@@ -40,12 +40,16 @@ export interface Project {
 
 export interface SkillCategory {
   name: string;
+  description?: string;
+  icon?: string; // SVG path for category icon
   skills: Skill[];
 }
 
 export interface Skill {
   name: string;
   level: number; // 0-100
+  highlighted?: boolean;
+  badge?: string; // e.g. "Certifié CNIL", "6 campus"
 }
 
 export interface Education {

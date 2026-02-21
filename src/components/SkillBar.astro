@@ -7,11 +7,22 @@ interface Props {
 }
 
 const { skill, index } = Astro.props;
+const isHighlighted = skill.highlighted;
 ---
 
 <span
-  class="scroll-reveal inline-block font-mono text-[11px] uppercase tracking-wider px-3 py-1.5 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-accent-500/50 hover:text-accent-500 transition-colors duration-200"
+  class:list={[
+    'scroll-reveal inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider px-3 py-1.5 transition-colors duration-200',
+    isHighlighted
+      ? 'bg-accent-500/10 border border-accent-500/30 text-accent-600 dark:text-accent-400 hover:bg-accent-500/20'
+      : 'border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-accent-500/50 hover:text-accent-500',
+  ]}
   style={`transition-delay: ${index * 40}ms`}
 >
   {skill.name}
+  {skill.badge && (
+    <span class="text-[9px] font-semibold bg-accent-500 text-white px-1.5 py-0.5 rounded-sm normal-case tracking-normal">
+      {skill.badge}
+    </span>
+  )}
 </span>
