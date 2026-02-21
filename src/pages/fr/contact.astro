@@ -1,0 +1,22 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import ContactSection from '../../components/ContactSection.astro';
+import { getData } from '../../i18n/utils';
+
+const lang = 'fr';
+const data = getData(lang);
+---
+
+<BaseLayout
+  title={`${data.ui.nav.contact} — ${data.personal.name}`}
+  description={data.ui.contact.subtitle}
+  lang={lang}
+>
+  <section class="py-20 px-6">
+    <div class="max-w-3xl mx-auto">
+      <SectionHeader title={data.ui.contact.title} subtitle={data.ui.contact.subtitle} number="01" />
+      <ContactSection lang={lang} />
+    </div>
+  </section>
+</BaseLayout>

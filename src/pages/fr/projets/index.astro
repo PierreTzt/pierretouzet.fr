@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SectionHeader from '../../../components/SectionHeader.astro';
+import ProjectCard from '../../../components/ProjectCard.astro';
+import { getData } from '../../../i18n/utils';
+
+const lang = 'fr';
+const data = getData(lang);
+---
+
+<BaseLayout
+  title={`${data.ui.nav.projects} — ${data.personal.name}`}
+  description={`Projets et réalisations de ${data.personal.name}`}
+  lang={lang}
+>
+  <section class="py-20 px-6">
+    <div class="max-w-7xl mx-auto">
+      <SectionHeader title={data.ui.sections.allProjects} number="01" />
+      <div class="grid gap-[1px] bg-zinc-200 dark:bg-zinc-800 md:grid-cols-2 lg:grid-cols-3">
+        {data.projects.map((project, i) => (
+          <div class="bg-zinc-50 dark:bg-zinc-950">
+            <ProjectCard project={project} lang={lang} index={i} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

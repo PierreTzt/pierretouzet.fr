@@ -1,0 +1,152 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+import ScrollToTop from '../components/ScrollToTop.astro';
+import type { Lang } from '../i18n/utils';
+import { getData, getHreflangUrl } from '../i18n/utils';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  lang: Lang;
+  ogImage?: string;
+}
+
+const { title, description, lang, ogImage } = Astro.props;
+const { ui } = getData(lang);
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).href : undefined;
+const siteUrl = Astro.site?.href || 'https://pierre-music.vercel.app';
+const hreflangFr = getHreflangUrl(Astro.url.pathname, 'fr', siteUrl);
+const hreflangEn = getHreflangUrl(Astro.url.pathname, 'en', siteUrl);
+---
+
+<!doctype html>
+<html lang={lang} class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="fr" href={hreflangFr} />
+    <link rel="alternate" hreflang="en" href={hreflangEn} />
+    <link rel="alternate" hreflang="x-default" href={hreflangFr} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#09090b" />
+    <ViewTransitions />
+    <script is:inline>
+      (function () {
+        const theme = localStorage.getItem('theme');
+        if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- Scroll progress bar -->
+    <div id="scroll-progress" aria-hidden="true"></div>
+
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-accent-500 focus:text-white focus:rounded"
+    >
+      {ui.skipToContent}
+    </a>
+
+    <Navbar lang={lang} currentPath={Astro.url.pathname} />
+
+    <main id="main-content" class="flex-1 pt-14">
+      <slot />
+    </main>
+
+    <Footer lang={lang} />
+    <ScrollToTop label={ui.scrollToTop} />
+
+    <!-- Scroll reveal + progress bar + glow tracking -->
+    <script>
+      let scrollHandler: (() => void) | null = null;
+
+      function initAll() {
+        // Scroll reveal
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                revealObserver.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+        );
+        document.querySelectorAll('.scroll-reveal, .text-reveal').forEach((el) => {
+          revealObserver.observe(el);
+        });
+
+        // Scroll progress bar — remove previous handler
+        const progressBar = document.getElementById('scroll-progress');
+        if (scrollHandler) {
+          window.removeEventListener('scroll', scrollHandler);
+        }
+        scrollHandler = () => {
+          if (!progressBar) return;
+          const scrollTop = window.scrollY;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const progress = docHeight > 0 ? scrollTop / docHeight : 0;
+          progressBar.style.transform = `scaleX(${progress})`;
+        };
+        window.addEventListener('scroll', scrollHandler, { passive: true });
+
+        // Glow effect tracking with rAF throttle
+        document.querySelectorAll('.glow-hover').forEach((card) => {
+          let ticking = false;
+          card.addEventListener('mousemove', (e: Event) => {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => {
+              const el = card as HTMLElement;
+              const me = e as MouseEvent;
+              const rect = el.getBoundingClientRect();
+              el.style.setProperty('--mouse-x', `${me.clientX - rect.left}px`);
+              el.style.setProperty('--mouse-y', `${me.clientY - rect.top}px`);
+              ticking = false;
+            });
+          });
+        });
+
+        // Skill bars
+        const skillObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const bar = entry.target as HTMLElement;
+                bar.style.width = `${bar.dataset.level || 0}%`;
+                skillObserver.unobserve(bar);
+              }
+            });
+          },
+          { threshold: 0.5 }
+        );
+        document.querySelectorAll('.skill-bar').forEach((el) => skillObserver.observe(el));
+      }
+
+      initAll();
+      document.addEventListener('astro:after-swap', initAll);
+    </script>
+  </body>
+</html>

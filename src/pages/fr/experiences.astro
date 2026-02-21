@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import ExperienceCard from '../../components/ExperienceCard.astro';
+import { getData } from '../../i18n/utils';
+
+const lang = 'fr';
+const data = getData(lang);
+---
+
+<BaseLayout
+  title={`${data.ui.nav.experiences} — ${data.personal.name}`}
+  description={`Parcours professionnel de ${data.personal.name}`}
+  lang={lang}
+>
+  <section class="py-20 px-6">
+    <div class="max-w-4xl mx-auto">
+      <SectionHeader title={data.ui.sections.allExperiences} number="01" />
+      {data.experiences.map((exp, i) => (
+        <ExperienceCard experience={exp} index={i} />
+      ))}
+
+      <!-- Education -->
+      <div class="mt-20">
+        <SectionHeader title={data.ui.education} number="02" />
+        {data.education.map((edu, i) => (
+          <div
+            class="scroll-reveal border-t border-zinc-200 dark:border-zinc-800 py-8 grid md:grid-cols-[200px_1fr] gap-6"
+            style={`transition-delay: ${i * 80}ms`}
+          >
+            <div>
+              <span class="font-mono text-xs text-zinc-500">{edu.startDate} — {edu.endDate}</span>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-1">
+                {edu.degree} — {edu.field}
+              </h3>
+              <p class="text-sm text-accent-500 font-medium mb-2">{edu.institution}</p>
+              {edu.description && (
+                <p class="text-sm text-zinc-500 leading-relaxed">{edu.description}</p>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

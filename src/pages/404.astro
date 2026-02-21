@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getData } from '../i18n/utils';
+
+const frData = getData('fr');
+const enData = getData('en');
+---
+
+<BaseLayout title="404" description="Page introuvable — Page not found" lang="fr">
+  <section class="min-h-[70vh] flex items-center justify-center px-6">
+    <div class="text-center">
+      <p class="font-mono text-accent-600 dark:text-accent-400 text-[11px] uppercase tracking-[0.3em] mb-8">Error 404</p>
+      <h1 class="font-display text-display mb-6">
+        <span class="text-zinc-900 dark:text-zinc-50 font-bold">Lost</span><br />
+        <span class="bg-gradient-to-r from-accent-500 to-electric-500 bg-clip-text text-transparent font-extrabold">in space</span>
+      </h1>
+      <p class="text-sm text-zinc-500 mb-12 max-w-sm mx-auto leading-relaxed">
+        {frData.ui.notFound.message}<br />
+        {enData.ui.notFound.message}
+      </p>
+      <div class="flex items-center justify-center gap-6">
+        <a
+          href="/fr/"
+          class="group inline-flex items-center gap-2 px-5 py-2.5 bg-zinc-900 dark:bg-zinc-100 text-zinc-50 dark:text-zinc-900 text-sm font-medium hover:bg-accent-600 dark:hover:bg-accent-500 dark:hover:text-white transition-all duration-200"
+        >
+          {frData.ui.notFound.backHome}
+        </a>
+        <a
+          href="/en/"
+          class="mono-label hover:text-accent-600 transition-colors duration-200"
+        >
+          English &rarr;
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

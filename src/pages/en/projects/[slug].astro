@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getData } from '../../../i18n/utils';
+import type { Project } from '../../../data/types';
+
+const lang = 'en';
+const data = getData(lang);
+
+export function getStaticPaths() {
+  const data = getData('en');
+  return data.projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props as { project: Project };
+---
+
+<BaseLayout
+  title={`${project.title} — ${data.personal.name}`}
+  description={project.shortDescription}
+  lang={lang}
+>
+  <section class="py-20 px-6">
+    <div class="max-w-4xl mx-auto">
+      <a href="/en/projects/" class="group mono-label hover:text-accent-500 transition-colors duration-200 inline-flex items-center gap-2 mb-12">
+        <svg class="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18" /></svg>
+        {data.ui.project.backToProjects}
+      </a>
+
+      <div class="mb-12">
+        <span class="mono-label mb-4 block">{data.ui.project.label}</span>
+        <h1 class="font-display text-heading text-zinc-900 dark:text-zinc-50 font-bold mb-4">{project.title}</h1>
+        <div class="h-[1px] bg-gradient-to-r from-accent-500 via-electric-500 to-transparent mt-6"></div>
+      </div>
+
+      <div class="aspect-video border border-zinc-200 dark:border-zinc-800 mb-12 flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-br from-accent-500/5 to-electric-500/5"></div>
+        <span class="font-mono text-xs text-zinc-500 dark:text-zinc-400 uppercase tracking-wider relative z-10">{data.ui.project.visual}</span>
+      </div>
+
+      <p class="text-base text-zinc-600 dark:text-zinc-400 leading-relaxed mb-12 max-w-2xl">{project.longDescription}</p>
+
+      <div class="mb-12">
+        <span class="mono-label mb-4 block">{data.ui.project.technologies}</span>
+        <div class="flex flex-wrap gap-2">
+          {project.technologies.map((tech) => (
+            <span class="font-mono text-[10px] uppercase tracking-wider px-3 py-1.5 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-accent-500/50 hover:text-accent-500 transition-colors duration-200">{tech}</span>
+          ))}
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-4 border-t border-zinc-200 dark:border-zinc-800 pt-8">
+        {project.demoUrl && (
+          <a href={project.demoUrl} target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-2 px-5 py-2.5 bg-zinc-900 dark:bg-zinc-100 text-zinc-50 dark:text-zinc-900 text-sm font-medium hover:bg-accent-600 dark:hover:bg-accent-500 dark:hover:text-white transition-all duration-200">
+            {data.ui.project.demo}
+            <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>
+          </a>
+        )}
+        {project.githubUrl && (
+          <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" class="group inline-flex items-center gap-2 px-5 py-2.5 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 text-sm font-medium hover:border-accent-500 hover:text-accent-500 transition-colors duration-200">
+            {data.ui.project.source}
+            <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" /></svg>
+          </a>
+        )}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

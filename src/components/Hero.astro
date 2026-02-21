@@ -1,0 +1,98 @@
+---
+import type { Lang } from '../i18n/utils';
+import { getData } from '../i18n/utils';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const { personal, ui } = getData(lang);
+
+const projectsHref = lang === 'fr' ? `/${lang}/projets/` : `/${lang}/projects/`;
+const contactHref = `/${lang}/contact/`;
+
+const firstName = personal.name.split(' ')[0];
+const lastName = personal.name.split(' ').slice(1).join(' ');
+---
+
+<section class="min-h-[85vh] px-6">
+  <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-[auto_1fr] items-end min-h-[85vh]">
+
+    <!-- Left: Photo desktop (full height, fades at bottom) -->
+    <div class="hidden lg:block self-stretch relative w-[300px] opacity-0 animate-reveal">
+      <div class="absolute inset-0 overflow-hidden hero-photo-mask">
+        <picture>
+          <source srcset="/images/pierre-touzet.webp" type="image/webp" />
+          <img
+            src="/images/pierre-touzet.png"
+            alt={personal.avatarAlt}
+            width="600"
+            height="900"
+            class="w-full h-full object-contain object-bottom"
+            loading="eager"
+          />
+        </picture>
+      </div>
+    </div>
+
+    <!-- Right: All text content -->
+    <div class="pb-16 lg:pl-4 flex flex-col justify-end min-h-[85vh]">
+      <!-- Photo mobile -->
+      <div class="lg:hidden flex justify-center mb-8 opacity-0 animate-reveal">
+        <div class="w-40 h-40 rounded-full overflow-hidden ring-2 ring-accent-500/20">
+          <picture>
+            <source srcset="/images/pierre-touzet-sm.webp" type="image/webp" />
+            <img
+              src="/images/pierre-touzet-sm.png"
+              alt={personal.avatarAlt}
+              width="400"
+              height="400"
+              class="w-full h-full object-cover scale-[1.6] translate-y-[15%]"
+              loading="eager"
+            />
+          </picture>
+        </div>
+      </div>
+      <h1 class="text-display font-display mb-4 opacity-0 animate-reveal-delay-1">
+        <span class="text-zinc-900 dark:text-zinc-50 font-bold">{firstName} </span><span class="font-extrabold bg-gradient-to-r from-accent-500 to-electric-500 bg-clip-text text-transparent">{lastName}</span>
+      </h1>
+      <p class="mono-label mb-8 opacity-0 animate-reveal-delay-1">
+        {personal.location}
+      </p>
+
+      <div class="grid md:grid-cols-[1fr_1px_1fr] gap-8 items-start opacity-0 animate-reveal-delay-2">
+        <div>
+          <p class="font-display text-subheading text-zinc-600 dark:text-zinc-400 font-light">
+            {personal.title}
+          </p>
+        </div>
+
+        <div class="hidden md:block h-full bg-zinc-200 dark:bg-zinc-800"></div>
+
+        <div>
+          <p class="text-sm text-zinc-500 leading-relaxed mb-8">
+            {personal.description}
+          </p>
+          <div class="flex items-center gap-6">
+            <a
+              href={projectsHref}
+              class="group inline-flex items-center gap-2 px-5 py-2.5 bg-accent-500 text-white text-sm font-medium hover:bg-accent-600 transition-all duration-200"
+            >
+              {ui.hero.cta}
+              <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+            <a
+              href={contactHref}
+              class="mono-label hover:text-accent-500 transition-colors duration-200"
+            >
+              {ui.hero.ctaSecondary} →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
