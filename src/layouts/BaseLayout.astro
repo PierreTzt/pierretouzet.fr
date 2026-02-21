@@ -52,6 +52,10 @@ const hreflangEn = getHreflangUrl(Astro.url.pathname, 'en', siteUrl);
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#09090b" />
     <ViewTransitions />
+    <script>
+      import { inject } from '@vercel/analytics';
+      inject();
+    </script>
     <script is:inline>
       (function () {
         const theme = localStorage.getItem('theme');
