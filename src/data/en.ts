@@ -17,12 +17,6 @@ export const data: SiteData = {
       icon: 'linkedin',
       label: "Pierre's LinkedIn profile",
     },
-    {
-      platform: 'Blog',
-      url: 'https://www.pierretouzet.fr/',
-      icon: 'blog',
-      label: "Pierre Touzet's blog",
-    },
   ],
   experiences: [
     {
@@ -89,18 +83,6 @@ export const data: SiteData = {
       technologies: ['No-code', 'Excel/CSV', 'PDF', 'Offline-first', 'ERP'],
       imageAlt: 'Gradly interface - RNCP bulletin management',
       demoUrl: 'https://www.gradly.fr/',
-      featured: true,
-    },
-    {
-      slug: 'blog',
-      title: 'Blog pierretouzet.fr',
-      shortDescription:
-        'Thoughts on tech, AI and education. Because sharing is growing.',
-      longDescription:
-        'My idea lab. I explore generative AI, no-code, EdTech trends and share lessons from my projects. A space for watch and reflection for those who believe tech should serve people.',
-      technologies: ['Writing', 'SEO', 'Generative AI', 'EdTech', 'No-code'],
-      imageAlt: "Pierre Touzet's blog",
-      demoUrl: 'https://www.pierretouzet.fr/',
       featured: true,
     },
     {

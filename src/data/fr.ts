@@ -17,12 +17,6 @@ export const data: SiteData = {
       icon: 'linkedin',
       label: 'Profil LinkedIn de Pierre',
     },
-    {
-      platform: 'Blog',
-      url: 'https://www.pierretouzet.fr/',
-      icon: 'blog',
-      label: 'Blog de Pierre Touzet',
-    },
   ],
   experiences: [
     {
@@ -89,18 +83,6 @@ export const data: SiteData = {
       technologies: ['No-code', 'Excel/CSV', 'PDF', 'Offline-first', 'ERP'],
       imageAlt: 'Interface de Gradly - gestion des bulletins RNCP',
       demoUrl: 'https://www.gradly.fr/',
-      featured: true,
-    },
-    {
-      slug: 'blog',
-      title: 'Blog pierretouzet.fr',
-      shortDescription:
-        "Réflexions sur la tech, l'IA et la pédagogie. Parce que partager, c'est progresser.",
-      longDescription:
-        "Mon laboratoire d'idées. J'y explore l'IA générative, le no-code, les tendances EdTech et je partage les leçons tirées de mes projets. Un espace de veille et de réflexion pour ceux qui croient que la tech doit servir l'humain.",
-      technologies: ['Rédaction', 'SEO', 'IA générative', 'EdTech', 'No-code'],
-      imageAlt: 'Blog de Pierre Touzet',
-      demoUrl: 'https://www.pierretouzet.fr/',
       featured: true,
     },
     {
