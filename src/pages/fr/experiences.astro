@@ -21,7 +21,11 @@ const data = getData(lang);
     <div class="max-w-4xl mx-auto">
       <SectionHeader title={data.ui.sections.allExperiences} number="01" />
       {data.experiences.map((exp, i) => (
-        <ExperienceCard experience={exp} index={i} />
+        <ExperienceCard
+          experience={exp}
+          index={i}
+          isLast={i === data.experiences.length - 1}
+        />
       ))}
 
       <!-- Education -->
@@ -29,20 +33,38 @@ const data = getData(lang);
         <SectionHeader title={data.ui.education} number="02" />
         {data.education.map((edu, i) => (
           <div
-            class="scroll-reveal border-t border-zinc-200 dark:border-zinc-800 py-8 grid md:grid-cols-[200px_1fr] gap-6"
+            class="scroll-reveal group relative grid md:grid-cols-[180px_40px_1fr] grid-cols-[24px_1fr] gap-x-0 md:gap-x-2"
             style={`transition-delay: ${i * 80}ms`}
           >
-            <div>
-              <span class="font-mono text-xs text-zinc-500">{edu.startDate} — {edu.endDate}</span>
+            <!-- Dates desktop -->
+            <div class="hidden md:flex flex-col justify-start pt-8">
+              <span class="font-mono text-xs text-zinc-500 text-right">{edu.startDate} — {edu.endDate}</span>
+              <span class="font-mono text-[10px] text-accent-500 text-right mt-1">{edu.institution}</span>
             </div>
-            <div>
-              <h3 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-1">
-                {edu.degree} — {edu.field}
-              </h3>
-              <p class="text-sm text-accent-500 font-medium mb-2">{edu.institution}</p>
-              {edu.description && (
-                <p class="text-sm text-zinc-500 leading-relaxed">{edu.description}</p>
+
+            <!-- Timeline column -->
+            <div class="relative flex flex-col items-center pt-8">
+              <div class="relative z-10 w-3 h-3 rounded-full border-2 border-accent-500 bg-white dark:bg-zinc-950 group-hover:bg-accent-500 transition-colors duration-300 flex-shrink-0"></div>
+              {i < data.education.length - 1 && (
+                <div class="w-px flex-1 bg-zinc-200 dark:bg-zinc-800 mt-0"></div>
               )}
+            </div>
+
+            <!-- Content -->
+            <div class="pb-10">
+              <div class="py-6 px-5 -mt-1 hover:bg-zinc-100/50 dark:hover:bg-zinc-900/30 transition-colors duration-200 rounded-lg">
+                <div class="md:hidden mb-2">
+                  <span class="font-mono text-xs text-zinc-500">{edu.startDate} — {edu.endDate}</span>
+                  <span class="font-mono text-[10px] text-accent-500 ml-2">{edu.institution}</span>
+                </div>
+                <h3 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-1 group-hover:text-accent-500 transition-colors duration-200">
+                  {edu.degree} — {edu.field}
+                </h3>
+                <p class="text-sm text-accent-500 font-medium mb-2 hidden md:block">{edu.institution}</p>
+                {edu.description && (
+                  <p class="text-sm text-zinc-500 leading-relaxed">{edu.description}</p>
+                )}
+              </div>
             </div>
           </div>
         ))}
