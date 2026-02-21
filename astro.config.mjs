@@ -4,7 +4,7 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://pierre-music.vercel.app',
+  site: 'https://portfolio-dusky-delta-65.vercel.app',
   integrations: [
     tailwind(),
     sitemap({
