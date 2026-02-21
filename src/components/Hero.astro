@@ -40,7 +40,7 @@ const lastName = personal.name.split(' ').slice(1).join(' ');
     <div class="pb-16 lg:pl-4 flex flex-col justify-end min-h-[85vh]">
       <!-- Photo mobile -->
       <div class="lg:hidden flex justify-center mb-8 opacity-0 animate-reveal">
-        <div class="w-40 h-40 rounded-full overflow-hidden ring-2 ring-accent-500/20">
+        <div class="w-36 h-36 rounded-full overflow-hidden ring-2 ring-accent-500/20">
           <picture>
             <source srcset="/images/pierre-touzet-sm.webp" type="image/webp" />
             <img
@@ -48,7 +48,7 @@ const lastName = personal.name.split(' ').slice(1).join(' ');
               alt={personal.avatarAlt}
               width="400"
               height="400"
-              class="w-full h-full object-cover scale-[1.6] translate-y-[15%]"
+              class="w-full h-full object-cover object-top"
               loading="eager"
             />
           </picture>

@@ -7,7 +7,7 @@ const { label } = Astro.props;
 ---
 
 <button
-  id="theme-toggle"
+  data-theme-toggle
   type="button"
   aria-label={label}
   class="p-2 text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100 transition-colors duration-200 focus:outline-2 focus:outline-offset-2 focus:outline-accent-500"
@@ -42,10 +42,11 @@ const { label } = Astro.props;
 
 <script>
   function initThemeToggle() {
-    const btn = document.getElementById('theme-toggle');
-    btn?.addEventListener('click', () => {
-      const isDark = document.documentElement.classList.toggle('dark');
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      });
     });
   }
   initThemeToggle();
