@@ -81,6 +81,8 @@ const lastName = personal.name.split(' ').slice(1).join(' ');
           <div class="flex items-center gap-6 flex-wrap">
             <a
               href={projectsHref}
+              data-track="cta_click"
+              data-track-label="hero_projects"
               class="group inline-flex items-center gap-2 px-5 py-2.5 bg-accent-500 text-white text-sm font-medium hover:bg-accent-600 transition-all duration-200"
             >
               {ui.hero.cta}
@@ -91,6 +93,8 @@ const lastName = personal.name.split(' ').slice(1).join(' ');
             <a
               href="/cv-pierre-touzet.pdf"
               download
+              data-track="cv_download"
+              data-track-label="hero"
               class="group inline-flex items-center gap-2 px-5 py-2.5 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 text-sm font-medium hover:border-accent-500 hover:text-accent-500 transition-colors duration-200"
             >
               <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -100,6 +104,8 @@ const lastName = personal.name.split(' ').slice(1).join(' ');
             </a>
             <a
               href={contactHref}
+              data-track="cta_click"
+              data-track-label="hero_contact"
               class="mono-label hover:text-accent-500 transition-colors duration-200"
             >
               {ui.hero.ctaSecondary} →
