@@ -19,6 +19,7 @@ const { label } = Astro.props;
     viewBox="0 0 24 24"
     stroke="currentColor"
     stroke-width="1.5"
+    aria-hidden="true"
   >
     <path
       stroke-linecap="round"
@@ -33,6 +34,7 @@ const { label } = Astro.props;
     viewBox="0 0 24 24"
     stroke="currentColor"
     stroke-width="1.5"
+    aria-hidden="true"
   >
     <path
       stroke-linecap="round"
@@ -76,6 +78,12 @@ const { label } = Astro.props;
   :global(.dark) .theme-icon--moon {
     opacity: 0;
     transform: rotate(-90deg) scale(0.5);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .theme-icon {
+      transition: none;
+    }
   }
 </style>
 

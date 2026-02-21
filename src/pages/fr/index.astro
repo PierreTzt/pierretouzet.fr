@@ -74,6 +74,7 @@ const topCategory = data.skillCategories[0];
                 href={s.url}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={s.label}
                 class="flex items-center justify-between py-2 border-t border-zinc-100 dark:border-zinc-800 group/link"
                 data-track="social_click"
                 data-track-label={s.platform.toLowerCase()}
@@ -86,6 +87,7 @@ const topCategory = data.skillCategories[0];
             ))}
             <a
               href={`mailto:${data.personal.email}`}
+              aria-label={data.ui.contact.emailMe}
               class="flex items-center justify-between py-2 border-t border-zinc-100 dark:border-zinc-800 group/link"
               data-track="social_click"
               data-track-label="email"

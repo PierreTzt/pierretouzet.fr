@@ -3,9 +3,10 @@ interface Props {
   title: string;
   subtitle?: string;
   number?: string;
+  as?: 'h1' | 'h2';
 }
 
-const { title, subtitle, number } = Astro.props;
+const { title, subtitle, number, as: Tag = 'h2' } = Astro.props;
 const words = title.split(' ');
 ---
 
@@ -14,14 +15,14 @@ const words = title.split(' ');
     {number && (
       <span class="font-mono text-[10px] text-accent-500">{number}</span>
     )}
-    <h2 class="font-display text-heading text-zinc-900 dark:text-zinc-50 font-bold">
+    <Tag class="font-display text-heading text-zinc-900 dark:text-zinc-50 font-bold">
       {words.map((word, i) => (
         <span class="word" style={`transition-delay: ${i * 60}ms`}>
           <span class="word-inner">{word}</span>
         </span>
         <Fragment>{' '}</Fragment>
       ))}
-    </h2>
+    </Tag>
   </div>
   {subtitle && (
     <p class="text-sm text-zinc-500 max-w-xl leading-relaxed mt-2">

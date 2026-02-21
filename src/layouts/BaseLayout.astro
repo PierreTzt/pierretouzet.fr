@@ -96,6 +96,16 @@ const schemaOrg = {
       })} />
     )}
     <ViewTransitions />
+    <script type="speculationrules">
+      {
+        "prerender": [
+          {
+            "where": { "href_matches": "/*" },
+            "eagerness": "moderate"
+          }
+        ]
+      }
+    </script>
     <script>
       import { inject } from '@vercel/analytics';
       import { track } from '@vercel/analytics';

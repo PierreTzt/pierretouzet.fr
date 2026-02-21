@@ -176,20 +176,43 @@
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  .scroll-reveal,
-  .text-reveal .word-inner {
-    transition: none !important;
-    animation: none !important;
+  html {
+    scroll-behavior: auto;
   }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
   .scroll-reveal {
     opacity: 1;
     transform: none;
   }
+
   .text-reveal .word-inner {
     transform: none;
   }
-  .animate-pulse {
+
+  /* Tailwind animate-reveal classes */
+  [class*="animate-reveal"] {
+    opacity: 1 !important;
     animation: none !important;
+  }
+
+  /* View Transitions */
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  /* Scroll progress bar — keep functional but no transition */
+  #scroll-progress {
+    transition: none !important;
   }
 }
 

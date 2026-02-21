@@ -19,7 +19,7 @@ const data = getData(lang);
 >
   <section class="py-20 px-6">
     <div class="max-w-4xl mx-auto">
-      <SectionHeader title={data.ui.sections.allExperiences} number="01" />
+      <SectionHeader title={data.ui.sections.allExperiences} number="01" as="h1" />
       {data.experiences.map((exp, i) => (
         <ExperienceCard
           experience={exp}
