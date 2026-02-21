@@ -1,3 +1,23 @@
 ---
-return Astro.redirect('/fr/');
+// No server redirect — client-side language detection below
 ---
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pierre Touzet</title>
+    <link rel="canonical" href="https://www.pierretouzet.fr/fr/" />
+    <script is:inline>
+      (function () {
+        var lang = navigator.language || navigator.userLanguage || '';
+        var isEnglish = lang.toLowerCase().startsWith('en');
+        window.location.replace(isEnglish ? '/en/' : '/fr/');
+      })();
+    </script>
+    <noscript>
+      <meta http-equiv="refresh" content="0;url=/fr/" />
+    </noscript>
+  </head>
+  <body></body>
+</html>
