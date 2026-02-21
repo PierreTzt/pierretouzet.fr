@@ -4,7 +4,7 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://portfolio-dusky-delta-65.vercel.app',
+  site: 'https://www.pierretouzet.fr',
   integrations: [
     tailwind(),
     sitemap({
