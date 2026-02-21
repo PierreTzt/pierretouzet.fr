@@ -12,6 +12,10 @@ const data = getData(lang);
   title={`${data.ui.nav.contact} — ${data.personal.name}`}
   description={data.ui.contact.subtitle}
   lang={lang}
+  breadcrumbs={[
+    { name: data.ui.nav.home, url: '/en/' },
+    { name: data.ui.nav.contact, url: '/en/contact/' },
+  ]}
 >
   <section class="py-20 px-6">
     <div class="max-w-3xl mx-auto">

@@ -31,6 +31,8 @@ const lastName = personal.name.split(' ').slice(1).join(' ');
             height="900"
             class="w-full h-full object-contain object-bottom"
             loading="eager"
+            decoding="async"
+            fetchpriority="high"
           />
         </picture>
       </div>
@@ -50,6 +52,8 @@ const lastName = personal.name.split(' ').slice(1).join(' ');
               height="400"
               class="w-full h-full object-cover object-top"
               loading="eager"
+              decoding="async"
+              fetchpriority="high"
             />
           </picture>
         </div>

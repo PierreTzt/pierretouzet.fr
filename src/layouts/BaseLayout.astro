@@ -7,14 +7,20 @@ import type { Lang } from '../i18n/utils';
 import { getData, getHreflangUrl } from '../i18n/utils';
 import '../styles/global.css';
 
+interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
 interface Props {
   title: string;
   description: string;
   lang: Lang;
   ogImage?: string;
+  breadcrumbs?: BreadcrumbItem[];
 }
 
-const { title, description, lang, ogImage } = Astro.props;
+const { title, description, lang, ogImage, breadcrumbs } = Astro.props;
 const { ui, personal } = getData(lang);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageUrl = new URL(ogImage || '/og-image.png', Astro.site).href;
@@ -74,6 +80,18 @@ const schemaOrg = {
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#09090b" />
     <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />
+    {breadcrumbs && breadcrumbs.length > 0 && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs.map((item, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: item.name,
+          item: new URL(item.url, Astro.site).href,
+        })),
+      })} />
+    )}
     <ViewTransitions />
     <script>
       import { inject } from '@vercel/analytics';
@@ -86,6 +104,9 @@ const schemaOrg = {
           document.documentElement.classList.add('dark');
         } else {
           document.documentElement.classList.remove('dark');
+        }
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.register('/sw.js');
         }
       })();
     </script>

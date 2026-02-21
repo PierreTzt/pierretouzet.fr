@@ -10,6 +10,10 @@ const data = getData(lang);
   title={`Mentions légales — ${data.personal.name}`}
   description="Mentions légales du site pierretouzet.fr"
   lang={lang}
+  breadcrumbs={[
+    { name: data.ui.nav.home, url: '/fr/' },
+    { name: data.ui.footer.legal, url: '/fr/mentions-legales/' },
+  ]}
 >
   <section class="py-20 px-6">
     <div class="max-w-3xl mx-auto">

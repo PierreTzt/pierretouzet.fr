@@ -12,6 +12,10 @@ const data = getData(lang);
   title={`${data.ui.nav.skills} — ${data.personal.name}`}
   description={`Technical skills of ${data.personal.name}`}
   lang={lang}
+  breadcrumbs={[
+    { name: data.ui.nav.home, url: '/en/' },
+    { name: data.ui.nav.skills, url: '/en/skills/' },
+  ]}
 >
   <section class="py-20 px-6">
     <div class="max-w-5xl mx-auto">
