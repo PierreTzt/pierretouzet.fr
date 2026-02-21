@@ -84,6 +84,11 @@ export const data: SiteData = {
       imageAlt: 'Gradly interface - RNCP bulletin management',
       demoUrl: 'https://www.gradly.fr/',
       featured: true,
+      metrics: [
+        { label: 'Admin time', value: '÷ 3' },
+        { label: 'Data', value: '100% offline' },
+        { label: 'Compatibility', value: 'Yparéo & ERP' },
+      ],
     },
     {
       slug: 'pedagogical-innovation',
@@ -95,6 +100,11 @@ export const data: SiteData = {
       technologies: ['LMS', 'Analytics', 'Automation', 'POC', 'EdTech Watch'],
       imageAlt: 'Pedagogical digital transformation',
       featured: true,
+      metrics: [
+        { label: 'Campuses', value: '10+' },
+        { label: 'Tools deployed', value: '5+' },
+        { label: 'Teams impacted', value: 'Dozens' },
+      ],
     },
     {
       slug: 'portfolio',
@@ -192,6 +202,26 @@ export const data: SiteData = {
       endDate: '2007',
     },
   ],
+  testimonials: [
+    {
+      name: 'Cyril Blanchet',
+      role: 'Campus Director',
+      company: 'ICL IET — Lyon Campus',
+      quote: "Pierre is a well-rounded professional — reliable and inspiring. He demonstrated exemplary rigor, well-placed creativity and sharp analytical skills. His stress management, project leadership and strategic vision were decisive in the success of our initiative.",
+    },
+    {
+      name: 'Za Nguyen',
+      role: 'Academic Coordinator',
+      company: 'IHECF Montpellier',
+      quote: "Pierre is someone you can truly count on: professional, committed, always willing to help. He has an excellent big-picture vision while paying attention to detail, which makes him particularly valuable within a team. I warmly recommend Pierre for any professional opportunity.",
+    },
+    {
+      name: 'Fanny Murer',
+      role: 'National Pedagogical Coordinator',
+      company: 'IEFT',
+      quote: "I particularly appreciated his great availability and listening skills. Structured and rigorous, he knows how to organize and prioritize projects effectively. Pierre is very comfortable with digital tools and helps streamline and modernize pedagogical practices.",
+    },
+  ],
   ui: {
     nav: {
       home: 'Home',
@@ -226,6 +256,7 @@ export const data: SiteData = {
       backToProjects: '← Back to projects',
       technologies: 'Tools & Technologies',
       visual: 'Visual',
+      metrics: 'Key figures',
     },
     contact: {
       title: "Let's work together",
@@ -243,6 +274,10 @@ export const data: SiteData = {
       title: 'Page Not Found',
       message: "Sorry, the page you're looking for doesn't exist.",
       backHome: 'Back to home',
+    },
+    testimonials: {
+      title: 'What they say',
+      subtitle: 'LinkedIn Recommendations',
     },
     education: 'Education',
     scrollToTop: 'Scroll to top',

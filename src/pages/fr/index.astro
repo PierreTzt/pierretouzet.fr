@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 import SkillBar from '../../components/SkillBar.astro';
+import Testimonials from '../../components/Testimonials.astro';
 import { getData } from '../../i18n/utils';
 
 const lang = 'fr';
@@ -184,7 +185,7 @@ const topCategory = data.skillCategories[0];
       </div>
 
       <!-- View all projects link -->
-      <div class="mt-8 flex justify-end">
+      <div class="mt-8 mb-8 flex justify-end">
         <a
           href="/fr/projets/"
           class="group mono-label hover:text-accent-500 transition-colors duration-200 flex items-center gap-2"
@@ -197,5 +198,11 @@ const topCategory = data.skillCategories[0];
       </div>
     </div>
   </section>
+
+  <Testimonials
+    testimonials={data.testimonials}
+    title={data.ui.testimonials.title}
+    subtitle={data.ui.testimonials.subtitle}
+  />
 </BaseLayout>
 

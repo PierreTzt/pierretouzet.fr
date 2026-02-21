@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
 import SkillBar from '../../components/SkillBar.astro';
+import Testimonials from '../../components/Testimonials.astro';
 import { getData } from '../../i18n/utils';
 
 const lang = 'en';
@@ -127,7 +128,7 @@ const topCategory = data.skillCategories[0];
         </a>
       </div>
 
-      <div class="mt-8 flex justify-end">
+      <div class="mt-8 mb-8 flex justify-end">
         <a href="/en/projects/" class="group mono-label hover:text-accent-500 transition-colors duration-200 flex items-center gap-2">
           {data.ui.sections.allProjects}
           <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
@@ -135,5 +136,11 @@ const topCategory = data.skillCategories[0];
       </div>
     </div>
   </section>
+
+  <Testimonials
+    testimonials={data.testimonials}
+    title={data.ui.testimonials.title}
+    subtitle={data.ui.testimonials.subtitle}
+  />
 </BaseLayout>
 

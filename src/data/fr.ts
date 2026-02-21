@@ -84,6 +84,11 @@ export const data: SiteData = {
       imageAlt: 'Interface de Gradly - gestion des bulletins RNCP',
       demoUrl: 'https://www.gradly.fr/',
       featured: true,
+      metrics: [
+        { label: 'Temps admin', value: '÷ 3' },
+        { label: 'Données', value: '100% offline' },
+        { label: 'Compatibilité', value: 'Yparéo & ERP' },
+      ],
     },
     {
       slug: 'innovation-pedagogique',
@@ -95,6 +100,11 @@ export const data: SiteData = {
       technologies: ['LMS', 'Analytics', 'Automatisation', 'POC', 'Veille EdTech'],
       imageAlt: 'Transformation digitale pédagogique',
       featured: true,
+      metrics: [
+        { label: 'Campus', value: '10+' },
+        { label: 'Outils déployés', value: '5+' },
+        { label: 'Équipes impactées', value: 'Dizaines' },
+      ],
     },
     {
       slug: 'portfolio',
@@ -192,6 +202,26 @@ export const data: SiteData = {
       endDate: '2007',
     },
   ],
+  testimonials: [
+    {
+      name: 'Cyril Blanchet',
+      role: "Directeur d'établissement",
+      company: 'ICL IET — Campus de Lyon',
+      quote: "Pierre est un professionnel complet, fiable et inspirant. Il a su faire preuve d'une rigueur exemplaire, d'une créativité juste et d'une capacité d'analyse pertinente. Sa gestion du stress, sa maîtrise de la conduite de projet et sa vision stratégique ont été déterminantes dans la réussite de notre démarche.",
+    },
+    {
+      name: 'Za Nguyen',
+      role: 'Responsable pédagogique',
+      company: 'IHECF Montpellier',
+      quote: "Pierre, c'est quelqu'un sur qui on peut vraiment compter : pro, impliqué, toujours prêt à aider. Il possède une excellente vision d'ensemble tout en prêtant attention aux détails, ce qui le rend particulièrement précieux au sein d'une équipe. Je recommande chaleureusement Pierre pour toute opportunité professionnelle.",
+    },
+    {
+      name: 'Fanny Murer',
+      role: 'Coordinatrice pédagogique nationale',
+      company: 'IEFT',
+      quote: "J'ai particulièrement apprécié sa grande disponibilité et son sens de l'écoute. Structuré et rigoureux, il sait organiser et prioriser efficacement les projets. Pierre est très à l'aise avec les outils informatiques et contribue à fluidifier et moderniser les pratiques pédagogiques.",
+    },
+  ],
   ui: {
     nav: {
       home: 'Accueil',
@@ -226,6 +256,7 @@ export const data: SiteData = {
       backToProjects: '← Retour aux projets',
       technologies: 'Outils & Technologies',
       visual: 'Visuel',
+      metrics: 'Chiffres clés',
     },
     contact: {
       title: 'Travaillons ensemble',
@@ -243,6 +274,10 @@ export const data: SiteData = {
       title: 'Page introuvable',
       message: "Désolé, la page que vous cherchez n'existe pas.",
       backHome: "Retour à l'accueil",
+    },
+    testimonials: {
+      title: 'Ils parlent de moi',
+      subtitle: 'Recommandations LinkedIn',
     },
     education: 'Formation',
     scrollToTop: 'Remonter en haut',

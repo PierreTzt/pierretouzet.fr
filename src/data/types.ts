@@ -36,6 +36,7 @@ export interface Project {
   demoUrl?: string;
   githubUrl?: string;
   featured: boolean;
+  metrics?: ProjectMetric[];
 }
 
 export interface SkillCategory {
@@ -95,6 +96,7 @@ export interface UITranslations {
     backToProjects: string;
     technologies: string;
     visual: string;
+    metrics: string;
   };
   contact: {
     title: string;
@@ -112,11 +114,27 @@ export interface UITranslations {
     message: string;
     backHome: string;
   };
+  testimonials: {
+    title: string;
+    subtitle: string;
+  };
   education: string;
   scrollToTop: string;
   skipToContent: string;
   switchLang: string;
   toggleTheme: string;
+}
+
+export interface Testimonial {
+  name: string;
+  role: string;
+  company: string;
+  quote: string;
+}
+
+export interface ProjectMetric {
+  label: string;
+  value: string;
 }
 
 export interface SiteData {
@@ -126,5 +144,6 @@ export interface SiteData {
   projects: Project[];
   skillCategories: SkillCategory[];
   education: Education[];
+  testimonials: Testimonial[];
   ui: UITranslations;
 }

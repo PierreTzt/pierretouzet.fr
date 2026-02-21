@@ -1,0 +1,45 @@
+---
+import type { Testimonial } from '../data/types';
+
+interface Props {
+  testimonials: Testimonial[];
+  title: string;
+  subtitle: string;
+}
+
+const { testimonials, title, subtitle } = Astro.props;
+---
+
+<section class="px-6 pb-24">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-10 scroll-reveal">
+      <span class="mono-label mb-2 block">{subtitle}</span>
+      <h2 class="font-display text-2xl md:text-3xl font-bold text-zinc-900 dark:text-zinc-50">
+        {title}
+      </h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-[1px] bg-zinc-200 dark:bg-zinc-800">
+      {testimonials.map((t, i) => (
+        <blockquote
+          class="scroll-reveal tile p-8 flex flex-col justify-between"
+          style={`transition-delay: ${i * 100}ms`}
+        >
+          <div>
+            <svg class="w-6 h-6 text-accent-500/30 mb-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11h4v10H0z" />
+            </svg>
+            <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed italic">
+              "{t.quote}"
+            </p>
+          </div>
+          <div class="mt-6 pt-4 border-t border-zinc-100 dark:border-zinc-800">
+            <p class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{t.name}</p>
+            <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mt-0.5">
+              {t.role} — {t.company}
+            </p>
+          </div>
+        </blockquote>
+      ))}
+    </div>
+  </div>
+</section>

@@ -111,6 +111,23 @@
     @apply opacity-100;
   }
 
+  /* Focus visible ring */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-accent-500;
+  }
+
+  /* Link underline animation */
+  .link-hover {
+    @apply relative;
+  }
+  .link-hover::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-[1px] bg-accent-500 transition-all duration-300;
+  }
+  .link-hover:hover::after {
+    @apply w-full;
+  }
+
   /* Scroll progress bar */
   #scroll-progress {
     @apply fixed top-0 left-0 h-[2px] z-[60];
@@ -149,5 +166,60 @@
   }
   .text-reveal .word-inner {
     transform: none;
+  }
+}
+
+/* Print stylesheet */
+@media print {
+  body::before,
+  #scroll-progress,
+  nav,
+  footer,
+  .scroll-to-top,
+  [data-scroll-to-top] {
+    display: none !important;
+  }
+
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+  }
+
+  main {
+    padding-top: 0 !important;
+  }
+
+  .scroll-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .tile {
+    border: 1px solid #e4e4e7 !important;
+    background: white !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666;
+  }
+
+  a[href^="#"]::after,
+  a[href^="/"]::after,
+  nav a::after {
+    content: none;
+  }
+
+  .glow-hover::after {
+    display: none !important;
+  }
+
+  * {
+    transition: none !important;
+    animation: none !important;
   }
 }
