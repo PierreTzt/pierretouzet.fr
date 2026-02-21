@@ -220,6 +220,7 @@ export const data: SiteData = {
     footer: {
       rights: 'Tous droits réservés.',
       builtWith: 'Construit avec Astro & Tailwind CSS',
+      legal: 'Mentions légales',
     },
     notFound: {
       title: 'Page introuvable',

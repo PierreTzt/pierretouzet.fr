@@ -15,12 +15,34 @@ interface Props {
 }
 
 const { title, description, lang, ogImage } = Astro.props;
-const { ui } = getData(lang);
+const { ui, personal } = getData(lang);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageUrl = new URL(ogImage || '/og-image.png', Astro.site).href;
 const siteUrl = Astro.site?.href || 'https://www.pierretouzet.fr';
 const hreflangFr = getHreflangUrl(Astro.url.pathname, 'fr', siteUrl);
 const hreflangEn = getHreflangUrl(Astro.url.pathname, 'en', siteUrl);
+
+const schemaOrg = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  mainEntity: {
+    '@type': 'Person',
+    name: personal.name,
+    jobTitle: personal.title,
+    description: personal.description,
+    url: siteUrl,
+    email: personal.email,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Valenciennes',
+      addressCountry: 'FR',
+    },
+    image: new URL('/images/pierre-touzet.webp', Astro.site).href,
+    sameAs: [
+      'https://www.linkedin.com/in/pierre-touzet/',
+    ],
+  },
+};
 ---
 
 <!doctype html>
@@ -51,6 +73,7 @@ const hreflangEn = getHreflangUrl(Astro.url.pathname, 'en', siteUrl);
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.json" />
     <meta name="theme-color" content="#09090b" />
+    <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />
     <ViewTransitions />
     <script>
       import { inject } from '@vercel/analytics';

@@ -53,6 +53,12 @@ const iconPaths: Record<string, string> = {
       <div class="font-mono text-xs text-zinc-500 text-right">
         <p>&copy; {year} {ui.footer.rights}</p>
         <p class="mt-1">{ui.footer.builtWith}</p>
+        <a
+          href={lang === 'fr' ? '/fr/mentions-legales/' : '/en/legal/'}
+          class="mt-1 inline-block hover:text-accent-500 transition-colors duration-200"
+        >
+          {ui.footer.legal}
+        </a>
       </div>
     </div>
   </div>

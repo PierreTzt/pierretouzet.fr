@@ -100,6 +100,7 @@ export interface UITranslations {
   footer: {
     rights: string;
     builtWith: string;
+    legal: string;
   };
   notFound: {
     title: string;

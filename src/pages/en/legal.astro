@@ -1,0 +1,73 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getData } from '../../i18n/utils';
+
+const lang = 'en';
+const data = getData(lang);
+---
+
+<BaseLayout
+  title={`Legal notice — ${data.personal.name}`}
+  description="Legal notice for pierretouzet.fr"
+  lang={lang}
+>
+  <section class="py-20 px-6">
+    <div class="max-w-3xl mx-auto">
+      <span class="mono-label mb-4 block">Legal</span>
+      <h1 class="font-display text-heading text-zinc-900 dark:text-zinc-50 font-bold mb-4">Legal notice</h1>
+      <div class="h-[1px] bg-gradient-to-r from-accent-500 via-electric-500 to-transparent mt-6 mb-12"></div>
+
+      <div class="space-y-10 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+        <div>
+          <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">Site publisher</h2>
+          <p>
+            {data.personal.name}<br />
+            {data.personal.title}<br />
+            {data.personal.location}<br />
+            Email: <a href={`mailto:${data.personal.email}`} class="text-accent-500 hover:underline">{data.personal.email}</a>
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">Hosting</h2>
+          <p>
+            Vercel Inc.<br />
+            440 N Baxter St, Coppell, TX 75019, United States<br />
+            <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" class="text-accent-500 hover:underline">vercel.com</a>
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">Intellectual property</h2>
+          <p>
+            All content on this site (text, images, graphics, logo, icons) is the exclusive property of {data.personal.name}, unless otherwise stated. Any reproduction, distribution, modification or use of this content without prior authorization is strictly prohibited.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">Personal data & GDPR</h2>
+          <p>
+            This site does not collect any personal data. No cookies are used. Traffic analytics are anonymous and provided by Vercel Analytics, a GDPR-compliant tool that does not require consent.
+          </p>
+          <p class="mt-3">
+            In accordance with the General Data Protection Regulation (GDPR), you have the right to access, rectify and delete your data. To exercise these rights, contact: <a href={`mailto:${data.personal.email}`} class="text-accent-500 hover:underline">{data.personal.email}</a>.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">Liability</h2>
+          <p>
+            The publisher cannot be held responsible for errors, unavailability of information or the presence of viruses on this site. Hyperlinks to other sites do not constitute an endorsement of their content.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">Credits</h2>
+          <p>
+            Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="text-accent-500 hover:underline">Astro</a> and <a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="text-accent-500 hover:underline">Tailwind CSS</a>. Hosted on <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" class="text-accent-500 hover:underline">Vercel</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
