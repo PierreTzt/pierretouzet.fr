@@ -107,7 +107,7 @@ const topCategory = data.skillCategories[0];
             <span class="mono-label">{data.ui.sections.topSkills}</span>
             <a href="/en/skills/" class="mono-label hover:text-accent-500 transition-colors duration-200">{data.ui.sections.viewAll} →</a>
           </div>
-          <div class="grid sm:grid-cols-2 gap-x-12 gap-y-4">
+          <div class="flex flex-wrap gap-2">
             {topCategory.skills.map((skill, i) => (
               <SkillBar skill={skill} index={i} />
             ))}

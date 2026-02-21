@@ -1,6 +1,6 @@
 {
-  "name": "Pierre Music — Portfolio",
-  "short_name": "Pierre M.",
+  "name": "Pierre Touzet — Portfolio",
+  "short_name": "Pierre T.",
   "start_url": "/fr/",
   "display": "standalone",
   "theme_color": "#09090b",
@@ -10,6 +10,11 @@
       "src": "/favicon.svg",
       "sizes": "any",
       "type": "image/svg+xml"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
     }
   ]
 }

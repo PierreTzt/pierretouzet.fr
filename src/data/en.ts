@@ -188,6 +188,7 @@ export const data: SiteData = {
     hero: {
       cta: 'Discover my projects',
       ctaSecondary: 'Contact me',
+      downloadCv: 'Download my CV',
     },
     sections: {
       latestProjects: 'Recent Projects',

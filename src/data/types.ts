@@ -69,6 +69,7 @@ export interface UITranslations {
   hero: {
     cta: string;
     ctaSecondary: string;
+    downloadCv: string;
   };
   sections: {
     latestProjects: string;

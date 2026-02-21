@@ -9,28 +9,9 @@ interface Props {
 const { skill, index } = Astro.props;
 ---
 
-<div class="scroll-reveal" style={`transition-delay: ${index * 50}ms`}>
-  <div class="flex items-center justify-between mb-2">
-    <span class="text-sm text-zinc-700 dark:text-zinc-300">
-      {skill.name}
-    </span>
-    <span class="font-mono text-[11px] text-zinc-500">
-      {skill.level}
-    </span>
-  </div>
-  <div
-    class="w-full h-px bg-zinc-200 dark:bg-zinc-800 relative"
-    role="progressbar"
-    aria-valuenow={skill.level}
-    aria-valuemin={0}
-    aria-valuemax={100}
-    aria-label={`${skill.name}: ${skill.level}%`}
-  >
-    <div
-      class="skill-bar absolute top-0 left-0 h-px bg-accent-500 transition-all duration-1000 ease-out"
-      style="width: 0%"
-      data-level={skill.level}
-    >
-    </div>
-  </div>
-</div>
+<span
+  class="scroll-reveal inline-block font-mono text-[11px] uppercase tracking-wider px-3 py-1.5 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-accent-500/50 hover:text-accent-500 transition-colors duration-200"
+  style={`transition-delay: ${index * 40}ms`}
+>
+  {skill.name}
+</span>
