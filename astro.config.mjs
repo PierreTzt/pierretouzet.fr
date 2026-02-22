@@ -15,6 +15,43 @@ export default defineConfig({
           en: 'en-US',
         },
       },
+      serialize(item) {
+        const url = item.url.replace('https://www.pierretouzet.fr', '');
+        item.lastmod = new Date();
+
+        // Home pages
+        if (url === '/fr/' || url === '/en/') {
+          item.changefreq = 'monthly';
+          item.priority = 1.0;
+        }
+        // Project detail pages
+        else if (url.match(/\/(projets|projects)\/[^/]+\//)) {
+          item.changefreq = 'monthly';
+          item.priority = 0.8;
+        }
+        // List pages
+        else if (url.match(/\/(projets|projects|experiences|competences|skills)\//)) {
+          item.changefreq = 'monthly';
+          item.priority = 0.7;
+        }
+        // Contact
+        else if (url.includes('/contact/')) {
+          item.changefreq = 'yearly';
+          item.priority = 0.6;
+        }
+        // Legal
+        else if (url.match(/\/(mentions-legales|legal)\//)) {
+          item.changefreq = 'yearly';
+          item.priority = 0.3;
+        }
+        // Default
+        else {
+          item.changefreq = 'monthly';
+          item.priority = 0.5;
+        }
+
+        return item;
+      },
     }),
   ],
   i18n: {
