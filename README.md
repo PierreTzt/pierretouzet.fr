@@ -99,9 +99,7 @@ npm run preview      # Preview du build localement
 - **Print stylesheet** : Mise en page optimisee pour l'impression
 
 ### Analytics
-- **Vercel Analytics** : Cookie-free, pas de banniere RGPD necessaire
-- **Custom events** : Tracking des clics CTA, telechargement CV, projets, social, contact, switch langue
-- **Implementation** : Listener delegue sur `[data-track]` dans BaseLayout
+- **Vercel Analytics** : Cookie-free, pas de banniere RGPD necessaire (pages vues, referents, pays)
 
 ### i18n
 - **Bilingue** : FR (defaut) + EN avec routes prefixees (`/fr/`, `/en/`)

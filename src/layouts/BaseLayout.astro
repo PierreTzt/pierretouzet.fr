@@ -108,21 +108,7 @@ const schemaOrg = {
     </script>
     <script>
       import { inject } from '@vercel/analytics';
-      import { track } from '@vercel/analytics';
       inject();
-
-      function initTracking() {
-        document.addEventListener('click', (e) => {
-          const el = (e.target as HTMLElement).closest('[data-track]') as HTMLElement;
-          if (!el) return;
-          const eventName = el.dataset.track!;
-          const eventData: Record<string, string> = {};
-          if (el.dataset.trackLabel) eventData.label = el.dataset.trackLabel;
-          if (el instanceof HTMLAnchorElement && el.href) eventData.url = el.href;
-          track(eventName, eventData);
-        });
-      }
-      initTracking();
     </script>
     <script is:inline>
       (function () {
