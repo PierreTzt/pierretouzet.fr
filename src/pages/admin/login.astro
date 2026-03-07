@@ -1,23 +1,5 @@
 ---
 export const prerender = false;
-
-let error = false;
-
-if (Astro.request.method === 'POST') {
-  const formData = await Astro.request.formData();
-  const password = formData.get('password');
-  if (password === import.meta.env.ADMIN_PASSWORD) {
-    Astro.cookies.set('admin-auth', import.meta.env.ADMIN_PASSWORD, {
-      path: '/admin',
-      httpOnly: true,
-      secure: import.meta.env.PROD,
-      sameSite: 'lax',
-      maxAge: 60 * 60 * 24,
-    });
-    return Astro.redirect('/admin/blog');
-  }
-  error = true;
-}
 ---
 
 <!DOCTYPE html>
@@ -36,17 +18,35 @@ if (Astro.request.method === 'POST') {
     input:focus { border-color: #4f46e5; }
     button { width: 100%; padding: 0.625rem; background: #18181b; color: white; border: none; font-size: 0.875rem; font-family: inherit; cursor: pointer; }
     button:hover { background: #4f46e5; }
-    .error { color: #ef4444; font-size: 0.8125rem; margin-bottom: 1rem; }
+    .error { color: #ef4444; font-size: 0.8125rem; margin-bottom: 1rem; display: none; }
   </style>
 </head>
 <body>
   <div class="card">
     <h1>Accès admin</h1>
-    {error && <p class="error">Mot de passe incorrect.</p>}
-    <form method="POST">
-      <input type="password" name="password" placeholder="Mot de passe" autofocus required />
+    <p id="error" class="error">Mot de passe incorrect.</p>
+    <form id="login-form">
+      <input type="password" id="password" placeholder="Mot de passe" autofocus required />
       <button type="submit">Entrer</button>
     </form>
   </div>
+  <script is:inline>
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const password = document.getElementById('password').value;
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      });
+      if (res.ok) {
+        window.location.href = '/admin/blog';
+      } else {
+        document.getElementById('error').style.display = 'block';
+        document.getElementById('password').value = '';
+        document.getElementById('password').focus();
+      }
+    });
+  </script>
 </body>
 </html>
