@@ -28,6 +28,11 @@ export interface Experience {
 
 export type ProjectStatus = 'active' | 'paused' | 'archived';
 
+export interface ProjectFeature {
+  title: string;
+  description: string;
+}
+
 export interface Project {
   slug: string;
   title: string;
@@ -41,6 +46,8 @@ export interface Project {
   status?: ProjectStatus;
   period?: string;
   metrics?: ProjectMetric[];
+  story?: string;
+  features?: ProjectFeature[];
 }
 
 export interface SkillCategory {
@@ -101,6 +108,8 @@ export interface UITranslations {
     technologies: string;
     visual: string;
     metrics: string;
+    story: string;
+    features: string;
   };
   contact: {
     title: string;

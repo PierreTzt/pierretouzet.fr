@@ -91,6 +91,25 @@ export const data: SiteData = {
         { label: 'Data', value: '100% offline' },
         { label: 'Compatibility', value: 'Yparéo & ERP' },
       ],
+      story: "Every semester, I watched the same scene unfold: academic coordinators locked in their offices for days, copy-pasting grades into Excel spreadsheets to produce RNCP-compliant competency bulletins. Hours of repetitive work, prone to errors and frustration. I thought: \"If I'm living this problem, hundreds of others are too.\" I started with a prototype for my own use. Then colleagues wanted it. Then other campuses. Gradly was born from this field observation — not from a market study, but from real pain.",
+      features: [
+        {
+          title: '100% offline — data sovereignty',
+          description: "No data ever leaves the user's machine. No cloud, no server, no GDPR risk. Learner data stays where it belongs.",
+        },
+        {
+          title: 'Smart import',
+          description: "Direct import from Excel, CSV or ERP exports (Yparéo). Gradly adapts to existing formats — not the other way around.",
+        },
+        {
+          title: 'RNCP-compliant PDF bulletins',
+          description: "Automatic generation of competency bulletins that comply with RNCP standards. Blocks, competencies, acquisition levels — everything is calculated and formatted.",
+        },
+        {
+          title: 'Admin time divided by 3',
+          description: "What used to take days now takes hours. Coordinators can focus on supporting learners, not on paperwork.",
+        },
+      ],
     },
     {
       slug: 'pedagogical-innovation',
@@ -391,6 +410,8 @@ export const data: SiteData = {
       technologies: 'Tools & Technologies',
       visual: 'Visual',
       metrics: 'Key figures',
+      story: 'The story',
+      features: 'Key features',
     },
     contact: {
       title: "Let's work together",

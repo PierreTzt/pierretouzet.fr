@@ -91,6 +91,25 @@ export const data: SiteData = {
         { label: 'Données', value: '100% offline' },
         { label: 'Compatibilité', value: 'Yparéo & ERP' },
       ],
+      story: "Chaque semestre, je voyais la même scène se répéter : des coordinateurs pédagogiques enfermés dans leur bureau pendant des jours, copiant-collant des notes dans des tableaux Excel pour produire des bulletins de compétences conformes au RNCP. Des heures de travail répétitif, source d'erreurs et de frustration. Je me suis dit : \"Si je vis ce problème, des centaines d'autres le vivent aussi.\" J'ai commencé par un prototype pour mon propre usage. Puis les collègues l'ont voulu. Puis d'autres campus. Gradly est né de ce constat terrain — pas d'une étude de marché, mais d'une douleur réelle.",
+      features: [
+        {
+          title: '100% offline — souveraineté des données',
+          description: "Aucune donnée ne quitte la machine de l'utilisateur. Pas de cloud, pas de serveur, pas de risque RGPD. Les données des apprenants restent où elles doivent être.",
+        },
+        {
+          title: 'Import intelligent',
+          description: "Import direct depuis Excel, CSV ou les exports ERP (Yparéo). Gradly s'adapte aux formats existants — pas l'inverse.",
+        },
+        {
+          title: 'Bulletins PDF conformes RNCP',
+          description: "Génération automatique de bulletins de compétences conformes aux référentiels RNCP. Blocs, compétences, niveaux d'acquisition — tout est calculé et mis en forme.",
+        },
+        {
+          title: 'Temps administratif divisé par 3',
+          description: "Ce qui prenait des jours se fait maintenant en quelques heures. Les coordinateurs peuvent se concentrer sur l'accompagnement, pas sur la paperasse.",
+        },
+      ],
     },
     {
       slug: 'innovation-pedagogique',
@@ -391,6 +410,8 @@ export const data: SiteData = {
       technologies: 'Outils & Technologies',
       visual: 'Visuel',
       metrics: 'Chiffres clés',
+      story: "L'histoire",
+      features: 'Fonctionnalités clés',
     },
     contact: {
       title: 'Travaillons ensemble',
