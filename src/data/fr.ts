@@ -334,6 +334,28 @@ export const data: SiteData = {
       description: 'Je mesure les résultats, je collecte les retours et je recommence — parce qu\'un bon process vit et évolue.',
     },
   ],
+  services: [
+    {
+      title: 'Ingénierie pédagogique & certification',
+      description: "Conception de programmes conformes aux exigences RNCP et Qualiopi, de la maquette à l'obtention de la certification.",
+      examples: ['Maquettes & syllabi', 'Dossiers RNCP', 'Audits Qualiopi', 'Blocs de compétences'],
+    },
+    {
+      title: 'Transformation digitale',
+      description: "Identification, déploiement et adoption d'outils numériques pour les équipes pédagogiques et administratives.",
+      examples: ['Déploiement LMS', 'Automatisation', 'Conduite du changement', 'Formation des équipes'],
+    },
+    {
+      title: 'Création de contenu & vulgarisation',
+      description: "Conception de contenus qui rendent le complexe accessible — vidéo, podcast, newsletter, ebook ou live.",
+      examples: ['Vidéo & Shorts', 'Podcast', 'Newsletter', 'Ebook & guides'],
+    },
+    {
+      title: 'Consulting IA & accompagnement',
+      description: "Accompagnement sur l'intégration de l'IA générative dans vos process pédagogiques ou votre activité.",
+      examples: ['Audit IA', 'Montée en compétences', 'Stratégie digitale', 'Mentorat'],
+    },
+  ],
   ui: {
     nav: {
       home: 'Accueil',
@@ -394,6 +416,10 @@ export const data: SiteData = {
     process: {
       title: 'Comment je travaille',
       subtitle: 'Chaque projet suit la même logique — adaptée au contexte.',
+    },
+    services: {
+      title: 'Ce que je peux faire pour vous',
+      subtitle: 'Des compétences concrètes, mobilisables en mission ou en poste.',
     },
     education: 'Formation',
     scrollToTop: 'Remonter en haut',

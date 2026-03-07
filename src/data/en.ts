@@ -334,6 +334,28 @@ export const data: SiteData = {
       description: 'I measure results, collect feedback and start again — because a good process lives and evolves.',
     },
   ],
+  services: [
+    {
+      title: 'Instructional Design & Certification',
+      description: 'Designing programs that meet RNCP and Qualiopi standards, from curriculum to certification.',
+      examples: ['Curricula & syllabi', 'RNCP applications', 'Qualiopi audits', 'Competency blocks'],
+    },
+    {
+      title: 'Digital Transformation',
+      description: 'Identifying, deploying and driving adoption of digital tools for educational and administrative teams.',
+      examples: ['LMS deployment', 'Automation', 'Change management', 'Team training'],
+    },
+    {
+      title: 'Content Creation & Education',
+      description: 'Creating content that makes the complex accessible — video, podcast, newsletter, ebook or live.',
+      examples: ['Video & Shorts', 'Podcast', 'Newsletter', 'Ebook & guides'],
+    },
+    {
+      title: 'AI Consulting & Mentoring',
+      description: 'Supporting the integration of generative AI into your educational processes or business.',
+      examples: ['AI audit', 'Upskilling', 'Digital strategy', 'Mentoring'],
+    },
+  ],
   ui: {
     nav: {
       home: 'Home',
@@ -394,6 +416,10 @@ export const data: SiteData = {
     process: {
       title: 'How I work',
       subtitle: 'Every project follows the same logic — adapted to context.',
+    },
+    services: {
+      title: 'What I can do for you',
+      subtitle: 'Concrete skills, ready for missions or permanent roles.',
     },
     education: 'Education',
     scrollToTop: 'Scroll to top',
