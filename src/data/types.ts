@@ -139,6 +139,30 @@ export interface UITranslations {
     title: string;
     subtitle: string;
   };
+  speaker: {
+    title: string;
+    subtitle: string;
+    cta: string;
+    format: string;
+  };
+  ebook: {
+    title: string;
+    subtitle: string;
+    cta: string;
+  };
+  hiring: {
+    title: string;
+    subtitle: string;
+    whyMe: string;
+  };
+  consulting: {
+    title: string;
+    subtitle: string;
+  };
+  hello: {
+    title: string;
+    subtitle: string;
+  };
   education: string;
   scrollToTop: string;
   skipToContent: string;
@@ -175,6 +199,18 @@ export interface Service {
   examples: string[];
 }
 
+export interface SpeakerTopic {
+  title: string;
+  abstract: string;
+  format: string;
+  tags: string[];
+}
+
+export interface FunFact {
+  emoji: string;
+  text: string;
+}
+
 export interface SiteData {
   personal: PersonalInfo;
   social: SocialLink[];
@@ -186,5 +222,7 @@ export interface SiteData {
   keyMetrics: KeyMetric[];
   processSteps: ProcessStep[];
   services: Service[];
+  speakerTopics: SpeakerTopic[];
+  funFacts: FunFact[];
   ui: UITranslations;
 }

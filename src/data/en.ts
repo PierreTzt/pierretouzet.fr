@@ -353,6 +353,32 @@ export const data: SiteData = {
       description: 'I measure results, collect feedback and start again — because a good process lives and evolves.',
     },
   ],
+  speakerTopics: [
+    {
+      title: 'From IT technician to program director: 15 years of curiosity',
+      abstract: "A non-linear career, a vocational diploma, and one conviction: curiosity is the best career engine. A look back at 15 years of pivots, risk-taking and transformation — in IT, education and entrepreneurship.",
+      format: 'Keynote · 30-45 min',
+      tags: ['Career', 'Multipotentialist', 'Career change'],
+    },
+    {
+      title: 'How I automated RNCP management for a school network',
+      abstract: "Academic coordinators spend days manually producing RNCP bulletins. I built a tool to divide that time by 3. A concrete look at problem identification, prototyping, deployment and results.",
+      format: 'Case study · 20-30 min',
+      tags: ['EdTech', 'RNCP', 'Automation', 'Gradly'],
+    },
+    {
+      title: "AI in education: a practitioner's view, not a theorist's",
+      abstract: "Everyone talks about AI in education. Few people actually use it daily with learners. What I've tested, what works, what doesn't, and why we need to stop being afraid.",
+      format: 'Keynote · 30-45 min',
+      tags: ['Generative AI', 'Education', 'Practice'],
+    },
+  ],
+  funFacts: [
+    { emoji: '🚀', text: 'Space enthusiast — can talk about SpaceX for hours' },
+    { emoji: '💎', text: 'Jewelry maker in his spare time' },
+    { emoji: '🏃', text: 'Regular runner — running as a pressure valve' },
+    { emoji: '🧠', text: 'Proud multipotentialist — always 5 projects running in parallel' },
+  ],
   services: [
     {
       title: 'Instructional Design & Certification',
@@ -441,6 +467,30 @@ export const data: SiteData = {
     services: {
       title: 'What I can do for you',
       subtitle: 'Concrete skills, ready for missions or permanent roles.',
+    },
+    speaker: {
+      title: 'Speaking & conferences',
+      subtitle: 'I talk about what I experience in the field — education, AI, digital transformation, atypical careers.',
+      cta: 'Invite me to speak',
+      format: 'Format',
+    },
+    ebook: {
+      title: 'AI in Education — Free Ebook',
+      subtitle: "A practitioner's take on generative AI in education. 10 pages to understand the real stakes, jargon-free.",
+      cta: 'Download for free',
+    },
+    hiring: {
+      title: 'Looking to hire?',
+      subtitle: "Discover why Pierre is the profile you need.",
+      whyMe: 'Why me',
+    },
+    consulting: {
+      title: 'Looking for a consultant?',
+      subtitle: 'Concrete missions, clear process, measurable results.',
+    },
+    hello: {
+      title: 'Nice to meet you!',
+      subtitle: 'Pierre Touzet in 30 seconds.',
     },
     education: 'Education',
     scrollToTop: 'Scroll to top',

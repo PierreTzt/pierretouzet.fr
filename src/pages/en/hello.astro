@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getData } from '../../i18n/utils';
+
+const lang = 'en';
+const data = getData(lang);
+---
+
+<BaseLayout
+  title={`${data.ui.hello.title} — ${data.personal.name}`}
+  description={data.ui.hello.subtitle}
+  lang={lang}
+>
+  <section class="py-20 px-6">
+    <div class="max-w-2xl mx-auto text-center">
+      <div class="scroll-reveal mb-8">
+        <div class="w-32 h-32 rounded-full overflow-hidden ring-2 ring-accent-500/20 mx-auto">
+          <picture>
+            <source srcset="/images/pierre-touzet-sm.webp" type="image/webp" />
+            <img
+              src="/images/pierre-touzet-sm.png"
+              alt={data.personal.avatarAlt}
+              width="400"
+              height="400"
+              class="w-full h-full object-cover object-top"
+              loading="eager"
+            />
+          </picture>
+        </div>
+      </div>
+
+      <div class="scroll-reveal mb-8" style="transition-delay: 80ms">
+        <h1 class="font-display text-heading text-zinc-900 dark:text-zinc-50 font-bold mb-2">
+          {data.ui.hello.title}
+        </h1>
+        <p class="text-lg text-zinc-600 dark:text-zinc-400 font-light mb-2">{data.personal.name}</p>
+        <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500">{data.personal.location}</p>
+      </div>
+
+      <div class="scroll-reveal mb-10" style="transition-delay: 160ms">
+        <p class="font-display text-subheading text-zinc-600 dark:text-zinc-400 font-light mb-4">
+          {data.personal.title}
+        </p>
+        <p class="text-sm text-zinc-500 leading-relaxed max-w-lg mx-auto">
+          {data.personal.description}
+        </p>
+      </div>
+
+      <div class="scroll-reveal mb-10" style="transition-delay: 240ms">
+        <div class="flex flex-wrap justify-center gap-2">
+          {data.services.map((s) => (
+            <span class="font-mono text-[10px] uppercase tracking-wider px-3 py-1.5 border border-zinc-200 dark:border-zinc-700 text-zinc-500 dark:text-zinc-400">
+              {s.title}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div class="scroll-reveal mb-10" style="transition-delay: 320ms">
+        <div class="grid grid-cols-2 gap-3 max-w-md mx-auto text-left">
+          {data.funFacts.map((fact) => (
+            <div class="tile p-3 flex items-start gap-2">
+              <span class="text-base">{fact.emoji}</span>
+              <p class="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">{fact.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="scroll-reveal flex flex-col sm:flex-row items-center justify-center gap-4" style="transition-delay: 400ms">
+        <a
+          href={`mailto:${data.personal.email}`}
+          class="group inline-flex items-center gap-3 px-8 py-4 bg-zinc-900 dark:bg-zinc-100 text-zinc-50 dark:text-zinc-900 text-sm font-medium hover:bg-accent-600 dark:hover:bg-accent-500 dark:hover:text-white transition-all duration-200"
+        >
+          {data.ui.contact.emailMe}
+          <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </a>
+        <a
+          href={data.social[0]?.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group inline-flex items-center gap-2 px-5 py-2.5 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 text-sm font-medium hover:border-accent-500 hover:text-accent-500 transition-colors duration-200"
+        >
+          LinkedIn
+          <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+          </svg>
+        </a>
+        <a href="/en/" class="mono-label hover:text-accent-500 transition-colors duration-200">
+          Portfolio →
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

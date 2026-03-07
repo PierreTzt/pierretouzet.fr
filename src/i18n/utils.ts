@@ -21,6 +21,10 @@ const pageSlugMap: Record<string, string> = {
   experiences: 'experiences',
   contact: 'contact',
   'mentions-legales': 'legal',
+  speaker: 'speaker',
+  consulting: 'consulting',
+  recrutement: 'hiring',
+  bonjour: 'hello',
 };
 
 // Reverse: EN -> FR

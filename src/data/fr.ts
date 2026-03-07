@@ -353,6 +353,32 @@ export const data: SiteData = {
       description: 'Je mesure les résultats, je collecte les retours et je recommence — parce qu\'un bon process vit et évolue.',
     },
   ],
+  speakerTopics: [
+    {
+      title: "De technicien informatique à responsable de programmes : 15 ans de curiosité",
+      abstract: "Un parcours non-linéaire, un bac pro en poche, et une conviction : la curiosité est le meilleur moteur de carrière. Retour d'expérience sur 15 ans de pivots, de prises de risque et de transformation — dans l'IT, la pédagogie et l'entrepreneuriat.",
+      format: 'Conférence · 30-45 min',
+      tags: ['Parcours', 'Multipotentialiste', 'Reconversion'],
+    },
+    {
+      title: "Comment j'ai automatisé la gestion RNCP d'un réseau d'écoles",
+      abstract: "Les coordinateurs pédagogiques passent des jours à produire des bulletins RNCP à la main. J'ai créé un outil pour diviser ce temps par 3. Retour concret sur l'identification du problème, le prototypage, le déploiement et les résultats.",
+      format: 'Retour d\'expérience · 20-30 min',
+      tags: ['EdTech', 'RNCP', 'Automatisation', 'Gradly'],
+    },
+    {
+      title: "L'IA en éducation : un regard de praticien, pas de théoricien",
+      abstract: "Tout le monde parle d'IA en éducation. Peu de gens l'utilisent vraiment au quotidien avec des apprenants. Ce que j'ai testé, ce qui marche, ce qui ne marche pas, et pourquoi il faut arrêter d'avoir peur.",
+      format: 'Conférence · 30-45 min',
+      tags: ['IA générative', 'Éducation', 'Pratique'],
+    },
+  ],
+  funFacts: [
+    { emoji: '🚀', text: 'Passionné de spatial — capable de parler de SpaceX pendant des heures' },
+    { emoji: '💎', text: 'Créateur de bijoux à ses heures perdues' },
+    { emoji: '🏃', text: 'Coureur régulier — le running comme soupape' },
+    { emoji: '🧠', text: 'Multipotentialiste assumé — toujours 5 projets en parallèle' },
+  ],
   services: [
     {
       title: 'Ingénierie pédagogique & certification',
@@ -441,6 +467,30 @@ export const data: SiteData = {
     services: {
       title: 'Ce que je peux faire pour vous',
       subtitle: 'Des compétences concrètes, mobilisables en mission ou en poste.',
+    },
+    speaker: {
+      title: 'Interventions & conférences',
+      subtitle: "Je parle de ce que je vis sur le terrain — pédagogie, IA, transformation digitale, parcours atypiques.",
+      cta: "M'inviter à intervenir",
+      format: 'Format',
+    },
+    ebook: {
+      title: "L'IA dans l'éducation — Ebook gratuit",
+      subtitle: "Un regard de praticien sur l'IA générative en éducation. 10 pages pour comprendre les vrais enjeux, sans jargon.",
+      cta: 'Télécharger gratuitement',
+    },
+    hiring: {
+      title: 'Vous recrutez ?',
+      subtitle: "Découvrez pourquoi Pierre est le profil qu'il vous faut.",
+      whyMe: 'Pourquoi moi',
+    },
+    consulting: {
+      title: 'Vous cherchez un consultant ?',
+      subtitle: 'Des missions concrètes, un process clair, des résultats mesurables.',
+    },
+    hello: {
+      title: 'Enchanté !',
+      subtitle: 'Pierre Touzet en 30 secondes.',
     },
     education: 'Formation',
     scrollToTop: 'Remonter en haut',
