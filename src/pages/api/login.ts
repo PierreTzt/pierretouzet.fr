@@ -7,7 +7,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
 
   if (password === import.meta.env.ADMIN_PASSWORD) {
     cookies.set('admin-auth', import.meta.env.ADMIN_PASSWORD, {
-      path: '/admin',
+      path: '/',
       httpOnly: true,
       secure: import.meta.env.PROD,
       sameSite: 'lax',
