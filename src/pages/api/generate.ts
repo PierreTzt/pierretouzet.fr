@@ -55,14 +55,7 @@ N'inclus PAS de bloc de code autour du JSON. Réponds directement en JSON.`;
 
 export const POST: APIRoute = async ({ request, cookies }) => {
   if (!isAuthenticated(request, cookies)) {
-    const hasCookieHeader = !!request.headers.get('cookie');
-    return new Response(JSON.stringify({
-      error: 'Non autorisé',
-      debug: {
-        hasCookieHeader,
-        hasEnvPassword: !!import.meta.env.ADMIN_PASSWORD,
-      },
-    }), { status: 401 });
+    return new Response(JSON.stringify({ error: 'Non autorisé' }), { status: 401 });
   }
 
   const { idea, lang } = await request.json();

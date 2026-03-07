@@ -257,10 +257,7 @@ export const prerender = false;
         });
 
         const data = await res.json();
-        if (!res.ok) {
-          const debugInfo = data.debug ? ' | ' + JSON.stringify(data.debug) : '';
-          throw new Error((data.error || 'Erreur') + debugInfo);
-        }
+        if (!res.ok) throw new Error(data.error || 'Erreur');
 
         $title.value = data.title || '';
         $description.value = data.description || '';
