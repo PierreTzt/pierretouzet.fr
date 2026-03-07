@@ -26,13 +26,13 @@ export const data: SiteData = {
       startDate: '2024-01',
       endDate: 'Present',
       description:
-        'Leading programs, quality assurance and faculty across 6 national campuses (Paris, Lyon, Bordeaux, Nantes, Montpellier, Le Mans) for approximately 500 learners.',
+        'Brought in to structure programs for a fast-growing tourism school. I now single-handedly lead the academic strategy across 6 national campuses, with a team of 11 on the ground and around 400 learners.',
       achievements: [
-        'Harmonized academic frameworks across 6 campuses: unified curricula, assessments and methods',
-        'Deployed new programs from design to launch',
+        'Full academic harmonization across 6 campuses: unified curricula, assessments and methods where each campus used to do things differently',
+        'Deployed new programs from design to launch, driving significant enrollment growth',
         'Designed syllabi, competency blocks and RNCP-compliant evaluation grids',
-        'Prepared and obtained certification and jury files (RNCP, Qualiopi)',
-        'Cross-functional management of coordinators and pedagogical directors',
+        'Secured certification and jury approvals (RNCP, Qualiopi)',
+        'Cross-functional management of a team of 11 coordinators and academic directors',
         'Budget oversight and program profitability optimization',
       ],
       technologies: ['RNCP', 'Qualiopi', 'Instructional Design', 'Management', 'Certification'],
@@ -44,11 +44,11 @@ export const data: SiteData = {
       startDate: '2022-04',
       endDate: '2024-01',
       description:
-        'Digital transformation of pedagogical tools across a national school network. Identification, testing and deployment of innovative solutions for field teams.',
+        'Hired for an admin role, my manager saw a tech expert in me and helped me evolve. In under 2 years, I led the digital transformation of pedagogical tools across a 28-campus network — with 100% adoption.',
       achievements: [
-        'Deployed digital tools adopted across all campuses in the network',
-        'Custom-built tools to automate recurring tasks',
-        'EdTech watch and POC management on innovative solutions',
+        'Deployed digital tools across all 28 campuses in the network — 100% adoption rate',
+        'Custom-built automation tools for recurring tasks (including early Gradly prototypes)',
+        'Permanent EdTech watch and POC management on innovative solutions',
         'Led cross-campus working groups',
         'Implemented data-driven quality tracking indicators for training programs',
       ],
@@ -61,9 +61,9 @@ export const data: SiteData = {
       startDate: '2010-10',
       endDate: '2021-11',
       description:
-        '11 years wearing two hats: administrative and operational management + full IT infrastructure ownership (N1-N3 support, migration, security).',
+        '11 years wearing two hats in a 2-person company: full operational management + IT infrastructure ownership. My biggest project: a complete overhaul of the supplier procurement system. After transforming everything, I was ready for a new challenge.',
       achievements: [
-        'Created procurement processes: rationalized supplier panel and achieved OTD > 90%',
+        'Complete overhaul of the procurement system: rationalized supplier panel and achieved OTD > 90%',
         'Full IT park migration to Windows 10',
         'N1, N2 and N3 IT support for all users',
         'Billing management, client follow-up and reporting',
@@ -127,49 +127,79 @@ export const data: SiteData = {
       slug: 'twitch-tech',
       title: 'Twitch Show — Tech News',
       shortDescription:
-        'Weekly live tech show breaking down technology news for a curious audience.',
+        'Nearly a year of weekly live shows: public speaking, streaming techniques and tech education for a curious audience.',
       longDescription:
-        'Hosted a weekly live show on Twitch dedicated to tech news in the broadest sense. Research, editorial preparation, live hosting and community interaction. A tech mediation experience that strengthened my ability to explain complex topics in real time.',
+        'For nearly a year, I hosted a weekly live show on Twitch covering tech news in the broadest sense. Research, editorial preparation, live hosting and community interaction. What I gained: mastery of live streaming, the tech behind it, and most importantly — public speaking skills.',
       technologies: ['Twitch', 'Live', 'Tech Education', 'Tech Watch'],
       imageAlt: 'Twitch tech news show',
       featured: false,
       status: 'paused',
+      period: '~1 year · Weekly',
     },
     {
       slug: 'youtube-taxes',
       title: 'YouTube — Tax Education',
       shortDescription:
-        'YouTube channel and Shorts making taxes simple: practical tips, filing guides, optimization.',
+        "~20 videos and Shorts to make taxes simple. Proof that I can break down any topic — even taxation.",
       longDescription:
-        "Created a YouTube channel with videos and Shorts to make taxation accessible to everyone. From tax filing to optimization tips, each video turns a dull subject into clear, actionable content. Proof that I can break down any topic.",
-      technologies: ['YouTube', 'Shorts', 'Education', 'Taxation'],
+        "Created a YouTube channel with about 20 videos and Shorts to make taxation accessible to everyone. One video every 3 days, from quick editing to platform algorithms. What I gained: understanding recommendation algorithms and mastering rapid video editing.",
+      technologies: ['YouTube', 'Shorts', 'Video Editing', 'Taxation'],
       imageAlt: 'YouTube tax education channel',
       featured: false,
       status: 'paused',
+      period: '~20 videos · 1 every 3 days',
     },
     {
       slug: 'podcast',
-      title: 'Podcast',
+      title: 'Podcast — Tech News',
       shortDescription:
-        'Podcast exploring tech, innovation and education topics through accessible audio formats.',
+        'Daily tech podcast over several months. An editorial and technical challenge with one goal: professional-grade output.',
       longDescription:
-        'Designed, recorded and published a podcast exploring topics I am passionate about: technology, innovation, education. A long-form format allowing deep dives into complex subjects.',
-      technologies: ['Podcast', 'Audio', 'Education'],
+        'Designed, recorded and published a daily podcast covering tech news in the broadest sense. An intense pace over several months. What I gained: the joy of sharing and the constant pursuit of professional-grade production.',
+      technologies: ['Podcast', 'Audio', 'Production', 'Tech Watch'],
       imageAlt: 'Tech and innovation podcast',
       featured: false,
       status: 'paused',
+      period: 'Several months · Daily',
+    },
+    {
+      slug: 'newsletter-tech',
+      title: 'LinkedIn Newsletter — Tech News',
+      shortDescription:
+        '~20 weekly editions breaking down tech news. Result: non-tech readers hooked on every issue.',
+      longDescription:
+        'Wrote and published a weekly newsletter on LinkedIn covering tech news in the broadest sense. About 20 editions published. What I gained: the ability to hook non-tech people on complex subjects.',
+      technologies: ['LinkedIn', 'Newsletter', 'Writing', 'Tech Watch'],
+      imageAlt: 'LinkedIn tech newsletter',
+      featured: false,
+      status: 'paused',
+      period: '~20 editions · Weekly',
+    },
+    {
+      slug: 'ebook-ai-education',
+      title: 'Ebook — AI in Education',
+      shortDescription:
+        "A 10-page ebook offering a practitioner's perspective on generative AI in education. Finalized, ready to share.",
+      longDescription:
+        "Wrote an ebook on AI in education, combining my field experience with the challenges of generative AI. About ten pages offering a practitioner's viewpoint, not a theorist's. What I gained: the satisfaction of putting my ideas on paper and structuring long-form thinking.",
+      technologies: ['Writing', 'Generative AI', 'Education'],
+      imageAlt: 'Ebook on AI in education',
+      featured: false,
+      status: 'active',
+      period: 'Finalized',
     },
     {
       slug: 'entrepreneurial-mentoring',
       title: 'Entrepreneurial Mentoring & AI',
       shortDescription:
-        'Mentored an entrepreneur through company creation and upskilling on generative AI.',
+        'End-to-end mentoring of an entrepreneur: micro-business creation and upskilling on generative AI.',
       longDescription:
-        "End-to-end mentoring of an entrepreneur in creating their company: offer structuring, digital strategy and upskilling on generative AI. An informal consulting mission demonstrating my ability to operate in the entrepreneurial world.",
+        "End-to-end mentoring of an entrepreneur in creating their micro-business: offer structuring, digital strategy and upskilling on generative AI. Mission completed. What I gained: the joy of mentoring and watching someone take the leap.",
       technologies: ['Consulting', 'Generative AI', 'Strategy', 'Mentoring'],
       imageAlt: 'Entrepreneurial mentoring and AI',
       featured: false,
       status: 'archived',
+      period: 'Mission completed',
     },
   ],
   skillCategories: [

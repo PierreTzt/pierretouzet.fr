@@ -26,13 +26,13 @@ export const data: SiteData = {
       startDate: '2024-01',
       endDate: "Aujourd'hui",
       description:
-        "Pilotage des programmes, de la qualité et du corps professoral sur 6 campus nationaux (Paris, Lyon, Bordeaux, Nantes, Montpellier, Le Mans) pour environ 500 apprenants.",
+        "Arrivé pour structurer les programmes d'une école de tourisme en pleine croissance, je pilote aujourd'hui seul la stratégie pédagogique de 6 campus nationaux, avec une équipe de 11 personnes sur le terrain et environ 400 apprenants.",
       achievements: [
-        'Harmonisation pédagogique sur 6 campus : maquettes, évaluations et modalités unifiées',
-        "Déploiement de nouveaux programmes de la conception à l'ouverture",
+        'Harmonisation pédagogique complète sur 6 campus : maquettes, évaluations et modalités unifiées là où chaque campus faisait différemment',
+        "Déploiement de nouveaux programmes de la conception à l'ouverture, avec une croissance significative des effectifs",
         "Conception des syllabi, blocs de compétences et grilles d'évaluation conformes RNCP",
-        'Préparation et obtention des dossiers de certification et jurys (RNCP, Qualiopi)',
-        'Management transversal des coordinateurs et responsables pédagogiques',
+        'Obtention des dossiers de certification et jurys (RNCP, Qualiopi)',
+        'Management transversal d\'une équipe de 11 coordinateurs et responsables pédagogiques',
         'Pilotage budgétaire et optimisation de la rentabilité des programmes',
       ],
       technologies: ['RNCP', 'Qualiopi', 'Ingénierie pédagogique', 'Management', 'Certification'],
@@ -44,11 +44,11 @@ export const data: SiteData = {
       startDate: '2022-04',
       endDate: '2024-01',
       description:
-        "Transformation digitale des outils pédagogiques au sein d'un réseau national d'écoles. Identification, test et déploiement de solutions innovantes pour les équipes terrain.",
+        "Recruté sur un poste administratif, mon N+1 a vu en moi un expert tech et m'a fait évoluer. En moins de 2 ans, j'ai mené la transformation digitale des outils pédagogiques d'un réseau de 28 campus — avec un taux d'adoption de 100%.",
       achievements: [
-        "Déploiement d'outils numériques adoptés par l'ensemble des campus du réseau",
-        "Développement sur mesure d'outils pour automatiser les tâches récurrentes",
-        'Veille EdTech et pilotage de POC sur des solutions innovantes',
+        "Déploiement d'outils numériques sur l'intégralité des 28 campus du réseau — 100% d'adoption",
+        "Développement sur mesure d'outils pour automatiser les tâches récurrentes (dont les prémices de Gradly)",
+        'Veille EdTech permanente et pilotage de POC sur des solutions innovantes',
         'Animation de groupes de travail transversaux entre campus',
         'Mise en place d\'indicateurs data pour le suivi qualité des formations',
       ],
@@ -61,9 +61,9 @@ export const data: SiteData = {
       startDate: '2010-10',
       endDate: '2021-11',
       description:
-        "11 ans en double casquette : pilotage administratif et opérationnel de l'entreprise + gestion complète de l'infrastructure IT (support N1 à N3, migration, sécurisation).",
+        "11 ans de double casquette dans une structure de 2 personnes : pilotage opérationnel complet + gestion de l'infrastructure IT. Mon plus gros projet : la refonte complète du système d'achat fournisseurs. Après avoir tout transformé, j'avais soif d'autre chose.",
       achievements: [
-        "Création et mise en place de process d'approvisionnement : rationalisation du panel fournisseurs et livraisons OTD > 90%",
+        "Refonte complète du système d'approvisionnement : rationalisation du panel fournisseurs et livraisons OTD > 90%",
         'Migration complète du parc informatique vers Windows 10',
         'Support IT N1, N2 et N3 pour l\'ensemble des utilisateurs',
         'Gestion de la facturation, du suivi clients et du reporting',
@@ -127,49 +127,79 @@ export const data: SiteData = {
       slug: 'twitch-tech',
       title: 'Émission Twitch — Actu Tech',
       shortDescription:
-        "Émission hebdomadaire de vulgarisation tech en live, décryptant l'actualité technologique pour un public curieux.",
+        "Près d'un an d'émission hebdomadaire en live : prise de parole, technique de streaming et vulgarisation tech pour un public curieux.",
       longDescription:
-        "Animation d'une émission hebdomadaire en live sur Twitch dédiée à l'actualité tech au sens large. Recherche, préparation éditoriale, animation en direct et interaction avec la communauté. Une expérience de médiation technologique qui a renforcé ma capacité à vulgariser des sujets complexes en temps réel.",
+        "Pendant près d'un an, j'ai animé une émission hebdomadaire en live sur Twitch dédiée à l'actualité tech au sens large. Recherche, préparation éditoriale, animation en direct et interaction avec la communauté. Ce que j'en ai tiré : la maîtrise des lives, la technique derrière le streaming, et surtout la prise de parole en public.",
       technologies: ['Twitch', 'Live', 'Vulgarisation', 'Veille tech'],
       imageAlt: 'Émission Twitch actu tech',
       featured: false,
       status: 'paused',
+      period: '~1 an · Hebdomadaire',
     },
     {
       slug: 'youtube-impots',
       title: 'YouTube — Vulgarisation fiscale',
       shortDescription:
-        "Chaîne YouTube et Shorts pour expliquer simplement les impôts : conseils pratiques, déclarations, optimisation.",
+        "~20 vidéos et Shorts pour expliquer simplement les impôts. La preuve que je peux vulgariser n'importe quel sujet — même la fiscalité.",
       longDescription:
-        "Création d'une chaîne YouTube avec vidéos et Shorts pour rendre la fiscalité accessible à tous. De la déclaration d'impôts aux astuces d'optimisation, chaque vidéo transforme un sujet rébarbatif en contenu clair et actionnable. La preuve que je peux vulgariser n'importe quel sujet.",
-      technologies: ['YouTube', 'Shorts', 'Vulgarisation', 'Fiscalité'],
+        "Création d'une chaîne YouTube avec une vingtaine de vidéos et Shorts pour rendre la fiscalité accessible à tous. Une vidéo tous les 3 jours, du montage rapide aux algorithmes de la plateforme. Ce que j'en ai tiré : la compréhension des algorithmes de recommandation et la maîtrise du montage vidéo rapide.",
+      technologies: ['YouTube', 'Shorts', 'Montage vidéo', 'Fiscalité'],
       imageAlt: 'Chaîne YouTube vulgarisation fiscale',
       featured: false,
       status: 'paused',
+      period: '~20 vidéos · 1 tous les 3 jours',
     },
     {
       slug: 'podcast',
-      title: 'Podcast',
+      title: 'Podcast — Actu Tech',
       shortDescription:
-        "Podcast explorant des sujets tech, innovation et pédagogie à travers des formats audio accessibles.",
+        "Podcast quotidien sur l'actualité tech pendant plusieurs mois. Un défi éditorial et technique avec un objectif : un rendu professionnel.",
       longDescription:
-        "Conception, enregistrement et diffusion d'un podcast explorant les sujets qui me passionnent : technologie, innovation, pédagogie. Un format long qui permet d'aller en profondeur sur des sujets complexes.",
-      technologies: ['Podcast', 'Audio', 'Vulgarisation'],
+        "Conception, enregistrement et diffusion d'un podcast quotidien explorant l'actualité tech au sens large. Un rythme intense pendant plusieurs mois. Ce que j'en ai tiré : le plaisir de partager et la recherche constante d'un rendu professionnel.",
+      technologies: ['Podcast', 'Audio', 'Production', 'Veille tech'],
       imageAlt: 'Podcast tech et innovation',
       featured: false,
       status: 'paused',
+      period: 'Quelques mois · Quotidien',
+    },
+    {
+      slug: 'newsletter-tech',
+      title: 'Newsletter LinkedIn — Actu Tech',
+      shortDescription:
+        "~20 éditions hebdomadaires décryptant l'actu tech. Résultat : des lecteurs pas du tout technophiles accrochés au rendez-vous.",
+      longDescription:
+        "Rédaction et diffusion d'une newsletter hebdomadaire sur LinkedIn, couvrant l'actualité tech au sens large. Une vingtaine d'éditions publiées. Ce que j'en ai tiré : la capacité à accrocher des personnes pas du tout technophiles sur des sujets complexes.",
+      technologies: ['LinkedIn', 'Newsletter', 'Rédaction', 'Veille tech'],
+      imageAlt: 'Newsletter LinkedIn actu tech',
+      featured: false,
+      status: 'paused',
+      period: '~20 éditions · Hebdomadaire',
+    },
+    {
+      slug: 'ebook-ia-education',
+      title: "Ebook — L'IA dans l'éducation",
+      shortDescription:
+        "Un ebook d'une dizaine de pages posant un regard de praticien sur l'IA générative en éducation. Finalisé, prêt à partager.",
+      longDescription:
+        "Rédaction d'un ebook sur l'IA dans l'éducation, croisant mon expérience terrain avec les enjeux de l'IA générative. Une dizaine de pages qui posent un avis de praticien, pas de théoricien. Ce que j'en ai tiré : le plaisir de poser mes idées sur papier et de structurer une pensée longue.",
+      technologies: ['Rédaction', 'IA générative', 'Éducation'],
+      imageAlt: "Ebook sur l'IA dans l'éducation",
+      featured: false,
+      status: 'active',
+      period: 'Finalisé',
     },
     {
       slug: 'accompagnement-entrepreneurial',
       title: 'Accompagnement entrepreneurial & IA',
       shortDescription:
-        "Accompagnement d'un entrepreneur sur la création de sa société et sa montée en compétences sur l'IA générative.",
+        "Accompagnement d'un entrepreneur de A à Z : création de micro-entreprise et montée en compétences sur l'IA générative.",
       longDescription:
-        "Accompagnement complet d'un entrepreneur dans la création de sa société : structuration de l'offre, stratégie digitale et montée en compétences sur l'IA générative. Une mission de consulting informelle qui démontre ma capacité à opérer dans le monde entrepreneurial.",
+        "Accompagnement complet d'un entrepreneur dans la création de sa micro-entreprise : structuration de l'offre, stratégie digitale et montée en compétences sur l'IA générative. Mission terminée. Ce que j'en ai tiré : le plaisir d'accompagner et de voir quelqu'un se lancer.",
       technologies: ['Consulting', 'IA générative', 'Stratégie', 'Mentorat'],
       imageAlt: 'Accompagnement entrepreneurial et IA',
       featured: false,
       status: 'archived',
+      period: 'Mission terminée',
     },
   ],
   skillCategories: [
