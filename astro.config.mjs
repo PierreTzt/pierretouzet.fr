@@ -2,12 +2,15 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
+import vercel from '@astrojs/vercel';
 
 export default defineConfig({
   site: 'https://www.pierretouzet.fr',
+  adapter: vercel(),
   integrations: [
     tailwind(),
     sitemap({
+      filter: (page) => !page.includes('/admin/'),
       i18n: {
         defaultLocale: 'fr',
         locales: {
@@ -24,13 +27,18 @@ export default defineConfig({
           item.changefreq = 'monthly';
           item.priority = 1.0;
         }
+        // Blog posts
+        else if (url.match(/\/blog\/[^/]+\//)) {
+          item.changefreq = 'weekly';
+          item.priority = 0.8;
+        }
         // Project detail pages
         else if (url.match(/\/(projets|projects)\/[^/]+\//)) {
           item.changefreq = 'monthly';
           item.priority = 0.8;
         }
         // List pages
-        else if (url.match(/\/(projets|projects|experiences|competences|skills)\//)) {
+        else if (url.match(/\/(projets|projects|experiences|competences|skills|blog)\//)) {
           item.changefreq = 'monthly';
           item.priority = 0.7;
         }

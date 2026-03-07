@@ -22,6 +22,7 @@ const { Content } = await post.render();
   title={`${post.data.title} — ${data.personal.name}`}
   description={post.data.description}
   lang={lang}
+  ogImage={`/og/${post.slug}.png`}
   breadcrumbs={[
     { name: data.ui.nav.home, url: '/en/' },
     { name: data.ui.blog.title, url: '/en/blog/' },
