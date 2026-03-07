@@ -23,6 +23,10 @@ const { Content } = await post.render();
   description={post.data.description}
   lang={lang}
   ogImage={`/og/${post.slug}.png`}
+  article={{
+    publishedTime: post.data.date.toISOString(),
+    tags: post.data.tags,
+  }}
   breadcrumbs={[
     { name: data.ui.nav.home, url: '/fr/' },
     { name: data.ui.blog.title, url: '/fr/blog/' },
