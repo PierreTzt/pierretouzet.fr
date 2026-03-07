@@ -18,11 +18,10 @@ const { testimonials, title, subtitle } = Astro.props;
         {title}
       </h2>
     </div>
-    <div class="grid md:grid-cols-3 gap-[1px] bg-zinc-200 dark:bg-zinc-800">
+    <div class="scroll-reveal grid md:grid-cols-3 gap-[1px] bg-zinc-200 dark:bg-zinc-800">
       {testimonials.map((t, i) => (
         <blockquote
-          class="scroll-reveal tile p-8 flex flex-col justify-between"
-          style={`transition-delay: ${i * 100}ms`}
+          class="tile p-8 flex flex-col justify-between"
         >
           <div>
             <svg class="w-6 h-6 text-accent-500/30 mb-4" fill="currentColor" viewBox="0 0 24 24">

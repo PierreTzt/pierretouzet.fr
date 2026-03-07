@@ -29,7 +29,7 @@ const Tag = hasDetailPage ? 'a' : 'div';
 <Tag
   {...(hasDetailPage ? { href: detailHref } : {})}
   class:list={[
-    'scroll-reveal tile group block overflow-hidden focus:outline-2 focus:outline-offset-2 focus:outline-accent-500',
+    'tile group block overflow-hidden focus:outline-2 focus:outline-offset-2 focus:outline-accent-500',
     hasDetailPage && 'tile-interactive glow-hover',
   ]}
   style={`transition-delay: ${index * 80}ms`}
