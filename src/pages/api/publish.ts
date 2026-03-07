@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { isAuthenticated } from '../../utils/auth';
 
 export const prerender = false;
 
@@ -13,8 +14,7 @@ function slugify(text: string): string {
 }
 
 export const POST: APIRoute = async ({ request, cookies }) => {
-  const cookie = cookies.get('admin-auth')?.value;
-  if (cookie !== import.meta.env.ADMIN_PASSWORD) {
+  if (!isAuthenticated(request, cookies)) {
     return new Response(JSON.stringify({ error: 'Non autorisé' }), { status: 401 });
   }
 

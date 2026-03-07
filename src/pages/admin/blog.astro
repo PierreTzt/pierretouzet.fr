@@ -252,11 +252,15 @@ export const prerender = false;
         const res = await fetch('/api/generate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
           body: JSON.stringify({ idea, lang }),
         });
 
         const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'Erreur');
+        if (!res.ok) {
+          const debugInfo = data.debug ? ' | ' + JSON.stringify(data.debug) : '';
+          throw new Error((data.error || 'Erreur') + debugInfo);
+        }
 
         $title.value = data.title || '';
         $description.value = data.description || '';
@@ -294,6 +298,7 @@ export const prerender = false;
         const res = await fetch('/api/publish', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
           body: JSON.stringify({
             title,
             description: $description.value.trim(),

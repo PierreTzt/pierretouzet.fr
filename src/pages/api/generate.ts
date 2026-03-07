@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import Anthropic from '@anthropic-ai/sdk';
+import { isAuthenticated } from '../../utils/auth';
 
 export const prerender = false;
 
@@ -53,9 +54,15 @@ Réponds TOUJOURS en JSON valide avec cette structure exacte :
 N'inclus PAS de bloc de code autour du JSON. Réponds directement en JSON.`;
 
 export const POST: APIRoute = async ({ request, cookies }) => {
-  const cookie = cookies.get('admin-auth')?.value;
-  if (cookie !== import.meta.env.ADMIN_PASSWORD) {
-    return new Response(JSON.stringify({ error: 'Non autorisé' }), { status: 401 });
+  if (!isAuthenticated(request, cookies)) {
+    const hasCookieHeader = !!request.headers.get('cookie');
+    return new Response(JSON.stringify({
+      error: 'Non autorisé',
+      debug: {
+        hasCookieHeader,
+        hasEnvPassword: !!import.meta.env.ADMIN_PASSWORD,
+      },
+    }), { status: 401 });
   }
 
   const { idea, lang } = await request.json();
