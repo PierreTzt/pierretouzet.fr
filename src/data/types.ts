@@ -26,6 +26,8 @@ export interface Experience {
   technologies: string[];
 }
 
+export type ProjectStatus = 'active' | 'paused' | 'archived';
+
 export interface Project {
   slug: string;
   title: string;
@@ -36,6 +38,8 @@ export interface Project {
   demoUrl?: string;
   githubUrl?: string;
   featured: boolean;
+  status?: ProjectStatus;
+  period?: string;
   metrics?: ProjectMetric[];
 }
 

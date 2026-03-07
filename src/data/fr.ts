@@ -84,6 +84,8 @@ export const data: SiteData = {
       imageAlt: 'Interface de Gradly - gestion des bulletins RNCP',
       demoUrl: 'https://www.gradly.fr/',
       featured: true,
+      status: 'active',
+      period: '2023 — Aujourd\'hui',
       metrics: [
         { label: 'Temps admin', value: '÷ 3' },
         { label: 'Données', value: '100% offline' },
@@ -100,6 +102,8 @@ export const data: SiteData = {
       technologies: ['LMS', 'Analytics', 'Automatisation', 'POC', 'Veille EdTech'],
       imageAlt: 'Transformation digitale pédagogique',
       featured: true,
+      status: 'active',
+      period: '2022 — Aujourd\'hui',
       metrics: [
         { label: 'Campus', value: '10+' },
         { label: 'Outils déployés', value: '5+' },
@@ -116,6 +120,56 @@ export const data: SiteData = {
       technologies: ['Astro', 'Tailwind CSS', 'TypeScript', 'Vercel'],
       imageAlt: 'Portfolio de Pierre Touzet',
       featured: false,
+      status: 'active',
+      period: '2025',
+    },
+    {
+      slug: 'twitch-tech',
+      title: 'Émission Twitch — Actu Tech',
+      shortDescription:
+        "Émission hebdomadaire de vulgarisation tech en live, décryptant l'actualité technologique pour un public curieux.",
+      longDescription:
+        "Animation d'une émission hebdomadaire en live sur Twitch dédiée à l'actualité tech au sens large. Recherche, préparation éditoriale, animation en direct et interaction avec la communauté. Une expérience de médiation technologique qui a renforcé ma capacité à vulgariser des sujets complexes en temps réel.",
+      technologies: ['Twitch', 'Live', 'Vulgarisation', 'Veille tech'],
+      imageAlt: 'Émission Twitch actu tech',
+      featured: false,
+      status: 'paused',
+    },
+    {
+      slug: 'youtube-impots',
+      title: 'YouTube — Vulgarisation fiscale',
+      shortDescription:
+        "Chaîne YouTube et Shorts pour expliquer simplement les impôts : conseils pratiques, déclarations, optimisation.",
+      longDescription:
+        "Création d'une chaîne YouTube avec vidéos et Shorts pour rendre la fiscalité accessible à tous. De la déclaration d'impôts aux astuces d'optimisation, chaque vidéo transforme un sujet rébarbatif en contenu clair et actionnable. La preuve que je peux vulgariser n'importe quel sujet.",
+      technologies: ['YouTube', 'Shorts', 'Vulgarisation', 'Fiscalité'],
+      imageAlt: 'Chaîne YouTube vulgarisation fiscale',
+      featured: false,
+      status: 'paused',
+    },
+    {
+      slug: 'podcast',
+      title: 'Podcast',
+      shortDescription:
+        "Podcast explorant des sujets tech, innovation et pédagogie à travers des formats audio accessibles.",
+      longDescription:
+        "Conception, enregistrement et diffusion d'un podcast explorant les sujets qui me passionnent : technologie, innovation, pédagogie. Un format long qui permet d'aller en profondeur sur des sujets complexes.",
+      technologies: ['Podcast', 'Audio', 'Vulgarisation'],
+      imageAlt: 'Podcast tech et innovation',
+      featured: false,
+      status: 'paused',
+    },
+    {
+      slug: 'accompagnement-entrepreneurial',
+      title: 'Accompagnement entrepreneurial & IA',
+      shortDescription:
+        "Accompagnement d'un entrepreneur sur la création de sa société et sa montée en compétences sur l'IA générative.",
+      longDescription:
+        "Accompagnement complet d'un entrepreneur dans la création de sa société : structuration de l'offre, stratégie digitale et montée en compétences sur l'IA générative. Une mission de consulting informelle qui démontre ma capacité à opérer dans le monde entrepreneurial.",
+      technologies: ['Consulting', 'IA générative', 'Stratégie', 'Mentorat'],
+      imageAlt: 'Accompagnement entrepreneurial et IA',
+      featured: false,
+      status: 'archived',
     },
   ],
   skillCategories: [

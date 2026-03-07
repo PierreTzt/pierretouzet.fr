@@ -84,6 +84,8 @@ export const data: SiteData = {
       imageAlt: 'Gradly interface - RNCP bulletin management',
       demoUrl: 'https://www.gradly.fr/',
       featured: true,
+      status: 'active',
+      period: '2023 — Present',
       metrics: [
         { label: 'Admin time', value: '÷ 3' },
         { label: 'Data', value: '100% offline' },
@@ -100,6 +102,8 @@ export const data: SiteData = {
       technologies: ['LMS', 'Analytics', 'Automation', 'POC', 'EdTech Watch'],
       imageAlt: 'Pedagogical digital transformation',
       featured: true,
+      status: 'active',
+      period: '2022 — Present',
       metrics: [
         { label: 'Campuses', value: '10+' },
         { label: 'Tools deployed', value: '5+' },
@@ -116,6 +120,56 @@ export const data: SiteData = {
       technologies: ['Astro', 'Tailwind CSS', 'TypeScript', 'Vercel'],
       imageAlt: "Pierre Touzet's portfolio",
       featured: false,
+      status: 'active',
+      period: '2025',
+    },
+    {
+      slug: 'twitch-tech',
+      title: 'Twitch Show — Tech News',
+      shortDescription:
+        'Weekly live tech show breaking down technology news for a curious audience.',
+      longDescription:
+        'Hosted a weekly live show on Twitch dedicated to tech news in the broadest sense. Research, editorial preparation, live hosting and community interaction. A tech mediation experience that strengthened my ability to explain complex topics in real time.',
+      technologies: ['Twitch', 'Live', 'Tech Education', 'Tech Watch'],
+      imageAlt: 'Twitch tech news show',
+      featured: false,
+      status: 'paused',
+    },
+    {
+      slug: 'youtube-taxes',
+      title: 'YouTube — Tax Education',
+      shortDescription:
+        'YouTube channel and Shorts making taxes simple: practical tips, filing guides, optimization.',
+      longDescription:
+        "Created a YouTube channel with videos and Shorts to make taxation accessible to everyone. From tax filing to optimization tips, each video turns a dull subject into clear, actionable content. Proof that I can break down any topic.",
+      technologies: ['YouTube', 'Shorts', 'Education', 'Taxation'],
+      imageAlt: 'YouTube tax education channel',
+      featured: false,
+      status: 'paused',
+    },
+    {
+      slug: 'podcast',
+      title: 'Podcast',
+      shortDescription:
+        'Podcast exploring tech, innovation and education topics through accessible audio formats.',
+      longDescription:
+        'Designed, recorded and published a podcast exploring topics I am passionate about: technology, innovation, education. A long-form format allowing deep dives into complex subjects.',
+      technologies: ['Podcast', 'Audio', 'Education'],
+      imageAlt: 'Tech and innovation podcast',
+      featured: false,
+      status: 'paused',
+    },
+    {
+      slug: 'entrepreneurial-mentoring',
+      title: 'Entrepreneurial Mentoring & AI',
+      shortDescription:
+        'Mentored an entrepreneur through company creation and upskilling on generative AI.',
+      longDescription:
+        "End-to-end mentoring of an entrepreneur in creating their company: offer structuring, digital strategy and upskilling on generative AI. An informal consulting mission demonstrating my ability to operate in the entrepreneurial world.",
+      technologies: ['Consulting', 'Generative AI', 'Strategy', 'Mentoring'],
+      imageAlt: 'Entrepreneurial mentoring and AI',
+      featured: false,
+      status: 'archived',
     },
   ],
   skillCategories: [
