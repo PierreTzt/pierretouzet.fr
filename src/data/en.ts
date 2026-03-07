@@ -141,6 +141,11 @@ export const data: SiteData = {
       featured: false,
       status: 'active',
       period: '2025',
+      metrics: [
+        { label: 'Pages', value: '40+' },
+        { label: 'Languages', value: '2' },
+        { label: 'Lighthouse', value: '95+' },
+      ],
     },
     {
       slug: 'twitch-tech',
@@ -154,6 +159,11 @@ export const data: SiteData = {
       featured: false,
       status: 'paused',
       period: '~1 year · Weekly',
+      metrics: [
+        { label: 'Duration', value: '~1 year' },
+        { label: 'Pace', value: 'Weekly' },
+        { label: 'Skill', value: 'Public speaking' },
+      ],
     },
     {
       slug: 'youtube-taxes',
@@ -167,6 +177,11 @@ export const data: SiteData = {
       featured: false,
       status: 'paused',
       period: '~20 videos · 1 every 3 days',
+      metrics: [
+        { label: 'Videos', value: '~20' },
+        { label: 'Pace', value: '1 / 3 days' },
+        { label: 'Format', value: 'Shorts + long' },
+      ],
     },
     {
       slug: 'podcast',
@@ -180,6 +195,11 @@ export const data: SiteData = {
       featured: false,
       status: 'paused',
       period: 'Several months · Daily',
+      metrics: [
+        { label: 'Pace', value: 'Daily' },
+        { label: 'Duration', value: 'Several months' },
+        { label: 'Quality', value: 'Pro-grade' },
+      ],
     },
     {
       slug: 'newsletter-tech',
@@ -193,6 +213,11 @@ export const data: SiteData = {
       featured: false,
       status: 'paused',
       period: '~20 editions · Weekly',
+      metrics: [
+        { label: 'Editions', value: '~20' },
+        { label: 'Pace', value: 'Weekly' },
+        { label: 'Audience', value: 'Non-tech' },
+      ],
     },
     {
       slug: 'ebook-ai-education',
@@ -206,6 +231,11 @@ export const data: SiteData = {
       featured: false,
       status: 'active',
       period: 'Finalized',
+      metrics: [
+        { label: 'Pages', value: '10' },
+        { label: 'Angle', value: 'Practitioner' },
+        { label: 'Status', value: 'Ready' },
+      ],
     },
     {
       slug: 'entrepreneurial-mentoring',
@@ -219,6 +249,11 @@ export const data: SiteData = {
       featured: false,
       status: 'archived',
       period: 'Mission completed',
+      metrics: [
+        { label: 'Mentored', value: '1 entrepreneur' },
+        { label: 'Scope', value: 'End-to-end' },
+        { label: 'Status', value: 'Completed' },
+      ],
     },
   ],
   skillCategories: [
@@ -491,6 +526,12 @@ export const data: SiteData = {
     hello: {
       title: 'Nice to meet you!',
       subtitle: 'Pierre Touzet in 30 seconds.',
+    },
+    blog: {
+      title: 'Blog',
+      subtitle: 'Thoughts on instructional design, AI in education, and digital innovation.',
+      backToBlog: 'Back to blog',
+      empty: 'No articles yet. Check back soon!',
     },
     education: 'Education',
     scrollToTop: 'Scroll to top',

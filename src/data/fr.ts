@@ -141,6 +141,11 @@ export const data: SiteData = {
       featured: false,
       status: 'active',
       period: '2025',
+      metrics: [
+        { label: 'Pages', value: '40+' },
+        { label: 'Langues', value: '2' },
+        { label: 'Lighthouse', value: '95+' },
+      ],
     },
     {
       slug: 'twitch-tech',
@@ -154,6 +159,11 @@ export const data: SiteData = {
       featured: false,
       status: 'paused',
       period: '~1 an · Hebdomadaire',
+      metrics: [
+        { label: 'Durée', value: '~1 an' },
+        { label: 'Rythme', value: 'Hebdo' },
+        { label: 'Compétence', value: 'Prise de parole' },
+      ],
     },
     {
       slug: 'youtube-impots',
@@ -167,6 +177,11 @@ export const data: SiteData = {
       featured: false,
       status: 'paused',
       period: '~20 vidéos · 1 tous les 3 jours',
+      metrics: [
+        { label: 'Vidéos', value: '~20' },
+        { label: 'Rythme', value: '1 / 3 jours' },
+        { label: 'Format', value: 'Shorts + long' },
+      ],
     },
     {
       slug: 'podcast',
@@ -180,6 +195,11 @@ export const data: SiteData = {
       featured: false,
       status: 'paused',
       period: 'Quelques mois · Quotidien',
+      metrics: [
+        { label: 'Rythme', value: 'Quotidien' },
+        { label: 'Durée', value: 'Plusieurs mois' },
+        { label: 'Qualité', value: 'Pro' },
+      ],
     },
     {
       slug: 'newsletter-tech',
@@ -193,6 +213,11 @@ export const data: SiteData = {
       featured: false,
       status: 'paused',
       period: '~20 éditions · Hebdomadaire',
+      metrics: [
+        { label: 'Éditions', value: '~20' },
+        { label: 'Rythme', value: 'Hebdo' },
+        { label: 'Audience', value: 'Non-tech' },
+      ],
     },
     {
       slug: 'ebook-ia-education',
@@ -206,6 +231,11 @@ export const data: SiteData = {
       featured: false,
       status: 'active',
       period: 'Finalisé',
+      metrics: [
+        { label: 'Pages', value: '10' },
+        { label: 'Angle', value: 'Praticien' },
+        { label: 'Statut', value: 'Prêt' },
+      ],
     },
     {
       slug: 'accompagnement-entrepreneurial',
@@ -219,6 +249,11 @@ export const data: SiteData = {
       featured: false,
       status: 'archived',
       period: 'Mission terminée',
+      metrics: [
+        { label: 'Accompagné', value: '1 entrepreneur' },
+        { label: 'Périmètre', value: 'De A à Z' },
+        { label: 'Statut', value: 'Terminé' },
+      ],
     },
   ],
   skillCategories: [
@@ -491,6 +526,12 @@ export const data: SiteData = {
     hello: {
       title: 'Enchanté !',
       subtitle: 'Pierre Touzet en 30 secondes.',
+    },
+    blog: {
+      title: 'Blog',
+      subtitle: 'Réflexions sur l\'ingénierie pédagogique, l\'IA en éducation et l\'innovation digitale.',
+      backToBlog: 'Retour au blog',
+      empty: 'Aucun article pour le moment. Revenez bientôt !',
     },
     education: 'Formation',
     scrollToTop: 'Remonter en haut',

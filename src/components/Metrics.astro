@@ -3,9 +3,10 @@ import type { KeyMetric } from '../data/types';
 
 interface Props {
   metrics: KeyMetric[];
+  trustedBy?: string;
 }
 
-const { metrics } = Astro.props;
+const { metrics, trustedBy } = Astro.props;
 ---
 
 <section class="px-6 pb-[1px]">
@@ -22,5 +23,19 @@ const { metrics } = Astro.props;
         </div>
       ))}
     </div>
+    {trustedBy && (
+      <div class="tile py-4 px-6 scroll-reveal">
+        <div class="flex items-center justify-center gap-6 flex-wrap">
+          <span class="font-mono text-[10px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500">{trustedBy}</span>
+          <span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-medium">IEFT</span>
+          <span class="text-zinc-300 dark:text-zinc-700">·</span>
+          <span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-medium">IFAG</span>
+          <span class="text-zinc-300 dark:text-zinc-700">·</span>
+          <span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-medium">ICM</span>
+          <span class="text-zinc-300 dark:text-zinc-700">·</span>
+          <span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-medium">Compétences & Développement</span>
+        </div>
+      </div>
+    )}
   </div>
 </section>

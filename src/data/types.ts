@@ -163,6 +163,12 @@ export interface UITranslations {
     title: string;
     subtitle: string;
   };
+  blog: {
+    title: string;
+    subtitle: string;
+    backToBlog: string;
+    empty: string;
+  };
   education: string;
   scrollToTop: string;
   skipToContent: string;
