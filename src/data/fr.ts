@@ -312,6 +312,28 @@ export const data: SiteData = {
     { value: '400+', label: 'apprenants' },
     { value: '6+', label: 'formats de contenu explorés' },
   ],
+  processSteps: [
+    {
+      number: '01',
+      title: 'Observer',
+      description: "J'écoute, j'audite, je comprends le vrai problème — pas celui qu'on me présente, celui qui se cache derrière.",
+    },
+    {
+      number: '02',
+      title: 'Concevoir',
+      description: 'Je dessine une solution sur mesure, je prototype vite, je teste avec les utilisateurs avant de tout construire.',
+    },
+    {
+      number: '03',
+      title: 'Déployer',
+      description: "Je forme les équipes, j'accompagne le changement et je ne lâche rien tant que l'adoption n'est pas réelle.",
+    },
+    {
+      number: '04',
+      title: 'Itérer',
+      description: 'Je mesure les résultats, je collecte les retours et je recommence — parce qu\'un bon process vit et évolue.',
+    },
+  ],
   ui: {
     nav: {
       home: 'Accueil',
@@ -368,6 +390,10 @@ export const data: SiteData = {
     testimonials: {
       title: 'Ils parlent de moi',
       subtitle: 'Recommandations LinkedIn',
+    },
+    process: {
+      title: 'Comment je travaille',
+      subtitle: 'Chaque projet suit la même logique — adaptée au contexte.',
     },
     education: 'Formation',
     scrollToTop: 'Remonter en haut',

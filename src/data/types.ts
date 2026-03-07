@@ -122,6 +122,10 @@ export interface UITranslations {
     title: string;
     subtitle: string;
   };
+  process: {
+    title: string;
+    subtitle: string;
+  };
   education: string;
   scrollToTop: string;
   skipToContent: string;
@@ -146,6 +150,12 @@ export interface KeyMetric {
   label: string;
 }
 
+export interface ProcessStep {
+  number: string;
+  title: string;
+  description: string;
+}
+
 export interface SiteData {
   personal: PersonalInfo;
   social: SocialLink[];
@@ -155,5 +165,6 @@ export interface SiteData {
   education: Education[];
   testimonials: Testimonial[];
   keyMetrics: KeyMetric[];
+  processSteps: ProcessStep[];
   ui: UITranslations;
 }
