@@ -3,9 +3,9 @@ import type { SiteData } from './types';
 export const data: SiteData = {
   personal: {
     name: 'Pierre Touzet',
-    title: 'Pedagogical Engineering & Digital Innovation',
+    title: 'I believe education can change the world.',
     description:
-      '15 years bridging tech and education. I lead training programs across 6 national campuses and build tools that simplify everyday work for educational teams. Founder of Gradly. Available for consulting and freelance.',
+      "So I make the complex accessible. 15 years across IT, education and digital innovation — I manage 6 national campuses, built Gradly, and I break down anything I get my hands on. Available for consulting and freelance.",
     email: 'pierre.touzet@mecontacter.eu',
     location: 'Valenciennes, France',
     avatarAlt: 'Photo of Pierre Touzet',
@@ -218,9 +218,15 @@ export const data: SiteData = {
     {
       name: 'Fanny Murer',
       role: 'National Pedagogical Coordinator',
-      company: 'IEFT',
+      company: 'ICL',
       quote: "I particularly appreciated his great availability and listening skills. Structured and rigorous, he knows how to organize and prioritize projects effectively. Pierre is very comfortable with digital tools and helps streamline and modernize pedagogical practices.",
     },
+  ],
+  keyMetrics: [
+    { value: '15', label: 'years of experience' },
+    { value: '6', label: 'campuses managed' },
+    { value: '400+', label: 'learners' },
+    { value: '6+', label: 'content formats explored' },
   ],
   ui: {
     nav: {

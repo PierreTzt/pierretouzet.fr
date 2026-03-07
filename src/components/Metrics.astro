@@ -1,0 +1,26 @@
+---
+import type { KeyMetric } from '../data/types';
+
+interface Props {
+  metrics: KeyMetric[];
+}
+
+const { metrics } = Astro.props;
+---
+
+<section class="px-6 pb-[1px]">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-[1px] bg-zinc-200 dark:bg-zinc-800">
+      {metrics.map((metric, i) => (
+        <div class={`tile p-6 md:p-8 text-center scroll-reveal`}>
+          <p class="font-display text-heading font-bold bg-gradient-to-r from-accent-500 to-electric-500 bg-clip-text text-transparent mb-1">
+            {metric.value}
+          </p>
+          <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+            {metric.label}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

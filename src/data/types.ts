@@ -137,6 +137,11 @@ export interface ProjectMetric {
   value: string;
 }
 
+export interface KeyMetric {
+  value: string;
+  label: string;
+}
+
 export interface SiteData {
   personal: PersonalInfo;
   social: SocialLink[];
@@ -145,5 +150,6 @@ export interface SiteData {
   skillCategories: SkillCategory[];
   education: Education[];
   testimonials: Testimonial[];
+  keyMetrics: KeyMetric[];
   ui: UITranslations;
 }

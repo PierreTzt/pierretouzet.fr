@@ -3,9 +3,9 @@ import type { SiteData } from './types';
 export const data: SiteData = {
   personal: {
     name: 'Pierre Touzet',
-    title: 'Ingénierie pédagogique & Innovation digitale',
+    title: "Je crois que l'éducation peut changer les choses.",
     description:
-      "15 ans à la croisée de la tech et de la pédagogie. Je pilote les programmes de formation de 6 campus nationaux et je crée des outils qui simplifient le quotidien des équipes pédagogiques. Fondateur de Gradly. Disponible en consulting et freelance.",
+      "Alors je rends le complexe accessible. 15 ans entre IT, pédagogie et innovation digitale — je pilote 6 campus nationaux, j'ai créé Gradly, et je vulgarise tout ce qui me tombe sous la main. Disponible en consulting et freelance.",
     email: 'pierre.touzet@mecontacter.eu',
     location: 'Valenciennes, France',
     avatarAlt: 'Photo de Pierre Touzet',
@@ -218,9 +218,15 @@ export const data: SiteData = {
     {
       name: 'Fanny Murer',
       role: 'Coordinatrice pédagogique nationale',
-      company: 'IEFT',
+      company: 'ICL',
       quote: "J'ai particulièrement apprécié sa grande disponibilité et son sens de l'écoute. Structuré et rigoureux, il sait organiser et prioriser efficacement les projets. Pierre est très à l'aise avec les outils informatiques et contribue à fluidifier et moderniser les pratiques pédagogiques.",
     },
+  ],
+  keyMetrics: [
+    { value: '15', label: "ans d'expérience" },
+    { value: '6', label: 'campus pilotés' },
+    { value: '400+', label: 'apprenants' },
+    { value: '6+', label: 'formats de contenu explorés' },
   ],
   ui: {
     nav: {
