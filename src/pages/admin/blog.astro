@@ -163,7 +163,6 @@ export const prerender = false;
   <script is:inline>
     // State
     let tags = [];
-    const password = document.cookie.split('; ').find(c => c.startsWith('admin-auth='))?.split('=')[1] || '';
 
     // Elements
     const $idea = document.getElementById('idea');
@@ -252,7 +251,7 @@ export const prerender = false;
       try {
         const res = await fetch('/api/generate', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'x-admin-password': password },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ idea, lang }),
         });
 
@@ -294,7 +293,7 @@ export const prerender = false;
       try {
         const res = await fetch('/api/publish', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'x-admin-password': password },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             title,
             description: $description.value.trim(),

@@ -12,9 +12,9 @@ function slugify(text: string): string {
     .slice(0, 60);
 }
 
-export const POST: APIRoute = async ({ request }) => {
-  const authHeader = request.headers.get('x-admin-password');
-  if (authHeader !== import.meta.env.ADMIN_PASSWORD) {
+export const POST: APIRoute = async ({ request, cookies }) => {
+  const cookie = cookies.get('admin-auth')?.value;
+  if (cookie !== import.meta.env.ADMIN_PASSWORD) {
     return new Response(JSON.stringify({ error: 'Non autorisé' }), { status: 401 });
   }
 

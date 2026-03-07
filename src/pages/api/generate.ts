@@ -52,9 +52,9 @@ Réponds TOUJOURS en JSON valide avec cette structure exacte :
 
 N'inclus PAS de bloc de code autour du JSON. Réponds directement en JSON.`;
 
-export const POST: APIRoute = async ({ request }) => {
-  const authHeader = request.headers.get('x-admin-password');
-  if (authHeader !== import.meta.env.ADMIN_PASSWORD) {
+export const POST: APIRoute = async ({ request, cookies }) => {
+  const cookie = cookies.get('admin-auth')?.value;
+  if (cookie !== import.meta.env.ADMIN_PASSWORD) {
     return new Response(JSON.stringify({ error: 'Non autorisé' }), { status: 401 });
   }
 
