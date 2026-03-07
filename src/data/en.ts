@@ -228,7 +228,7 @@ export const data: SiteData = {
         "Wrote an ebook on AI in education, combining my field experience with the challenges of generative AI. About ten pages offering a practitioner's viewpoint, not a theorist's. What I gained: the satisfaction of putting my ideas on paper and structuring long-form thinking.",
       technologies: ['Writing', 'Generative AI', 'Education'],
       imageAlt: 'Ebook on AI in education',
-      featured: false,
+      featured: true,
       status: 'active',
       period: 'Finalized',
       metrics: [

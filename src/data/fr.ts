@@ -228,7 +228,7 @@ export const data: SiteData = {
         "Rédaction d'un ebook sur l'IA dans l'éducation, croisant mon expérience terrain avec les enjeux de l'IA générative. Une dizaine de pages qui posent un avis de praticien, pas de théoricien. Ce que j'en ai tiré : le plaisir de poser mes idées sur papier et de structurer une pensée longue.",
       technologies: ['Rédaction', 'IA générative', 'Éducation'],
       imageAlt: "Ebook sur l'IA dans l'éducation",
-      featured: false,
+      featured: true,
       status: 'active',
       period: 'Finalisé',
       metrics: [
