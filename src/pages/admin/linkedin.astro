@@ -206,6 +206,14 @@ const blogArticles = posts.map(p => ({
     .carousel-preview-strip img:hover { border-color: #4f46e5; }
     .carousel-preview-strip img.active { border-color: #4f46e5; border-width: 2px; }
 
+    /* Banner slides */
+    .banner-slide { border: 1px solid #e4e4e7; padding: 1rem; margin-bottom: 0.75rem; background: white; position: relative; }
+    .banner-slide-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+    .banner-slide-num { font-size: 0.6875rem; font-weight: 700; color: #4f46e5; font-family: ui-monospace, monospace; }
+    .banner-preview-item { margin-bottom: 0.75rem; }
+    .banner-preview-item img { width: 100%; border: 1px solid #e4e4e7; }
+    .banner-preview-label { font-size: 0.6875rem; color: #71717a; font-family: ui-monospace, monospace; margin-bottom: 0.25rem; }
+
     /* RSS */
     .rss-sources { margin-bottom: 1rem; }
     .rss-source { display: flex; gap: 0.5rem; align-items: center; padding: 0.5rem; border: 1px solid #e4e4e7; margin-bottom: 0.375rem; background: white; font-size: 0.75rem; }
@@ -448,25 +456,17 @@ const blogArticles = posts.map(p => ({
     <!-- ==================== TAB 6: Bannière ==================== -->
     <div id="panel-banner" class="tab-panel hidden">
       <div class="card">
-        <div class="card-header">Bannière de profil LinkedIn</div>
-        <p style="font-size: 0.8125rem; color: #71717a; margin-bottom: 1rem;">Génère une bannière 1584x396 cohérente avec ton branding. La zone gauche est réservée à ta photo de profil.</p>
-        <div class="field">
-          <label for="banner-tagline">Tagline</label>
-          <input type="text" id="banner-tagline" placeholder="Ex: Ingénierie pédagogique · Innovation digitale · IA en éducation" value="Responsable national des programmes | Créateur de Gradly | Freelance & Consulting" />
-        </div>
-        <div class="field">
-          <label for="banner-keywords">Mots-clés (séparés par des virgules)</label>
-          <input type="text" id="banner-keywords" placeholder="Ex: EdTech, RNCP, IA, Pédagogie" value="EDTECH, RNCP, IA EN ÉDUCATION, PÉDAGOGIE, GRADLY" />
-        </div>
-        <button id="btn-gen-banner" class="btn btn-primary" style="width:100%">
-          Générer la bannière
+        <div class="card-header">Diaporama bannière LinkedIn Premium</div>
+        <p style="font-size: 0.8125rem; color: #71717a; margin-bottom: 1rem;">Génère jusqu'à 5 bannières 1584x396 pour le diaporama Premium. La zone gauche est réservée à ta photo de profil.</p>
+        <div id="banner-slides-list"></div>
+        <button id="btn-add-banner-slide" class="btn btn-ghost btn-sm" style="width:100%;margin-top:0.5rem">+ Ajouter une slide</button>
+        <button id="btn-gen-banner" class="btn btn-primary" style="width:100%;margin-top:1rem">
+          Générer les bannières
         </button>
         <div id="status-banner" class="status hidden"></div>
-        <div id="banner-preview" class="visual-preview" style="margin-top: 1rem;">
-          <span class="placeholder">La bannière apparaîtra ici</span>
-        </div>
-        <div class="actions" style="margin-top: 1rem;">
-          <button id="btn-download-banner" class="btn btn-primary" disabled>Télécharger la bannière</button>
+        <div id="banner-preview" style="margin-top: 1rem;"></div>
+        <div class="actions hidden" id="banner-download-actions" style="margin-top: 1rem;">
+          <button id="btn-download-banner" class="btn btn-primary">Télécharger toutes les bannières</button>
         </div>
       </div>
     </div>
@@ -1706,65 +1706,122 @@ const blogArticles = posts.map(p => ({
     origHistoryClick.addEventListener('click', renderCalendar);
     renderCalendar();
 
-    // ==================== BANNER GENERATION ====================
-    const $bannerTagline = document.getElementById('banner-tagline');
-    const $bannerKeywords = document.getElementById('banner-keywords');
+    // ==================== BANNER SLIDESHOW ====================
+    const $bannerSlidesList = document.getElementById('banner-slides-list');
+    const $btnAddBannerSlide = document.getElementById('btn-add-banner-slide');
     const $btnGenBanner = document.getElementById('btn-gen-banner');
     const $statusBanner = document.getElementById('status-banner');
     const $bannerPreview = document.getElementById('banner-preview');
+    const $bannerDownloadActions = document.getElementById('banner-download-actions');
     const $btnDownloadBanner = document.getElementById('btn-download-banner');
-    let bannerBlob = null;
+    let bannerBlobs = [];
+
+    let bannerSlides = [
+      { tagline: 'Responsable national des programmes | Créateur de Gradly | Freelance & Consulting | 🏃 Coureur irrégulier', keywords: 'EDTECH, RNCP, IA EN ÉDUCATION, PÉDAGOGIE, GRADLY' },
+      { tagline: '', keywords: '' },
+    ];
+
+    function renderBannerSlides() {
+      $btnAddBannerSlide.classList.toggle('hidden', bannerSlides.length >= 5);
+      $bannerSlidesList.innerHTML = bannerSlides.map((s, i) =>
+        '<div class="banner-slide">' +
+          '<div class="banner-slide-header">' +
+            '<span class="banner-slide-num">SLIDE ' + (i + 1) + ' / ' + bannerSlides.length + '</span>' +
+            (bannerSlides.length > 1 ? '<button class="btn btn-danger btn-sm" onclick="removeBannerSlide(' + i + ')">Retirer</button>' : '') +
+          '</div>' +
+          '<div class="field" style="margin-bottom:0.75rem">' +
+            '<label>Tagline</label>' +
+            '<input type="text" placeholder="Message principal de cette slide" value="' + escAttr(s.tagline) + '" onchange="updateBannerSlide(' + i + ',\'tagline\',this.value)" />' +
+          '</div>' +
+          '<div class="field" style="margin-bottom:0">' +
+            '<label>Mots-clés (virgules)</label>' +
+            '<input type="text" placeholder="Ex: EdTech, RNCP, IA, Pédagogie" value="' + escAttr(s.keywords) + '" onchange="updateBannerSlide(' + i + ',\'keywords\',this.value)" />' +
+          '</div>' +
+        '</div>'
+      ).join('');
+    }
+
+    window.updateBannerSlide = function(i, field, value) {
+      bannerSlides[i][field] = value;
+    };
+
+    window.removeBannerSlide = function(i) {
+      bannerSlides.splice(i, 1);
+      renderBannerSlides();
+    };
+
+    $btnAddBannerSlide.addEventListener('click', () => {
+      if (bannerSlides.length >= 5) return;
+      bannerSlides.push({ tagline: '', keywords: '' });
+      renderBannerSlides();
+    });
 
     $btnGenBanner.addEventListener('click', async () => {
-      const tagline = $bannerTagline.value.trim();
-      if (!tagline) return;
-
-      const keywordsRaw = $bannerKeywords.value.trim();
-      const keywords = keywordsRaw ? keywordsRaw.split(',').map(k => k.trim()).filter(Boolean) : [];
+      const validSlides = bannerSlides.filter(s => s.tagline.trim());
+      if (validSlides.length === 0) return;
 
       $btnGenBanner.disabled = true;
       $btnGenBanner.innerHTML = '<span class="spinner"></span> Génération...';
       $statusBanner.classList.remove('hidden', 'error');
-      $statusBanner.textContent = 'Création de la bannière 1584x396...';
+      $statusBanner.textContent = 'Création de ' + validSlides.length + ' bannière(s)...';
+      bannerBlobs = [];
+      $bannerPreview.innerHTML = '';
 
       try {
-        const res = await fetch('/api/generate-linkedin-banner', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'same-origin',
-          body: JSON.stringify({ tagline, keywords }),
-        });
+        for (let i = 0; i < validSlides.length; i++) {
+          $statusBanner.textContent = 'Slide ' + (i + 1) + ' / ' + validSlides.length + '...';
+          const keywords = validSlides[i].keywords.trim()
+            ? validSlides[i].keywords.split(',').map(k => k.trim()).filter(Boolean)
+            : [];
 
-        if (!res.ok) {
-          const err = await res.json();
-          throw new Error(err.error || 'Erreur');
+          const res = await fetch('/api/generate-linkedin-banner', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({ tagline: validSlides[i].tagline, keywords }),
+          });
+
+          if (!res.ok) {
+            const err = await res.json();
+            throw new Error(err.error || 'Erreur slide ' + (i + 1));
+          }
+
+          const blob = await res.blob();
+          bannerBlobs.push(blob);
+
+          const url = URL.createObjectURL(blob);
+          $bannerPreview.innerHTML +=
+            '<div class="banner-preview-item">' +
+              '<div class="banner-preview-label">SLIDE ' + (i + 1) + '</div>' +
+              '<img src="' + url + '" alt="Bannière ' + (i + 1) + '" />' +
+            '</div>';
         }
 
-        bannerBlob = await res.blob();
-        const url = URL.createObjectURL(bannerBlob);
-        $bannerPreview.innerHTML = '<img src="' + url + '" alt="Bannière LinkedIn" style="width:100%" />';
-        $btnDownloadBanner.disabled = false;
+        $bannerDownloadActions.classList.remove('hidden');
         $statusBanner.classList.add('hidden');
       } catch (err) {
         $statusBanner.classList.add('error');
         $statusBanner.textContent = 'Erreur : ' + err.message;
       } finally {
         $btnGenBanner.disabled = false;
-        $btnGenBanner.textContent = 'Générer la bannière';
+        $btnGenBanner.textContent = 'Générer les bannières';
       }
     });
 
     $btnDownloadBanner.addEventListener('click', () => {
-      if (!bannerBlob) return;
-      const url = URL.createObjectURL(bannerBlob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'linkedin-banner-1584x396.png';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      bannerBlobs.forEach((blob, i) => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'linkedin-banner-slide-' + (i + 1) + '-1584x396.png';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      });
     });
+
+    renderBannerSlides();
   </script>
 </body>
 </html>
