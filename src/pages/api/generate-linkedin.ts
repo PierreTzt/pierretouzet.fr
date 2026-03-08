@@ -98,7 +98,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     return new Response(JSON.stringify({ error: 'Non autorisé' }), { status: 401 });
   }
 
-  const { input, format } = await request.json();
+  const { input, format, preferences } = await request.json();
 
   if (!input || !format) {
     return new Response(JSON.stringify({ error: 'Input et format requis' }), { status: 400 });
@@ -107,9 +107,16 @@ export const POST: APIRoute = async ({ request, cookies }) => {
   const formatInstruction = FORMAT_INSTRUCTIONS[format] || FORMAT_INSTRUCTIONS.analyse;
 
   const isUrl = /^https?:\/\//.test(input.trim());
-  const userMessage = isUrl
+  let userMessage = isUrl
     ? `${formatInstruction}\n\nPierre partage cette source : ${input}\n\nBasé sur l'URL et ton analyse, génère le post LinkedIn.`
     : `${formatInstruction}\n\nIdée/sujet de Pierre :\n\n${input}`;
+
+  // Inject tone preferences from feedback history
+  if (preferences && preferences.length > 0) {
+    userMessage += '\n\n## Préférences de ton (retours précédents de Pierre) :\n' +
+      preferences.map((p: string) => `- ${p}`).join('\n') +
+      '\n\nRespecte impérativement ces préférences.';
+  }
 
   const apiKey = import.meta.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
