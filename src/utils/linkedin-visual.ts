@@ -44,6 +44,7 @@ export async function generateLinkedInVisual(options: {
     analyse: '#818cf8',
     opinion: '#4f46e5',
     fait: '#6366f1',
+    veille: '#4f46e5',
   };
   const accent = accentColors[format] || '#4f46e5';
 
@@ -52,6 +53,7 @@ export async function generateLinkedInVisual(options: {
     analyse: 'ANALYSE',
     opinion: 'OPINION',
     fait: 'FAIT MARQUANT',
+    veille: 'VEILLE HEBDO',
   };
   const label = formatLabels[format] || '';
 

@@ -52,6 +52,15 @@ const SYSTEM_PROMPT = `Tu es l'assistant LinkedIn de Pierre Touzet. Tu l'aides �
 - Ton analyse d'expert : ce que ça signifie vraiment
 - Longueur : 600-1000 caractères
 
+### Veille hebdo
+- Titre récurrent : "La veille de Pierre #[numéro]"
+- Format : 3 actus commentées, chacune avec :
+  - Le sujet/source en une ligne
+  - Mon commentaire en 1-2 lignes, direct et expert
+- Séparateur visuel entre chaque actu (ligne vide)
+- Conclusion courte : tendance ou fil conducteur entre les actus
+- Longueur : 1000-1800 caractères
+
 ## Règles de formatage LinkedIn
 - Texte BRUT uniquement (pas de Markdown, pas de **gras**, pas de # titres)
 - Sauts de ligne entre chaque paragraphe (critique pour la lisibilité)
@@ -81,6 +90,7 @@ const FORMAT_INSTRUCTIONS: Record<string, string> = {
   analyse: "Rédige un post LinkedIn au format 'Analyse courte'. Pierre partage son analyse d'expert sur ce sujet/source.",
   opinion: "Rédige un post LinkedIn au format 'Prise de position'. Pierre donne son opinion tranchée et argumentée.",
   fait: "Rédige un post LinkedIn au format 'Fait marquant'. Pierre met en avant un chiffre ou fait clé avec son analyse.",
+  veille: "Rédige un post LinkedIn au format 'Veille hebdo'. Pierre partage sa curation de 3 actus de la semaine avec ses commentaires d'expert. Les actus sont fournies ci-dessous.",
 };
 
 export const POST: APIRoute = async ({ request, cookies }) => {

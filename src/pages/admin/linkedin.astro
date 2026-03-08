@@ -1,5 +1,18 @@
 ---
 export const prerender = false;
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+
+const blogArticles = posts.map(p => ({
+  slug: p.slug,
+  title: p.data.title,
+  description: p.data.description,
+  date: p.data.date.toISOString().slice(0, 10),
+  lang: p.data.lang,
+  tags: p.data.tags,
+}));
 ---
 
 <!DOCTYPE html>
@@ -39,6 +52,9 @@ export const prerender = false;
     .btn-accent:hover:not(:disabled) { background: #4338ca; }
     .btn-ghost { background: transparent; color: #71717a; border: 1px solid #e4e4e7; }
     .btn-ghost:hover:not(:disabled) { color: #18181b; border-color: #a1a1aa; }
+    .btn-sm { padding: 0.375rem 0.75rem; font-size: 0.75rem; }
+    .btn-danger { background: transparent; color: #ef4444; border: 1px solid #fecaca; }
+    .btn-danger:hover { background: #fef2f2; }
     .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
     .actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; }
@@ -46,6 +62,12 @@ export const prerender = false;
     /* Sections */
     .card { background: white; border: 1px solid #e4e4e7; padding: 1.5rem; margin-bottom: 1.5rem; }
     .card-header { font-size: 0.6875rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: #4f46e5; margin-bottom: 1rem; font-family: ui-monospace, monospace; }
+
+    /* Main tabs */
+    .main-tabs { display: flex; gap: 0; margin-bottom: 1.5rem; border-bottom: 1px solid #e4e4e7; }
+    .main-tab { padding: 0.625rem 1.25rem; font-size: 0.8125rem; font-family: ui-monospace, monospace; cursor: pointer; border: none; background: transparent; color: #71717a; border-bottom: 2px solid transparent; transition: all 0.15s; }
+    .main-tab:hover { color: #18181b; }
+    .main-tab.active { color: #4f46e5; border-bottom-color: #4f46e5; font-weight: 600; }
 
     /* Format selector */
     .format-options { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin-top: 0.375rem; }
@@ -77,7 +99,7 @@ export const prerender = false;
     @media (max-width: 768px) { .edit-layout { grid-template-columns: 1fr; } .format-options { grid-template-columns: 1fr; } }
 
     /* Visual preview */
-    .visual-preview { background: #18181b; border: 1px solid #27272a; display: flex; align-items: center; justify-content: center; padding: 1rem; min-height: 200px; }
+    .visual-preview { background: #f4f4f5; border: 1px solid #e4e4e7; display: flex; align-items: center; justify-content: center; padding: 1rem; min-height: 200px; }
     .visual-preview img { max-width: 100%; max-height: 400px; object-fit: contain; }
     .visual-preview .placeholder { color: #71717a; font-size: 0.8125rem; font-family: ui-monospace, monospace; }
 
@@ -113,6 +135,23 @@ export const prerender = false;
     /* Export buttons */
     .export-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
     .btn-copy-ok { background: #22c55e; color: white; }
+
+    /* Veille items */
+    .veille-item { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.75rem; border: 1px solid #e4e4e7; margin-bottom: 0.5rem; background: white; }
+    .veille-item-content { flex: 1; }
+    .veille-item-title { font-size: 0.8125rem; font-weight: 500; color: #18181b; margin-bottom: 0.25rem; }
+    .veille-item-url { font-size: 0.6875rem; color: #4f46e5; word-break: break-all; }
+    .veille-item-note { font-size: 0.75rem; color: #71717a; margin-top: 0.25rem; }
+    .veille-item-date { font-size: 0.625rem; color: #a1a1aa; font-family: ui-monospace, monospace; }
+    .veille-empty { padding: 2rem; text-align: center; color: #a1a1aa; font-size: 0.8125rem; border: 1px dashed #e4e4e7; }
+    .veille-counter { font-size: 0.75rem; color: #71717a; font-family: ui-monospace, monospace; margin-bottom: 1rem; }
+
+    /* Blog articles list */
+    .blog-item { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; border: 1px solid #e4e4e7; margin-bottom: 0.5rem; background: white; }
+    .blog-item-info { flex: 1; }
+    .blog-item-title { font-size: 0.8125rem; font-weight: 500; color: #18181b; }
+    .blog-item-meta { font-size: 0.6875rem; color: #71717a; margin-top: 0.125rem; }
+    .blog-item-meta .lang { text-transform: uppercase; font-weight: 600; color: #4f46e5; }
   </style>
 </head>
 <body>
@@ -125,52 +164,139 @@ export const prerender = false;
     <h1>LinkedIn Studio</h1>
     <p class="subtitle">Génère tes posts LinkedIn + visuels brandés. Copie, colle, publie.</p>
 
-    <!-- Step 1: Input -->
-    <div id="step-input" class="card">
-      <div class="card-header">01 — Ton sujet</div>
-      <div class="field">
-        <label for="input">Lien, idée, ou sujet</label>
-        <textarea id="input" rows="3" placeholder="Ex: Colle un lien d'article, décris un sujet, partage une stat..."></textarea>
-      </div>
-      <div class="field">
-        <label>Format du post</label>
-        <div class="format-options">
-          <div class="format-option">
-            <input type="radio" name="format" id="fmt-analyse" value="analyse" checked />
-            <label for="fmt-analyse">
-              Analyse courte
-              <span>Source + ce que j'en retiens</span>
-            </label>
-          </div>
-          <div class="format-option">
-            <input type="radio" name="format" id="fmt-opinion" value="opinion" />
-            <label for="fmt-opinion">
-              Prise de position
-              <span>J'estime que... + arguments</span>
-            </label>
-          </div>
-          <div class="format-option">
-            <input type="radio" name="format" id="fmt-fait" value="fait" />
-            <label for="fmt-fait">
-              Fait marquant
-              <span>Chiffre / stat + commentaire</span>
-            </label>
-          </div>
-        </div>
-      </div>
-      <button id="btn-generate" class="btn btn-primary" style="width:100%">
-        Générer le post
-      </button>
-      <div id="status-generate" class="status hidden"></div>
+    <!-- Main tabs -->
+    <div class="main-tabs">
+      <button class="main-tab active" data-panel="panel-post">Nouveau post</button>
+      <button class="main-tab" data-panel="panel-veille">Veille hebdo</button>
+      <button class="main-tab" data-panel="panel-blog">Depuis le blog</button>
     </div>
 
-    <!-- Step 2: Edit + Visual -->
+    <!-- ==================== TAB 1: Nouveau post ==================== -->
+    <div id="panel-post" class="tab-panel">
+      <div id="step-input" class="card">
+        <div class="card-header">01 — Ton sujet</div>
+        <div class="field">
+          <label for="input">Lien, idée, ou sujet</label>
+          <textarea id="input" rows="3" placeholder="Ex: Colle un lien d'article, décris un sujet, partage une stat..."></textarea>
+        </div>
+        <div class="field">
+          <label>Format du post</label>
+          <div class="format-options">
+            <div class="format-option">
+              <input type="radio" name="format" id="fmt-analyse" value="analyse" checked />
+              <label for="fmt-analyse">
+                Analyse courte
+                <span>Source + ce que j'en retiens</span>
+              </label>
+            </div>
+            <div class="format-option">
+              <input type="radio" name="format" id="fmt-opinion" value="opinion" />
+              <label for="fmt-opinion">
+                Prise de position
+                <span>J'estime que... + arguments</span>
+              </label>
+            </div>
+            <div class="format-option">
+              <input type="radio" name="format" id="fmt-fait" value="fait" />
+              <label for="fmt-fait">
+                Fait marquant
+                <span>Chiffre / stat + commentaire</span>
+              </label>
+            </div>
+          </div>
+        </div>
+        <button id="btn-generate" class="btn btn-primary" style="width:100%">
+          Générer le post
+        </button>
+        <div id="status-generate" class="status hidden"></div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 2: Veille hebdo ==================== -->
+    <div id="panel-veille" class="tab-panel hidden">
+      <div class="card">
+        <div class="card-header">Accumuler des actus</div>
+        <p class="veille-counter">Pendant la semaine, ajoute des liens. Quand tu es prêt, génère ta veille hebdo.</p>
+        <div class="row" style="margin-bottom: 1rem;">
+          <div class="field" style="margin-bottom:0">
+            <label for="veille-url">Lien de l'actu</label>
+            <input type="text" id="veille-url" placeholder="https://..." />
+          </div>
+          <div class="field" style="margin-bottom:0">
+            <label for="veille-title">Titre / description courte</label>
+            <input type="text" id="veille-title" placeholder="De quoi ça parle ?" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="veille-note">Note perso (optionnel)</label>
+          <input type="text" id="veille-note" placeholder="Ton angle, ce qui t'a marqué..." />
+        </div>
+        <button id="btn-add-veille" class="btn btn-ghost btn-sm" style="width:100%">
+          Ajouter à la veille
+        </button>
+      </div>
+
+      <div class="card">
+        <div class="card-header">Actus accumulées</div>
+        <div id="veille-count" class="veille-counter"></div>
+        <div id="veille-list"></div>
+        <div class="actions" style="margin-top: 1rem;">
+          <button id="btn-generate-veille" class="btn btn-primary" disabled>
+            Générer la veille hebdo
+          </button>
+          <button id="btn-clear-veille" class="btn btn-danger btn-sm">
+            Vider la liste
+          </button>
+        </div>
+        <div id="status-veille" class="status hidden"></div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 3: Depuis le blog ==================== -->
+    <div id="panel-blog" class="tab-panel hidden">
+      <div class="card">
+        <div class="card-header">Décliner un article en post LinkedIn</div>
+        <div class="field">
+          <label>Format de déclinaison</label>
+          <div class="format-options">
+            <div class="format-option">
+              <input type="radio" name="blog-format" id="bfmt-analyse" value="analyse" checked />
+              <label for="bfmt-analyse">Analyse courte</label>
+            </div>
+            <div class="format-option">
+              <input type="radio" name="blog-format" id="bfmt-opinion" value="opinion" />
+              <label for="bfmt-opinion">Prise de position</label>
+            </div>
+            <div class="format-option">
+              <input type="radio" name="blog-format" id="bfmt-fait" value="fait" />
+              <label for="bfmt-fait">Fait marquant</label>
+            </div>
+          </div>
+        </div>
+        <div id="blog-list">
+          {blogArticles.map(a => (
+            <div class="blog-item" data-title={a.title} data-description={a.description} data-slug={a.slug} data-lang={a.lang}>
+              <div class="blog-item-info">
+                <div class="blog-item-title">{a.title}</div>
+                <div class="blog-item-meta">
+                  <span class="lang">{a.lang}</span> — {a.date} — {a.tags.join(', ')}
+                </div>
+              </div>
+              <button class="btn btn-ghost btn-sm btn-repurpose">Décliner</button>
+            </div>
+          ))}
+        </div>
+        <div id="status-blog" class="status hidden"></div>
+      </div>
+    </div>
+
+    <!-- ==================== SHARED: Edit + Visual + Preview + Export ==================== -->
     <div id="step-edit" class="hidden">
       <div class="edit-layout">
         <!-- Left: text -->
         <div>
           <div class="card">
-            <div class="card-header">02 — Post généré</div>
+            <div class="card-header">Post généré</div>
             <div class="field">
               <label for="post-text">Texte du post</label>
               <textarea id="post-text" rows="14" style="font-size: 0.8125rem;"></textarea>
@@ -184,7 +310,7 @@ export const prerender = false;
         <!-- Right: visual -->
         <div>
           <div class="card">
-            <div class="card-header">03 — Visuel</div>
+            <div class="card-header">Visuel</div>
             <div class="field">
               <label for="headline">Titre du visuel</label>
               <input type="text" id="headline" placeholder="Titre court et percutant" />
@@ -250,7 +376,7 @@ export const prerender = false;
 
       <!-- Export -->
       <div class="card">
-        <div class="card-header">04 — Exporter</div>
+        <div class="card-header">Exporter</div>
         <div class="export-actions">
           <button id="btn-copy" class="btn btn-accent">Copier le texte</button>
           <button id="btn-download" class="btn btn-primary" disabled>Télécharger le visuel</button>
@@ -261,11 +387,14 @@ export const prerender = false;
   </div>
 
   <script is:inline>
-    // State
+    // ==================== STATE ====================
     let currentVisualBlob = null;
     let currentSize = '1080x1080';
+    let currentFormat = 'analyse';
+    let currentInput = '';
+    let veilleItems = JSON.parse(localStorage.getItem('linkedin-veille') || '[]');
 
-    // Elements
+    // ==================== ELEMENTS ====================
     const $input = document.getElementById('input');
     const $postText = document.getElementById('post-text');
     const $headline = document.getElementById('headline');
@@ -275,7 +404,6 @@ export const prerender = false;
     const $previewImage = document.getElementById('preview-image');
     const $previewImg = document.getElementById('preview-img');
 
-    const $stepInput = document.getElementById('step-input');
     const $stepEdit = document.getElementById('step-edit');
 
     const $btnGenerate = document.getElementById('btn-generate');
@@ -288,38 +416,94 @@ export const prerender = false;
     const $statusGenerate = document.getElementById('status-generate');
     const $statusVisual = document.getElementById('status-visual');
 
+    // Veille elements
+    const $veilleUrl = document.getElementById('veille-url');
+    const $veilleTitle = document.getElementById('veille-title');
+    const $veilleNote = document.getElementById('veille-note');
+    const $veilleList = document.getElementById('veille-list');
+    const $veilleCount = document.getElementById('veille-count');
+    const $btnAddVeille = document.getElementById('btn-add-veille');
+    const $btnGenerateVeille = document.getElementById('btn-generate-veille');
+    const $btnClearVeille = document.getElementById('btn-clear-veille');
+    const $statusVeille = document.getElementById('status-veille');
+    const $statusBlog = document.getElementById('status-blog');
+
+    // ==================== TABS ====================
+    document.querySelectorAll('.main-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.panel).classList.remove('hidden');
+      });
+    });
+
+    // ==================== HELPERS ====================
     function getFormat() {
-      return document.querySelector('input[name="format"]:checked').value;
+      return document.querySelector('input[name="format"]:checked')?.value || 'analyse';
     }
-
+    function getBlogFormat() {
+      return document.querySelector('input[name="blog-format"]:checked')?.value || 'analyse';
+    }
     function getSize() {
-      return document.querySelector('input[name="size"]:checked').value;
+      return document.querySelector('input[name="size"]:checked')?.value || '1080x1080';
     }
-
-    // Update LinkedIn preview in real-time
-    $postText?.addEventListener('input', updatePreview);
 
     function updatePreview() {
       const text = $postText.value || 'Le texte de ton post apparaîtra ici...';
       $previewBody.textContent = text;
-      // Re-apply truncation class if text is long
       if (text.length > 250) {
         $previewBody.classList.add('linkedin-mock-truncated');
       } else {
         $previewBody.classList.remove('linkedin-mock-truncated');
       }
     }
+    $postText?.addEventListener('input', updatePreview);
 
-    // Generate post
-    async function generatePost() {
-      const input = $input.value.trim();
-      const format = getFormat();
-      if (!input) return;
+    function showEdit(data) {
+      $postText.value = data.text || '';
+      $headline.value = data.headline || '';
+      $visSubtitle.value = data.subtitle || '';
+      updatePreview();
+      // Reset visual
+      currentVisualBlob = null;
+      $visualContainer.innerHTML = '<span class="placeholder">Le visuel apparaîtra ici</span>';
+      $previewImage.classList.add('hidden');
+      $btnDownload.disabled = true;
+      // Show
+      $stepEdit.classList.remove('hidden');
+      $stepEdit.scrollIntoView({ behavior: 'smooth' });
+    }
 
-      $btnGenerate.disabled = true;
-      $btnGenerate.innerHTML = '<span class="spinner"></span> Génération...';
-      $statusGenerate.classList.remove('hidden', 'error');
-      $statusGenerate.textContent = 'Claude rédige ton post LinkedIn...';
+    function resetAll() {
+      $input.value = '';
+      $postText.value = '';
+      $headline.value = '';
+      $visSubtitle.value = '';
+      currentVisualBlob = null;
+      currentInput = '';
+      $visualContainer.innerHTML = '<span class="placeholder">Le visuel apparaîtra ici</span>';
+      $previewBody.textContent = 'Le texte de ton post apparaîtra ici...';
+      $previewImage.classList.add('hidden');
+      $btnDownload.disabled = true;
+      $stepEdit.classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ==================== GENERATE POST (shared) ====================
+    async function callGenerate(input, format, statusEl, btnEl) {
+      if (!input) return null;
+      currentInput = input;
+      currentFormat = format;
+
+      if (btnEl) {
+        btnEl.disabled = true;
+        btnEl.innerHTML = '<span class="spinner"></span> Génération...';
+      }
+      if (statusEl) {
+        statusEl.classList.remove('hidden', 'error');
+        statusEl.textContent = 'Claude rédige ton post LinkedIn...';
+      }
 
       try {
         const res = await fetch('/api/generate-linkedin', {
@@ -328,35 +512,154 @@ export const prerender = false;
           credentials: 'same-origin',
           body: JSON.stringify({ input, format }),
         });
-
         const data = await res.json();
         if (!res.ok) throw new Error(data.raw ? data.error + ' — ' + data.raw : (data.error || 'Erreur'));
-
-        $postText.value = data.text || '';
-        $headline.value = data.headline || '';
-        $visSubtitle.value = data.subtitle || '';
-
-        updatePreview();
-        $stepEdit.classList.remove('hidden');
-        $statusGenerate.classList.add('hidden');
-        $stepEdit.scrollIntoView({ behavior: 'smooth' });
+        if (statusEl) statusEl.classList.add('hidden');
+        return data;
       } catch (err) {
-        $statusGenerate.classList.add('error');
-        $statusGenerate.textContent = 'Erreur : ' + err.message;
+        if (statusEl) {
+          statusEl.classList.add('error');
+          statusEl.textContent = 'Erreur : ' + err.message;
+        }
+        return null;
       } finally {
-        $btnGenerate.disabled = false;
-        $btnGenerate.textContent = 'Générer le post';
+        if (btnEl) {
+          btnEl.disabled = false;
+          btnEl.textContent = btnEl.dataset.label || 'Générer le post';
+        }
       }
     }
 
-    $btnGenerate.addEventListener('click', generatePost);
-    $btnRegenerate.addEventListener('click', generatePost);
+    // ==================== TAB 1: Nouveau post ====================
+    $btnGenerate.dataset.label = 'Générer le post';
+    $btnGenerate.addEventListener('click', async () => {
+      const data = await callGenerate($input.value.trim(), getFormat(), $statusGenerate, $btnGenerate);
+      if (data) showEdit(data);
+    });
 
-    // Generate visual
+    $btnRegenerate.addEventListener('click', async () => {
+      const data = await callGenerate(currentInput, currentFormat, $statusGenerate, null);
+      if (data) showEdit(data);
+    });
+
+    // ==================== TAB 2: Veille hebdo ====================
+    function saveVeille() {
+      localStorage.setItem('linkedin-veille', JSON.stringify(veilleItems));
+    }
+
+    function renderVeille() {
+      $veilleCount.textContent = veilleItems.length + ' actu' + (veilleItems.length > 1 ? 's' : '') + ' dans la pile';
+      $btnGenerateVeille.disabled = veilleItems.length < 1;
+
+      if (veilleItems.length === 0) {
+        $veilleList.innerHTML = '<div class="veille-empty">Aucune actu pour le moment. Ajoute des liens ci-dessus.</div>';
+        return;
+      }
+
+      $veilleList.innerHTML = veilleItems.map((item, i) => `
+        <div class="veille-item">
+          <div class="veille-item-content">
+            <div class="veille-item-title">${escHtml(item.title)}</div>
+            ${item.url ? '<div class="veille-item-url">' + escHtml(item.url) + '</div>' : ''}
+            ${item.note ? '<div class="veille-item-note">' + escHtml(item.note) + '</div>' : ''}
+            <div class="veille-item-date">${item.date}</div>
+          </div>
+          <button class="btn btn-danger btn-sm" onclick="removeVeille(${i})">Retirer</button>
+        </div>
+      `).join('');
+    }
+
+    function escHtml(s) {
+      const d = document.createElement('div');
+      d.textContent = s;
+      return d.innerHTML;
+    }
+
+    window.removeVeille = function(i) {
+      veilleItems.splice(i, 1);
+      saveVeille();
+      renderVeille();
+    };
+
+    $btnAddVeille.addEventListener('click', () => {
+      const title = $veilleTitle.value.trim();
+      if (!title) return;
+      veilleItems.push({
+        url: $veilleUrl.value.trim(),
+        title,
+        note: $veilleNote.value.trim(),
+        date: new Date().toISOString().slice(0, 10),
+      });
+      saveVeille();
+      renderVeille();
+      $veilleUrl.value = '';
+      $veilleTitle.value = '';
+      $veilleNote.value = '';
+    });
+
+    $btnClearVeille.addEventListener('click', () => {
+      if (veilleItems.length && confirm('Vider toute la liste de veille ?')) {
+        veilleItems = [];
+        saveVeille();
+        renderVeille();
+      }
+    });
+
+    $btnGenerateVeille.dataset.label = 'Générer la veille hebdo';
+    $btnGenerateVeille.addEventListener('click', async () => {
+      // Build input from accumulated items
+      const itemsText = veilleItems.map((item, i) =>
+        `Actu ${i + 1}:\n` +
+        `Titre: ${item.title}\n` +
+        (item.url ? `Source: ${item.url}\n` : '') +
+        (item.note ? `Note de Pierre: ${item.note}\n` : '')
+      ).join('\n');
+
+      const input = `Voici les actus accumulées cette semaine pour la veille hebdo :\n\n${itemsText}`;
+
+      const data = await callGenerate(input, 'veille', $statusVeille, $btnGenerateVeille);
+      if (data) {
+        currentFormat = 'veille';
+        showEdit(data);
+      }
+    });
+
+    renderVeille();
+
+    // ==================== TAB 3: Depuis le blog ====================
+    document.querySelectorAll('.btn-repurpose').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const item = btn.closest('.blog-item');
+        const title = item.dataset.title;
+        const description = item.dataset.description;
+        const slug = item.dataset.slug;
+        const lang = item.dataset.lang;
+        const format = getBlogFormat();
+        const blogUrl = `https://www.pierretouzet.fr/${lang}/blog/${slug}`;
+
+        const input = `Décline cet article de blog en post LinkedIn :\n\nTitre : ${title}\nDescription : ${description}\nURL : ${blogUrl}\n\nLe post doit donner envie de lire l'article complet sans tout révéler. Inclus le lien vers l'article.`;
+
+        btn.disabled = true;
+        btn.textContent = '...';
+        $statusBlog.classList.remove('hidden', 'error');
+        $statusBlog.textContent = 'Génération du post depuis l\'article...';
+
+        const data = await callGenerate(input, format, $statusBlog, null);
+        btn.disabled = false;
+        btn.textContent = 'Décliner';
+
+        if (data) {
+          currentFormat = format;
+          showEdit(data);
+        }
+      });
+    });
+
+    // ==================== VISUAL GENERATION ====================
     $btnVisual.addEventListener('click', async () => {
       const headline = $headline.value.trim();
       const subtitle = $visSubtitle.value.trim();
-      const format = getFormat();
+      const format = currentFormat;
       const size = getSize();
       if (!headline) return;
 
@@ -383,9 +686,8 @@ export const prerender = false;
         currentSize = size;
 
         const url = URL.createObjectURL(blob);
-        $visualContainer.innerHTML = `<img src="${url}" alt="Visuel LinkedIn" />`;
+        $visualContainer.innerHTML = '<img src="' + url + '" alt="Visuel LinkedIn" />';
 
-        // Update LinkedIn preview
         $previewImg.src = url;
         $previewImage.classList.remove('hidden');
 
@@ -400,11 +702,10 @@ export const prerender = false;
       }
     });
 
-    // Copy text
+    // ==================== EXPORT ====================
     $btnCopy.addEventListener('click', async () => {
       const text = $postText.value.trim();
       if (!text) return;
-
       try {
         await navigator.clipboard.writeText(text);
         $btnCopy.textContent = 'Copié !';
@@ -416,7 +717,6 @@ export const prerender = false;
           $btnCopy.classList.add('btn-accent');
         }, 2000);
       } catch {
-        // Fallback
         const ta = document.createElement('textarea');
         ta.value = text;
         document.body.appendChild(ta);
@@ -428,33 +728,19 @@ export const prerender = false;
       }
     });
 
-    // Download visual
     $btnDownload.addEventListener('click', () => {
       if (!currentVisualBlob) return;
       const url = URL.createObjectURL(currentVisualBlob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `linkedin-${getFormat()}-${currentSize}.png`;
+      a.download = 'linkedin-' + currentFormat + '-' + currentSize + '.png';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
       URL.revokeObjectURL(url);
     });
 
-    // New post
-    $btnNew.addEventListener('click', () => {
-      $input.value = '';
-      $postText.value = '';
-      $headline.value = '';
-      $visSubtitle.value = '';
-      currentVisualBlob = null;
-      $visualContainer.innerHTML = '<span class="placeholder">Le visuel apparaîtra ici</span>';
-      $previewBody.textContent = 'Le texte de ton post apparaîtra ici...';
-      $previewImage.classList.add('hidden');
-      $btnDownload.disabled = true;
-      $stepEdit.classList.add('hidden');
-      $stepInput.scrollIntoView({ behavior: 'smooth' });
-    });
+    $btnNew.addEventListener('click', resetAll);
   </script>
 </body>
 </html>
