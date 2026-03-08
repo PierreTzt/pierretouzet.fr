@@ -235,6 +235,7 @@ const blogArticles = posts.map(p => ({
       <button class="main-tab" data-panel="panel-blog">Depuis le blog</button>
       <button class="main-tab" data-panel="panel-history">Historique</button>
       <button class="main-tab" data-panel="panel-reverse">LinkedIn → Blog</button>
+      <button class="main-tab" data-panel="panel-banner">Bannière</button>
     </div>
 
     <!-- ==================== TAB 1: Nouveau post ==================== -->
@@ -440,6 +441,32 @@ const blogArticles = posts.map(p => ({
             <button id="btn-reverse-reset" class="btn btn-ghost">Annuler</button>
           </div>
           <div id="status-reverse-publish" class="status hidden"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 6: Bannière ==================== -->
+    <div id="panel-banner" class="tab-panel hidden">
+      <div class="card">
+        <div class="card-header">Bannière de profil LinkedIn</div>
+        <p style="font-size: 0.8125rem; color: #71717a; margin-bottom: 1rem;">Génère une bannière 1584x396 cohérente avec ton branding. La zone gauche est réservée à ta photo de profil.</p>
+        <div class="field">
+          <label for="banner-tagline">Tagline</label>
+          <input type="text" id="banner-tagline" placeholder="Ex: Ingénierie pédagogique · Innovation digitale · IA en éducation" value="Responsable national des programmes | Créateur de Gradly | Freelance & Consulting" />
+        </div>
+        <div class="field">
+          <label for="banner-keywords">Mots-clés (séparés par des virgules)</label>
+          <input type="text" id="banner-keywords" placeholder="Ex: EdTech, RNCP, IA, Pédagogie" value="EDTECH, RNCP, IA EN ÉDUCATION, PÉDAGOGIE, GRADLY" />
+        </div>
+        <button id="btn-gen-banner" class="btn btn-primary" style="width:100%">
+          Générer la bannière
+        </button>
+        <div id="status-banner" class="status hidden"></div>
+        <div id="banner-preview" class="visual-preview" style="margin-top: 1rem;">
+          <span class="placeholder">La bannière apparaîtra ici</span>
+        </div>
+        <div class="actions" style="margin-top: 1rem;">
+          <button id="btn-download-banner" class="btn btn-primary" disabled>Télécharger la bannière</button>
         </div>
       </div>
     </div>
@@ -1678,6 +1705,66 @@ const blogArticles = posts.map(p => ({
     const origHistoryClick = document.querySelector('[data-panel="panel-history"]');
     origHistoryClick.addEventListener('click', renderCalendar);
     renderCalendar();
+
+    // ==================== BANNER GENERATION ====================
+    const $bannerTagline = document.getElementById('banner-tagline');
+    const $bannerKeywords = document.getElementById('banner-keywords');
+    const $btnGenBanner = document.getElementById('btn-gen-banner');
+    const $statusBanner = document.getElementById('status-banner');
+    const $bannerPreview = document.getElementById('banner-preview');
+    const $btnDownloadBanner = document.getElementById('btn-download-banner');
+    let bannerBlob = null;
+
+    $btnGenBanner.addEventListener('click', async () => {
+      const tagline = $bannerTagline.value.trim();
+      if (!tagline) return;
+
+      const keywordsRaw = $bannerKeywords.value.trim();
+      const keywords = keywordsRaw ? keywordsRaw.split(',').map(k => k.trim()).filter(Boolean) : [];
+
+      $btnGenBanner.disabled = true;
+      $btnGenBanner.innerHTML = '<span class="spinner"></span> Génération...';
+      $statusBanner.classList.remove('hidden', 'error');
+      $statusBanner.textContent = 'Création de la bannière 1584x396...';
+
+      try {
+        const res = await fetch('/api/generate-linkedin-banner', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({ tagline, keywords }),
+        });
+
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || 'Erreur');
+        }
+
+        bannerBlob = await res.blob();
+        const url = URL.createObjectURL(bannerBlob);
+        $bannerPreview.innerHTML = '<img src="' + url + '" alt="Bannière LinkedIn" style="width:100%" />';
+        $btnDownloadBanner.disabled = false;
+        $statusBanner.classList.add('hidden');
+      } catch (err) {
+        $statusBanner.classList.add('error');
+        $statusBanner.textContent = 'Erreur : ' + err.message;
+      } finally {
+        $btnGenBanner.disabled = false;
+        $btnGenBanner.textContent = 'Générer la bannière';
+      }
+    });
+
+    $btnDownloadBanner.addEventListener('click', () => {
+      if (!bannerBlob) return;
+      const url = URL.createObjectURL(bannerBlob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'linkedin-banner-1584x396.png';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    });
   </script>
 </body>
 </html>

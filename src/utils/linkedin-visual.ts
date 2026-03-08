@@ -234,3 +234,185 @@ export async function generateLinkedInVisual(options: {
 
   return await sharp(Buffer.from(svg)).png().toBuffer();
 }
+
+export async function generateLinkedInBanner(options: {
+  tagline: string;
+  keywords?: string[];
+}): Promise<Buffer> {
+  const { tagline, keywords } = options;
+  const width = 1584;
+  const height = 396;
+  const accent = '#4f46e5';
+
+  const svg = await satori(
+    {
+      type: 'div',
+      props: {
+        style: {
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'row',
+          background: '#fafafa',
+          fontFamily: 'Inter',
+          position: 'relative',
+          overflow: 'hidden',
+        },
+        children: [
+          // Decorative glow (left, behind profile photo)
+          {
+            type: 'div',
+            props: {
+              style: {
+                position: 'absolute',
+                bottom: '-40%',
+                left: '-5%',
+                width: '35%',
+                height: '120%',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle, rgba(79,70,229,0.07) 0%, transparent 70%)',
+              },
+            },
+          },
+          // Decorative glow (right)
+          {
+            type: 'div',
+            props: {
+              style: {
+                position: 'absolute',
+                top: '-50%',
+                right: '-5%',
+                width: '30%',
+                height: '150%',
+                borderRadius: '50%',
+                background: 'radial-gradient(circle, rgba(129,140,248,0.05) 0%, transparent 70%)',
+              },
+            },
+          },
+          // Left spacer (profile photo zone ~400px)
+          {
+            type: 'div',
+            props: {
+              style: {
+                width: '400px',
+                flexShrink: 0,
+              },
+            },
+          },
+          // Content area (center-right)
+          {
+            type: 'div',
+            props: {
+              style: {
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                paddingRight: '80px',
+                gap: '16px',
+              },
+              children: [
+                // Accent line
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      width: '48px',
+                      height: '3px',
+                      background: `linear-gradient(to right, ${accent}, #818cf8)`,
+                    },
+                  },
+                },
+                // Name
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      fontSize: '42px',
+                      fontWeight: 700,
+                      fontFamily: 'Sora',
+                      color: '#18181b',
+                      letterSpacing: '-0.01em',
+                      lineHeight: 1.1,
+                    },
+                    children: 'PIERRE TOUZET',
+                  },
+                },
+                // Tagline
+                {
+                  type: 'div',
+                  props: {
+                    style: {
+                      fontSize: '16px',
+                      fontWeight: 400,
+                      color: '#71717a',
+                      lineHeight: 1.4,
+                      maxWidth: '700px',
+                    },
+                    children: tagline,
+                  },
+                },
+                // Keywords row
+                ...(keywords && keywords.length > 0
+                  ? [
+                      {
+                        type: 'div',
+                        props: {
+                          style: {
+                            display: 'flex',
+                            gap: '8px',
+                            flexWrap: 'wrap' as const,
+                            marginTop: '4px',
+                          },
+                          children: keywords.map((kw) => ({
+                            type: 'div',
+                            props: {
+                              style: {
+                                fontSize: '11px',
+                                fontWeight: 500,
+                                color: accent,
+                                letterSpacing: '0.08em',
+                                padding: '3px 10px',
+                                border: `1px solid ${accent}`,
+                                borderRadius: '2px',
+                              },
+                              children: kw.toUpperCase(),
+                            },
+                          })),
+                        },
+                      },
+                    ]
+                  : []),
+              ],
+            },
+          },
+          // Bottom accent line (full width)
+          {
+            type: 'div',
+            props: {
+              style: {
+                position: 'absolute',
+                bottom: '0',
+                left: '0',
+                width: '100%',
+                height: '4px',
+                background: `linear-gradient(to right, transparent, ${accent}, #818cf8, transparent)`,
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      width,
+      height,
+      fonts: [
+        { name: 'Inter', data: interRegular, weight: 400, style: 'normal' as const },
+        { name: 'Inter', data: interBold, weight: 700, style: 'normal' as const },
+        { name: 'Sora', data: soraBold, weight: 700, style: 'normal' as const },
+      ],
+    }
+  );
+
+  return await sharp(Buffer.from(svg)).png().toBuffer();
+}
