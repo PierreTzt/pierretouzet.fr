@@ -330,7 +330,7 @@ export const prerender = false;
         });
 
         const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'Erreur');
+        if (!res.ok) throw new Error(data.raw ? data.error + ' — ' + data.raw : (data.error || 'Erreur'));
 
         $postText.value = data.text || '';
         $headline.value = data.headline || '';

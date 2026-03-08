@@ -101,7 +101,12 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     ? `${formatInstruction}\n\nPierre partage cette source : ${input}\n\nBasé sur l'URL et ton analyse, génère le post LinkedIn.`
     : `${formatInstruction}\n\nIdée/sujet de Pierre :\n\n${input}`;
 
-  const client = new Anthropic({ apiKey: import.meta.env.ANTHROPIC_API_KEY });
+  const apiKey = import.meta.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    return new Response(JSON.stringify({ error: 'ANTHROPIC_API_KEY non configurée' }), { status: 500 });
+  }
+
+  const client = new Anthropic({ apiKey });
 
   try {
     const message = await client.messages.create({
@@ -111,21 +116,39 @@ export const POST: APIRoute = async ({ request, cookies }) => {
       messages: [{ role: 'user', content: userMessage }],
     });
 
-    const text = message.content[0].type === 'text' ? message.content[0].text : '';
+    const rawText = message.content[0].type === 'text' ? message.content[0].text : '';
+
+    if (!rawText) {
+      return new Response(JSON.stringify({ error: 'Réponse IA vide' }), { status: 500 });
+    }
 
     let parsed;
     try {
-      parsed = JSON.parse(text);
+      parsed = JSON.parse(rawText);
     } catch {
-      const match = text.match(/\{[\s\S]*\}/);
+      // Try extracting JSON from code blocks or surrounding text
+      const match = rawText.match(/\{[\s\S]*?\n\}/);
       if (match) {
-        parsed = JSON.parse(match[0]);
+        try {
+          parsed = JSON.parse(match[0]);
+        } catch {
+          return new Response(JSON.stringify({ error: 'JSON invalide dans la réponse', raw: rawText.slice(0, 500) }), { status: 500 });
+        }
       } else {
-        return new Response(JSON.stringify({ error: 'Réponse IA invalide', raw: text }), { status: 500 });
+        return new Response(JSON.stringify({ error: 'Pas de JSON trouvé dans la réponse', raw: rawText.slice(0, 500) }), { status: 500 });
       }
     }
 
-    return new Response(JSON.stringify(parsed), {
+    // Ensure required fields exist
+    if (!parsed.text) {
+      return new Response(JSON.stringify({ error: 'Champ "text" manquant', raw: rawText.slice(0, 500) }), { status: 500 });
+    }
+
+    return new Response(JSON.stringify({
+      text: parsed.text,
+      headline: parsed.headline || '',
+      subtitle: parsed.subtitle || '',
+    }), {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (err: any) {
