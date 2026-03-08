@@ -5,9 +5,9 @@ import { generateLinkedInVisual } from '../../utils/linkedin-visual';
 export const prerender = false;
 
 const VALID_SIZES: Record<string, { width: number; height: number }> = {
-  '1080x1080': { width: 1080, height: 1080 },
+  '1200x1200': { width: 1200, height: 1200 },
   '1080x1350': { width: 1080, height: 1350 },
-  '1200x630': { width: 1200, height: 630 },
+  '1200x627': { width: 1200, height: 627 },
 };
 
 export const POST: APIRoute = async ({ request, cookies }) => {

@@ -37,7 +37,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
         subtitle: slide.subtitle || undefined,
         format: format || 'analyse',
         width: 1080,
-        height: 1080,
+        height: 1350,
         slideNumber: i + 1,
         totalSlides,
       });

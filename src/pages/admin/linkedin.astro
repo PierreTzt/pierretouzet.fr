@@ -519,16 +519,16 @@ const blogArticles = posts.map(p => ({
                 <label>Taille</label>
                 <div class="size-options">
                   <div class="size-option">
-                    <input type="radio" name="size" id="size-square" value="1080x1080" checked />
-                    <label for="size-square">1080x1080 Carré</label>
+                    <input type="radio" name="size" id="size-square" value="1200x1200" checked />
+                    <label for="size-square">1200x1200 Carré</label>
                   </div>
                   <div class="size-option">
                     <input type="radio" name="size" id="size-portrait" value="1080x1350" />
                     <label for="size-portrait">1080x1350 Portrait</label>
                   </div>
                   <div class="size-option">
-                    <input type="radio" name="size" id="size-landscape" value="1200x630" />
-                    <label for="size-landscape">1200x630 Paysage</label>
+                    <input type="radio" name="size" id="size-landscape" value="1200x627" />
+                    <label for="size-landscape">1200x627 Paysage</label>
                   </div>
                 </div>
               </div>
@@ -537,7 +537,7 @@ const blogArticles = posts.map(p => ({
             <!-- Carousel mode -->
             <div id="carousel-mode" class="hidden">
               <div class="field">
-                <label>Slides du carrousel <span style="font-weight:400;text-transform:none;letter-spacing:normal">(1080x1080, min 2)</span></label>
+                <label>Slides du carrousel <span style="font-weight:400;text-transform:none;letter-spacing:normal">(1080x1350 portrait, min 2)</span></label>
                 <div id="carousel-slides-list"></div>
                 <button id="btn-add-slide" class="btn btn-ghost btn-sm" style="width:100%;margin-top:0.5rem">+ Ajouter une slide</button>
               </div>
@@ -609,7 +609,7 @@ const blogArticles = posts.map(p => ({
   <script is:inline>
     // ==================== STATE ====================
     let currentVisualBlob = null;
-    let currentSize = '1080x1080';
+    let currentSize = '1200x1200';
     let currentFormat = 'analyse';
     let currentInput = '';
     let veilleItems = JSON.parse(localStorage.getItem('linkedin-veille') || '[]');
@@ -687,7 +687,7 @@ const blogArticles = posts.map(p => ({
       return document.querySelector('input[name="blog-format"]:checked')?.value || 'analyse';
     }
     function getSize() {
-      return document.querySelector('input[name="size"]:checked')?.value || '1080x1080';
+      return document.querySelector('input[name="size"]:checked')?.value || '1200x1200';
     }
 
     function updatePreview() {
