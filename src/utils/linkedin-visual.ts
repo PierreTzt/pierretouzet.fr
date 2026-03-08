@@ -318,12 +318,12 @@ export async function generateLinkedInBanner(options: {
               },
             },
           },
-          // Left spacer (profile photo zone ~400px)
+          // Left spacer (profile photo zone ~340px)
           {
             type: 'div',
             props: {
               style: {
-                width: '400px',
+                width: '340px',
                 flexShrink: 0,
               },
             },
@@ -337,8 +337,8 @@ export async function generateLinkedInBanner(options: {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
-                paddingRight: '80px',
-                gap: '16px',
+                paddingRight: '60px',
+                gap: '12px',
               },
               children: [
                 // Accent line
@@ -346,8 +346,8 @@ export async function generateLinkedInBanner(options: {
                   type: 'div',
                   props: {
                     style: {
-                      width: '48px',
-                      height: '3px',
+                      width: '56px',
+                      height: '4px',
                       background: `linear-gradient(to right, ${accent}, #818cf8)`,
                     },
                   },
@@ -357,12 +357,12 @@ export async function generateLinkedInBanner(options: {
                   type: 'div',
                   props: {
                     style: {
-                      fontSize: '42px',
+                      fontSize: '56px',
                       fontWeight: 700,
                       fontFamily: 'Sora',
                       color: '#18181b',
-                      letterSpacing: '-0.01em',
-                      lineHeight: 1.1,
+                      letterSpacing: '-0.02em',
+                      lineHeight: 1.0,
                     },
                     children: 'PIERRE TOUZET',
                   },
@@ -372,11 +372,10 @@ export async function generateLinkedInBanner(options: {
                   type: 'div',
                   props: {
                     style: {
-                      fontSize: '16px',
+                      fontSize: '22px',
                       fontWeight: 400,
-                      color: '#71717a',
-                      lineHeight: 1.4,
-                      maxWidth: '700px',
+                      color: '#52525b',
+                      lineHeight: 1.3,
                     },
                     children: tagline,
                   },
@@ -389,20 +388,20 @@ export async function generateLinkedInBanner(options: {
                         props: {
                           style: {
                             display: 'flex',
-                            gap: '8px',
+                            gap: '10px',
                             flexWrap: 'wrap' as const,
-                            marginTop: '4px',
+                            marginTop: '2px',
                           },
                           children: keywords.map((kw) => ({
                             type: 'div',
                             props: {
                               style: {
-                                fontSize: '11px',
-                                fontWeight: 500,
+                                fontSize: '14px',
+                                fontWeight: 600,
                                 color: accent,
-                                letterSpacing: '0.08em',
-                                padding: '3px 10px',
-                                border: `1px solid ${accent}`,
+                                letterSpacing: '0.06em',
+                                padding: '4px 14px',
+                                border: `1.5px solid ${accent}`,
                                 borderRadius: '2px',
                               },
                               children: kw.toUpperCase(),
