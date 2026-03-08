@@ -187,6 +187,25 @@ const blogArticles = posts.map(p => ({
     .perf-carton { color: #22c55e; }
     .history-empty { padding: 3rem; text-align: center; color: #a1a1aa; font-size: 0.8125rem; border: 1px dashed #e4e4e7; }
 
+    /* Calendar */
+    .calendar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 1rem; }
+    .calendar-item { padding: 0.75rem; border: 1px solid #e4e4e7; background: white; }
+    .calendar-value { font-size: 1.125rem; font-weight: 700; color: #18181b; }
+    .calendar-label { font-size: 0.6875rem; color: #71717a; font-family: ui-monospace, monospace; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.125rem; }
+    .calendar-suggestion { display: flex; gap: 0.75rem; align-items: center; padding: 0.75rem; border: 1px solid #e4e4e7; margin-bottom: 0.5rem; background: white; }
+    .calendar-suggestion-icon { width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; font-size: 1rem; background: rgba(79, 70, 229, 0.08); flex-shrink: 0; }
+    .calendar-suggestion-text { font-size: 0.8125rem; color: #18181b; }
+    .calendar-suggestion-detail { font-size: 0.6875rem; color: #71717a; margin-top: 0.125rem; }
+
+    /* Carousel */
+    .carousel-slide-row { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; }
+    .carousel-slide-row input { flex: 1; }
+    .carousel-slide-num { font-size: 0.6875rem; font-weight: 700; color: #4f46e5; font-family: ui-monospace, monospace; width: 1.5rem; text-align: center; flex-shrink: 0; }
+    .carousel-preview-strip { display: flex; gap: 0.5rem; overflow-x: auto; padding: 0.5rem 0; }
+    .carousel-preview-strip img { width: 160px; height: 160px; object-fit: cover; border: 1px solid #e4e4e7; cursor: pointer; transition: border-color 0.15s; }
+    .carousel-preview-strip img:hover { border-color: #4f46e5; }
+    .carousel-preview-strip img.active { border-color: #4f46e5; border-width: 2px; }
+
     /* RSS */
     .rss-sources { margin-bottom: 1rem; }
     .rss-source { display: flex; gap: 0.5rem; align-items: center; padding: 0.5rem; border: 1px solid #e4e4e7; margin-bottom: 0.375rem; background: white; font-size: 0.75rem; }
@@ -427,6 +446,13 @@ const blogArticles = posts.map(p => ({
 
     <!-- ==================== TAB 4: Historique ==================== -->
     <div id="panel-history" class="tab-panel hidden">
+      <!-- Calendar suggestion -->
+      <div class="card" id="calendar-card">
+        <div class="card-header">Calendrier éditorial</div>
+        <div id="calendar-grid" class="calendar-grid"></div>
+        <div id="calendar-suggestions"></div>
+      </div>
+
       <div id="history-stats" class="history-stats"></div>
       <div class="card">
         <div class="card-header">Répartition des tags</div>
@@ -466,30 +492,57 @@ const blogArticles = posts.map(p => ({
           <div class="card">
             <div class="card-header">Visuel</div>
             <div class="field">
-              <label for="headline">Titre du visuel</label>
-              <input type="text" id="headline" placeholder="Titre court et percutant" />
-            </div>
-            <div class="field">
-              <label for="vis-subtitle">Sous-titre (optionnel)</label>
-              <input type="text" id="vis-subtitle" placeholder="Chiffre clé, source..." />
-            </div>
-            <div class="field">
-              <label>Taille</label>
+              <label>Mode</label>
               <div class="size-options">
                 <div class="size-option">
-                  <input type="radio" name="size" id="size-square" value="1080x1080" checked />
-                  <label for="size-square">1080x1080 Carré</label>
+                  <input type="radio" name="visual-mode" id="mode-single" value="single" checked />
+                  <label for="mode-single">Slide unique</label>
                 </div>
                 <div class="size-option">
-                  <input type="radio" name="size" id="size-portrait" value="1080x1350" />
-                  <label for="size-portrait">1080x1350 Portrait</label>
-                </div>
-                <div class="size-option">
-                  <input type="radio" name="size" id="size-landscape" value="1200x630" />
-                  <label for="size-landscape">1200x630 Paysage</label>
+                  <input type="radio" name="visual-mode" id="mode-carousel" value="carousel" />
+                  <label for="mode-carousel">Carrousel</label>
                 </div>
               </div>
             </div>
+
+            <!-- Single mode -->
+            <div id="single-mode">
+              <div class="field">
+                <label for="headline">Titre du visuel</label>
+                <input type="text" id="headline" placeholder="Titre court et percutant" />
+              </div>
+              <div class="field">
+                <label for="vis-subtitle">Sous-titre (optionnel)</label>
+                <input type="text" id="vis-subtitle" placeholder="Chiffre clé, source..." />
+              </div>
+              <div class="field">
+                <label>Taille</label>
+                <div class="size-options">
+                  <div class="size-option">
+                    <input type="radio" name="size" id="size-square" value="1080x1080" checked />
+                    <label for="size-square">1080x1080 Carré</label>
+                  </div>
+                  <div class="size-option">
+                    <input type="radio" name="size" id="size-portrait" value="1080x1350" />
+                    <label for="size-portrait">1080x1350 Portrait</label>
+                  </div>
+                  <div class="size-option">
+                    <input type="radio" name="size" id="size-landscape" value="1200x630" />
+                    <label for="size-landscape">1200x630 Paysage</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Carousel mode -->
+            <div id="carousel-mode" class="hidden">
+              <div class="field">
+                <label>Slides du carrousel <span style="font-weight:400;text-transform:none;letter-spacing:normal">(1080x1080, min 2)</span></label>
+                <div id="carousel-slides-list"></div>
+                <button id="btn-add-slide" class="btn btn-ghost btn-sm" style="width:100%;margin-top:0.5rem">+ Ajouter une slide</button>
+              </div>
+            </div>
+
             <button id="btn-visual" class="btn btn-primary" style="width:100%">
               Générer le visuel
             </button>
@@ -497,6 +550,8 @@ const blogArticles = posts.map(p => ({
             <div id="visual-container" class="visual-preview" style="margin-top: 1rem;">
               <span class="placeholder">Le visuel apparaîtra ici</span>
             </div>
+            <!-- Carousel preview strip -->
+            <div id="carousel-preview" class="carousel-preview-strip hidden"></div>
           </div>
         </div>
       </div>
@@ -1359,6 +1414,270 @@ const blogArticles = posts.map(p => ({
       renderReverseTags();
       $reverseResult.classList.add('hidden');
     });
+
+    // ==================== CAROUSEL MODE ====================
+    const $singleMode = document.getElementById('single-mode');
+    const $carouselMode = document.getElementById('carousel-mode');
+    const $carouselSlidesList = document.getElementById('carousel-slides-list');
+    const $btnAddSlide = document.getElementById('btn-add-slide');
+    const $carouselPreview = document.getElementById('carousel-preview');
+    let carouselSlides = [{ headline: '', subtitle: '' }, { headline: '', subtitle: '' }];
+    let carouselBlobs = [];
+    let isCarouselMode = false;
+
+    document.querySelectorAll('input[name="visual-mode"]').forEach(r => {
+      r.addEventListener('change', () => {
+        isCarouselMode = r.value === 'carousel';
+        $singleMode.classList.toggle('hidden', isCarouselMode);
+        $carouselMode.classList.toggle('hidden', !isCarouselMode);
+        $carouselPreview.classList.add('hidden');
+        if (isCarouselMode) renderCarouselSlides();
+      });
+    });
+
+    function renderCarouselSlides() {
+      $carouselSlidesList.innerHTML = carouselSlides.map((s, i) =>
+        '<div class="carousel-slide-row">' +
+          '<span class="carousel-slide-num">' + (i + 1) + '</span>' +
+          '<input type="text" placeholder="Titre slide ' + (i + 1) + '" value="' + escAttr(s.headline) + '" onchange="updateCarouselSlide(' + i + ',\'headline\',this.value)" />' +
+          '<input type="text" placeholder="Sous-titre (opt.)" value="' + escAttr(s.subtitle) + '" style="max-width:35%" onchange="updateCarouselSlide(' + i + ',\'subtitle\',this.value)" />' +
+          (carouselSlides.length > 2 ? '<button class="btn btn-danger btn-sm" onclick="removeCarouselSlide(' + i + ')">×</button>' : '') +
+        '</div>'
+      ).join('');
+    }
+
+    window.updateCarouselSlide = function(i, field, value) {
+      carouselSlides[i][field] = value;
+    };
+
+    window.removeCarouselSlide = function(i) {
+      carouselSlides.splice(i, 1);
+      renderCarouselSlides();
+    };
+
+    $btnAddSlide.addEventListener('click', () => {
+      if (carouselSlides.length >= 10) return;
+      carouselSlides.push({ headline: '', subtitle: '' });
+      renderCarouselSlides();
+    });
+
+    // Override visual generation for carousel
+    const originalVisualHandler = $btnVisual.onclick;
+    $btnVisual.addEventListener('click', async (e) => {
+      if (!isCarouselMode) return; // let original handler run
+      e.stopImmediatePropagation();
+
+      const validSlides = carouselSlides.filter(s => s.headline.trim());
+      if (validSlides.length < 2) {
+        $statusVisual.classList.remove('hidden');
+        $statusVisual.classList.add('error');
+        $statusVisual.textContent = 'Au moins 2 slides avec titre requis';
+        return;
+      }
+
+      $btnVisual.disabled = true;
+      $btnVisual.innerHTML = '<span class="spinner"></span> Génération...';
+      $statusVisual.classList.remove('hidden', 'error');
+      $statusVisual.textContent = 'Création du carrousel (' + validSlides.length + ' slides)...';
+
+      try {
+        const res = await fetch('/api/generate-linkedin-carousel', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({ slides: validSlides, format: currentFormat }),
+        });
+
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || 'Erreur');
+        }
+
+        const data = await res.json();
+        carouselBlobs = [];
+
+        // Convert base64 to blobs
+        for (const b64 of data.images) {
+          const bin = atob(b64);
+          const arr = new Uint8Array(bin.length);
+          for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+          carouselBlobs.push(new Blob([arr], { type: 'image/png' }));
+        }
+
+        // Show first in main preview
+        const firstUrl = URL.createObjectURL(carouselBlobs[0]);
+        $visualContainer.innerHTML = '<img src="' + firstUrl + '" alt="Slide 1" />';
+        $previewImg.src = firstUrl;
+        $previewImage.classList.remove('hidden');
+        currentVisualBlob = carouselBlobs[0];
+        $btnDownload.disabled = false;
+
+        // Show carousel strip
+        $carouselPreview.classList.remove('hidden');
+        $carouselPreview.innerHTML = carouselBlobs.map((blob, i) => {
+          const url = URL.createObjectURL(blob);
+          return '<img src="' + url + '" alt="Slide ' + (i + 1) + '" data-index="' + i + '" class="' + (i === 0 ? 'active' : '') + '" />';
+        }).join('');
+
+        // Click to select slide
+        $carouselPreview.querySelectorAll('img').forEach(img => {
+          img.addEventListener('click', () => {
+            const idx = parseInt(img.dataset.index);
+            const url = URL.createObjectURL(carouselBlobs[idx]);
+            $visualContainer.innerHTML = '<img src="' + url + '" alt="Slide ' + (idx + 1) + '" />';
+            currentVisualBlob = carouselBlobs[idx];
+            $carouselPreview.querySelectorAll('img').forEach(i => i.classList.remove('active'));
+            img.classList.add('active');
+          });
+        });
+
+        $statusVisual.classList.add('hidden');
+      } catch (err) {
+        $statusVisual.classList.add('error');
+        $statusVisual.textContent = 'Erreur : ' + err.message;
+      } finally {
+        $btnVisual.disabled = false;
+        $btnVisual.textContent = 'Générer le visuel';
+      }
+    }, true); // capture phase to run before original
+
+    // Override download for carousel (download all)
+    const origDownloadHandler = $btnDownload.onclick;
+    $btnDownload.addEventListener('click', (e) => {
+      if (!isCarouselMode || carouselBlobs.length === 0) return;
+      e.stopImmediatePropagation();
+
+      carouselBlobs.forEach((blob, i) => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'linkedin-carousel-' + currentFormat + '-slide-' + (i + 1) + '.png';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      });
+    }, true);
+
+    renderCarouselSlides();
+
+    // ==================== CALENDAR EDITORIAL ====================
+    const $calendarGrid = document.getElementById('calendar-grid');
+    const $calendarSuggestions = document.getElementById('calendar-suggestions');
+    const DAYS_FR = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+
+    function renderCalendar() {
+      if (postHistory.length === 0) {
+        document.getElementById('calendar-card').innerHTML =
+          '<div class="card-header">Calendrier éditorial</div>' +
+          '<p style="font-size:0.8125rem;color:#a1a1aa">Sauve quelques posts dans l\'historique pour débloquer les suggestions.</p>';
+        return;
+      }
+
+      const now = new Date();
+      const dates = postHistory.map(p => new Date(p.date)).sort((a, b) => b.getTime() - a.getTime());
+      const lastPostDate = dates[0];
+      const daysSinceLast = Math.floor((now.getTime() - lastPostDate.getTime()) / 86400000);
+
+      // Average frequency
+      let avgDaysBetween = '-';
+      if (dates.length >= 2) {
+        const gaps = [];
+        for (let i = 0; i < dates.length - 1; i++) {
+          gaps.push(Math.floor((dates[i].getTime() - dates[i + 1].getTime()) / 86400000));
+        }
+        avgDaysBetween = (gaps.reduce((a, b) => a + b, 0) / gaps.length).toFixed(1);
+      }
+
+      // Posts this week
+      const weekAgo = new Date(now.getTime() - 7 * 86400000);
+      const thisWeek = dates.filter(d => d >= weekAgo).length;
+
+      $calendarGrid.innerHTML =
+        '<div class="calendar-item"><div class="calendar-value">' + daysSinceLast + 'j</div><div class="calendar-label">Depuis dernier post</div></div>' +
+        '<div class="calendar-item"><div class="calendar-value">' + avgDaysBetween + 'j</div><div class="calendar-label">Fréquence moyenne</div></div>' +
+        '<div class="calendar-item"><div class="calendar-value">' + thisWeek + '</div><div class="calendar-label">Posts cette semaine</div></div>';
+
+      // Suggestions
+      const suggestions = [];
+
+      // 1. Timing suggestion
+      const avgDays = parseFloat(avgDaysBetween);
+      if (!isNaN(avgDays) && daysSinceLast >= avgDays) {
+        const sugDate = new Date(lastPostDate.getTime() + avgDays * 86400000);
+        const sugDay = sugDate > now ? sugDate : now;
+        suggestions.push({
+          icon: '&#128197;',
+          text: daysSinceLast > avgDays * 1.5 ? 'Il serait temps de poster !' : 'Prochain post suggéré',
+          detail: DAYS_FR[sugDay.getDay()] + ' ' + sugDay.getDate() + '/' + (sugDay.getMonth() + 1) + ' (basé sur ta fréquence de ' + avgDaysBetween + 'j)',
+        });
+      } else if (!isNaN(avgDays)) {
+        const nextDate = new Date(lastPostDate.getTime() + avgDays * 86400000);
+        suggestions.push({
+          icon: '&#9989;',
+          text: 'Tu es dans le rythme',
+          detail: 'Prochain post vers le ' + nextDate.getDate() + '/' + (nextDate.getMonth() + 1),
+        });
+      }
+
+      // 2. Format suggestion
+      const formatCounts = {};
+      const recentFormats = postHistory.slice(0, 5).map(p => p.format);
+      postHistory.forEach(p => { formatCounts[p.format] = (formatCounts[p.format] || 0) + 1; });
+      const allFormats = ['analyse', 'opinion', 'fait', 'veille', 'newsletter'];
+      const unusedFormats = allFormats.filter(f => !recentFormats.includes(f));
+      if (unusedFormats.length > 0) {
+        suggestions.push({
+          icon: '&#128161;',
+          text: 'Format suggéré : ' + unusedFormats[0],
+          detail: 'Pas utilisé dans tes 5 derniers posts. Varier les formats augmente l\'engagement.',
+        });
+      }
+
+      // 3. Best performer suggestion
+      const cartonPosts = postHistory.filter(p => p.perf === 'carton');
+      if (cartonPosts.length >= 2) {
+        const cartonFormats = {};
+        cartonPosts.forEach(p => { cartonFormats[p.format] = (cartonFormats[p.format] || 0) + 1; });
+        const bestFormat = Object.entries(cartonFormats).sort((a, b) => b[1] - a[1])[0];
+        suggestions.push({
+          icon: '&#127942;',
+          text: 'Ton meilleur format : ' + bestFormat[0],
+          detail: bestFormat[1] + ' carton(s) sur ce format. Double down quand tu veux de l\'impact.',
+        });
+      }
+
+      // 4. Tag freshness
+      const recentTags = new Set();
+      postHistory.slice(0, 5).forEach(p => (p.tags || []).forEach(t => recentTags.add(t)));
+      const allTags = {};
+      postHistory.forEach(p => (p.tags || []).forEach(t => { allTags[t] = (allTags[t] || 0) + 1; }));
+      const staleTags = Object.entries(allTags)
+        .filter(([t, c]) => c >= 2 && !recentTags.has(t))
+        .sort((a, b) => b[1] - a[1]);
+      if (staleTags.length > 0) {
+        suggestions.push({
+          icon: '&#128204;',
+          text: 'Thème à réactiver : ' + staleTags[0][0],
+          detail: staleTags[0][1] + ' posts au total mais absent des 5 derniers. Ton audience attend peut-être.',
+        });
+      }
+
+      $calendarSuggestions.innerHTML = suggestions.length
+        ? suggestions.map(s =>
+          '<div class="calendar-suggestion">' +
+            '<div class="calendar-suggestion-icon">' + s.icon + '</div>' +
+            '<div><div class="calendar-suggestion-text">' + s.text + '</div>' +
+            '<div class="calendar-suggestion-detail">' + s.detail + '</div></div>' +
+          '</div>'
+        ).join('')
+        : '<p style="font-size:0.8125rem;color:#a1a1aa">Ajoute plus de posts et de métriques pour des suggestions plus précises.</p>';
+    }
+
+    // Render calendar when history tab opens
+    const origHistoryClick = document.querySelector('[data-panel="panel-history"]');
+    origHistoryClick.addEventListener('click', renderCalendar);
+    renderCalendar();
   </script>
 </body>
 </html>

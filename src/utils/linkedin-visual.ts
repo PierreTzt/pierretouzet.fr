@@ -22,11 +22,13 @@ const soraBold = loadFontFile('sora', '700-normal');
 export async function generateLinkedInVisual(options: {
   headline: string;
   subtitle?: string;
-  format: 'analyse' | 'opinion' | 'fait';
+  format: string;
   width: number;
   height: number;
+  slideNumber?: number;
+  totalSlides?: number;
 }): Promise<Buffer> {
-  const { headline, subtitle, format, width, height } = options;
+  const { headline, subtitle, format, width, height, slideNumber, totalSlides } = options;
 
   // Adapt font sizes based on dimensions
   const scale = Math.min(width, height) / 1080;
@@ -57,7 +59,11 @@ export async function generateLinkedInVisual(options: {
     veille: 'VEILLE HEBDO',
     newsletter: 'NEWSLETTER',
   };
-  const label = formatLabels[format] || '';
+  const baseLabel = formatLabels[format] || '';
+  const slideIndicator = slideNumber && totalSlides
+    ? `${String(slideNumber).padStart(2, '0')} / ${String(totalSlides).padStart(2, '0')}`
+    : '';
+  const label = slideIndicator ? (baseLabel ? `${baseLabel} — ${slideIndicator}` : slideIndicator) : baseLabel;
 
   const svg = await satori(
     {

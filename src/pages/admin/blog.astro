@@ -154,7 +154,41 @@ export const prerender = false;
         <p id="published-info" style="font-size: 0.875rem; color: #71717a; margin-bottom: 1.5rem;"></p>
         <div class="actions" style="justify-content: center;">
           <a id="published-link" href="#" class="btn btn-primary" target="_blank">Voir l'article</a>
+          <button id="btn-linkedin" class="btn btn-accent">Décliner en post LinkedIn</button>
           <button id="btn-new" class="btn btn-ghost">Nouvel article</button>
+        </div>
+      </div>
+
+      <!-- LinkedIn auto-pipeline -->
+      <div id="linkedin-pipeline" class="hidden">
+        <div class="card">
+          <div class="card-header">Post LinkedIn généré</div>
+          <div class="field">
+            <label>Format</label>
+            <div class="row-3" style="margin-bottom:0.75rem">
+              <label style="display:inline-flex;align-items:center;gap:0.375rem;text-transform:none;letter-spacing:normal;font-size:0.8125rem;cursor:pointer">
+                <input type="radio" name="li-format" value="analyse" checked style="width:auto" /> Analyse
+              </label>
+              <label style="display:inline-flex;align-items:center;gap:0.375rem;text-transform:none;letter-spacing:normal;font-size:0.8125rem;cursor:pointer">
+                <input type="radio" name="li-format" value="opinion" style="width:auto" /> Opinion
+              </label>
+              <label style="display:inline-flex;align-items:center;gap:0.375rem;text-transform:none;letter-spacing:normal;font-size:0.8125rem;cursor:pointer">
+                <input type="radio" name="li-format" value="fait" style="width:auto" /> Fait marquant
+              </label>
+            </div>
+          </div>
+          <div id="status-linkedin" class="status">Choisis un format et clique sur Générer.</div>
+          <button id="btn-gen-linkedin" class="btn btn-primary" style="width:100%;margin-top:0.75rem">Générer le post LinkedIn</button>
+          <div id="linkedin-result" class="hidden" style="margin-top:1rem">
+            <div class="field">
+              <label for="li-text">Texte du post</label>
+              <textarea id="li-text" rows="10" style="font-size:0.8125rem"></textarea>
+            </div>
+            <div class="actions">
+              <button id="btn-copy-li" class="btn btn-accent">Copier le texte</button>
+              <a href="/admin/linkedin" class="btn btn-ghost">Ouvrir LinkedIn Studio</a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -335,7 +369,82 @@ export const prerender = false;
       renderTags();
       $stepEdit.classList.add('hidden');
       $stepDone.classList.add('hidden');
+      document.getElementById('linkedin-pipeline').classList.add('hidden');
+      document.getElementById('linkedin-result').classList.add('hidden');
       $stepIdea.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // ==================== LINKEDIN AUTO-PIPELINE ====================
+    const $btnLinkedin = document.getElementById('btn-linkedin');
+    const $linkedinPipeline = document.getElementById('linkedin-pipeline');
+    const $btnGenLinkedin = document.getElementById('btn-gen-linkedin');
+    const $statusLinkedin = document.getElementById('status-linkedin');
+    const $linkedinResult = document.getElementById('linkedin-result');
+    const $liText = document.getElementById('li-text');
+    const $btnCopyLi = document.getElementById('btn-copy-li');
+
+    $btnLinkedin.addEventListener('click', () => {
+      $linkedinPipeline.classList.remove('hidden');
+      $linkedinPipeline.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    $btnGenLinkedin.addEventListener('click', async () => {
+      const title = $title.value.trim();
+      const description = $description.value.trim();
+      const liFormat = document.querySelector('input[name="li-format"]:checked')?.value || 'analyse';
+      const blogUrl = document.getElementById('published-link').href;
+
+      const input = 'Décline cet article de blog en post LinkedIn :\n\nTitre : ' + title +
+        '\nDescription : ' + description +
+        '\nURL : ' + blogUrl +
+        '\n\nLe post doit donner envie de lire l\'article complet sans tout révéler. Inclus le lien vers l\'article.';
+
+      $btnGenLinkedin.disabled = true;
+      $btnGenLinkedin.innerHTML = '<span class="spinner"></span> Génération...';
+      $statusLinkedin.classList.remove('error', 'success');
+      $statusLinkedin.textContent = 'Claude rédige le post LinkedIn...';
+
+      try {
+        const feedbackPrefs = JSON.parse(localStorage.getItem('linkedin-feedback') || '[]');
+        const res = await fetch('/api/generate-linkedin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({ input, format: liFormat, preferences: feedbackPrefs }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Erreur');
+
+        $liText.value = data.text || '';
+        $linkedinResult.classList.remove('hidden');
+        $statusLinkedin.classList.add('success');
+        $statusLinkedin.textContent = 'Post généré !';
+      } catch (err) {
+        $statusLinkedin.classList.add('error');
+        $statusLinkedin.textContent = 'Erreur : ' + err.message;
+      } finally {
+        $btnGenLinkedin.disabled = false;
+        $btnGenLinkedin.textContent = 'Générer le post LinkedIn';
+      }
+    });
+
+    $btnCopyLi.addEventListener('click', async () => {
+      const text = $liText.value.trim();
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text);
+        $btnCopyLi.textContent = 'Copié !';
+        setTimeout(() => { $btnCopyLi.textContent = 'Copier le texte'; }, 2000);
+      } catch {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        $btnCopyLi.textContent = 'Copié !';
+        setTimeout(() => { $btnCopyLi.textContent = 'Copier le texte'; }, 2000);
+      }
     });
   </script>
 </body>
