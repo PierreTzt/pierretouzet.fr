@@ -1466,8 +1466,8 @@ const blogArticles = posts.map(p => ({
       $carouselSlidesList.innerHTML = carouselSlides.map((s, i) =>
         '<div class="carousel-slide-row">' +
           '<span class="carousel-slide-num">' + (i + 1) + '</span>' +
-          '<input type="text" placeholder="Titre slide ' + (i + 1) + '" value="' + escAttr(s.headline) + '" onchange="updateCarouselSlide(' + i + ',\'headline\',this.value)" />' +
-          '<input type="text" placeholder="Sous-titre (opt.)" value="' + escAttr(s.subtitle) + '" style="max-width:35%" onchange="updateCarouselSlide(' + i + ',\'subtitle\',this.value)" />' +
+          '<input type="text" placeholder="Titre slide ' + (i + 1) + '" value="' + escAttr(s.headline) + '" oninput="updateCarouselSlide(' + i + ',\'headline\',this.value)" />' +
+          '<input type="text" placeholder="Sous-titre (opt.)" value="' + escAttr(s.subtitle) + '" style="max-width:35%" oninput="updateCarouselSlide(' + i + ',\'subtitle\',this.value)" />' +
           (carouselSlides.length > 2 ? '<button class="btn btn-danger btn-sm" onclick="removeCarouselSlide(' + i + ')">×</button>' : '') +
         '</div>'
       ).join('');
@@ -1718,7 +1718,10 @@ const blogArticles = posts.map(p => ({
 
     let bannerSlides = [
       { tagline: 'Responsable national des programmes | Créateur de Gradly | Freelance & Consulting | 🏃 Coureur irrégulier', keywords: 'EDTECH, RNCP, IA EN ÉDUCATION, PÉDAGOGIE, GRADLY' },
-      { tagline: '', keywords: '' },
+      { tagline: '15 ans entre IT, pédagogie et innovation digitale — Bac pro → Responsable programmes → Entrepreneur', keywords: 'PARCOURS ATYPIQUE, RECONVERSION, EDTECH' },
+      { tagline: "Gradly — L'outil qui automatise vos référentiels RNCP et simplifie Qualiopi", keywords: 'AUTOMATISATION, RNCP, QUALIOPI, CERTIFICATION' },
+      { tagline: "L'IA en éducation, vue du terrain — YouTube, podcast, newsletter, ebook", keywords: 'CONTENU, IA GÉNÉRATIVE, YOUTUBE, PODCAST' },
+      { tagline: 'Disponible en consulting & freelance — Ingénierie pédagogique, transformation digitale, IA', keywords: 'CONSULTING, FREELANCE, DISPONIBLE' },
     ];
 
     function renderBannerSlides() {
@@ -1731,11 +1734,11 @@ const blogArticles = posts.map(p => ({
           '</div>' +
           '<div class="field" style="margin-bottom:0.75rem">' +
             '<label>Tagline</label>' +
-            '<input type="text" placeholder="Message principal de cette slide" value="' + escAttr(s.tagline) + '" onchange="updateBannerSlide(' + i + ',\'tagline\',this.value)" />' +
+            '<input type="text" data-banner-slide="' + i + '" data-banner-field="tagline" placeholder="Message principal de cette slide" value="' + escAttr(s.tagline) + '" oninput="updateBannerSlide(' + i + ',\'tagline\',this.value)" />' +
           '</div>' +
           '<div class="field" style="margin-bottom:0">' +
             '<label>Mots-clés (virgules)</label>' +
-            '<input type="text" placeholder="Ex: EdTech, RNCP, IA, Pédagogie" value="' + escAttr(s.keywords) + '" onchange="updateBannerSlide(' + i + ',\'keywords\',this.value)" />' +
+            '<input type="text" data-banner-slide="' + i + '" data-banner-field="keywords" placeholder="Ex: EdTech, RNCP, IA, Pédagogie" value="' + escAttr(s.keywords) + '" oninput="updateBannerSlide(' + i + ',\'keywords\',this.value)" />' +
           '</div>' +
         '</div>'
       ).join('');
@@ -1756,7 +1759,17 @@ const blogArticles = posts.map(p => ({
       renderBannerSlides();
     });
 
+    // Sync DOM inputs → bannerSlides state before generating
+    function syncBannerSlidesFromDOM() {
+      $bannerSlidesList.querySelectorAll('input[data-banner-slide]').forEach(input => {
+        const i = parseInt(input.dataset.bannerSlide);
+        const field = input.dataset.bannerField;
+        if (bannerSlides[i]) bannerSlides[i][field] = input.value;
+      });
+    }
+
     $btnGenBanner.addEventListener('click', async () => {
+      syncBannerSlidesFromDOM();
       const validSlides = bannerSlides.filter(s => s.tagline.trim());
       if (validSlides.length === 0) return;
 
