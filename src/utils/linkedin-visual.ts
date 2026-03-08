@@ -19,6 +19,34 @@ const interRegular = loadFontFile('inter', '400-normal');
 const interBold = loadFontFile('inter', '700-normal');
 const soraBold = loadFontFile('sora', '700-normal');
 
+async function loadTwemoji(_code: string, segment: string): Promise<string | undefined> {
+  const codePoints = [...segment]
+    .map(c => c.codePointAt(0)!)
+    .filter(cp => cp > 0xFF && cp !== 0xFE0F)
+    .map(cp => cp.toString(16))
+    .join('-');
+  if (!codePoints) return undefined;
+  try {
+    const res = await fetch(
+      `https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/${codePoints}.svg`
+    );
+    if (res.ok) {
+      const svg = await res.text();
+      return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+    }
+  } catch {}
+  return undefined;
+}
+
+const satoriEmoji = {
+  loadAdditionalAsset: async (code: string, segment: string) => {
+    if (code === 'emoji') {
+      return loadTwemoji(code, segment);
+    }
+    return undefined;
+  },
+};
+
 export async function generateLinkedInVisual(options: {
   headline: string;
   subtitle?: string;
@@ -229,6 +257,7 @@ export async function generateLinkedInVisual(options: {
         { name: 'Inter', data: interBold, weight: 700, style: 'normal' as const },
         { name: 'Sora', data: soraBold, weight: 700, style: 'normal' as const },
       ],
+      ...satoriEmoji,
     }
   );
 
@@ -411,6 +440,7 @@ export async function generateLinkedInBanner(options: {
         { name: 'Inter', data: interBold, weight: 700, style: 'normal' as const },
         { name: 'Sora', data: soraBold, weight: 700, style: 'normal' as const },
       ],
+      ...satoriEmoji,
     }
   );
 
