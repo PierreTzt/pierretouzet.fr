@@ -70,7 +70,7 @@ const blogArticles = posts.map(p => ({
     .main-tab.active { color: #4f46e5; border-bottom-color: #4f46e5; font-weight: 600; }
 
     /* Format selector */
-    .format-options { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; margin-top: 0.375rem; }
+    .format-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; margin-top: 0.375rem; }
     .format-option { position: relative; }
     .format-option input { position: absolute; opacity: 0; pointer-events: none; }
     .format-option label {
@@ -186,6 +186,17 @@ const blogArticles = posts.map(p => ({
     .perf-correct { color: #f59e0b; }
     .perf-carton { color: #22c55e; }
     .history-empty { padding: 3rem; text-align: center; color: #a1a1aa; font-size: 0.8125rem; border: 1px dashed #e4e4e7; }
+
+    /* RSS */
+    .rss-sources { margin-bottom: 1rem; }
+    .rss-source { display: flex; gap: 0.5rem; align-items: center; padding: 0.5rem; border: 1px solid #e4e4e7; margin-bottom: 0.375rem; background: white; font-size: 0.75rem; }
+    .rss-source-url { flex: 1; color: #4f46e5; word-break: break-all; font-family: ui-monospace, monospace; }
+    .rss-suggestion { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.625rem; border: 1px solid #e4e4e7; margin-bottom: 0.375rem; background: white; cursor: pointer; transition: border-color 0.15s; }
+    .rss-suggestion:hover { border-color: #4f46e5; }
+    .rss-suggestion-content { flex: 1; }
+    .rss-suggestion-title { font-size: 0.8125rem; font-weight: 500; color: #18181b; }
+    .rss-suggestion-desc { font-size: 0.6875rem; color: #71717a; margin-top: 0.125rem; }
+    .rss-suggestion-date { font-size: 0.625rem; color: #a1a1aa; font-family: ui-monospace, monospace; }
   </style>
 </head>
 <body>
@@ -204,6 +215,7 @@ const blogArticles = posts.map(p => ({
       <button class="main-tab" data-panel="panel-veille">Veille hebdo</button>
       <button class="main-tab" data-panel="panel-blog">Depuis le blog</button>
       <button class="main-tab" data-panel="panel-history">Historique</button>
+      <button class="main-tab" data-panel="panel-reverse">LinkedIn → Blog</button>
     </div>
 
     <!-- ==================== TAB 1: Nouveau post ==================== -->
@@ -236,6 +248,13 @@ const blogArticles = posts.map(p => ({
               <label for="fmt-fait">
                 Fait marquant
                 <span>Chiffre / stat + commentaire</span>
+              </label>
+            </div>
+            <div class="format-option">
+              <input type="radio" name="format" id="fmt-newsletter" value="newsletter" />
+              <label for="fmt-newsletter">
+                Newsletter
+                <span>Format long et approfondi</span>
               </label>
             </div>
           </div>
@@ -285,6 +304,26 @@ const blogArticles = posts.map(p => ({
         </div>
         <div id="status-veille" class="status hidden"></div>
       </div>
+
+      <div class="card">
+        <div class="card-header">Sources RSS</div>
+        <p style="font-size: 0.8125rem; color: #71717a; margin-bottom: 1rem;">Ajoute des flux RSS pour recevoir des suggestions d'actus automatiquement.</p>
+        <div class="row" style="margin-bottom: 1rem; align-items: end;">
+          <div class="field" style="margin-bottom:0">
+            <label for="rss-url">URL du flux RSS</label>
+            <input type="text" id="rss-url" placeholder="https://example.com/rss" />
+          </div>
+          <div class="field" style="margin-bottom:0">
+            <button id="btn-add-rss" class="btn btn-ghost btn-sm" style="width:100%">Ajouter</button>
+          </div>
+        </div>
+        <div id="rss-sources" class="rss-sources"></div>
+        <button id="btn-fetch-rss" class="btn btn-primary btn-sm" style="width:100%">
+          Récupérer les derniers articles
+        </button>
+        <div id="status-rss" class="status hidden"></div>
+        <div id="rss-suggestions" style="margin-top: 1rem;"></div>
+      </div>
     </div>
 
     <!-- ==================== TAB 3: Depuis le blog ==================== -->
@@ -322,6 +361,67 @@ const blogArticles = posts.map(p => ({
           ))}
         </div>
         <div id="status-blog" class="status hidden"></div>
+      </div>
+    </div>
+
+    <!-- ==================== TAB 5: LinkedIn → Blog ==================== -->
+    <div id="panel-reverse" class="tab-panel hidden">
+      <div class="card">
+        <div class="card-header">Transformer un post LinkedIn en article de blog</div>
+        <p style="font-size: 0.8125rem; color: #71717a; margin-bottom: 1rem;">Colle le texte d'un post LinkedIn qui a bien marché. L'IA va le développer en article de blog complet.</p>
+        <div class="field">
+          <label for="reverse-text">Texte du post LinkedIn</label>
+          <textarea id="reverse-text" rows="6" style="font-size: 0.8125rem;" placeholder="Colle ici le texte de ton post LinkedIn..."></textarea>
+        </div>
+        <div class="row">
+          <div class="field">
+            <label for="reverse-lang">Langue de l'article</label>
+            <select id="reverse-lang">
+              <option value="fr" selected>Français</option>
+              <option value="en">English</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>&nbsp;</label>
+            <button id="btn-reverse" class="btn btn-primary" style="width:100%">
+              Générer l'article de blog
+            </button>
+          </div>
+        </div>
+        <div id="status-reverse" class="status hidden"></div>
+      </div>
+
+      <!-- Reverse result -->
+      <div id="reverse-result" class="hidden">
+        <div class="card">
+          <div class="card-header">Article généré</div>
+          <div class="row">
+            <div class="field">
+              <label for="reverse-title">Titre</label>
+              <input type="text" id="reverse-title" />
+            </div>
+            <div class="field">
+              <label for="reverse-desc">Description SEO</label>
+              <input type="text" id="reverse-desc" />
+            </div>
+          </div>
+          <div class="field">
+            <label>Tags</label>
+            <div class="row" style="align-items:end">
+              <input type="text" id="reverse-tag-input" placeholder="Ajouter un tag + Entrée" />
+            </div>
+            <div id="reverse-tags-list" class="tags-container"></div>
+          </div>
+          <div class="field">
+            <label for="reverse-content">Contenu (Markdown)</label>
+            <textarea id="reverse-content" rows="18" style="font-family: ui-monospace, monospace; font-size: 0.8125rem;"></textarea>
+          </div>
+          <div class="actions">
+            <button id="btn-reverse-publish" class="btn btn-accent">Publier sur le blog</button>
+            <button id="btn-reverse-reset" class="btn btn-ghost">Annuler</button>
+          </div>
+          <div id="status-reverse-publish" class="status hidden"></div>
+        </div>
       </div>
     </div>
 
@@ -1017,6 +1117,248 @@ const blogArticles = posts.map(p => ({
     // Render history on tab switch
     document.querySelector('[data-panel="panel-history"]').addEventListener('click', renderHistory);
     renderHistory();
+
+    // ==================== RSS FEEDS ====================
+    let rssSources = JSON.parse(localStorage.getItem('linkedin-rss-sources') || '[]');
+
+    const $rssUrl = document.getElementById('rss-url');
+    const $btnAddRss = document.getElementById('btn-add-rss');
+    const $rssSources = document.getElementById('rss-sources');
+    const $btnFetchRss = document.getElementById('btn-fetch-rss');
+    const $statusRss = document.getElementById('status-rss');
+    const $rssSuggestions = document.getElementById('rss-suggestions');
+
+    function saveRssSources() {
+      localStorage.setItem('linkedin-rss-sources', JSON.stringify(rssSources));
+    }
+
+    function renderRssSources() {
+      if (rssSources.length === 0) {
+        $rssSources.innerHTML = '';
+        $btnFetchRss.disabled = true;
+        return;
+      }
+      $btnFetchRss.disabled = false;
+      $rssSources.innerHTML = rssSources.map((url, i) =>
+        '<div class="rss-source"><span class="rss-source-url">' + escHtml(url) + '</span>' +
+        '<button class="btn btn-danger btn-sm" onclick="removeRss(' + i + ')">×</button></div>'
+      ).join('');
+    }
+
+    window.removeRss = function(i) {
+      rssSources.splice(i, 1);
+      saveRssSources();
+      renderRssSources();
+    };
+
+    $btnAddRss.addEventListener('click', () => {
+      const url = $rssUrl.value.trim();
+      if (!url || rssSources.includes(url)) return;
+      rssSources.push(url);
+      saveRssSources();
+      renderRssSources();
+      $rssUrl.value = '';
+    });
+
+    $btnFetchRss.addEventListener('click', async () => {
+      $btnFetchRss.disabled = true;
+      $btnFetchRss.innerHTML = '<span class="spinner"></span> Chargement...';
+      $statusRss.classList.remove('hidden', 'error');
+      $statusRss.textContent = 'Récupération des flux...';
+      $rssSuggestions.innerHTML = '';
+
+      let allItems = [];
+      for (const url of rssSources) {
+        try {
+          const res = await fetch('/api/fetch-rss', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({ url }),
+          });
+          const data = await res.json();
+          if (res.ok && data.items) {
+            allItems = allItems.concat(data.items);
+          }
+        } catch {}
+      }
+
+      // Sort by date descending, take 15
+      allItems.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+      allItems = allItems.slice(0, 15);
+
+      if (allItems.length === 0) {
+        $rssSuggestions.innerHTML = '<div class="veille-empty">Aucun article trouvé dans les flux.</div>';
+      } else {
+        $rssSuggestions.innerHTML = allItems.map(item =>
+          '<div class="rss-suggestion" data-title="' + escAttr(item.title) + '" data-url="' + escAttr(item.link) + '" data-desc="' + escAttr(item.description) + '">' +
+            '<div class="rss-suggestion-content">' +
+              '<div class="rss-suggestion-title">' + escHtml(item.title) + '</div>' +
+              '<div class="rss-suggestion-desc">' + escHtml(item.description) + '</div>' +
+              (item.date ? '<div class="rss-suggestion-date">' + item.date.slice(0, 10) + '</div>' : '') +
+            '</div>' +
+            '<button class="btn btn-ghost btn-sm">Ajouter</button>' +
+          '</div>'
+        ).join('');
+
+        // Click to add to veille
+        $rssSuggestions.querySelectorAll('.rss-suggestion .btn').forEach(btn => {
+          btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const sug = btn.closest('.rss-suggestion');
+            veilleItems.push({
+              url: sug.dataset.url,
+              title: sug.dataset.title,
+              note: '',
+              date: new Date().toISOString().slice(0, 10),
+            });
+            saveVeille();
+            renderVeille();
+            btn.textContent = 'Ajouté';
+            btn.disabled = true;
+          });
+        });
+      }
+
+      $statusRss.classList.add('hidden');
+      $btnFetchRss.disabled = false;
+      $btnFetchRss.textContent = 'Récupérer les derniers articles';
+    });
+
+    function escAttr(s) {
+      return s.replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    }
+
+    renderRssSources();
+
+    // ==================== LINKEDIN → BLOG (REVERSE FLOW) ====================
+    const $reverseText = document.getElementById('reverse-text');
+    const $reverseLang = document.getElementById('reverse-lang');
+    const $btnReverse = document.getElementById('btn-reverse');
+    const $statusReverse = document.getElementById('status-reverse');
+    const $reverseResult = document.getElementById('reverse-result');
+    const $reverseTitle = document.getElementById('reverse-title');
+    const $reverseDesc = document.getElementById('reverse-desc');
+    const $reverseContent = document.getElementById('reverse-content');
+    const $reverseTagInput = document.getElementById('reverse-tag-input');
+    const $reverseTagsList = document.getElementById('reverse-tags-list');
+    const $btnReversePublish = document.getElementById('btn-reverse-publish');
+    const $btnReverseReset = document.getElementById('btn-reverse-reset');
+    const $statusReversePublish = document.getElementById('status-reverse-publish');
+
+    let reverseTags = [];
+
+    function renderReverseTags() {
+      $reverseTagsList.innerHTML = reverseTags.map((t, i) =>
+        '<span class="tag">' + escHtml(t) + '<button onclick="removeReverseTag(' + i + ')">×</button></span>'
+      ).join('');
+    }
+
+    window.removeReverseTag = function(i) {
+      reverseTags.splice(i, 1);
+      renderReverseTags();
+    };
+
+    $reverseTagInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const val = $reverseTagInput.value.trim();
+        if (val && !reverseTags.includes(val)) {
+          reverseTags.push(val);
+          renderReverseTags();
+        }
+        $reverseTagInput.value = '';
+      }
+    });
+
+    $btnReverse.addEventListener('click', async () => {
+      const text = $reverseText.value.trim();
+      const lang = $reverseLang.value;
+      if (!text) return;
+
+      const idea = 'Développe ce post LinkedIn en article de blog complet. Le post a bien fonctionné sur LinkedIn, il faut maintenant l\'approfondir en article.\n\nPost LinkedIn original :\n\n' + text;
+
+      $btnReverse.disabled = true;
+      $btnReverse.innerHTML = '<span class="spinner"></span> Génération...';
+      $statusReverse.classList.remove('hidden', 'error');
+      $statusReverse.textContent = 'Claude rédige l\'article à partir du post...';
+
+      try {
+        const res = await fetch('/api/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({ idea, lang }),
+        });
+
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Erreur');
+
+        $reverseTitle.value = data.title || '';
+        $reverseDesc.value = data.description || '';
+        $reverseContent.value = data.content || '';
+        reverseTags = data.tags || [];
+        renderReverseTags();
+
+        $reverseResult.classList.remove('hidden');
+        $statusReverse.classList.add('hidden');
+        $reverseResult.scrollIntoView({ behavior: 'smooth' });
+      } catch (err) {
+        $statusReverse.classList.add('error');
+        $statusReverse.textContent = 'Erreur : ' + err.message;
+      } finally {
+        $btnReverse.disabled = false;
+        $btnReverse.textContent = 'Générer l\'article de blog';
+      }
+    });
+
+    $btnReversePublish.addEventListener('click', async () => {
+      const title = $reverseTitle.value.trim();
+      const content = $reverseContent.value.trim();
+      if (!title || !content) return;
+
+      $btnReversePublish.disabled = true;
+      $btnReversePublish.innerHTML = '<span class="spinner"></span> Publication...';
+      $statusReversePublish.classList.remove('hidden', 'error', 'success');
+      $statusReversePublish.textContent = 'Commit sur GitHub en cours...';
+
+      try {
+        const res = await fetch('/api/publish', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'same-origin',
+          body: JSON.stringify({
+            title,
+            description: $reverseDesc.value.trim(),
+            tags: reverseTags,
+            content,
+            lang: $reverseLang.value,
+          }),
+        });
+
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Erreur');
+
+        $statusReversePublish.classList.add('success');
+        $statusReversePublish.innerHTML = 'Article publié ! <a href="https://www.pierretouzet.fr' + data.url + '" target="_blank" style="color:#4f46e5">Voir l\'article</a> (en ligne dans ~1 min)';
+      } catch (err) {
+        $statusReversePublish.classList.add('error');
+        $statusReversePublish.textContent = 'Erreur : ' + err.message;
+      } finally {
+        $btnReversePublish.disabled = false;
+        $btnReversePublish.textContent = 'Publier sur le blog';
+      }
+    });
+
+    $btnReverseReset.addEventListener('click', () => {
+      $reverseText.value = '';
+      $reverseTitle.value = '';
+      $reverseDesc.value = '';
+      $reverseContent.value = '';
+      reverseTags = [];
+      renderReverseTags();
+      $reverseResult.classList.add('hidden');
+    });
   </script>
 </body>
 </html>

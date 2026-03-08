@@ -61,6 +61,14 @@ const SYSTEM_PROMPT = `Tu es l'assistant LinkedIn de Pierre Touzet. Tu l'aides �
 - Conclusion courte : tendance ou fil conducteur entre les actus
 - Longueur : 1000-1800 caractères
 
+### Newsletter LinkedIn
+- Format plus développé pour la fonctionnalité Newsletter de LinkedIn
+- Introduction accrocheuse qui pose le sujet
+- 2-3 sections avec des sous-titres clairs (texte brut, pas de Markdown)
+- Analyse approfondie avec exemples concrets du terrain
+- Conclusion avec un avis tranché et une ouverture
+- Longueur : 2000-4000 caractères (plus long qu'un post classique)
+
 ## Règles de formatage LinkedIn
 - Texte BRUT uniquement (pas de Markdown, pas de **gras**, pas de # titres)
 - Sauts de ligne entre chaque paragraphe (critique pour la lisibilité)
@@ -91,6 +99,7 @@ const FORMAT_INSTRUCTIONS: Record<string, string> = {
   opinion: "Rédige un post LinkedIn au format 'Prise de position'. Pierre donne son opinion tranchée et argumentée.",
   fait: "Rédige un post LinkedIn au format 'Fait marquant'. Pierre met en avant un chiffre ou fait clé avec son analyse.",
   veille: "Rédige un post LinkedIn au format 'Veille hebdo'. Pierre partage sa curation de 3 actus de la semaine avec ses commentaires d'expert. Les actus sont fournies ci-dessous.",
+  newsletter: "Rédige un contenu pour la Newsletter LinkedIn de Pierre. Format plus développé et approfondi qu'un post classique. Pierre approfondit un sujet avec son expertise terrain.",
 };
 
 export const POST: APIRoute = async ({ request, cookies }) => {

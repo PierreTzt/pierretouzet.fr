@@ -45,6 +45,7 @@ export async function generateLinkedInVisual(options: {
     opinion: '#4f46e5',
     fait: '#6366f1',
     veille: '#4f46e5',
+    newsletter: '#4338ca',
   };
   const accent = accentColors[format] || '#4f46e5';
 
@@ -54,6 +55,7 @@ export async function generateLinkedInVisual(options: {
     opinion: 'OPINION',
     fait: 'FAIT MARQUANT',
     veille: 'VEILLE HEBDO',
+    newsletter: 'NEWSLETTER',
   };
   const label = formatLabels[format] || '';
 
