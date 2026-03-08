@@ -323,7 +323,7 @@ export async function generateLinkedInBanner(options: {
             type: 'div',
             props: {
               style: {
-                width: '340px',
+                width: '440px',
                 flexShrink: 0,
               },
             },
