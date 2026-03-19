@@ -458,6 +458,7 @@ export const data: SiteData = {
       allProjects: 'Tous les projets',
       allExperiences: 'Toutes les expériences',
       allSkills: 'Toutes les compétences',
+      latestArticles: 'Derniers articles',
     },
     status: {
       label: 'Disponibilité',

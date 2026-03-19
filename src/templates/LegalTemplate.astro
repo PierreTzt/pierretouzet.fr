@@ -1,0 +1,119 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getData } from '../i18n/utils';
+
+interface Props {
+  lang: 'fr' | 'en';
+}
+
+const { lang } = Astro.props;
+const data = getData(lang);
+
+const legalSlug = lang === 'fr' ? 'mentions-legales' : 'legal';
+
+const i18n = lang === 'fr'
+  ? {
+      pageTitle: 'Mentions légales',
+      pageDescription: 'Mentions légales du site pierretouzet.fr',
+      heading: 'Mentions légales',
+      publisher: 'Éditeur du site',
+      emailLabel: 'Email : ',
+      hosting: 'Hébergement',
+      hostingCountry: 'États-Unis',
+      ip: 'Propriété intellectuelle',
+      ipText: `L'ensemble du contenu de ce site (textes, images, graphismes, logo, icônes) est la propriété exclusive de ${data.personal.name}, sauf mention contraire. Toute reproduction, distribution, modification ou utilisation de ces contenus sans autorisation préalable est strictement interdite.`,
+      gdpr: 'Données personnelles & RGPD',
+      gdprText1: "Ce site ne collecte aucune donnée personnelle. Aucun cookie n'est déposé. Les statistiques de fréquentation sont anonymes et réalisées via Vercel Analytics, un outil conforme au RGPD qui ne nécessite pas de consentement.",
+      gdprText2: `Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour exercer ces droits, contactez : `,
+      liability: 'Responsabilité',
+      liabilityText: "L'éditeur ne saurait être tenu responsable des erreurs, d'une absence de disponibilité des informations ou de la présence de virus sur ce site. Les liens hypertextes vers d'autres sites ne constituent pas une approbation de leur contenu.",
+      credits: 'Crédits',
+      creditsPrefix: 'Site développé avec ',
+      creditsMiddle: ' et ',
+      creditsSuffix: '. Hébergé sur ',
+    }
+  : {
+      pageTitle: 'Legal notice',
+      pageDescription: 'Legal notice for pierretouzet.fr',
+      heading: 'Legal notice',
+      publisher: 'Site publisher',
+      emailLabel: 'Email: ',
+      hosting: 'Hosting',
+      hostingCountry: 'United States',
+      ip: 'Intellectual property',
+      ipText: `All content on this site (text, images, graphics, logo, icons) is the exclusive property of ${data.personal.name}, unless otherwise stated. Any reproduction, distribution, modification or use of this content without prior authorization is strictly prohibited.`,
+      gdpr: 'Personal data & GDPR',
+      gdprText1: 'This site does not collect any personal data. No cookies are used. Traffic analytics are anonymous and provided by Vercel Analytics, a GDPR-compliant tool that does not require consent.',
+      gdprText2: 'In accordance with the General Data Protection Regulation (GDPR), you have the right to access, rectify and delete your data. To exercise these rights, contact: ',
+      liability: 'Liability',
+      liabilityText: 'The publisher cannot be held responsible for errors, unavailability of information or the presence of viruses on this site. Hyperlinks to other sites do not constitute an endorsement of their content.',
+      credits: 'Credits',
+      creditsPrefix: 'Built with ',
+      creditsMiddle: ' and ',
+      creditsSuffix: '. Hosted on ',
+    };
+---
+
+<BaseLayout
+  title={`${i18n.pageTitle} — ${data.personal.name}`}
+  description={i18n.pageDescription}
+  lang={lang}
+  breadcrumbs={[
+    { name: data.ui.nav.home, url: `/${lang}/` },
+    { name: data.ui.footer.legal, url: `/${lang}/${legalSlug}/` },
+  ]}
+>
+  <section class="py-20 px-6">
+    <div class="max-w-3xl mx-auto">
+      <span class="mono-label mb-4 block">Legal</span>
+      <h1 class="font-display text-heading text-zinc-900 dark:text-zinc-50 font-bold mb-4">{i18n.heading}</h1>
+      <div class="h-[1px] bg-gradient-to-r from-accent-500 via-electric-500 to-transparent mt-6 mb-12"></div>
+
+      <div class="space-y-10 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+        <div>
+          <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">{i18n.publisher}</h2>
+          <p>
+            {data.personal.name}<br />
+            {data.personal.title}<br />
+            {data.personal.location}<br />
+            {i18n.emailLabel}<a href={`mailto:${data.personal.email}`} class="text-accent-500 hover:underline">{data.personal.email}</a>
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">{i18n.hosting}</h2>
+          <p>
+            Vercel Inc.<br />
+            440 N Baxter St, Coppell, TX 75019, {i18n.hostingCountry}<br />
+            <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" class="text-accent-500 hover:underline">vercel.com</a>
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">{i18n.ip}</h2>
+          <p>{i18n.ipText}</p>
+        </div>
+
+        <div>
+          <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">{i18n.gdpr}</h2>
+          <p>{i18n.gdprText1}</p>
+          <p class="mt-3">
+            {i18n.gdprText2}<a href={`mailto:${data.personal.email}`} class="text-accent-500 hover:underline">{data.personal.email}</a>.
+          </p>
+        </div>
+
+        <div>
+          <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">{i18n.liability}</h2>
+          <p>{i18n.liabilityText}</p>
+        </div>
+
+        <div>
+          <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">{i18n.credits}</h2>
+          <p>
+            {i18n.creditsPrefix}<a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="text-accent-500 hover:underline">Astro</a>{i18n.creditsMiddle}<a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="text-accent-500 hover:underline">Tailwind CSS</a>{i18n.creditsSuffix}<a href="https://vercel.com" target="_blank" rel="noopener noreferrer" class="text-accent-500 hover:underline">Vercel</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

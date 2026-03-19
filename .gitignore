@@ -25,6 +25,7 @@ pnpm-debug.log*
 
 # lighthouse reports
 lighthouse-report*.json
+.lighthouseci/
 
 # source photos (not optimized)
 *.JPG

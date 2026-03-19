@@ -1,7 +1,9 @@
 {
   "name": "Pierre Touzet — Portfolio",
   "short_name": "Pierre T.",
+  "description": "Portfolio de Pierre Touzet — Ingénierie pédagogique & Innovation numérique",
   "start_url": "/fr/",
+  "scope": "/",
   "display": "standalone",
   "theme_color": "#09090b",
   "background_color": "#fafafa",

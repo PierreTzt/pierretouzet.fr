@@ -35,9 +35,13 @@ const reversePageSlugMap: Record<string, string> = Object.fromEntries(
 
 // Project slug mapping between FR and EN
 function buildProjectSlugMap(): { frToEn: Record<string, string>; enToFr: Record<string, string> } {
+  if (frData.projects.length !== enData.projects.length) {
+    console.warn('[i18n] FR and EN project arrays have different lengths — slug mapping may be incorrect');
+  }
   const frToEn: Record<string, string> = {};
   const enToFr: Record<string, string> = {};
-  for (let i = 0; i < frData.projects.length; i++) {
+  const len = Math.min(frData.projects.length, enData.projects.length);
+  for (let i = 0; i < len; i++) {
     const frSlug = frData.projects[i].slug;
     const enSlug = enData.projects[i].slug;
     frToEn[frSlug] = enSlug;

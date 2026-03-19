@@ -3,6 +3,19 @@ import { isAuthenticated } from '../../utils/auth';
 
 export const prerender = false;
 
+function isAllowedUrl(urlStr: string): boolean {
+  try {
+    const parsed = new URL(urlStr);
+    if (parsed.protocol !== 'https:') return false;
+    const host = parsed.hostname.toLowerCase();
+    const blocked = ['169.254.169.254', 'metadata.google.internal', 'localhost', '127.0.0.1', '0.0.0.0', '::1'];
+    if (blocked.includes(host)) return false;
+    if (host.endsWith('.internal') || host.endsWith('.local')) return false;
+    if (/^(10\.|172\.(1[6-9]|2\d|3[01])\.|192\.168\.)/.test(host)) return false;
+    return true;
+  } catch { return false; }
+}
+
 interface RssItem {
   title: string;
   link: string;
@@ -43,10 +56,21 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     return new Response(JSON.stringify({ error: 'Non autorisé' }), { status: 401 });
   }
 
-  const { url } = await request.json();
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return new Response(JSON.stringify({ error: 'Corps JSON invalide' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+  }
+
+  const { url } = body;
 
   if (!url) {
     return new Response(JSON.stringify({ error: 'URL requise' }), { status: 400 });
+  }
+
+  if (!isAllowedUrl(url)) {
+    return new Response(JSON.stringify({ error: 'URL non autorisée' }), { status: 400 });
   }
 
   try {
@@ -68,7 +92,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     return new Response(JSON.stringify({ items }), {
       headers: { 'Content-Type': 'application/json' },
     });
-  } catch (err: any) {
-    return new Response(JSON.stringify({ error: err.message }), { status: 500 });
+  } catch {
+    return new Response(JSON.stringify({ error: 'Erreur lors de la récupération du flux' }), { status: 500 });
   }
 };

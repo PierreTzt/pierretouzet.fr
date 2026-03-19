@@ -103,7 +103,13 @@ function isActive(href: string): boolean {
 </nav>
 
 <script>
+  let mobileMenuController: AbortController | undefined;
+
   function initMobileMenu() {
+    mobileMenuController?.abort();
+    mobileMenuController = new AbortController();
+    const { signal } = mobileMenuController;
+
     const btn = document.getElementById('mobile-menu-btn');
     const menu = document.getElementById('mobile-menu');
     // Reset menu state on navigation
@@ -112,7 +118,7 @@ function isActive(href: string): boolean {
     btn?.addEventListener('click', () => {
       const isOpen = menu?.classList.toggle('hidden') === false;
       btn.setAttribute('aria-expanded', String(isOpen));
-    });
+    }, { signal });
   }
   initMobileMenu();
   document.addEventListener('astro:after-swap', initMobileMenu);

@@ -95,6 +95,7 @@ export interface UITranslations {
     allProjects: string;
     allExperiences: string;
     allSkills: string;
+    latestArticles: string;
   };
   status: {
     label: string;

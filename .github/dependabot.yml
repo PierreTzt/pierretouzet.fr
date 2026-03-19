@@ -1,0 +1,35 @@
+version: 2
+updates:
+  # npm dependencies
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "08:00"
+      timezone: Europe/Paris
+    open-pull-requests-limit: 5
+    labels:
+      - dependencies
+    # Group minor/patch updates together to reduce PR noise
+    groups:
+      astro-ecosystem:
+        patterns:
+          - "@astrojs/*"
+          - "astro"
+      dev-tooling:
+        patterns:
+          - "eslint*"
+          - "prettier*"
+          - "husky"
+          - "lint-staged"
+          - "typescript*"
+
+  # GitHub Actions
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 3
+    labels:
+      - ci

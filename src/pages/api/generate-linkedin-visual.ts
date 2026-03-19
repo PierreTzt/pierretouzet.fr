@@ -15,7 +15,14 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     return new Response(JSON.stringify({ error: 'Non autorisé' }), { status: 401 });
   }
 
-  const { headline, subtitle, format, size } = await request.json();
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return new Response(JSON.stringify({ error: 'Corps JSON invalide' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+  }
+
+  const { headline, subtitle, format, size } = body;
 
   if (!headline || !size) {
     return new Response(JSON.stringify({ error: 'Headline et size requis' }), { status: 400 });
@@ -41,6 +48,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
       },
     });
   } catch (err: any) {
-    return new Response(JSON.stringify({ error: err.message }), { status: 500 });
+    console.error('[generate-linkedin-visual] Error:', err);
+    return new Response(JSON.stringify({ error: 'Erreur lors de la génération du visuel' }), { status: 500 });
   }
 };

@@ -16,10 +16,6 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-
   body {
     @apply font-sans antialiased;
     @apply text-zinc-900 bg-zinc-50;
@@ -85,7 +81,7 @@
 
   /* Mono label */
   .mono-label {
-    @apply font-mono text-[10px] uppercase tracking-[0.15em] text-zinc-500 dark:text-zinc-400;
+    @apply font-mono text-caption uppercase tracking-[0.15em] text-zinc-500 dark:text-zinc-400;
   }
 
   /* Bento tile base */
@@ -233,8 +229,7 @@
   #scroll-progress,
   nav,
   footer,
-  .scroll-to-top,
-  [data-scroll-to-top] {
+  #scroll-to-top {
     display: none !important;
   }
 

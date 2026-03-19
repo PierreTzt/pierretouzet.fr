@@ -18,7 +18,14 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     return new Response(JSON.stringify({ error: 'Non autorisé' }), { status: 401 });
   }
 
-  const { title, description, tags, content, lang } = await request.json();
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return new Response(JSON.stringify({ error: 'Corps JSON invalide' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+  }
+
+  const { title, description, tags, content, lang } = body;
 
   if (!title || !content || !lang) {
     return new Response(JSON.stringify({ error: 'Titre, contenu et langue requis' }), { status: 400 });
@@ -27,13 +34,17 @@ export const POST: APIRoute = async ({ request, cookies }) => {
   const slug = slugify(title);
   const date = new Date().toISOString().split('T')[0];
 
+  const safeTitle = title.replace(/[\n\r]/g, ' ').replace(/---/g, '').replace(/"/g, '\\"').trim();
+  const safeDescription = (description || '').replace(/[\n\r]/g, ' ').replace(/---/g, '').replace(/"/g, '\\"').trim();
+  const safeTags = (tags || []).map((t: string) => t.replace(/['\n\r\[\]{}]/g, '').trim()).filter(Boolean);
+
   const frontmatter = [
     '---',
-    `title: "${title.replace(/"/g, '\\"')}"`,
-    `description: "${description.replace(/"/g, '\\"')}"`,
+    `title: "${safeTitle}"`,
+    `description: "${safeDescription}"`,
     `date: ${date}`,
     `lang: ${lang}`,
-    `tags: [${tags.map((t: string) => `'${t}'`).join(', ')}]`,
+    `tags: [${safeTags.map((t: string) => `'${t}'`).join(', ')}]`,
     '---',
     '',
   ].join('\n');
@@ -85,7 +96,8 @@ export const POST: APIRoute = async ({ request, cookies }) => {
 
     if (!response.ok) {
       const err = await response.json();
-      return new Response(JSON.stringify({ error: 'GitHub API error', details: err }), { status: 500 });
+      console.error('[publish] GitHub API error:', err);
+      return new Response(JSON.stringify({ error: 'Erreur lors de la publication' }), { status: 500 });
     }
 
     const result = await response.json();
@@ -100,6 +112,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (err: any) {
-    return new Response(JSON.stringify({ error: err.message }), { status: 500 });
+    console.error('[publish] Error:', err);
+    return new Response(JSON.stringify({ error: 'Erreur lors de la publication' }), { status: 500 });
   }
 };

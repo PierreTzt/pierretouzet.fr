@@ -14,7 +14,14 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     return new Response(JSON.stringify({ error: 'Non autorisé' }), { status: 401 });
   }
 
-  const { slides, format } = await request.json();
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return new Response(JSON.stringify({ error: 'Corps JSON invalide' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+  }
+
+  const { slides, format } = body;
 
   if (!slides || !Array.isArray(slides) || slides.length < 2) {
     return new Response(JSON.stringify({ error: 'Au moins 2 slides requises' }), { status: 400 });
@@ -48,6 +55,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (err: any) {
-    return new Response(JSON.stringify({ error: err.message }), { status: 500 });
+    console.error('[generate-linkedin-carousel] Error:', err);
+    return new Response(JSON.stringify({ error: 'Erreur lors de la génération du carousel' }), { status: 500 });
   }
 };

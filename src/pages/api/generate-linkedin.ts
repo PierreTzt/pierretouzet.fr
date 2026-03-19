@@ -1,27 +1,16 @@
 import type { APIRoute } from 'astro';
 import Anthropic from '@anthropic-ai/sdk';
 import { isAuthenticated } from '../../utils/auth';
+import { personaBio, personaTone, personaExpertise } from '../../utils/persona';
 
 export const prerender = false;
 
 const SYSTEM_PROMPT = `Tu es l'assistant LinkedIn de Pierre Touzet. Tu l'aides à rédiger des posts LinkedIn percutants.
 
-## Qui est Pierre
-- Responsable national des programmes dans un réseau d'écoles (IEFT, Tourism Management School)
-- Pilote 6 campus nationaux, 400+ apprenants
-- Créateur de Gradly (outil d'automatisation RNCP)
-- 15 ans d'expérience entre IT, pédagogie et innovation digitale
-- Parcours atypique : bac pro → technicien IT → ingénieur pédagogique → responsable programmes → entrepreneur
-- Créateur de contenu : YouTube, podcast, newsletter, ebook sur l'IA en éducation
-- Disponible en consulting et freelance
+${personaBio}
 
 ## Ton de Pierre sur LinkedIn
-- Direct, première personne ("je", "j'ai")
-- Praticien, pas théoricien — il parle de ce qu'il vit, pas de ce qu'il lit
-- Pas de jargon corporate, pas de bullshit
-- Opinions assumées, appuyées par l'expérience terrain
-- Phrases courtes, percutantes. Pas de remplissage.
-- Humain : il parle d'échecs, de doutes, pas que de succès
+${personaTone}
 
 ## ANTI-STORYTELLING — RÈGLE ABSOLUE
 - JAMAIS de "Il y a 3 ans, j'ai tout quitté..."
@@ -76,13 +65,7 @@ const SYSTEM_PROMPT = `Tu es l'assistant LinkedIn de Pierre Touzet. Tu l'aides �
 - Pas de hashtags dans le texte. Les hashtags seront ajoutés séparément.
 - Longueur optimale : 800-1500 caractères
 
-## Domaines d'expertise
-- Ingénierie pédagogique & certification (RNCP, Qualiopi)
-- Transformation digitale dans l'enseignement supérieur
-- IA générative en éducation (usage terrain, pas théorique)
-- Conduite du changement et adoption d'outils
-- EdTech et automatisation (Gradly)
-- Parcours atypiques et reconversion
+${personaExpertise}
 
 ## Format de sortie
 Réponds TOUJOURS en JSON valide avec cette structure exacte :
@@ -107,7 +90,14 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     return new Response(JSON.stringify({ error: 'Non autorisé' }), { status: 401 });
   }
 
-  const { input, format, preferences } = await request.json();
+  let body;
+  try {
+    body = await request.json();
+  } catch {
+    return new Response(JSON.stringify({ error: 'Corps JSON invalide' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+  }
+
+  const { input, format, preferences } = body;
 
   if (!input || !format) {
     return new Response(JSON.stringify({ error: 'Input et format requis' }), { status: 400 });
@@ -158,16 +148,19 @@ export const POST: APIRoute = async ({ request, cookies }) => {
         try {
           parsed = JSON.parse(match[0]);
         } catch {
-          return new Response(JSON.stringify({ error: 'JSON invalide dans la réponse', raw: rawText.slice(0, 500) }), { status: 500 });
+          console.error('[generate-linkedin] Invalid JSON in response:', rawText.slice(0, 500));
+          return new Response(JSON.stringify({ error: 'JSON invalide dans la réponse' }), { status: 500 });
         }
       } else {
-        return new Response(JSON.stringify({ error: 'Pas de JSON trouvé dans la réponse', raw: rawText.slice(0, 500) }), { status: 500 });
+        console.error('[generate-linkedin] No JSON found in response:', rawText.slice(0, 500));
+        return new Response(JSON.stringify({ error: 'Pas de JSON trouvé dans la réponse' }), { status: 500 });
       }
     }
 
     // Ensure required fields exist
     if (!parsed.text) {
-      return new Response(JSON.stringify({ error: 'Champ "text" manquant', raw: rawText.slice(0, 500) }), { status: 500 });
+      console.error('[generate-linkedin] Missing "text" field in response:', rawText.slice(0, 500));
+      return new Response(JSON.stringify({ error: 'Champ "text" manquant dans la réponse' }), { status: 500 });
     }
 
     return new Response(JSON.stringify({
@@ -178,6 +171,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (err: any) {
-    return new Response(JSON.stringify({ error: err.message }), { status: 500 });
+    console.error('[generate-linkedin] Error:', err);
+    return new Response(JSON.stringify({ error: 'Erreur lors de la génération' }), { status: 500 });
   }
 };

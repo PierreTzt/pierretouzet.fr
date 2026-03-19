@@ -88,12 +88,18 @@ const { label } = Astro.props;
 </style>
 
 <script>
+  let themeToggleController: AbortController | undefined;
+
   function initThemeToggle() {
+    themeToggleController?.abort();
+    themeToggleController = new AbortController();
+    const { signal } = themeToggleController;
+
     document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
       btn.addEventListener('click', () => {
         const isDark = document.documentElement.classList.toggle('dark');
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      });
+      }, { signal });
     });
   }
   initThemeToggle();

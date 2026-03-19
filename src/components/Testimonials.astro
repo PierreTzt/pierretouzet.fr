@@ -24,7 +24,7 @@ const { testimonials, title, subtitle } = Astro.props;
           class="tile p-8 flex flex-col justify-between"
         >
           <div>
-            <svg class="w-6 h-6 text-accent-500/30 mb-4" fill="currentColor" viewBox="0 0 24 24">
+            <svg class="w-6 h-6 text-accent-500/30 mb-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151C7.546 6.068 5.983 8.789 5.983 11h4v10H0z" />
             </svg>
             <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed italic">
@@ -33,7 +33,7 @@ const { testimonials, title, subtitle } = Astro.props;
           </div>
           <div class="mt-6 pt-4 border-t border-zinc-100 dark:border-zinc-800">
             <p class="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{t.name}</p>
-            <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mt-0.5">
+            <p class="font-mono text-caption uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mt-0.5">
               {t.role} — {t.company}
             </p>
           </div>

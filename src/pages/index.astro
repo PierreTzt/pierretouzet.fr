@@ -10,7 +10,7 @@
     <link rel="canonical" href="https://www.pierretouzet.fr/fr/" />
     <script is:inline>
       (function () {
-        var lang = navigator.language || navigator.userLanguage || '';
+        var lang = navigator.language || '';
         var isEnglish = lang.toLowerCase().startsWith('en');
         window.location.replace(isEnglish ? '/en/' : '/fr/');
       })();

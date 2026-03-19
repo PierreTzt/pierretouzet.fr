@@ -1,4 +1,5 @@
-const CACHE_NAME = 'portfolio-v1';
+const CACHE_VERSION = '2';
+const CACHE_NAME = `portfolio-v${CACHE_VERSION}`;
 const STATIC_ASSETS = [
   '/favicon.svg',
   '/apple-touch-icon.png',
@@ -32,6 +33,9 @@ self.addEventListener('fetch', (event) => {
 
   // Skip non-GET and external requests
   if (request.method !== 'GET' || url.origin !== self.location.origin) return;
+
+  // Skip admin and API routes
+  if (url.pathname.startsWith('/admin') || url.pathname.startsWith('/api')) return;
 
   // HTML pages: network-first with cache fallback
   if (request.headers.get('accept')?.includes('text/html')) {

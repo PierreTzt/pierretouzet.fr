@@ -17,7 +17,7 @@ const { metrics, trustedBy } = Astro.props;
           <p class="font-display text-heading font-bold bg-gradient-to-r from-accent-500 to-electric-500 bg-clip-text text-transparent mb-1">
             {metric.value}
           </p>
-          <p class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+          <p class="font-mono text-caption uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
             {metric.label}
           </p>
         </div>
@@ -26,14 +26,14 @@ const { metrics, trustedBy } = Astro.props;
     {trustedBy && (
       <div class="tile py-4 px-6 scroll-reveal">
         <div class="flex items-center justify-center gap-6 flex-wrap">
-          <span class="font-mono text-[10px] uppercase tracking-wider text-zinc-400 dark:text-zinc-500">{trustedBy}</span>
-          <span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-medium">IEFT</span>
+          <span class="font-mono text-caption uppercase tracking-wider text-zinc-400 dark:text-zinc-500">{trustedBy}</span>
+          <span class="font-mono text-caption uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-medium">IEFT</span>
           <span class="text-zinc-300 dark:text-zinc-700">·</span>
-          <span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-medium">IFAG</span>
+          <span class="font-mono text-caption uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-medium">IFAG</span>
           <span class="text-zinc-300 dark:text-zinc-700">·</span>
-          <span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-medium">ICM</span>
+          <span class="font-mono text-caption uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-medium">ICM</span>
           <span class="text-zinc-300 dark:text-zinc-700">·</span>
-          <span class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-medium">Compétences & Développement</span>
+          <span class="font-mono text-caption uppercase tracking-wider text-zinc-500 dark:text-zinc-400 font-medium">Compétences & Développement</span>
         </div>
       </div>
     )}

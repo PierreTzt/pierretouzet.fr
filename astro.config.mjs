@@ -20,7 +20,6 @@ export default defineConfig({
       },
       serialize(item) {
         const url = item.url.replace('https://www.pierretouzet.fr', '');
-        item.lastmod = new Date();
 
         // Home pages
         if (url === '/fr/' || url === '/en/') {

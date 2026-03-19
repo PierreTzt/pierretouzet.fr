@@ -18,17 +18,17 @@ const { label } = Astro.props;
 </button>
 
 <script>
-  let scrollToTopHandler: (() => void) | null = null;
+  let scrollToTopController: AbortController | undefined;
 
   function initScrollToTop() {
+    scrollToTopController?.abort();
+    scrollToTopController = new AbortController();
+    const { signal } = scrollToTopController;
+
     const btn = document.getElementById('scroll-to-top');
     if (!btn) return;
 
-    if (scrollToTopHandler) {
-      window.removeEventListener('scroll', scrollToTopHandler);
-    }
-
-    scrollToTopHandler = () => {
+    window.addEventListener('scroll', () => {
       if (window.scrollY > 300) {
         btn.classList.remove('opacity-0', 'invisible', 'translate-y-4');
         btn.classList.add('opacity-100', 'visible', 'translate-y-0');
@@ -36,10 +36,9 @@ const { label } = Astro.props;
         btn.classList.add('opacity-0', 'invisible', 'translate-y-4');
         btn.classList.remove('opacity-100', 'visible', 'translate-y-0');
       }
-    };
+    }, { passive: true, signal });
 
-    window.addEventListener('scroll', scrollToTopHandler, { passive: true });
-    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }), { signal });
   }
   initScrollToTop();
   document.addEventListener('astro:after-swap', initScrollToTop);

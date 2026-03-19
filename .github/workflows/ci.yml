@@ -1,0 +1,126 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Cancel in-progress runs for the same branch
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '20'
+
+jobs:
+  # ──────────────────────────────────────────────
+  # Quality checks: lint, type-check, format
+  # ──────────────────────────────────────────────
+  quality:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - run: npm ci
+
+      - name: Astro type check
+        run: npx astro check
+
+      - name: ESLint
+        run: npx eslint . --max-warnings 0
+
+      - name: Prettier format check
+        run: npx prettier --check "src/**/*.{astro,ts,tsx,js,mjs,css,json,md}"
+
+  # ──────────────────────────────────────────────
+  # Security: dependency audit
+  # ──────────────────────────────────────────────
+  security:
+    name: Security Audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - run: npm ci
+
+      - name: npm audit (high + critical)
+        run: npm audit --audit-level=high
+        continue-on-error: true
+
+  # ──────────────────────────────────────────────
+  # Build: verify production build succeeds
+  # ──────────────────────────────────────────────
+  build:
+    name: Build Verification
+    runs-on: ubuntu-latest
+    needs: quality
+    env:
+      # Dummy values so SSR endpoints don't fail at build time
+      ADMIN_PASSWORD: ci-build-placeholder
+      ANTHROPIC_API_KEY: ci-build-placeholder
+      GITHUB_TOKEN: ci-build-placeholder
+      GITHUB_REPO: PierreTzt/portfolio
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Verify build output exists
+        run: |
+          test -d dist || (echo "Build output missing" && exit 1)
+          echo "Build output size:"
+          du -sh dist/
+
+  # ──────────────────────────────────────────────
+  # Lighthouse CI (only on PRs to catch regressions)
+  # ──────────────────────────────────────────────
+  lighthouse:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build for Lighthouse
+        env:
+          ADMIN_PASSWORD: ci-build-placeholder
+          ANTHROPIC_API_KEY: ci-build-placeholder
+          GITHUB_TOKEN: ci-build-placeholder
+          GITHUB_REPO: PierreTzt/portfolio
+        run: npm run build
+
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: .lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true

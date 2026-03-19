@@ -26,15 +26,21 @@ async function loadTwemoji(_code: string, segment: string): Promise<string | und
     .map(cp => cp.toString(16))
     .join('-');
   if (!codePoints) return undefined;
+  const url = `https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/${codePoints}.svg`;
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 3000);
   try {
-    const res = await fetch(
-      `https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/${codePoints}.svg`
-    );
+    const res = await fetch(url, { signal: controller.signal });
     if (res.ok) {
       const svg = await res.text();
       return `data:image/svg+xml,${encodeURIComponent(svg)}`;
     }
-  } catch {}
+  } catch {
+    // Timeout or network error — return empty string as fallback
+    return '';
+  } finally {
+    clearTimeout(timeout);
+  }
   return undefined;
 }
 

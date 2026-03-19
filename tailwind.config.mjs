@@ -33,6 +33,7 @@ export default {
         },
       },
       fontSize: {
+        'caption': ['10px', { lineHeight: '1.4' }],
         'display': ['clamp(3.5rem, 9vw, 8rem)', { lineHeight: '0.9', letterSpacing: '-0.03em' }],
         'heading': ['clamp(2rem, 4vw, 3.5rem)', { lineHeight: '0.95', letterSpacing: '-0.02em' }],
         'subheading': ['clamp(1.25rem, 2vw, 1.75rem)', { lineHeight: '1.15', letterSpacing: '-0.01em' }],

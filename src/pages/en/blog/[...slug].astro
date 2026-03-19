@@ -1,10 +1,6 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
+import BlogArticleTemplate from '../../../templates/BlogArticleTemplate.astro';
 import { getCollection } from 'astro:content';
-import { getData } from '../../../i18n/utils';
-
-const lang = 'en';
-const data = getData(lang);
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog', ({ data }) => data.lang === 'en' && !data.draft);
@@ -15,65 +11,6 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
 ---
 
-<BaseLayout
-  title={`${post.data.title} — ${data.personal.name}`}
-  description={post.data.description}
-  lang={lang}
-  ogImage={`/og/${post.slug}.png`}
-  article={{
-    publishedTime: post.data.date.toISOString(),
-    tags: post.data.tags,
-  }}
-  breadcrumbs={[
-    { name: data.ui.nav.home, url: '/en/' },
-    { name: data.ui.blog.title, url: '/en/blog/' },
-    { name: post.data.title, url: `/en/blog/${post.slug}/` },
-  ]}
->
-  <article class="py-20 px-6">
-    <div class="max-w-3xl mx-auto">
-      <a
-        href="/en/blog/"
-        class="scroll-reveal group mono-label hover:text-accent-500 transition-colors duration-200 inline-flex items-center gap-2 mb-12"
-      >
-        <svg class="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
-        </svg>
-        {data.ui.blog.backToBlog}
-      </a>
-
-      <header class="scroll-reveal mb-12">
-        <div class="flex flex-wrap gap-2 mb-4">
-          {post.data.tags.map((tag) => (
-            <span class="font-mono text-[10px] uppercase tracking-wider px-2 py-0.5 bg-accent-500/10 text-accent-600 dark:text-accent-400">
-              {tag}
-            </span>
-          ))}
-        </div>
-        <h1 class="font-display text-heading text-zinc-900 dark:text-zinc-50 font-bold mb-4">
-          {post.data.title}
-        </h1>
-        <time class="font-mono text-[10px] text-zinc-400" datetime={post.data.date.toISOString()}>
-          {post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-        </time>
-        <div class="h-[1px] bg-gradient-to-r from-accent-500 via-electric-500 to-transparent mt-6"></div>
-      </header>
-
-      <div class="scroll-reveal prose prose-zinc dark:prose-invert prose-sm max-w-none prose-headings:font-display prose-headings:font-bold prose-a:text-accent-500 hover:prose-a:text-accent-600" style="transition-delay: 100ms">
-        <Content />
-      </div>
-
-      <div class="mt-16 pt-8 border-t border-zinc-200 dark:border-zinc-800 text-center">
-        <a
-          href="/en/blog/"
-          class="mono-label hover:text-accent-500 transition-colors duration-200"
-        >
-          ← {data.ui.blog.backToBlog}
-        </a>
-      </div>
-    </div>
-  </article>
-</BaseLayout>
+<BlogArticleTemplate lang="en" post={post} />
