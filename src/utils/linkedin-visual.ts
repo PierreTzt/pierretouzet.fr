@@ -62,11 +62,11 @@ export async function generateLinkedInVisual(options: {
   const scale = Math.min(width, height) / 1080;
   const headlineLen = headline.length;
   const headlineSize = Math.round(
-    (headlineLen > 80 ? 36 : headlineLen > 50 ? 44 : 56) * scale
+    (headlineLen > 80 ? 48 : headlineLen > 50 ? 60 : 76) * scale
   );
-  const subtitleSize = Math.round(20 * scale);
-  const brandSize = Math.round(14 * scale);
-  const labelSize = Math.round(11 * scale);
+  const subtitleSize = Math.round(28 * scale);
+  const brandSize = Math.round(18 * scale);
+  const labelSize = Math.round(14 * scale);
   const pad = Math.round(80 * scale);
 
   // Format-specific accent color
