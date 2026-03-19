@@ -58,8 +58,8 @@ export async function generateLinkedInVisual(options: {
 }): Promise<Buffer> {
   const { headline, subtitle, format, width, height, slideNumber, totalSlides } = options;
 
-  // Adapt font sizes based on dimensions
-  const scale = Math.min(width, height) / 1080;
+  // Adapt font sizes based on dimensions (floor at 0.85 so landscape stays readable)
+  const scale = Math.max(Math.min(width, height) / 1080, 0.85);
   const headlineLen = headline.length;
   const headlineSize = Math.round(
     (headlineLen > 80 ? 48 : headlineLen > 50 ? 60 : 76) * scale
