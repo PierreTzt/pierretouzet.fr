@@ -37,7 +37,7 @@ Non. Il faut être **praticien**. Les gens ne cherchent pas des experts — ils 
 
 ### Partir d'un vrai problème
 
-Mon contenu le plus performant part toujours d'une question réelle : "Comment je déclare mes impôts Twitch ?", "C'est quoi le RNCP ?", "Comment je forme mes équipes à l'IA ?"
+Mon contenu le plus performant part toujours d'une question réelle : "Comment je déclare mes impôts Twitch ?", "C'est quoi le RNCP ?", "Comment je forme mes équipes à [l'IA](/fr/blog/ia-education-terrain/) ?"
 
 ### Simplifier sans simplifier
 

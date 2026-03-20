@@ -62,8 +62,24 @@ const lastName = personal.name.split(' ').slice(1).join(' ');
         <span class="text-zinc-900 dark:text-zinc-50 font-bold">{firstName} </span><span class="font-extrabold bg-gradient-to-r from-accent-500 to-electric-500 bg-clip-text text-transparent">{lastName}</span>
       </h1>
       <p class="mono-label mb-8 opacity-0 animate-reveal-delay-1">
-        {personal.location}
+        <span data-greeting class="text-accent-500"></span> {personal.location}
       </p>
+
+      <script is:inline>
+        (function() {
+          var el = document.querySelector('[data-greeting]');
+          if (!el) return;
+          var h = new Date().getHours();
+          var lang = document.documentElement.lang;
+          var g;
+          if (lang === 'fr') {
+            g = h >= 18 ? 'Bonsoir' : 'Bonjour';
+          } else {
+            g = h >= 18 ? 'Good evening' : h >= 12 ? 'Good afternoon' : 'Good morning';
+          }
+          el.textContent = g + ' —';
+        })();
+      </script>
 
       <div class="grid md:grid-cols-[1fr_1px_1fr] gap-8 items-start opacity-0 animate-reveal-delay-2">
         <div>
@@ -75,7 +91,7 @@ const lastName = personal.name.split(' ').slice(1).join(' ');
         <div class="hidden md:block h-full bg-zinc-200 dark:bg-zinc-800"></div>
 
         <div>
-          <p class="text-sm text-zinc-500 leading-relaxed mb-8">
+          <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-8">
             {personal.description}
           </p>
           <div class="flex items-center gap-6 flex-wrap">

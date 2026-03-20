@@ -19,8 +19,8 @@ Voici ce que j'ai observé :
 ### Ce qui marche
 
 - **La génération de supports de cours** : un gain de temps considérable pour les formateurs, à condition de bien prompter et de toujours relire
-- **L'aide à l'évaluation** : pas pour noter automatiquement, mais pour générer des grilles, des critères, des suggestions de feedback
-- **La veille et la synthèse** : résumer un article de 20 pages en 3 points clés, c'est là que l'IA excelle
+- **L'aide à l'évaluation** : pas pour noter automatiquement, mais pour générer des grilles, des critères, des suggestions de feedback — c'est d'ailleurs un des axes que j'ai automatisés avec [Gradly](/fr/blog/rncp-automatisation-gradly/)
+- **La veille et la synthèse** : résumer un article de 20 pages en 3 points clés, c'est là que l'IA excelle — et c'est un levier majeur pour [créer du contenu éducatif](/fr/blog/creer-contenu-educatif-linkedin/) de qualité
 
 ### Ce qui ne marche pas (encore)
 
@@ -32,6 +32,6 @@ Voici ce que j'ai observé :
 
 L'IA en éducation n'est ni la révolution qu'on nous vend, ni le danger qu'on nous agite. C'est un outil. Puissant, imparfait, et qui demande de la méthode.
 
-Le vrai défi n'est pas technologique — il est humain. C'est la conduite du changement. C'est convaincre un formateur de 55 ans que cet outil peut l'aider sans le remplacer.
+Le vrai défi n'est pas technologique — il est humain. C'est [la conduite du changement](/fr/blog/conduite-changement-ecoles/). C'est convaincre un formateur de 55 ans que cet outil peut l'aider sans le remplacer.
 
 Et ça, aucune IA ne sait le faire. C'est un travail de terrain.

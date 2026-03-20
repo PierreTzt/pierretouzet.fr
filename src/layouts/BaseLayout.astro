@@ -44,25 +44,63 @@ const schemaOrg = isHomePage ? {
   mainEntity: {
     '@type': 'Person',
     name: personal.name,
-    jobTitle: personal.title,
+    givenName: 'Pierre',
+    familyName: 'Touzet',
+    jobTitle: lang === 'fr' ? 'Responsable national des programmes / Ingénieur pédagogique' : 'National Program Director / Instructional Designer',
     description: personal.description,
     url: siteUrl,
     email: personal.email,
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Valenciennes',
+      addressRegion: 'Hauts-de-France',
       addressCountry: 'FR',
     },
     image: new URL('/images/pierre-touzet.webp', Astro.site).href,
+    worksFor: {
+      '@type': 'Organization',
+      name: 'IEFT - Tourism Management School',
+    },
+    alumniOf: [
+      { '@type': 'Organization', name: 'OpenClassrooms' },
+      { '@type': 'Organization', name: 'Anaxil' },
+    ],
+    hasCredential: [
+      {
+        '@type': 'EducationalOccupationalCredential',
+        credentialCategory: 'certification',
+        name: lang === 'fr' ? "Responsable d'Ingénierie pédagogique" : 'Instructional Design Manager',
+        recognizedBy: { '@type': 'Organization', name: 'OpenClassrooms' },
+      },
+      {
+        '@type': 'EducationalOccupationalCredential',
+        credentialCategory: 'certification',
+        name: 'DPO - Data Protection Officer',
+        recognizedBy: { '@type': 'Organization', name: 'CNIL' },
+      },
+    ],
+    hasOccupation: {
+      '@type': 'Occupation',
+      name: lang === 'fr' ? 'Ingénieur pédagogique' : 'Instructional Designer',
+      skills: 'RNCP, Qualiopi, Instructional Design, Digital Transformation, LMS, EdTech, AI in Education',
+    },
+    knowsAbout: [
+      'Ingénierie pédagogique', 'RNCP certification', 'Qualiopi audit',
+      'Digital transformation in education', 'Instructional design',
+      'Generative AI in education', 'LMS deployment', 'Change management',
+      'Multi-campus coordination', 'GDPR compliance in education', 'EdTech',
+      'Competency-based assessment',
+    ],
     sameAs: [
       'https://www.linkedin.com/in/pierre-touzet/',
+      'https://www.gradly.fr',
     ],
   },
 } : null;
 ---
 
 <!doctype html>
-<html lang={lang} class="scroll-smooth">
+<html lang={lang} class="motion-safe:scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -101,7 +139,8 @@ const schemaOrg = isHomePage ? {
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="alternate" type="application/rss+xml" title={lang === 'fr' ? 'Blog RSS Feed (FR)' : 'Blog RSS Feed (EN)'} href={lang === 'fr' ? '/rss.xml' : '/en/rss.xml'} />
-    <meta name="theme-color" content="#09090b" />
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)" />
     {schemaOrg && <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />}
     {article && (
       <script type="application/ld+json" set:html={JSON.stringify({
@@ -186,10 +225,10 @@ const schemaOrg = isHomePage ? {
     <main id="main-content" class="flex-1 pt-14">
       {breadcrumbs && breadcrumbs.length > 0 && (
         <nav aria-label="Breadcrumb" class="max-w-5xl mx-auto px-4 pt-6 pb-0">
-          <ol class="flex items-center gap-1.5 text-xs text-zinc-400 dark:text-zinc-500">
+          <ol class="flex items-center gap-1.5 text-xs text-zinc-600 dark:text-zinc-400">
             {breadcrumbs.map((crumb, i) => (
               <li class="flex items-center gap-1.5">
-                {i > 0 && <span class="text-zinc-300 dark:text-zinc-600">/</span>}
+                {i > 0 && <span class="text-zinc-400 dark:text-zinc-500">/</span>}
                 {crumb.url ? (
                   <a href={crumb.url} class="hover:text-accent transition-colors">{crumb.name}</a>
                 ) : (
@@ -262,6 +301,29 @@ const schemaOrg = isHomePage ? {
 
       initAll();
       document.addEventListener('astro:after-swap', initAll);
+    </script>
+
+    <!-- Konami code Easter egg -->
+    <script>
+      let konamiSeq: number[] = [];
+      const konamiCode = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+      document.addEventListener('keydown', (e) => {
+        konamiSeq.push(e.keyCode);
+        konamiSeq = konamiSeq.slice(-10);
+        if (konamiSeq.join(',') === konamiCode.join(',')) {
+          const lang = document.documentElement.lang;
+          const msg = lang === 'fr'
+            ? 'Vous avez trouvé le secret. Curieux, vous aussi ?'
+            : "You found the secret. Curious one, aren't you?";
+          const toast = document.createElement('div');
+          toast.setAttribute('role', 'status');
+          toast.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] px-6 py-3 bg-accent-500 text-white text-sm font-medium shadow-lg';
+          toast.textContent = msg;
+          document.body.appendChild(toast);
+          setTimeout(() => { toast.style.opacity = '0'; toast.style.transition = 'opacity 0.3s'; setTimeout(() => toast.remove(), 300); }, 4000);
+          konamiSeq = [];
+        }
+      });
     </script>
   </body>
 </html>

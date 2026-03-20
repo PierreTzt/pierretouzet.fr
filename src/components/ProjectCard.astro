@@ -33,7 +33,6 @@ const Tag = hasDetailPage ? 'a' : 'div';
     hasDetailPage && 'tile-interactive glow-hover',
   ]}
   style={`transition-delay: ${index * 80}ms`}
-  aria-label={project.title}
 >
   {hasImage && (
     <div class="aspect-[4/3] relative overflow-hidden bg-zinc-100 dark:bg-zinc-800/50">
@@ -66,7 +65,7 @@ const Tag = hasDetailPage ? 'a' : 'div';
       {project.title}
     </h3>
     {project.period && (
-      <p class="font-mono text-caption text-zinc-400 dark:text-zinc-500 mb-3">{project.period}</p>
+      <p class="font-mono text-caption text-zinc-500 dark:text-zinc-400 mb-3">{project.period}</p>
     )}
 
     <p class="text-sm text-zinc-500 dark:text-zinc-400 mb-4 leading-relaxed line-clamp-2">

@@ -6,7 +6,7 @@ lang: fr
 tags: ['Transformation digitale', 'Conduite du changement', 'Enseignement supérieur']
 ---
 
-J'ai déployé des outils numériques sur 6 campus en 3 ans. Des LMS, des outils d'évaluation, des plateformes de signature, des systèmes de gestion de notes.
+J'ai déployé des outils numériques sur 6 campus en 3 ans. Des LMS, des outils d'évaluation, des plateformes de signature, des systèmes de gestion de notes — [dont Gradly pour les bulletins RNCP](/fr/blog/rncp-automatisation-gradly/).
 
 **Le constat est toujours le même** : la technologie n'est jamais le problème. Le problème, c'est l'adoption.
 
@@ -22,7 +22,7 @@ Après avoir raté mes premières tentatives (oui, moi aussi), voici ce que j'ai
 
 ### 1. Commencer par le problème, pas par l'outil
 
-Personne ne veut "utiliser un LMS". Les gens veulent **arrêter de perdre 3 heures par semaine à envoyer des mails avec des pièces jointes**. C'est ça le point d'entrée.
+Personne ne veut "utiliser un LMS". Les gens veulent **arrêter de perdre 3 heures par semaine à envoyer des mails avec des pièces jointes**. C'est ça le point d'entrée. [Mon propre parcours](/fr/blog/parcours-atypique-bac-pro/) m'a appris ça : chaque changement réussi part d'un problème concret, pas d'une décision top-down.
 
 ### 2. Former en situation réelle
 
@@ -40,4 +40,4 @@ Dans chaque équipe, il y a 1 ou 2 personnes qui aiment tester. Ce sont eux qu'i
 
 La conduite du changement, ce n'est pas un slide dans un deck de consulting. C'est du terrain. C'est de la patience. C'est accepter que l'adoption prend 6 mois, pas 6 jours.
 
-Et c'est surtout comprendre que derrière chaque "résistance au changement", il y a souvent une peur légitime qu'on n'a pas pris le temps d'écouter.
+Et c'est surtout comprendre que derrière chaque "résistance au changement", il y a souvent une peur légitime qu'on n'a pas pris le temps d'écouter. C'est vrai pour les outils classiques, et [c'est encore plus vrai pour l'IA](/fr/blog/ia-education-terrain/).

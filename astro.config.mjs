@@ -4,11 +4,15 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 
+// Sentry: uncomment when SENTRY_DSN is configured in Vercel
+// import sentry from '@sentry/astro';
+
 export default defineConfig({
   site: 'https://www.pierretouzet.fr',
   adapter: vercel(),
   integrations: [
     tailwind(),
+    // sentry({ sourcemaps: { disable: true }, telemetry: false }),
     sitemap({
       filter: (page) => !page.includes('/admin/'),
       i18n: {

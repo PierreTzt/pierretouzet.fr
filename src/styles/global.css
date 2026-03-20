@@ -1,15 +1,6 @@
-/* Latin + Latin-ext only (FR/EN site) */
-@import '@fontsource/inter/latin-400.css';
-@import '@fontsource/inter/latin-500.css';
-@import '@fontsource/inter/latin-600.css';
-@import '@fontsource/inter/latin-700.css';
-@import '@fontsource/inter/latin-ext-400.css';
-@import '@fontsource/inter/latin-ext-600.css';
-@import '@fontsource/sora/latin-300.css';
-@import '@fontsource/sora/latin-600.css';
-@import '@fontsource/sora/latin-700.css';
-@import '@fontsource/sora/latin-800.css';
-@import '@fontsource/sora/latin-ext-700.css';
+/* Variable fonts — single file per family, all weights */
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/sora';
 
 @tailwind base;
 @tailwind components;
@@ -131,11 +122,20 @@
   /* Scroll progress bar */
   #scroll-progress {
     @apply fixed top-0 left-0 h-[2px] z-[60];
-    background: linear-gradient(90deg, #4f46e5, #818cf8);
+    background: linear-gradient(90deg, theme('colors.accent.500'), theme('colors.electric.500'));
     transform-origin: left;
     transform: scaleX(0);
     width: 100%;
     transition: transform 0.1s linear;
+  }
+}
+
+/* Forced colors (Windows High Contrast) fallback for gradient text */
+@media (forced-colors: active) {
+  .bg-clip-text {
+    -webkit-text-fill-color: unset !important;
+    color: LinkText !important;
+    background: none !important;
   }
 }
 

@@ -12,8 +12,14 @@ const data = getData(lang);
 
 <BaseLayout
   title={`${data.ui.hello.title} — ${data.personal.name}`}
-  description={data.ui.hello.subtitle}
+  description={lang === 'fr'
+    ? "Ingénieur pédagogique, 15 ans entre IT et éducation. De technicien informatique à responsable de 6 campus nationaux."
+    : "Instructional designer, 15 years across IT and education. From IT technician to managing 6 national campuses."}
   lang={lang}
+  breadcrumbs={[
+    { name: data.ui.nav.home, url: `/${lang}/` },
+    { name: data.ui.hello.title, url: lang === 'fr' ? `/${lang}/bonjour/` : `/${lang}/hello/` },
+  ]}
 >
   <section class="py-20 px-6">
     <div class="max-w-2xl mx-auto text-center">
@@ -45,14 +51,22 @@ const data = getData(lang);
         <p class="font-mono text-caption uppercase tracking-wider text-zinc-500">{data.personal.location}</p>
       </div>
 
-      <!-- Tagline -->
-      <div class="scroll-reveal mb-10" style="transition-delay: 160ms">
-        <p class="font-display text-subheading text-zinc-600 dark:text-zinc-400 font-light mb-4">
+      <!-- Career narrative -->
+      <div class="scroll-reveal mb-10 text-left max-w-lg mx-auto" style="transition-delay: 160ms">
+        <p class="font-display text-subheading text-zinc-600 dark:text-zinc-400 font-light mb-4 text-center">
           {data.personal.title}
         </p>
-        <p class="text-sm text-zinc-500 leading-relaxed max-w-lg mx-auto">
-          {data.personal.description}
-        </p>
+        <div class="space-y-3 text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+          <p>{lang === 'fr'
+            ? "Bac pro électrotechnique en poche, j'ai commencé comme technicien informatique dans une structure de 2 personnes. Pendant 11 ans, j'ai tout fait : support IT, gestion fournisseurs, graphisme, process — la polyvalence comme école."
+            : "With a vocational diploma in electrical engineering, I started as an IT technician in a 2-person company. For 11 years, I did everything: IT support, supplier management, design, process — versatility as my school."}</p>
+          <p>{lang === 'fr'
+            ? "En 2022, j'ai pivoté vers l'éducation. En moins de 2 ans chez IFAG, j'ai mené la transformation digitale de 28 campus avec un taux d'adoption de 100%. C'est là que j'ai créé Gradly pour automatiser les bulletins RNCP."
+            : "In 2022, I pivoted to education. In under 2 years at IFAG, I led the digital transformation of 28 campuses with 100% adoption. That's where I built Gradly to automate RNCP bulletins."}</p>
+          <p>{lang === 'fr'
+            ? "Aujourd'hui, je pilote seul la stratégie pédagogique de 6 campus nationaux à l'IEFT, avec 11 personnes sur le terrain et 400 apprenants. DPO certifié CNIL, je suis aussi disponible en consulting."
+            : "Today, I single-handedly lead the academic strategy across 6 national IEFT campuses, with 11 people on the ground and 400 learners. CNIL-certified DPO, also available for consulting."}</p>
+        </div>
       </div>
 
       <!-- Services tags -->

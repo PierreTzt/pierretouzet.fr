@@ -19,6 +19,10 @@ const emailSubject = lang === 'fr' ? 'Opportunité de recrutement' : 'Hiring opp
   title={`${data.ui.hiring.title} — ${data.personal.name}`}
   description={data.ui.hiring.subtitle}
   lang={lang}
+  breadcrumbs={[
+    { name: data.ui.nav.home, url: `/${lang}/` },
+    { name: data.ui.hiring.title, url: lang === 'fr' ? `/${lang}/recrutement/` : `/${lang}/hiring/` },
+  ]}
 >
   <section class="py-20 px-6">
     <div class="max-w-4xl mx-auto">

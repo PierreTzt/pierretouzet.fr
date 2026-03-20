@@ -9,6 +9,8 @@ interface ImportMetaEnv {
   readonly GITHUB_TOKEN: string;
   /** GitHub repository in format owner/repo */
   readonly GITHUB_REPO: string;
+  /** Sentry DSN for error tracking (optional — leave empty to disable) */
+  readonly SENTRY_DSN: string;
   /** True in production builds */
   readonly PROD: boolean;
   /** True in development mode */

@@ -12,16 +12,17 @@ const isHighlighted = skill.highlighted;
 
 <span
   class:list={[
-    'scroll-reveal inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-wider px-3 py-1.5 transition-colors duration-200',
+    'scroll-reveal group relative inline-flex items-center gap-1.5 font-mono text-caption uppercase tracking-wider px-3 py-1.5 transition-colors duration-200 overflow-hidden',
     isHighlighted
       ? 'bg-accent-500/10 border border-accent-500/30 text-accent-600 dark:text-accent-400 hover:bg-accent-500/20'
       : 'border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-accent-500/50 hover:text-accent-500',
   ]}
   style={`transition-delay: ${index * 40}ms`}
 >
+  <span class="absolute bottom-0 left-0 h-[2px] bg-accent-500/40 transition-all duration-500 ease-out opacity-0 group-hover:opacity-100" style={`width: ${skill.level}%`}></span>
   {skill.name}
   {skill.badge && (
-    <span class="text-[9px] font-semibold bg-accent-500 text-white px-1.5 py-0.5 rounded-sm normal-case tracking-normal">
+    <span class="text-[10px] font-semibold bg-accent-500 text-white px-1.5 py-0.5 rounded-sm normal-case tracking-normal">
       {skill.badge}
     </span>
   )}

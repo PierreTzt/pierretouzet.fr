@@ -32,11 +32,11 @@ Les profils les plus intéressants que je croise — ceux qui innovent, qui rés
 
 ### L'adaptabilité
 
-Quand tu as changé de métier 3 fois, tu n'as plus peur de l'inconnu. Tu sais que tu vas apprendre. C'est juste une question de temps et de méthode.
+Quand tu as changé de métier 3 fois, tu n'as plus peur de l'inconnu. Tu sais que tu vas apprendre. C'est juste une question de temps et de méthode. C'est d'ailleurs ce qui m'a le plus servi en [conduite du changement](/fr/blog/conduite-changement-ecoles/).
 
 ### La vision transversale
 
-Je comprends les développeurs parce que j'ai été technicien. Je comprends les formateurs parce que j'ai enseigné. Je comprends les dirigeants parce que j'ai créé ma boîte. Cette transversalité, aucun diplôme ne la donne.
+Je comprends les développeurs parce que j'ai été technicien. Je comprends les formateurs parce que j'ai enseigné. Je comprends les dirigeants parce que j'ai créé ma boîte. C'est cette transversalité qui m'a permis de [construire Gradly](/fr/blog/rncp-automatisation-gradly/) — aucun diplôme ne la donne.
 
 ### L'humilité
 

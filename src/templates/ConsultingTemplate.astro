@@ -28,6 +28,10 @@ const useCases = lang === 'fr'
           title: "Vous voulez intégrer l'IA dans vos formations mais ne savez pas par où commencer",
           description: "Audit de maturité, montée en compétences des équipes, définition d'une stratégie réaliste. Un regard de praticien, pas de théoricien.",
         },
+        {
+          title: "Vous utilisez l'IA dans vos formations et vous ne savez pas si vous êtes conforme",
+          description: "L'AI Act européen classe les systèmes d'IA éducatifs comme « haut risque » à partir du 2 août 2026. DPO certifié CNIL, j'audite vos usages, identifie les risques et vous accompagne vers la conformité.",
+        },
       ],
     }
   : {
@@ -44,6 +48,10 @@ const useCases = lang === 'fr'
         {
           title: "You want to integrate AI into your programs but don't know where to start",
           description: "Maturity audit, team upskilling, realistic strategy. A practitioner's perspective, not a theorist's.",
+        },
+        {
+          title: "You use AI in your training and don't know if you're compliant",
+          description: "The EU AI Act classifies educational AI systems as 'high-risk' from August 2, 2026. As a CNIL-certified DPO, I audit your AI usage, identify risks, and guide you toward compliance.",
         },
       ],
     };
@@ -71,8 +79,49 @@ const missionFormats = lang === 'fr'
   title={`${data.ui.consulting.title} — ${data.personal.name}`}
   description={data.ui.consulting.subtitle}
   lang={lang}
+  breadcrumbs={[
+    { name: data.ui.nav.home, url: `/${lang}/` },
+    { name: data.ui.consulting.title, url: `/${lang}/consulting/` },
+  ]}
 >
   <section class="py-20 px-6">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": lang === 'fr'
+        ? "Pierre Touzet - Consulting en ingénierie pédagogique"
+        : "Pierre Touzet - Instructional Design Consulting",
+      "description": lang === 'fr'
+        ? "Consultant freelance en ingénierie pédagogique, transformation digitale et certification RNCP/Qualiopi"
+        : "Freelance consultant in instructional design, digital transformation and RNCP/Qualiopi certification",
+      "url": lang === 'fr'
+        ? "https://www.pierretouzet.fr/fr/consulting/"
+        : "https://www.pierretouzet.fr/en/consulting/",
+      "provider": {
+        "@type": "Person",
+        "name": "Pierre Touzet",
+        "url": "https://www.pierretouzet.fr"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "France"
+      },
+      "serviceType": lang === 'fr'
+        ? ["Ingénierie pédagogique", "Transformation digitale", "Certification RNCP", "Audit Qualiopi", "Consulting IA en éducation"]
+        : ["Instructional design", "Digital transformation", "RNCP certification", "Qualiopi audit", "AI consulting in education"],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": lang === 'fr' ? "Services de consulting" : "Consulting services",
+        "itemListElement": missionFormats.items.map((item) => ({
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": item.title,
+            "description": item.description
+          }
+        }))
+      }
+    })} />
     <div class="max-w-4xl mx-auto">
       <SectionHeader title={data.ui.consulting.title} subtitle={data.ui.consulting.subtitle} number="01" as="h1" />
 
@@ -123,6 +172,26 @@ const missionFormats = lang === 'fr'
         </div>
       </div>
 
+      <!-- Gradly proof point -->
+      <div class="scroll-reveal mb-16 tile p-6" style="transition-delay: 165ms">
+        <div class="flex items-start gap-4">
+          <span class="font-mono text-caption text-accent-500 shrink-0 mt-1">★</span>
+          <div>
+            <p class="text-sm font-semibold text-zinc-900 dark:text-zinc-100 mb-1">
+              {lang === 'fr' ? "Exemple concret : Gradly" : "Concrete example: Gradly"}
+            </p>
+            <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+              {lang === 'fr'
+                ? "Face au constat que les coordinateurs pédagogiques passaient des jours à produire manuellement des bulletins RNCP, j'ai créé Gradly — un outil qui divise le temps administratif par 3. Déployé sur plusieurs campus, 100% offline pour la souveraineté des données."
+                : "Seeing that academic coordinators spent days manually producing RNCP bulletins, I built Gradly — a tool that divides admin time by 3. Deployed across multiple campuses, 100% offline for data sovereignty."}
+            </p>
+            <a href={lang === 'fr' ? '/fr/projets/gradly/' : '/en/projects/gradly/'} class="mono-label hover:text-accent-500 transition-colors mt-2 inline-block">
+              {lang === 'fr' ? 'Voir le projet' : 'See the project'} →
+            </a>
+          </div>
+        </div>
+      </div>
+
       <!-- Use cases -->
       <div class="scroll-reveal mb-16" style="transition-delay: 175ms">
         <span class="mono-label mb-6 block">{useCases.label}</span>
@@ -166,7 +235,18 @@ const missionFormats = lang === 'fr'
       </div>
 
       <!-- CTA -->
-      <div class="scroll-reveal text-center" style="transition-delay: 250ms">
+      <div class="scroll-reveal text-center flex flex-wrap justify-center gap-4" style="transition-delay: 250ms">
+        <a
+          href="https://cal.com/pierre-tzt/30min"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group inline-flex items-center gap-3 px-8 py-4 bg-accent-500 text-white text-sm font-medium hover:bg-accent-600 transition-all duration-200"
+        >
+          {lang === 'fr' ? 'Réserver un créneau' : 'Book a slot'}
+          <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+          </svg>
+        </a>
         <a
           href={`mailto:${data.personal.email}?subject=${encodeURIComponent(emailSubject)}`}
           class="group inline-flex items-center gap-3 px-8 py-4 bg-zinc-900 dark:bg-zinc-100 text-zinc-50 dark:text-zinc-900 text-sm font-medium hover:bg-accent-600 dark:hover:bg-accent-500 dark:hover:text-white transition-all duration-200"

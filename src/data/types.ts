@@ -34,6 +34,7 @@ export interface ProjectFeature {
 }
 
 export interface Project {
+  id: string;
   slug: string;
   title: string;
   shortDescription: string;
@@ -150,6 +151,26 @@ export interface UITranslations {
     title: string;
     subtitle: string;
     cta: string;
+    landing: {
+      metaDescription: string;
+      heroSubtitle: string;
+      formTitle: string;
+      formName: string;
+      formEmail: string;
+      formCta: string;
+      formSuccess: string;
+      formSuccessDetail: string;
+      tocTitle: string;
+      tocItems: string[];
+      credibilityTitle: string;
+      credibilityItems: string[];
+      testimonialQuote: string;
+      testimonialAuthor: string;
+      testimonialRole: string;
+      freeLabel: string;
+      pagesLabel: string;
+      formatLabel: string;
+    };
   };
   hiring: {
     title: string;

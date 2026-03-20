@@ -1,7 +1,15 @@
 import type { APIRoute } from 'astro';
 import { createSessionToken } from '../../utils/auth';
+import { timingSafeEqual } from 'crypto';
 
 export const prerender = false;
+
+function safeCompare(a: string, b: string): boolean {
+  const bufA = Buffer.from(a);
+  const bufB = Buffer.from(b);
+  if (bufA.length !== bufB.length) return false;
+  return timingSafeEqual(bufA, bufB);
+}
 
 export const POST: APIRoute = async ({ request, cookies }) => {
   let body;
@@ -13,7 +21,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
 
   const { password } = body;
 
-  if (password === import.meta.env.ADMIN_PASSWORD) {
+  if (password && safeCompare(password, import.meta.env.ADMIN_PASSWORD)) {
     cookies.set('admin-auth', createSessionToken(import.meta.env.ADMIN_PASSWORD), {
       path: '/',
       httpOnly: true,
