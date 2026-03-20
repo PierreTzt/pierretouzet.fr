@@ -29,7 +29,7 @@
     "@fontsource/sora": "^5.2.8",
     "@sentry/astro": "^10.45.0",
     "@tailwindcss/typography": "^0.5.19",
-    "@vercel/analytics": "^1.6.1",
+    "@vercel/analytics": "^2.0.1",
     "astro": "^5.17.1",
     "satori": "^0.25.0",
     "sharp": "^0.34.5",
