@@ -43,10 +43,10 @@ J'aurais pu construire une plateforme complète avec 50 fonctionnalités. J'ai c
 
 ### Le terrain dicte le produit
 
-Chaque fonctionnalité de Gradly vient d'un problème réel observé sur le terrain. Pas d'un brainstorming en salle de réunion.
+Chaque fonctionnalité de Gradly vient d'un problème réel observé sur le terrain, au contact des équipes et des [réalités de la conduite du changement](/fr/blog/conduite-changement-ecoles/). Pas d'un brainstorming en salle de réunion.
 
 ### L'automatisation n'est pas une fin en soi
 
-L'objectif n'a jamais été "automatiser pour automatiser". C'était : redonner du temps aux coordinateurs pour faire leur vrai métier — accompagner les étudiants et les formateurs.
+L'objectif n'a jamais été "automatiser pour automatiser". C'était : redonner du temps aux coordinateurs pour faire leur vrai métier — accompagner les étudiants et les formateurs. C'est d'ailleurs ce que [mon propre parcours](/fr/blog/parcours-atypique-bac-pro/) m'a appris : la tech n'a de valeur que si elle sert les gens.
 
 C'est la différence entre un projet tech et un projet utile.

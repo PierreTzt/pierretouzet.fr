@@ -3,9 +3,9 @@ import type { SiteData } from './types';
 export const data: SiteData = {
   personal: {
     name: 'Pierre Touzet',
-    title: "Je crois que l'éducation peut changer les choses.",
+    title: "Je rends le complexe accessible.",
     description:
-      "Alors je rends le complexe accessible. 15 ans entre IT, pédagogie et innovation digitale — je pilote 6 campus nationaux, j'ai créé Gradly, et je vulgarise tout ce qui me tombe sous la main. Disponible en consulting et freelance.",
+      "15 ans entre IT, pédagogie et innovation digitale — je pilote 6 campus nationaux, j'ai créé Gradly pour automatiser la gestion RNCP, et j'accompagne les organisations éducatives dans leur transformation. Disponible en consulting et freelance.",
     email: 'pierre.touzet@mecontacter.eu',
     location: 'Valenciennes, France',
     avatarAlt: 'Photo de Pierre Touzet',
@@ -15,7 +15,7 @@ export const data: SiteData = {
       platform: 'LinkedIn',
       url: 'https://www.linkedin.com/in/pierre-touzet/',
       icon: 'linkedin',
-      label: 'Profil LinkedIn de Pierre',
+      label: 'Profil LinkedIn de Pierre (nouvelle fenêtre)',
     },
   ],
   experiences: [
@@ -74,6 +74,7 @@ export const data: SiteData = {
   ],
   projects: [
     {
+      id: 'gradly',
       slug: 'gradly',
       title: 'Gradly',
       shortDescription:
@@ -112,6 +113,7 @@ export const data: SiteData = {
       ],
     },
     {
+      id: 'innovation-pedagogique',
       slug: 'innovation-pedagogique',
       title: "Transformation digitale pédagogique",
       shortDescription:
@@ -130,6 +132,7 @@ export const data: SiteData = {
       ],
     },
     {
+      id: 'portfolio',
       slug: 'portfolio',
       title: 'Portfolio personnel',
       shortDescription:
@@ -148,6 +151,7 @@ export const data: SiteData = {
       ],
     },
     {
+      id: 'twitch-tech',
       slug: 'twitch-tech',
       title: 'Émission Twitch — Actu Tech',
       shortDescription:
@@ -166,6 +170,7 @@ export const data: SiteData = {
       ],
     },
     {
+      id: 'youtube-impots',
       slug: 'youtube-impots',
       title: 'YouTube — Vulgarisation fiscale',
       shortDescription:
@@ -184,6 +189,7 @@ export const data: SiteData = {
       ],
     },
     {
+      id: 'podcast',
       slug: 'podcast',
       title: 'Podcast — Actu Tech',
       shortDescription:
@@ -202,6 +208,7 @@ export const data: SiteData = {
       ],
     },
     {
+      id: 'newsletter-tech',
       slug: 'newsletter-tech',
       title: 'Newsletter LinkedIn — Actu Tech',
       shortDescription:
@@ -220,6 +227,7 @@ export const data: SiteData = {
       ],
     },
     {
+      id: 'ebook-ia-education',
       slug: 'ebook-ia-education',
       title: "Ebook — L'IA dans l'éducation",
       shortDescription:
@@ -238,6 +246,7 @@ export const data: SiteData = {
       ],
     },
     {
+      id: 'accompagnement-entrepreneurial',
       slug: 'accompagnement-entrepreneurial',
       title: 'Accompagnement entrepreneurial & IA',
       shortDescription:
@@ -484,7 +493,7 @@ export const data: SiteData = {
     },
     footer: {
       rights: 'Tous droits réservés.',
-      builtWith: 'Construit avec Astro & Tailwind CSS',
+      builtWith: 'Fait main avec Astro, Tailwind & pas mal de café',
       legal: 'Mentions légales',
     },
     notFound: {
@@ -514,6 +523,36 @@ export const data: SiteData = {
       title: "L'IA dans l'éducation — Ebook gratuit",
       subtitle: "Un regard de praticien sur l'IA générative en éducation. 10 pages pour comprendre les vrais enjeux, sans jargon.",
       cta: 'Télécharger gratuitement',
+      landing: {
+        metaDescription: "Téléchargez gratuitement l'ebook de Pierre Touzet sur l'IA générative en éducation. 10 pages de retour d'expérience terrain, sans jargon.",
+        heroSubtitle: "10 pages pour comprendre comment l'IA générative transforme l'éducation — avec un regard de praticien, pas de théoricien. Basé sur 15 ans d'expérience terrain.",
+        formTitle: 'Télécharger gratuitement',
+        formName: 'Votre prénom',
+        formEmail: 'Votre email',
+        formCta: "Recevoir l'ebook (PDF)",
+        formSuccess: 'Votre téléchargement va commencer.',
+        formSuccessDetail: "Si le téléchargement ne se lance pas automatiquement, cliquez sur le lien ci-dessous.",
+        tocTitle: 'Ce que vous allez découvrir',
+        tocItems: [
+          "Pourquoi l'IA générative change la donne en éducation — au-delà du buzz",
+          "Ce qui marche vraiment sur le terrain (et ce qui ne marche pas)",
+          "Comment intégrer l'IA dans ses pratiques pédagogiques sans tout réinventer",
+          "Les erreurs à éviter quand on débute avec l'IA en formation",
+        ],
+        credibilityTitle: "Pourquoi lire cet ebook",
+        credibilityItems: [
+          "Écrit par un praticien qui utilise l'IA au quotidien avec des apprenants",
+          "Basé sur des expérimentations concrètes, pas des projections théoriques",
+          "Applicable immédiatement — chaque chapitre propose des actions concrètes",
+          "Gratuit, sans engagement, sans spam",
+        ],
+        testimonialQuote: "Pierre est quelqu'un sur qui on peut vraiment compter : pro, impliqué, toujours prêt à aider. Il possède une excellente vision d'ensemble tout en prêtant attention aux détails.",
+        testimonialAuthor: "Za Nguyen",
+        testimonialRole: "Responsable pédagogique — IHECF Montpellier",
+        freeLabel: 'Gratuit',
+        pagesLabel: '10 pages',
+        formatLabel: 'PDF',
+      },
     },
     hiring: {
       title: 'Vous recrutez ?',

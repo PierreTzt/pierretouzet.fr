@@ -3,9 +3,9 @@ import type { SiteData } from './types';
 export const data: SiteData = {
   personal: {
     name: 'Pierre Touzet',
-    title: 'I believe education can change the world.',
+    title: 'I make the complex accessible.',
     description:
-      "So I make the complex accessible. 15 years across IT, education and digital innovation — I manage 6 national campuses, built Gradly, and I break down anything I get my hands on. Available for consulting and freelance.",
+      "15 years across IT, education and digital innovation — I manage 6 national campuses, built Gradly to automate RNCP (France's national competency certification framework) management, and I help educational organizations transform. Available for consulting and freelance.",
     email: 'pierre.touzet@mecontacter.eu',
     location: 'Valenciennes, France',
     avatarAlt: 'Photo of Pierre Touzet',
@@ -15,7 +15,7 @@ export const data: SiteData = {
       platform: 'LinkedIn',
       url: 'https://www.linkedin.com/in/pierre-touzet/',
       icon: 'linkedin',
-      label: "Pierre's LinkedIn profile",
+      label: "Pierre's LinkedIn profile (opens in new tab)",
     },
   ],
   experiences: [
@@ -31,7 +31,7 @@ export const data: SiteData = {
         'Full academic harmonization across 6 campuses: unified curricula, assessments and methods where each campus used to do things differently',
         'Deployed new programs from design to launch, driving significant enrollment growth',
         'Designed syllabi, competency blocks and RNCP-compliant evaluation grids',
-        'Secured certification and jury approvals (RNCP, Qualiopi)',
+        'Secured certification and jury approvals (RNCP, Qualiopi — France\'s mandatory quality label for training providers)',
         'Cross-functional management of a team of 11 coordinators and academic directors',
         'Budget oversight and program profitability optimization',
       ],
@@ -74,6 +74,7 @@ export const data: SiteData = {
   ],
   projects: [
     {
+      id: 'gradly',
       slug: 'gradly',
       title: 'Gradly',
       shortDescription:
@@ -112,6 +113,7 @@ export const data: SiteData = {
       ],
     },
     {
+      id: 'innovation-pedagogique',
       slug: 'pedagogical-innovation',
       title: 'Pedagogical Digital Transformation',
       shortDescription:
@@ -130,6 +132,7 @@ export const data: SiteData = {
       ],
     },
     {
+      id: 'portfolio',
       slug: 'portfolio',
       title: 'Personal Portfolio',
       shortDescription:
@@ -148,6 +151,7 @@ export const data: SiteData = {
       ],
     },
     {
+      id: 'twitch-tech',
       slug: 'twitch-tech',
       title: 'Twitch Show — Tech News',
       shortDescription:
@@ -166,6 +170,7 @@ export const data: SiteData = {
       ],
     },
     {
+      id: 'youtube-impots',
       slug: 'youtube-taxes',
       title: 'YouTube — Tax Education',
       shortDescription:
@@ -184,6 +189,7 @@ export const data: SiteData = {
       ],
     },
     {
+      id: 'podcast',
       slug: 'podcast',
       title: 'Podcast — Tech News',
       shortDescription:
@@ -202,6 +208,7 @@ export const data: SiteData = {
       ],
     },
     {
+      id: 'newsletter-tech',
       slug: 'newsletter-tech',
       title: 'LinkedIn Newsletter — Tech News',
       shortDescription:
@@ -220,6 +227,7 @@ export const data: SiteData = {
       ],
     },
     {
+      id: 'ebook-ia-education',
       slug: 'ebook-ai-education',
       title: 'Ebook — AI in Education',
       shortDescription:
@@ -238,6 +246,7 @@ export const data: SiteData = {
       ],
     },
     {
+      id: 'accompagnement-entrepreneurial',
       slug: 'entrepreneurial-mentoring',
       title: 'Entrepreneurial Mentoring & AI',
       shortDescription:
@@ -290,7 +299,7 @@ export const data: SiteData = {
       description: 'Building custom tools and driving digital transformation.',
       icon: 'M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5',
       skills: [
-        { name: 'GDPR & Data Protection', level: 85, highlighted: true, badge: 'CNIL-certified DPO' },
+        { name: 'GDPR & Data Protection', level: 85, highlighted: true, badge: 'Certified DPO (CNIL, France)' },
         { name: 'Process Automation', level: 85, highlighted: true, badge: 'Admin time ÷ 3' },
         { name: 'No-code / Low-code', level: 80 },
         { name: 'Technology Watch', level: 80 },
@@ -334,7 +343,7 @@ export const data: SiteData = {
     },
     {
       institution: 'Lycée du Hainaut',
-      degree: 'Professional Baccalaureate',
+      degree: 'Vocational Diploma',
       field: 'Electrical Engineering',
       startDate: '2006',
       endDate: '2007',
@@ -484,7 +493,7 @@ export const data: SiteData = {
     },
     footer: {
       rights: 'All rights reserved.',
-      builtWith: 'Built with Astro & Tailwind CSS',
+      builtWith: 'Handcrafted with Astro, Tailwind & a lot of coffee',
       legal: 'Legal notice',
     },
     notFound: {
@@ -514,6 +523,36 @@ export const data: SiteData = {
       title: 'AI in Education — Free Ebook',
       subtitle: "A practitioner's take on generative AI in education. 10 pages to understand the real stakes, jargon-free.",
       cta: 'Download for free',
+      landing: {
+        metaDescription: "Download Pierre Touzet's free ebook on generative AI in education. 10 pages of field experience, jargon-free.",
+        heroSubtitle: "10 pages to understand how generative AI is transforming education — from a practitioner's perspective, not a theorist's. Based on 15 years of field experience.",
+        formTitle: 'Download for free',
+        formName: 'Your first name',
+        formEmail: 'Your email',
+        formCta: 'Get the ebook (PDF)',
+        formSuccess: 'Your download will start shortly.',
+        formSuccessDetail: 'If the download does not start automatically, click the link below.',
+        tocTitle: 'What you will discover',
+        tocItems: [
+          'Why generative AI is a game-changer in education — beyond the buzz',
+          'What actually works in the field (and what does not)',
+          'How to integrate AI into your teaching practices without reinventing everything',
+          'The mistakes to avoid when starting with AI in training',
+        ],
+        credibilityTitle: 'Why read this ebook',
+        credibilityItems: [
+          'Written by a practitioner who uses AI daily with learners',
+          'Based on concrete experiments, not theoretical projections',
+          'Immediately actionable — each chapter offers concrete next steps',
+          'Free, no strings attached, no spam',
+        ],
+        testimonialQuote: "Pierre is someone you can truly count on: professional, committed, always willing to help. He has an excellent big-picture vision while paying attention to detail.",
+        testimonialAuthor: 'Za Nguyen',
+        testimonialRole: 'Academic Coordinator — IHECF Montpellier',
+        freeLabel: 'Free',
+        pagesLabel: '10 pages',
+        formatLabel: 'PDF',
+      },
     },
     hiring: {
       title: 'Looking to hire?',

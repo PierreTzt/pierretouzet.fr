@@ -26,6 +26,8 @@ const pageSlugMap: Record<string, string> = {
   recrutement: 'hiring',
   bonjour: 'hello',
   blog: 'blog',
+  faq: 'faq',
+  ebook: 'ebook',
 };
 
 // Reverse: EN -> FR
@@ -33,19 +35,16 @@ const reversePageSlugMap: Record<string, string> = Object.fromEntries(
   Object.entries(pageSlugMap).map(([k, v]) => [v, k])
 );
 
-// Project slug mapping between FR and EN
+// Project slug mapping between FR and EN (matched by canonical id)
 function buildProjectSlugMap(): { frToEn: Record<string, string>; enToFr: Record<string, string> } {
-  if (frData.projects.length !== enData.projects.length) {
-    console.warn('[i18n] FR and EN project arrays have different lengths — slug mapping may be incorrect');
-  }
   const frToEn: Record<string, string> = {};
   const enToFr: Record<string, string> = {};
-  const len = Math.min(frData.projects.length, enData.projects.length);
-  for (let i = 0; i < len; i++) {
-    const frSlug = frData.projects[i].slug;
-    const enSlug = enData.projects[i].slug;
-    frToEn[frSlug] = enSlug;
-    enToFr[enSlug] = frSlug;
+  for (const frProject of frData.projects) {
+    const enProject = enData.projects.find(p => p.id === frProject.id);
+    if (enProject) {
+      frToEn[frProject.slug] = enProject.slug;
+      enToFr[enProject.slug] = frProject.slug;
+    }
   }
   return { frToEn, enToFr };
 }

@@ -1,0 +1,14 @@
+{
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  },
+  "eslint.validate": ["javascript", "typescript", "astro"],
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "files.exclude": {
+    "**/.astro": true,
+    "**/dist": true,
+    "**/.vercel": true
+  }
+}

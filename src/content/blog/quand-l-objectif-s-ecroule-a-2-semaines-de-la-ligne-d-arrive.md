@@ -25,7 +25,7 @@ Résultat : **forfait**. L'objectif de l'année parti en fumée.
 
 ## Ce que j'en retiens
 
-Cette histoire, elle me rappelle tous mes projets professionnels qui ont capoté à cause d'un imprévu. **La différence entre planifier et s'adapter**.
+Cette histoire, elle me rappelle tous mes projets professionnels qui ont capoté à cause d'un imprévu. C'est aussi ce que [mon parcours non-linéaire](/fr/blog/parcours-atypique-bac-pro/) m'a appris : **la différence entre planifier et s'adapter**.
 
 ### Les objectifs rigides, c'est fragile
 
@@ -37,7 +37,7 @@ Aujourd'hui, je pose toujours la question : "Et si X se passe, on fait quoi ?"
 
 J'aurais pu voir cette blessure comme un échec personnel. **J'ai choisi d'y voir une leçon** sur l'importance des plans B.
 
-Dans mes projets Gradly ou mes formations, j'intègre systématiquement des scénarios de repli. Ça sauve des projets.
+Dans mes projets [Gradly](/fr/blog/rncp-automatisation-gradly/) ou mes formations, j'intègre systématiquement des scénarios de repli. Ça sauve des projets.
 
 ### Recommencer, c'est OK
 
