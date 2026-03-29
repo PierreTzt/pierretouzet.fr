@@ -1,18 +1,21 @@
 import satori from 'satori';
 import sharp from 'sharp';
 import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 function loadFontFile(family: 'inter' | 'sora', weight: string): Buffer {
-  const path = join(
-    process.cwd(),
-    'node_modules',
-    '@fontsource',
-    family,
-    'files',
-    `${family}-latin-${weight}.woff`
-  );
-  return readFileSync(path);
+  const filename = `${family}-latin-${weight}.woff`;
+  const candidates = [
+    // Works on Vercel serverless (relative to built file)
+    join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'node_modules', '@fontsource', family, 'files', filename),
+    // Works in dev / build (project root)
+    join(process.cwd(), 'node_modules', '@fontsource', family, 'files', filename),
+  ];
+  for (const p of candidates) {
+    try { return readFileSync(p); } catch {}
+  }
+  throw new Error(`Font not found: ${family}/${filename}`);
 }
 
 const interRegular = loadFontFile('inter', '400-normal');
