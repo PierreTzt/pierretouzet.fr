@@ -9,7 +9,13 @@ import vercel from '@astrojs/vercel';
 
 export default defineConfig({
   site: 'https://www.pierretouzet.fr',
-  adapter: vercel(),
+  adapter: vercel({
+    includeFiles: [
+      './node_modules/@fontsource/inter/files/inter-latin-400-normal.woff',
+      './node_modules/@fontsource/inter/files/inter-latin-700-normal.woff',
+      './node_modules/@fontsource/sora/files/sora-latin-700-normal.woff',
+    ],
+  }),
   integrations: [
     tailwind(),
     // sentry({ sourcemaps: { disable: true }, telemetry: false }),
