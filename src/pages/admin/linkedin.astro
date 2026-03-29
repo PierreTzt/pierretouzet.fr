@@ -948,11 +948,22 @@ const blogArticles = posts.map(p => ({
         });
 
         if (!res.ok) {
-          const err = await res.json();
-          throw new Error(err.error || 'Erreur');
+          const text = await res.text();
+          let msg = 'Erreur ' + res.status;
+          try { msg = JSON.parse(text).error || msg; } catch {}
+          throw new Error(msg);
+        }
+
+        const ct = res.headers.get('content-type') || '';
+        if (!ct.includes('image/')) {
+          const text = await res.text();
+          throw new Error('Réponse inattendue (' + ct + '): ' + text.slice(0, 200));
         }
 
         const blob = await res.blob();
+        if (blob.size < 100) {
+          throw new Error('Image vide (' + blob.size + ' octets)');
+        }
         currentVisualBlob = blob;
         currentSize = size;
 
