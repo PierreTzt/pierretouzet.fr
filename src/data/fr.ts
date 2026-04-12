@@ -74,6 +74,45 @@ export const data: SiteData = {
   ],
   projects: [
     {
+      id: 'distil-academy',
+      slug: 'distil-academy',
+      title: 'Distil Academy',
+      shortDescription:
+        "Plateforme de formation en ligne sur l'IA générative : des cours courts, denses et à jour pour monter en compétences vite et bien.",
+      longDescription:
+        "J'ai créé Distil pour répondre à une frustration : les formations IA sont soit trop longues, soit déjà obsolètes. Distil filtre le bruit et ne garde que ce qui marche. 25 modules, 42 leçons de 10-15 min, accès à vie et mises à jour régulières. Une pédagogie condensée, pensée pour les professionnels qui veulent des résultats concrets sans y passer des mois.",
+      technologies: ['Astro', 'Tailwind CSS', 'Vercel', 'PostHog'],
+      imageAlt: 'Interface de Distil Academy - plateforme de formation IA',
+      demoUrl: 'https://www.distil.academy/',
+      featured: true,
+      status: 'active',
+      period: '2026 — Aujourd\'hui',
+      metrics: [
+        { label: 'Format', value: 'Leçons de 10-15 min' },
+        { label: 'Accès', value: 'À vie' },
+        { label: 'Mises à jour', value: 'Continues' },
+      ],
+      story: "Les formations IA disponibles m'ont toujours frustré : soit des vidéos YouTube déjà périmées, soit des cursus à 2000€ qui recyclent les mêmes contenus. Je me suis dit : et si je créais la formation que j'aurais aimé suivre ? Des modules de moins d'une heure, des leçons de 10-15 min, uniquement ce qui fonctionne sur le terrain. Pas de hype, pas de théorie creuse — du concret, testé et mis à jour en continu. Distil est né de cette conviction : l'IA évolue trop vite pour des formations figées.",
+      features: [
+        {
+          title: 'Cours courts et denses',
+          description: "Chaque module fait moins d'une heure, chaque leçon 10-15 min. Pas de remplissage, que de l'essentiel.",
+        },
+        {
+          title: 'Accès à vie + mises à jour',
+          description: "Un seul achat, un accès permanent. Les cours sont mis à jour régulièrement pour suivre l'évolution de l'IA.",
+        },
+        {
+          title: 'Contenu filtré et testé',
+          description: "Veille permanente et tests en conditions réelles. Seul ce qui marche vraiment est enseigné.",
+        },
+        {
+          title: 'Pensé pour les professionnels',
+          description: "Pas besoin de background technique. Des résultats concrets applicables immédiatement dans son métier.",
+        },
+      ],
+    },
+    {
       id: 'gradly',
       slug: 'gradly',
       title: 'Gradly',

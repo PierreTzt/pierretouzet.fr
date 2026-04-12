@@ -74,6 +74,45 @@ export const data: SiteData = {
   ],
   projects: [
     {
+      id: 'distil-academy',
+      slug: 'distil-academy',
+      title: 'Distil Academy',
+      shortDescription:
+        'Online training platform for generative AI: short, dense, up-to-date courses to skill up fast.',
+      longDescription:
+        "I built Distil out of frustration: AI courses are either too long or already outdated. Distil cuts through the noise and keeps only what works. 25 modules, 42 lessons of 10-15 min each, lifetime access and regular updates. Condensed pedagogy designed for professionals who want real results without spending months.",
+      technologies: ['Astro', 'Tailwind CSS', 'Vercel', 'PostHog'],
+      imageAlt: 'Distil Academy interface - AI training platform',
+      demoUrl: 'https://www.distil.academy/',
+      featured: true,
+      status: 'active',
+      period: '2026 — Present',
+      metrics: [
+        { label: 'Format', value: '10-15 min lessons' },
+        { label: 'Access', value: 'Lifetime' },
+        { label: 'Updates', value: 'Continuous' },
+      ],
+      story: "Available AI courses always frustrated me: either outdated YouTube videos or €2,000 programs recycling the same content. I thought: what if I built the course I wish I'd taken? Modules under one hour, 10-15 min lessons, only what works in the field. No hype, no hollow theory — just concrete, tested content updated continuously. Distil was born from this conviction: AI moves too fast for static courses.",
+      features: [
+        {
+          title: 'Short, dense courses',
+          description: "Each module is under one hour, each lesson 10-15 min. No filler, just the essentials.",
+        },
+        {
+          title: 'Lifetime access + updates',
+          description: "One purchase, permanent access. Courses are regularly updated to keep pace with AI evolution.",
+        },
+        {
+          title: 'Filtered, tested content',
+          description: "Continuous monitoring and real-world testing. Only what actually works gets taught.",
+        },
+        {
+          title: 'Built for professionals',
+          description: "No technical background needed. Concrete results you can apply immediately in your work.",
+        },
+      ],
+    },
+    {
       id: 'gradly',
       slug: 'gradly',
       title: 'Gradly',
