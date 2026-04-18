@@ -51,6 +51,29 @@ export interface Project {
   features?: ProjectFeature[];
 }
 
+export interface StudioExternalSite {
+  id: string;
+  slug: string;
+  title: string;
+  url: string;
+  shortDescription: string;
+  technologies: string[];
+  period?: string;
+  imageAlt: string;
+  status?: ProjectStatus;
+}
+
+export type StudioEntryRef =
+  | { kind: 'project'; projectSlug: string }
+  | { kind: 'external'; siteSlug: string };
+
+export interface StudioCluster {
+  id: string;
+  title: string;
+  description: string;
+  entries: StudioEntryRef[];
+}
+
 export interface SkillCategory {
   name: string;
   description?: string;
@@ -78,7 +101,7 @@ export interface UITranslations {
   nav: {
     home: string;
     experiences: string;
-    projects: string;
+    studio: string;
     skills: string;
     contact: string;
     menuLabel: string;
@@ -89,11 +112,11 @@ export interface UITranslations {
     downloadCv: string;
   };
   sections: {
-    latestProjects: string;
+    studio: string;
     latestExperiences: string;
     topSkills: string;
     viewAll: string;
-    allProjects: string;
+    allStudio: string;
     allExperiences: string;
     allSkills: string;
     latestArticles: string;
@@ -106,7 +129,7 @@ export interface UITranslations {
     label: string;
     demo: string;
     source: string;
-    backToProjects: string;
+    backToStudio: string;
     technologies: string;
     visual: string;
     metrics: string;
@@ -191,6 +214,13 @@ export interface UITranslations {
     backToBlog: string;
     empty: string;
   };
+  studio: {
+    intro: string;
+    caseStudyBadge: string;
+    liveSiteBadge: string;
+    clusterCountProjects: string;
+    clusterCountSites: string;
+  };
   education: string;
   scrollToTop: string;
   skipToContent: string;
@@ -244,6 +274,8 @@ export interface SiteData {
   social: SocialLink[];
   experiences: Experience[];
   projects: Project[];
+  studioSites: StudioExternalSite[];
+  studioClusters: StudioCluster[];
   skillCategories: SkillCategory[];
   education: Education[];
   testimonials: Testimonial[];
