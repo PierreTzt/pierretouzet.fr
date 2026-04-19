@@ -1,0 +1,107 @@
+---
+import type { Lang } from '../i18n/utils';
+import type { StudioCluster, SiteData } from '../data/types';
+import { resolveStudioEntry } from '../utils/studio';
+import { getData } from '../i18n/utils';
+
+interface Props {
+  cluster: StudioCluster;
+  data: SiteData;
+  lang: Lang;
+  size?: 'lg' | 'sm';
+}
+
+const { cluster, data, lang, size = 'sm' } = Astro.props;
+const ui = getData(lang).ui;
+
+const resolved = cluster.entries
+  .map((r) => resolveStudioEntry(r, data))
+  .filter((r): r is NonNullable<typeof r> => r !== null);
+
+const projectCount = resolved.filter((r) => r.type === 'project').length;
+const siteCount = resolved.filter((r) => r.type === 'external').length;
+
+const countParts: string[] = [];
+if (projectCount > 0) {
+  countParts.push(ui.studio.clusterCountProjects.replace('{n}', String(projectCount)));
+}
+if (siteCount > 0) {
+  countParts.push(ui.studio.clusterCountSites.replace('{n}', String(siteCount)));
+}
+const countLabel = countParts.join(' · ');
+
+const href = `/${lang}/studio/#${cluster.id}`;
+
+const thumbs = resolved.slice(0, 3).map((r) => {
+  const slug = r.data.slug;
+  const imageSlug =
+    slug === 'innovation-pedagogique' || slug === 'pedagogical-innovation'
+      ? 'innovation'
+      : slug;
+  return { alt: r.data.imageAlt, imageSlug };
+});
+
+const tileClass = size === 'lg' ? 'p-8 md:p-10 min-h-[320px]' : 'p-6 min-h-[260px]';
+---
+
+<a
+  href={href}
+  class:list={['tile tile-interactive glow-hover group flex flex-col justify-between', tileClass]}
+>
+  <div>
+    <div class="flex items-center justify-between mb-6">
+      <span class="mono-label">{ui.nav.studio}</span>
+      <span class="font-mono text-caption text-accent-500">
+        {cluster.id.toUpperCase().replace(/-/g, ' ')}
+      </span>
+    </div>
+    <h2
+      class="font-display font-bold text-zinc-900 dark:text-zinc-50 group-hover:text-accent-500 transition-colors duration-200 mb-3"
+      class:list={[size === 'lg' ? 'text-heading' : 'text-xl']}
+    >
+      {cluster.title}
+    </h2>
+    <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-lg mb-4">
+      {cluster.description}
+    </p>
+  </div>
+
+  <div class="flex items-center justify-between mt-6">
+    <div class="flex -space-x-3">
+      {
+        thumbs.map((t) => (
+          <picture class="w-10 h-10 rounded-full overflow-hidden border-2 border-zinc-50 dark:border-zinc-950 bg-zinc-200 dark:bg-zinc-800">
+            <source srcset={`/images/project-${t.imageSlug}.webp`} type="image/webp" />
+            <img
+              src={`/images/project-${t.imageSlug}.png`}
+              alt={t.alt}
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </picture>
+        ))
+      }
+    </div>
+    <div class="flex items-center gap-2">
+      <span
+        class="font-mono text-caption uppercase tracking-wider text-zinc-500 dark:text-zinc-400"
+      >
+        {countLabel}
+      </span>
+      <svg
+        class="w-4 h-4 text-zinc-500 group-hover:text-accent-500 group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-200"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        stroke-width="1.5"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+        />
+      </svg>
+    </div>
+  </div>
+</a>
