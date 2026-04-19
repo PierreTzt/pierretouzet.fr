@@ -23,11 +23,11 @@ describe('getLangFromUrl', () => {
   });
 
   it('returns "fr" for a French subpage', () => {
-    expect(getLangFromUrl(new URL('https://pierretouzet.fr/fr/projets/'))).toBe('fr');
+    expect(getLangFromUrl(new URL('https://pierretouzet.fr/fr/studio/'))).toBe('fr');
   });
 
   it('returns "en" for an English subpage', () => {
-    expect(getLangFromUrl(new URL('https://pierretouzet.fr/en/projects/'))).toBe('en');
+    expect(getLangFromUrl(new URL('https://pierretouzet.fr/en/studio/'))).toBe('en');
   });
 
   it('returns "en" for a deep English path (blog article)', () => {
@@ -94,7 +94,7 @@ describe('getLocalizedPath', () => {
   // ---- FR -> EN page slug mapping ----
   describe('FR -> EN page slug mapping', () => {
     const cases: [string, string][] = [
-      ['/fr/projets/', '/en/projects/'],
+      ['/fr/studio/', '/en/studio/'],
       ['/fr/competences/', '/en/skills/'],
       ['/fr/experiences/', '/en/experiences/'],
       ['/fr/contact/', '/en/contact/'],
@@ -114,7 +114,7 @@ describe('getLocalizedPath', () => {
   // ---- EN -> FR page slug mapping ----
   describe('EN -> FR page slug mapping', () => {
     const cases: [string, string][] = [
-      ['/en/projects/', '/fr/projets/'],
+      ['/en/studio/', '/fr/studio/'],
       ['/en/skills/', '/fr/competences/'],
       ['/en/experiences/', '/fr/experiences/'],
       ['/en/contact/', '/fr/contact/'],
@@ -156,46 +156,46 @@ describe('getLocalizedPath', () => {
   describe('project slug mapping', () => {
     it('maps FR project detail path to EN equivalent (gradly)', () => {
       // gradly -> gradly (same slug in both languages)
-      expect(getLocalizedPath('/fr/projets/gradly/', 'en')).toBe('/en/projects/gradly/');
+      expect(getLocalizedPath('/fr/studio/gradly/', 'en')).toBe('/en/studio/gradly/');
     });
 
     it('maps EN project detail path to FR equivalent (gradly)', () => {
-      expect(getLocalizedPath('/en/projects/gradly/', 'fr')).toBe('/fr/projets/gradly/');
+      expect(getLocalizedPath('/en/studio/gradly/', 'fr')).toBe('/fr/studio/gradly/');
     });
 
     it('maps FR innovation-pedagogique to EN pedagogical-innovation', () => {
-      expect(getLocalizedPath('/fr/projets/innovation-pedagogique/', 'en')).toBe(
-        '/en/projects/pedagogical-innovation/'
+      expect(getLocalizedPath('/fr/studio/innovation-pedagogique/', 'en')).toBe(
+        '/en/studio/pedagogical-innovation/'
       );
     });
 
     it('maps EN pedagogical-innovation to FR innovation-pedagogique', () => {
-      expect(getLocalizedPath('/en/projects/pedagogical-innovation/', 'fr')).toBe(
-        '/fr/projets/innovation-pedagogique/'
+      expect(getLocalizedPath('/en/studio/pedagogical-innovation/', 'fr')).toBe(
+        '/fr/studio/innovation-pedagogique/'
       );
     });
 
     it('maps FR youtube-impots to EN youtube-taxes', () => {
-      expect(getLocalizedPath('/fr/projets/youtube-impots/', 'en')).toBe(
-        '/en/projects/youtube-taxes/'
+      expect(getLocalizedPath('/fr/studio/youtube-impots/', 'en')).toBe(
+        '/en/studio/youtube-taxes/'
       );
     });
 
     it('maps EN youtube-taxes to FR youtube-impots', () => {
-      expect(getLocalizedPath('/en/projects/youtube-taxes/', 'fr')).toBe(
-        '/fr/projets/youtube-impots/'
+      expect(getLocalizedPath('/en/studio/youtube-taxes/', 'fr')).toBe(
+        '/fr/studio/youtube-impots/'
       );
     });
 
     it('maps FR ebook-ia-education to EN ebook-ai-education', () => {
-      expect(getLocalizedPath('/fr/projets/ebook-ia-education/', 'en')).toBe(
-        '/en/projects/ebook-ai-education/'
+      expect(getLocalizedPath('/fr/studio/ebook-ia-education/', 'en')).toBe(
+        '/en/studio/ebook-ai-education/'
       );
     });
 
     it('maps FR accompagnement-entrepreneurial to EN entrepreneurial-mentoring', () => {
-      expect(getLocalizedPath('/fr/projets/accompagnement-entrepreneurial/', 'en')).toBe(
-        '/en/projects/entrepreneurial-mentoring/'
+      expect(getLocalizedPath('/fr/studio/accompagnement-entrepreneurial/', 'en')).toBe(
+        '/en/studio/entrepreneurial-mentoring/'
       );
     });
   });
@@ -227,10 +227,9 @@ describe('getLocalizedPath', () => {
     });
 
     it('returns same lang path when target matches current', () => {
-      // /fr/projets/ with target 'fr' — segment[0] becomes 'fr', then tries reversePageSlugMap on 'projets'
-      // reversePageSlugMap has 'projects' -> 'projets', not 'projets' -> anything
-      // so segment[1] stays 'projets'
-      expect(getLocalizedPath('/fr/projets/', 'fr')).toBe('/fr/projets/');
+      // /fr/studio/ with target 'fr' — segments[0] becomes 'fr' (identity),
+      // 'studio' has no mapping in either direction so segment[1] stays as-is.
+      expect(getLocalizedPath('/fr/studio/', 'fr')).toBe('/fr/studio/');
     });
   });
 });
@@ -256,8 +255,8 @@ describe('getHreflangUrl', () => {
   });
 
   it('maps project slugs in hreflang URLs', () => {
-    expect(getHreflangUrl('/fr/projets/innovation-pedagogique/', 'en', siteUrl)).toBe(
-      'https://www.pierretouzet.fr/en/projects/pedagogical-innovation/'
+    expect(getHreflangUrl('/fr/studio/innovation-pedagogique/', 'en', siteUrl)).toBe(
+      'https://www.pierretouzet.fr/en/studio/pedagogical-innovation/'
     );
   });
 
@@ -281,7 +280,7 @@ describe('buildProjectSlugMap (indirect)', () => {
   it('creates correct pairings for all projects by verifying round-trips', () => {
     // For each FR project, go FR->EN->FR and expect the original slug
     for (const frProject of frData.projects) {
-      const frPath = `/fr/projets/${frProject.slug}/`;
+      const frPath = `/fr/studio/${frProject.slug}/`;
       const enPath = getLocalizedPath(frPath, 'en');
       const roundTrip = getLocalizedPath(enPath, 'fr');
       expect(roundTrip).toBe(frPath);
@@ -291,7 +290,7 @@ describe('buildProjectSlugMap (indirect)', () => {
   it('creates correct pairings for all EN projects by verifying round-trips', () => {
     // For each EN project, go EN->FR->EN and expect the original slug
     for (const enProject of enData.projects) {
-      const enPath = `/en/projects/${enProject.slug}/`;
+      const enPath = `/en/studio/${enProject.slug}/`;
       const frPath = getLocalizedPath(enPath, 'fr');
       const roundTrip = getLocalizedPath(frPath, 'en');
       expect(roundTrip).toBe(enPath);
@@ -303,9 +302,9 @@ describe('buildProjectSlugMap (indirect)', () => {
     for (let i = 0; i < len; i++) {
       const frSlug = frData.projects[i].slug;
       const enSlug = enData.projects[i].slug;
-      const frPath = `/fr/projets/${frSlug}/`;
+      const frPath = `/fr/studio/${frSlug}/`;
       const result = getLocalizedPath(frPath, 'en');
-      expect(result).toBe(`/en/projects/${enSlug}/`);
+      expect(result).toBe(`/en/studio/${enSlug}/`);
     }
   });
 

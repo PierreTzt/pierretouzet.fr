@@ -16,7 +16,6 @@ export function getData(lang: Lang): SiteData {
 
 // Page slug mapping: FR -> EN
 const pageSlugMap: Record<string, string> = {
-  projets: 'projects',
   competences: 'skills',
   experiences: 'experiences',
   contact: 'contact',
