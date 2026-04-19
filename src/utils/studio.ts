@@ -1,9 +1,4 @@
-import type {
-  SiteData,
-  StudioEntryRef,
-  Project,
-  StudioExternalSite,
-} from '../data/types';
+import type { SiteData, StudioEntryRef, Project, StudioExternalSite } from '../data/types';
 
 export type ResolvedStudioEntry =
   | { type: 'project'; data: Project }
@@ -11,7 +6,7 @@ export type ResolvedStudioEntry =
 
 export function resolveStudioEntry(
   ref: StudioEntryRef,
-  data: SiteData
+  data: SiteData,
 ): ResolvedStudioEntry | null {
   if (ref.kind === 'project') {
     const project = data.projects.find((p) => p.slug === ref.projectSlug);

@@ -35,9 +35,7 @@ const href = `/${lang}/studio/#${cluster.id}`;
 const thumbs = resolved.slice(0, 3).map((r) => {
   const slug = r.data.slug;
   const imageSlug =
-    slug === 'innovation-pedagogique' || slug === 'pedagogical-innovation'
-      ? 'innovation'
-      : slug;
+    slug === 'innovation-pedagogique' || slug === 'pedagogical-innovation' ? 'innovation' : slug;
   return { alt: r.data.imageAlt, imageSlug };
 });
 
@@ -99,8 +97,7 @@ const tileClass = size === 'lg' ? 'p-8 md:p-10 min-h-[320px]' : 'p-6 min-h-[260p
         <path
           stroke-linecap="round"
           stroke-linejoin="round"
-          d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
-        />
+          d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"></path>
       </svg>
     </div>
   </div>
