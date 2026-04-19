@@ -3,9 +3,7 @@ import type { Lang } from '../i18n/utils';
 import type { Project, StudioExternalSite } from '../data/types';
 import { getData } from '../i18n/utils';
 
-type Entry =
-  | { type: 'project'; data: Project }
-  | { type: 'external'; data: StudioExternalSite };
+type Entry = { type: 'project'; data: Project } | { type: 'external'; data: StudioExternalSite };
 
 interface Props {
   entry: Entry;
@@ -113,11 +111,7 @@ const statusDisplay = status ? statusConfig[status] : null;
     >
       {title}
     </h3>
-    {
-      period && (
-        <p class="font-mono text-caption text-zinc-500 dark:text-zinc-400 mb-3">{period}</p>
-      )
-    }
+    {period && <p class="font-mono text-caption text-zinc-500 dark:text-zinc-400 mb-3">{period}</p>}
     <p class="text-sm text-zinc-500 dark:text-zinc-400 mb-4 leading-relaxed line-clamp-2">
       {shortDescription}
     </p>
@@ -125,11 +119,13 @@ const statusDisplay = status ? statusConfig[status] : null;
     <div class="flex items-center justify-between">
       <div class="flex flex-wrap gap-2">
         {
-          technologies.slice(0, 3).map((tech) => (
-            <span class="font-mono text-caption uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
-              {tech}
-            </span>
-          ))
+          technologies
+            .slice(0, 3)
+            .map((tech) => (
+              <span class="font-mono text-caption uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                {tech}
+              </span>
+            ))
         }
       </div>
       <svg
