@@ -4,7 +4,11 @@
       "source": "/",
       "destination": "/fr/",
       "permanent": false
-    }
+    },
+    { "source": "/fr/projets", "destination": "/fr/studio", "permanent": true },
+    { "source": "/fr/projets/:slug", "destination": "/fr/studio/:slug", "permanent": true },
+    { "source": "/en/projects", "destination": "/en/studio", "permanent": true },
+    { "source": "/en/projects/:slug", "destination": "/en/studio/:slug", "permanent": true }
   ],
   "headers": [
     {
