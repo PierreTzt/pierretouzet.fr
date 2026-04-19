@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import StudioClusterSection from '../components/StudioClusterSection.astro';
+import { getData } from '../i18n/utils';
+
+interface Props {
+  lang: 'fr' | 'en';
+}
+
+const { lang } = Astro.props;
+const data = getData(lang);
+
+const studioPath = `/${lang}/studio/`;
+const homePath = `/${lang}/`;
+
+let offset = 0;
+const clustersWithOffset = data.studioClusters.map((c) => {
+  const current = offset;
+  offset += c.entries.length;
+  return { cluster: c, indexOffset: current };
+});
+---
+
+<BaseLayout
+  title={`${data.ui.nav.studio} — ${data.personal.name}`}
+  description={data.ui.studio.intro}
+  lang={lang}
+  breadcrumbs={[
+    { name: data.ui.nav.home, url: homePath },
+    { name: data.ui.nav.studio, url: studioPath },
+  ]}
+>
+  <section class="py-20 px-6">
+    <div class="max-w-7xl mx-auto">
+      <SectionHeader title={data.ui.nav.studio} number="01" as="h1" />
+      <p class="text-base text-zinc-600 dark:text-zinc-400 max-w-2xl mb-12">
+        {data.ui.studio.intro}
+      </p>
+
+      {
+        clustersWithOffset.map(({ cluster, indexOffset }) => (
+          <StudioClusterSection
+            cluster={cluster}
+            data={data}
+            lang={lang}
+            indexOffset={indexOffset}
+          />
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
