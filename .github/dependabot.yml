@@ -11,12 +11,16 @@ updates:
     open-pull-requests-limit: 5
     labels:
       - dependencies
-    # Group minor/patch updates together to reduce PR noise
+    # Group minor/patch updates together to reduce PR noise.
+    # Majors get their own individual PRs so one risky bump doesn't block safe ones.
     groups:
       astro-ecosystem:
         patterns:
           - "@astrojs/*"
           - "astro"
+        update-types:
+          - minor
+          - patch
       dev-tooling:
         patterns:
           - "eslint*"
@@ -24,6 +28,9 @@ updates:
           - "husky"
           - "lint-staged"
           - "typescript*"
+        update-types:
+          - minor
+          - patch
 
   # GitHub Actions
   - package-ecosystem: github-actions
