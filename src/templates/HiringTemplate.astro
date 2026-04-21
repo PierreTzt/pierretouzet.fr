@@ -31,7 +31,7 @@ const emailSubject = lang === 'fr' ? 'Opportunité de recrutement' : 'Hiring opp
       <!-- Why me -->
       <div class="scroll-reveal mb-12">
         <span class="mono-label mb-4 block">{data.ui.hiring.whyMe}</span>
-        <div class="grid md:grid-cols-3 gap-[1px] bg-zinc-200 dark:bg-zinc-800">
+        <div class="grid md:grid-cols-3 gap-px bg-zinc-200 dark:bg-zinc-800">
           {data.keyMetrics.map((m) => (
             <div class="tile p-6 text-center">
               <p class="font-display text-2xl font-bold text-accent-500 mb-1">{m.value}</p>

@@ -23,7 +23,7 @@ const i18n = lang === 'fr'
       ip: 'Propriété intellectuelle',
       ipText: `L'ensemble du contenu de ce site (textes, images, graphismes, logo, icônes) est la propriété exclusive de ${data.personal.name}, sauf mention contraire. Toute reproduction, distribution, modification ou utilisation de ces contenus sans autorisation préalable est strictement interdite.`,
       gdpr: 'Données personnelles & RGPD',
-      gdprText1: "Ce site ne collecte aucune donnée personnelle. Aucun cookie n'est déposé. Les statistiques de fréquentation sont anonymes et réalisées via Vercel Analytics, un outil conforme au RGPD qui ne nécessite pas de consentement.",
+      gdprText1: "Ce site ne collecte aucune donnée personnelle. Aucun cookie n'est déposé. Les statistiques de fréquentation et les mesures de performance (Core Web Vitals) sont anonymes et réalisées via Vercel Analytics et Vercel Speed Insights, des outils conformes au RGPD qui ne nécessitent pas de consentement.",
       gdprText2: `Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour exercer ces droits, contactez : `,
       liability: 'Responsabilité',
       liabilityText: "L'éditeur ne saurait être tenu responsable des erreurs, d'une absence de disponibilité des informations ou de la présence de virus sur ce site. Les liens hypertextes vers d'autres sites ne constituent pas une approbation de leur contenu.",
@@ -43,7 +43,7 @@ const i18n = lang === 'fr'
       ip: 'Intellectual property',
       ipText: `All content on this site (text, images, graphics, logo, icons) is the exclusive property of ${data.personal.name}, unless otherwise stated. Any reproduction, distribution, modification or use of this content without prior authorization is strictly prohibited.`,
       gdpr: 'Personal data & GDPR',
-      gdprText1: 'This site does not collect any personal data. No cookies are used. Traffic analytics are anonymous and provided by Vercel Analytics, a GDPR-compliant tool that does not require consent.',
+      gdprText1: 'This site does not collect any personal data. No cookies are used. Traffic analytics and performance measurements (Core Web Vitals) are anonymous and provided by Vercel Analytics and Vercel Speed Insights, GDPR-compliant tools that do not require consent.',
       gdprText2: 'In accordance with the General Data Protection Regulation (GDPR), you have the right to access, rectify and delete your data. To exercise these rights, contact: ',
       liability: 'Liability',
       liabilityText: 'The publisher cannot be held responsible for errors, unavailability of information or the presence of viruses on this site. Hyperlinks to other sites do not constitute an endorsement of their content.',
@@ -67,7 +67,7 @@ const i18n = lang === 'fr'
     <div class="max-w-3xl mx-auto">
       <span class="mono-label mb-4 block">Legal</span>
       <h1 class="font-display text-heading text-zinc-900 dark:text-zinc-50 font-bold mb-4">{i18n.heading}</h1>
-      <div class="h-[1px] bg-gradient-to-r from-accent-500 via-electric-500 to-transparent mt-6 mb-12"></div>
+      <div class="h-px bg-linear-to-r from-accent-500 via-electric-500 to-transparent mt-6 mb-12"></div>
 
       <div class="space-y-10 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
         <div>
