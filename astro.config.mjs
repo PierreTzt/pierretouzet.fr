@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';
 import vercel from '@astrojs/vercel';
 
@@ -16,8 +16,10 @@ export default defineConfig({
       './node_modules/@fontsource/sora/files/sora-latin-700-normal.woff',
     ],
   }),
+  vite: {
+    plugins: [tailwindcss()],
+  },
   integrations: [
-    tailwind(),
     // sentry({ sourcemaps: { disable: true }, telemetry: false }),
     sitemap({
       filter: (page) => !page.includes('/admin/'),

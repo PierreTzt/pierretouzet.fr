@@ -193,7 +193,9 @@ const schemaOrg = isHomePage ? {
     </script>
     <script>
       import { inject } from '@vercel/analytics';
+      import { injectSpeedInsights } from '@vercel/speed-insights';
       inject();
+      injectSpeedInsights();
     </script>
     <script is:inline>
       (function () {
@@ -215,7 +217,7 @@ const schemaOrg = isHomePage ? {
 
     <a
       href="#main-content"
-      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-accent-500 focus:text-white focus:rounded"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-100 focus:px-4 focus:py-2 focus:bg-accent-500 focus:text-white focus:rounded-sm"
     >
       {ui.skipToContent}
     </a>
@@ -317,7 +319,7 @@ const schemaOrg = isHomePage ? {
             : "You found the secret. Curious one, aren't you?";
           const toast = document.createElement('div');
           toast.setAttribute('role', 'status');
-          toast.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 z-[100] px-6 py-3 bg-accent-500 text-white text-sm font-medium shadow-lg';
+          toast.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 z-100 px-6 py-3 bg-accent-500 text-white text-sm font-medium shadow-lg';
           toast.textContent = msg;
           document.body.appendChild(toast);
           setTimeout(() => { toast.style.opacity = '0'; toast.style.transition = 'opacity 0.3s'; setTimeout(() => toast.remove(), 300); }, 4000);

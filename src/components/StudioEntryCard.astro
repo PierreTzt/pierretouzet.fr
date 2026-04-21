@@ -66,7 +66,7 @@ const statusDisplay = status ? statusConfig[status] : null;
   class="tile tile-interactive glow-hover group block overflow-hidden focus:outline-2 focus:outline-offset-2 focus:outline-accent-500"
   style={`transition-delay: ${index * 80}ms`}
 >
-  <div class="aspect-[4/3] relative overflow-hidden bg-zinc-100 dark:bg-zinc-800/50">
+  <div class="aspect-4/3 relative overflow-hidden bg-zinc-100 dark:bg-zinc-800/50">
     <picture>
       <source srcset={`/images/project-${imageSlug}.webp`} type="image/webp" />
       <img
@@ -87,7 +87,7 @@ const statusDisplay = status ? statusConfig[status] : null;
       </span>
       <span
         class:list={[
-          'font-mono text-caption uppercase tracking-wider px-2 py-0.5 rounded-sm',
+          'font-mono text-caption uppercase tracking-wider px-2 py-0.5 rounded-xs',
           badgeClass,
         ]}
       >
@@ -97,7 +97,7 @@ const statusDisplay = status ? statusConfig[status] : null;
         statusDisplay && (
           <span
             class:list={[
-              'font-mono text-caption uppercase tracking-wider px-2 py-0.5 rounded-sm',
+              'font-mono text-caption uppercase tracking-wider px-2 py-0.5 rounded-xs',
               statusDisplay.class,
             ]}
           >

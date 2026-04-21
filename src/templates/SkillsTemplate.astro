@@ -31,7 +31,7 @@ const skillsSlug = lang === 'fr' ? 'competences' : 'skills';
     <div class="max-w-5xl mx-auto">
       <SectionHeader title={data.ui.services.title} number="01" as="h1" />
 
-      <div class="scroll-reveal grid md:grid-cols-2 gap-[1px] bg-zinc-200 dark:bg-zinc-800 mb-16">
+      <div class="scroll-reveal grid md:grid-cols-2 gap-px bg-zinc-200 dark:bg-zinc-800 mb-16">
         {data.services.map((service, i) => (
           <div class="tile p-8">
             <span class="font-mono text-caption text-accent-500 mb-3 block">{String(i + 1).padStart(2, '0')}</span>
@@ -50,7 +50,7 @@ const skillsSlug = lang === 'fr' ? 'competences' : 'skills';
 
       <SectionHeader title={data.ui.sections.allSkills} number="02" />
 
-      <div class="scroll-reveal grid md:grid-cols-2 gap-[1px] bg-zinc-200 dark:bg-zinc-800">
+      <div class="scroll-reveal grid md:grid-cols-2 gap-px bg-zinc-200 dark:bg-zinc-800">
         {data.skillCategories.map((category, catIdx) => (
           <div class="tile p-8">
             <div class="flex items-start gap-3 mb-2">

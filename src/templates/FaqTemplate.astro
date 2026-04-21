@@ -140,7 +140,7 @@ const faqSchema = {
       <SectionHeader title={pageTitle} subtitle={pageSubtitle} number="01" as="h1" />
 
       <!-- FAQ items -->
-      <div class="scroll-reveal space-y-[1px] bg-zinc-200 dark:bg-zinc-800">
+      <div class="scroll-reveal space-y-px bg-zinc-200 dark:bg-zinc-800">
         {faqs.map((faq, i) => (
           <details class="tile group" id={`faq-${i + 1}`}>
             <summary class="p-6 cursor-pointer select-none flex items-start gap-4 list-none [&::-webkit-details-marker]:hidden">
@@ -157,7 +157,7 @@ const faqSchema = {
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
               </svg>
             </summary>
-            <div class="px-6 pb-6 pl-[3.25rem]">
+            <div class="px-6 pb-6 pl-13">
               <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">{faq.answer}</p>
             </div>
           </details>
