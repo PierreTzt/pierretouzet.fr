@@ -24,11 +24,20 @@ import { join } from 'node:path';
 function loadFont(name: string): Buffer {
   // Try node_modules path (works in build)
   const paths = [
-    join(process.cwd(), 'node_modules', '@fontsource', 'inter', 'files', `inter-latin-${name}.woff`),
+    join(
+      process.cwd(),
+      'node_modules',
+      '@fontsource',
+      'inter',
+      'files',
+      `inter-latin-${name}.woff`,
+    ),
     join(process.cwd(), 'node_modules', '@fontsource', 'sora', 'files', `sora-latin-${name}.woff`),
   ];
   for (const p of paths) {
-    try { return readFileSync(p); } catch {}
+    try {
+      return readFileSync(p);
+    } catch {}
   }
   throw new Error(`Font not found: ${name}`);
 }
@@ -195,7 +204,7 @@ export async function generateOgImage(options: {
         { name: 'Inter', data: interRegular, weight: 400, style: 'normal' },
         { name: 'Inter', data: interBold, weight: 700, style: 'normal' },
       ],
-    }
+    },
   );
 
   return await sharp(Buffer.from(svg)).png().toBuffer();

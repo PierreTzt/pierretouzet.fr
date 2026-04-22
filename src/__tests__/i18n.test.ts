@@ -165,37 +165,37 @@ describe('getLocalizedPath', () => {
 
     it('maps FR innovation-pedagogique to EN pedagogical-innovation', () => {
       expect(getLocalizedPath('/fr/studio/innovation-pedagogique/', 'en')).toBe(
-        '/en/studio/pedagogical-innovation/'
+        '/en/studio/pedagogical-innovation/',
       );
     });
 
     it('maps EN pedagogical-innovation to FR innovation-pedagogique', () => {
       expect(getLocalizedPath('/en/studio/pedagogical-innovation/', 'fr')).toBe(
-        '/fr/studio/innovation-pedagogique/'
+        '/fr/studio/innovation-pedagogique/',
       );
     });
 
     it('maps FR youtube-impots to EN youtube-taxes', () => {
       expect(getLocalizedPath('/fr/studio/youtube-impots/', 'en')).toBe(
-        '/en/studio/youtube-taxes/'
+        '/en/studio/youtube-taxes/',
       );
     });
 
     it('maps EN youtube-taxes to FR youtube-impots', () => {
       expect(getLocalizedPath('/en/studio/youtube-taxes/', 'fr')).toBe(
-        '/fr/studio/youtube-impots/'
+        '/fr/studio/youtube-impots/',
       );
     });
 
     it('maps FR ebook-ia-education to EN ebook-ai-education', () => {
       expect(getLocalizedPath('/fr/studio/ebook-ia-education/', 'en')).toBe(
-        '/en/studio/ebook-ai-education/'
+        '/en/studio/ebook-ai-education/',
       );
     });
 
     it('maps FR accompagnement-entrepreneurial to EN entrepreneurial-mentoring', () => {
       expect(getLocalizedPath('/fr/studio/accompagnement-entrepreneurial/', 'en')).toBe(
-        '/en/studio/entrepreneurial-mentoring/'
+        '/en/studio/entrepreneurial-mentoring/',
       );
     });
   });
@@ -250,25 +250,25 @@ describe('getHreflangUrl', () => {
 
   it('maps page slugs in hreflang URLs', () => {
     expect(getHreflangUrl('/fr/competences/', 'en', siteUrl)).toBe(
-      'https://www.pierretouzet.fr/en/skills/'
+      'https://www.pierretouzet.fr/en/skills/',
     );
   });
 
   it('maps project slugs in hreflang URLs', () => {
     expect(getHreflangUrl('/fr/studio/innovation-pedagogique/', 'en', siteUrl)).toBe(
-      'https://www.pierretouzet.fr/en/studio/pedagogical-innovation/'
+      'https://www.pierretouzet.fr/en/studio/pedagogical-innovation/',
     );
   });
 
   it('works with a site URL that has no trailing slash', () => {
     expect(getHreflangUrl('/fr/', 'en', 'https://www.pierretouzet.fr')).toBe(
-      'https://www.pierretouzet.fr/en/'
+      'https://www.pierretouzet.fr/en/',
     );
   });
 
   it('works with a site URL that has a trailing slash', () => {
     expect(getHreflangUrl('/fr/', 'en', 'https://www.pierretouzet.fr/')).toBe(
-      'https://www.pierretouzet.fr/en/'
+      'https://www.pierretouzet.fr/en/',
     );
   });
 });

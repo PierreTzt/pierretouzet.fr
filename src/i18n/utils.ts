@@ -46,7 +46,7 @@ const pageSlugMap: Record<string, string> = {
 
 // Reverse: EN -> FR
 const reversePageSlugMap: Record<string, string> = Object.fromEntries(
-  Object.entries(pageSlugMap).map(([k, v]) => [v, k])
+  Object.entries(pageSlugMap).map(([k, v]) => [v, k]),
 );
 
 // Project slug mapping between FR and EN (matched by canonical id)
@@ -54,7 +54,7 @@ function buildProjectSlugMap(): { frToEn: Record<string, string>; enToFr: Record
   const frToEn: Record<string, string> = {};
   const enToFr: Record<string, string> = {};
   for (const frProject of frData.projects) {
-    const enProject = enData.projects.find(p => p.id === frProject.id);
+    const enProject = enData.projects.find((p) => p.id === frProject.id);
     if (enProject) {
       frToEn[frProject.slug] = enProject.slug;
       enToFr[enProject.slug] = frProject.slug;

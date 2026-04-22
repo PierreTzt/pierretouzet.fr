@@ -42,14 +42,18 @@ export const onRequest = defineMiddleware(async (context, next) => {
   // Rate limit login endpoint
   if (context.url.pathname === '/api/login' && context.request.method === 'POST') {
     cleanupAttempts();
-    const ip = context.request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()
-      || context.request.headers.get('x-real-ip')
-      || 'unknown';
+    const ip =
+      context.request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ||
+      context.request.headers.get('x-real-ip') ||
+      'unknown';
     if (isRateLimited(ip)) {
-      return new Response(JSON.stringify({ error: 'Trop de tentatives. Réessayez dans une minute.' }), {
-        status: 429,
-        headers: { 'Content-Type': 'application/json' },
-      });
+      return new Response(
+        JSON.stringify({ error: 'Trop de tentatives. Réessayez dans une minute.' }),
+        {
+          status: 429,
+          headers: { 'Content-Type': 'application/json' },
+        },
+      );
     }
   }
 

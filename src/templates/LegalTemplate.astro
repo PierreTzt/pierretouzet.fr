@@ -21,63 +21,72 @@ const LEGAL_STATUS_EN = 'Sole proprietor (micro-enterprise regime)';
 const APE_LABEL_FR = 'Programmation informatique';
 const APE_LABEL_EN = 'Computer programming';
 
-const i18n = lang === 'fr'
-  ? {
-      pageTitle: 'Mentions légales',
-      pageDescription: 'Mentions légales du site pierretouzet.fr',
-      heading: 'Mentions légales',
-      publisher: 'Éditeur du site',
-      statusLabel: 'Statut : ',
-      sirenLabel: 'SIREN : ',
-      siretLabel: 'SIRET : ',
-      apeLabel: 'Code APE : ',
-      creationLabel: "Date d'immatriculation : ",
-      directorLabel: 'Directeur de la publication : ',
-      emailLabel: 'Email : ',
-      hosting: 'Hébergement',
-      hostingCountry: 'États-Unis',
-      ip: 'Propriété intellectuelle',
-      ipText: `L'ensemble du contenu de ce site (textes, images, graphismes, logo, icônes) est la propriété exclusive de ${data.personal.name}, sauf mention contraire. Toute reproduction, distribution, modification ou utilisation de ces contenus sans autorisation préalable est strictement interdite.`,
-      gdpr: 'Données personnelles & RGPD',
-      gdprSummary: 'Ce site collecte un minimum de données personnelles : mesures d\'audience agrégées (Vercel Analytics, Vercel Speed Insights — sans cookie, sans identifiant persistant) et, le cas échéant, les informations que vous saisissez volontairement dans le formulaire de contact. Un cookie technique (`admin-auth`) existe uniquement pour l\'espace d\'administration éditeur et ne concerne pas les visiteurs.',
-      gdprDetails: 'Le détail des traitements, des bases légales, des durées de conservation, des sous-traitants (Vercel, GitHub, Anthropic) et des transferts hors UE est disponible dans la ',
-      gdprDetailsLink: 'politique de confidentialité',
-      gdprRights: 'Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, vous disposez d\'un droit d\'accès, de rectification, d\'effacement, de limitation et d\'opposition sur vos données. Vous disposez également d\'un droit d\'introduire une réclamation auprès de la CNIL. Pour exercer ces droits, contactez : ',
-      liability: 'Responsabilité',
-      liabilityText: "L'éditeur ne saurait être tenu responsable des erreurs, d'une absence de disponibilité des informations ou de la présence de virus sur ce site. Les liens hypertextes vers d'autres sites ne constituent pas une approbation de leur contenu.",
-      credits: 'Crédits',
-      creditsPrefix: 'Site développé avec ',
-      creditsMiddle: ' et ',
-      creditsSuffix: '. Hébergé sur ',
-    }
-  : {
-      pageTitle: 'Legal notice',
-      pageDescription: 'Legal notice for pierretouzet.fr',
-      heading: 'Legal notice',
-      publisher: 'Site publisher',
-      statusLabel: 'Status: ',
-      sirenLabel: 'SIREN: ',
-      siretLabel: 'SIRET: ',
-      apeLabel: 'APE code: ',
-      creationLabel: 'Registration date: ',
-      directorLabel: 'Publication director: ',
-      emailLabel: 'Email: ',
-      hosting: 'Hosting',
-      hostingCountry: 'United States',
-      ip: 'Intellectual property',
-      ipText: `All content on this site (text, images, graphics, logo, icons) is the exclusive property of ${data.personal.name}, unless otherwise stated. Any reproduction, distribution, modification or use of this content without prior authorization is strictly prohibited.`,
-      gdpr: 'Personal data & GDPR',
-      gdprSummary: 'This site collects minimal personal data: aggregated audience metrics (Vercel Analytics, Vercel Speed Insights — no cookie, no persistent identifier) and, where applicable, the information you voluntarily submit through the contact form. A technical cookie (`admin-auth`) exists only for the editor admin area and does not apply to visitors.',
-      gdprDetails: 'Full details about processing activities, legal bases, retention periods, subprocessors (Vercel, GitHub, Anthropic), and transfers outside the EU are available in the ',
-      gdprDetailsLink: 'privacy policy',
-      gdprRights: 'Under the General Data Protection Regulation (GDPR) and the French Data Protection Act, you have the right to access, rectify, erase, restrict and object to the processing of your personal data. You also have the right to lodge a complaint with the CNIL (French data protection authority). To exercise these rights, contact: ',
-      liability: 'Liability',
-      liabilityText: 'The publisher cannot be held responsible for errors, unavailability of information or the presence of viruses on this site. Hyperlinks to other sites do not constitute an endorsement of their content.',
-      credits: 'Credits',
-      creditsPrefix: 'Built with ',
-      creditsMiddle: ' and ',
-      creditsSuffix: '. Hosted on ',
-    };
+const i18n =
+  lang === 'fr'
+    ? {
+        pageTitle: 'Mentions légales',
+        pageDescription: 'Mentions légales du site pierretouzet.fr',
+        heading: 'Mentions légales',
+        publisher: 'Éditeur du site',
+        statusLabel: 'Statut : ',
+        sirenLabel: 'SIREN : ',
+        siretLabel: 'SIRET : ',
+        apeLabel: 'Code APE : ',
+        creationLabel: "Date d'immatriculation : ",
+        directorLabel: 'Directeur de la publication : ',
+        emailLabel: 'Email : ',
+        hosting: 'Hébergement',
+        hostingCountry: 'États-Unis',
+        ip: 'Propriété intellectuelle',
+        ipText: `L'ensemble du contenu de ce site (textes, images, graphismes, logo, icônes) est la propriété exclusive de ${data.personal.name}, sauf mention contraire. Toute reproduction, distribution, modification ou utilisation de ces contenus sans autorisation préalable est strictement interdite.`,
+        gdpr: 'Données personnelles & RGPD',
+        gdprSummary:
+          "Ce site collecte un minimum de données personnelles : mesures d'audience agrégées (Vercel Analytics, Vercel Speed Insights — sans cookie, sans identifiant persistant) et, le cas échéant, les informations que vous saisissez volontairement dans le formulaire de contact. Un cookie technique (`admin-auth`) existe uniquement pour l'espace d'administration éditeur et ne concerne pas les visiteurs.",
+        gdprDetails:
+          'Le détail des traitements, des bases légales, des durées de conservation, des sous-traitants (Vercel, GitHub, Anthropic) et des transferts hors UE est disponible dans la ',
+        gdprDetailsLink: 'politique de confidentialité',
+        gdprRights:
+          "Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation et d'opposition sur vos données. Vous disposez également d'un droit d'introduire une réclamation auprès de la CNIL. Pour exercer ces droits, contactez : ",
+        liability: 'Responsabilité',
+        liabilityText:
+          "L'éditeur ne saurait être tenu responsable des erreurs, d'une absence de disponibilité des informations ou de la présence de virus sur ce site. Les liens hypertextes vers d'autres sites ne constituent pas une approbation de leur contenu.",
+        credits: 'Crédits',
+        creditsPrefix: 'Site développé avec ',
+        creditsMiddle: ' et ',
+        creditsSuffix: '. Hébergé sur ',
+      }
+    : {
+        pageTitle: 'Legal notice',
+        pageDescription: 'Legal notice for pierretouzet.fr',
+        heading: 'Legal notice',
+        publisher: 'Site publisher',
+        statusLabel: 'Status: ',
+        sirenLabel: 'SIREN: ',
+        siretLabel: 'SIRET: ',
+        apeLabel: 'APE code: ',
+        creationLabel: 'Registration date: ',
+        directorLabel: 'Publication director: ',
+        emailLabel: 'Email: ',
+        hosting: 'Hosting',
+        hostingCountry: 'United States',
+        ip: 'Intellectual property',
+        ipText: `All content on this site (text, images, graphics, logo, icons) is the exclusive property of ${data.personal.name}, unless otherwise stated. Any reproduction, distribution, modification or use of this content without prior authorization is strictly prohibited.`,
+        gdpr: 'Personal data & GDPR',
+        gdprSummary:
+          'This site collects minimal personal data: aggregated audience metrics (Vercel Analytics, Vercel Speed Insights — no cookie, no persistent identifier) and, where applicable, the information you voluntarily submit through the contact form. A technical cookie (`admin-auth`) exists only for the editor admin area and does not apply to visitors.',
+        gdprDetails:
+          'Full details about processing activities, legal bases, retention periods, subprocessors (Vercel, GitHub, Anthropic), and transfers outside the EU are available in the ',
+        gdprDetailsLink: 'privacy policy',
+        gdprRights:
+          'Under the General Data Protection Regulation (GDPR) and the French Data Protection Act, you have the right to access, rectify, erase, restrict and object to the processing of your personal data. You also have the right to lodge a complaint with the CNIL (French data protection authority). To exercise these rights, contact: ',
+        liability: 'Liability',
+        liabilityText:
+          'The publisher cannot be held responsible for errors, unavailability of information or the presence of viruses on this site. Hyperlinks to other sites do not constitute an endorsement of their content.',
+        credits: 'Credits',
+        creditsPrefix: 'Built with ',
+        creditsMiddle: ' and ',
+        creditsSuffix: '. Hosted on ',
+      };
 ---
 
 <BaseLayout
@@ -92,12 +101,17 @@ const i18n = lang === 'fr'
   <section class="py-20 px-6">
     <div class="max-w-3xl mx-auto">
       <span class="mono-label mb-4 block">Legal</span>
-      <h1 class="font-display text-heading text-zinc-900 dark:text-zinc-50 font-bold mb-4">{i18n.heading}</h1>
-      <div class="h-px bg-linear-to-r from-accent-500 via-electric-500 to-transparent mt-6 mb-12"></div>
+      <h1 class="font-display text-heading text-zinc-900 dark:text-zinc-50 font-bold mb-4">
+        {i18n.heading}
+      </h1>
+      <div class="h-px bg-linear-to-r from-accent-500 via-electric-500 to-transparent mt-6 mb-12">
+      </div>
 
       <div class="space-y-10 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
         <div>
-          <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">{i18n.publisher}</h2>
+          <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">
+            {i18n.publisher}
+          </h2>
           <p>
             {data.personal.name}<br />
             {data.personal.title}<br />
@@ -108,16 +122,26 @@ const i18n = lang === 'fr'
             {i18n.apeLabel}{APE} — {lang === 'fr' ? APE_LABEL_FR : APE_LABEL_EN}<br />
             {i18n.creationLabel}{CREATION_DATE}<br />
             {i18n.directorLabel}{data.personal.name}<br />
-            {i18n.emailLabel}<a href={`mailto:${data.personal.email}`} class="text-accent-500 hover:underline">{data.personal.email}</a>
+            {i18n.emailLabel}<a
+              href={`mailto:${data.personal.email}`}
+              class="text-accent-500 hover:underline">{data.personal.email}</a
+            >
           </p>
         </div>
 
         <div>
-          <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">{i18n.hosting}</h2>
+          <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">
+            {i18n.hosting}
+          </h2>
           <p>
             Vercel Inc.<br />
             440 N Baxter St, Coppell, TX 75019, {i18n.hostingCountry}<br />
-            <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" class="text-accent-500 hover:underline">vercel.com</a>
+            <a
+              href="https://vercel.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-accent-500 hover:underline">vercel.com</a
+            >
           </p>
         </div>
 
@@ -130,22 +154,47 @@ const i18n = lang === 'fr'
           <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">{i18n.gdpr}</h2>
           <p>{i18n.gdprSummary}</p>
           <p class="mt-3">
-            {i18n.gdprDetails}<a href={`/${lang}/${privacySlug}/`} class="text-accent-500 hover:underline">{i18n.gdprDetailsLink}</a>.
+            {i18n.gdprDetails}<a
+              href={`/${lang}/${privacySlug}/`}
+              class="text-accent-500 hover:underline">{i18n.gdprDetailsLink}</a
+            >.
           </p>
           <p class="mt-3">
-            {i18n.gdprRights}<a href={`mailto:${data.personal.email}`} class="text-accent-500 hover:underline">{data.personal.email}</a>.
+            {i18n.gdprRights}<a
+              href={`mailto:${data.personal.email}`}
+              class="text-accent-500 hover:underline">{data.personal.email}</a
+            >.
           </p>
         </div>
 
         <div>
-          <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">{i18n.liability}</h2>
+          <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">
+            {i18n.liability}
+          </h2>
           <p>{i18n.liabilityText}</p>
         </div>
 
         <div>
-          <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">{i18n.credits}</h2>
+          <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">
+            {i18n.credits}
+          </h2>
           <p>
-            {i18n.creditsPrefix}<a href="https://astro.build" target="_blank" rel="noopener noreferrer" class="text-accent-500 hover:underline">Astro</a>{i18n.creditsMiddle}<a href="https://tailwindcss.com" target="_blank" rel="noopener noreferrer" class="text-accent-500 hover:underline">Tailwind CSS</a>{i18n.creditsSuffix}<a href="https://vercel.com" target="_blank" rel="noopener noreferrer" class="text-accent-500 hover:underline">Vercel</a>.
+            {i18n.creditsPrefix}<a
+              href="https://astro.build"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-accent-500 hover:underline">Astro</a
+            >{i18n.creditsMiddle}<a
+              href="https://tailwindcss.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-accent-500 hover:underline">Tailwind CSS</a
+            >{i18n.creditsSuffix}<a
+              href="https://vercel.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-accent-500 hover:underline">Vercel</a
+            >.
           </p>
         </div>
       </div>

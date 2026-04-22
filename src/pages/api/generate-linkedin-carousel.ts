@@ -27,7 +27,10 @@ export const POST: APIRoute = async ({ request, cookies }) => {
   try {
     body = await request.json();
   } catch {
-    return new Response(JSON.stringify({ error: 'Corps JSON invalide' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+    return new Response(JSON.stringify({ error: 'Corps JSON invalide' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 
   const { slides, format } = body;
@@ -65,6 +68,8 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     });
   } catch (err: any) {
     console.error('[generate-linkedin-carousel] Error:', err);
-    return new Response(JSON.stringify({ error: 'Erreur lors de la génération du carousel' }), { status: 500 });
+    return new Response(JSON.stringify({ error: 'Erreur lors de la génération du carousel' }), {
+      status: 500,
+    });
   }
 };

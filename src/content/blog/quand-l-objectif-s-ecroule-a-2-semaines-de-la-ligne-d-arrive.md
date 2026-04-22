@@ -5,6 +5,7 @@ date: 2026-03-11
 lang: fr
 tags: ['Échec', 'Objectifs', 'Résilience']
 ---
+
 ## Le plan parfait qui a foiré
 
 Mai 2025 : je m'inscris au semi-marathon de Paris. **21 km, moi qui ne courais jamais**. L'objectif était clair, la motivation au max.

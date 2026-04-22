@@ -26,10 +26,11 @@ export const getStaticPaths: GetStaticPaths = async () => {
 export const GET: APIRoute = async ({ props }) => {
   const { post } = props;
 
-  const dateStr = post.data.date.toLocaleDateString(
-    post.data.lang === 'fr' ? 'fr-FR' : 'en-US',
-    { year: 'numeric', month: 'long', day: 'numeric' }
-  );
+  const dateStr = post.data.date.toLocaleDateString(post.data.lang === 'fr' ? 'fr-FR' : 'en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
 
   const png = await generateOgImage({
     title: post.data.title,
@@ -38,7 +39,7 @@ export const GET: APIRoute = async ({ props }) => {
     lang: post.data.lang,
   });
 
-  return new Response(png, {
+  return new Response(new Uint8Array(png), {
     headers: {
       'Content-Type': 'image/png',
       'Cache-Control': 'public, max-age=31536000, immutable',

@@ -1,5 +1,5 @@
 ---
-title: "Automating RNCP management: why I built Gradly"
+title: 'Automating RNCP management: why I built Gradly'
 description: "Academic coordinators spend days producing RNCP transcripts. I built a tool to cut that time by 3. Here's how."
 date: 2026-02-03
 lang: en

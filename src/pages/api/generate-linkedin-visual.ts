@@ -28,7 +28,10 @@ export const POST: APIRoute = async ({ request, cookies }) => {
   try {
     body = await request.json();
   } catch {
-    return new Response(JSON.stringify({ error: 'Corps JSON invalide' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+    return new Response(JSON.stringify({ error: 'Corps JSON invalide' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 
   const { headline, subtitle, format, size } = body;
@@ -50,7 +53,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
       ...dimensions,
     });
 
-    return new Response(png, {
+    return new Response(new Uint8Array(png), {
       headers: {
         'Content-Type': 'image/png',
         'Content-Disposition': `inline; filename="linkedin-visual-${size}.png"`,
@@ -58,6 +61,8 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     });
   } catch (err: any) {
     console.error('[generate-linkedin-visual] Error:', err);
-    return new Response(JSON.stringify({ error: 'Erreur lors de la génération du visuel' }), { status: 500 });
+    return new Response(JSON.stringify({ error: 'Erreur lors de la génération du visuel' }), {
+      status: 500,
+    });
   }
 };

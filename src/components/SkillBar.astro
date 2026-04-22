@@ -19,11 +19,15 @@ const isHighlighted = skill.highlighted;
   ]}
   style={`transition-delay: ${index * 40}ms`}
 >
-  <span class="absolute bottom-0 left-0 h-[2px] bg-accent-500/40 transition-all duration-500 ease-out opacity-0 group-hover:opacity-100" style={`width: ${skill.level}%`}></span>
+  <span
+    class="absolute bottom-0 left-0 h-[2px] bg-accent-500/40 transition-all duration-500 ease-out opacity-0 group-hover:opacity-100"
+    style={`width: ${skill.level}%`}></span>
   {skill.name}
-  {skill.badge && (
-    <span class="text-[10px] font-semibold bg-accent-500 text-white px-1.5 py-0.5 rounded-xs normal-case tracking-normal">
-      {skill.badge}
-    </span>
-  )}
+  {
+    skill.badge && (
+      <span class="text-[10px] font-semibold bg-accent-500 text-white px-1.5 py-0.5 rounded-xs normal-case tracking-normal">
+        {skill.badge}
+      </span>
+    )
+  }
 </span>

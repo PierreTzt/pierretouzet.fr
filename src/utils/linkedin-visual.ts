@@ -29,12 +29,23 @@ function loadFontFile(family: 'inter' | 'sora', weight: string): Buffer {
   const filename = `${family}-latin-${weight}.woff`;
   const candidates = [
     // Works on Vercel serverless (relative to built file)
-    join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'node_modules', '@fontsource', family, 'files', filename),
+    join(
+      dirname(fileURLToPath(import.meta.url)),
+      '..',
+      '..',
+      'node_modules',
+      '@fontsource',
+      family,
+      'files',
+      filename,
+    ),
     // Works in dev / build (project root)
     join(process.cwd(), 'node_modules', '@fontsource', family, 'files', filename),
   ];
   for (const p of candidates) {
-    try { return readFileSync(p); } catch {}
+    try {
+      return readFileSync(p);
+    } catch {}
   }
   throw new Error(`Font not found: ${family}/${filename}`);
 }
@@ -43,13 +54,13 @@ const interRegular = loadFontFile('inter', '400-normal');
 const interBold = loadFontFile('inter', '700-normal');
 const soraBold = loadFontFile('sora', '700-normal');
 
-async function loadTwemoji(_code: string, segment: string): Promise<string | undefined> {
+async function loadTwemoji(_code: string, segment: string): Promise<string> {
   const codePoints = [...segment]
-    .map(c => c.codePointAt(0)!)
-    .filter(cp => cp > 0xFF && cp !== 0xFE0F)
-    .map(cp => cp.toString(16))
+    .map((c) => c.codePointAt(0)!)
+    .filter((cp) => cp > 0xff && cp !== 0xfe0f)
+    .map((cp) => cp.toString(16))
     .join('-');
-  if (!codePoints) return undefined;
+  if (!codePoints) return '';
   const url = `https://cdn.jsdelivr.net/gh/twitter/twemoji@14.0.2/assets/svg/${codePoints}.svg`;
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 3000);
@@ -65,15 +76,15 @@ async function loadTwemoji(_code: string, segment: string): Promise<string | und
   } finally {
     clearTimeout(timeout);
   }
-  return undefined;
+  return '';
 }
 
 const satoriEmoji = {
-  loadAdditionalAsset: async (code: string, segment: string) => {
+  loadAdditionalAsset: async (code: string, segment: string): Promise<string> => {
     if (code === 'emoji') {
       return loadTwemoji(code, segment);
     }
-    return undefined;
+    return '';
   },
 };
 
@@ -91,9 +102,7 @@ export async function generateLinkedInVisual(options: {
   // Adapt font sizes based on dimensions (floor at 0.85 so landscape stays readable)
   const scale = Math.max(Math.min(width, height) / 1080, 0.85);
   const headlineLen = headline.length;
-  const headlineSize = Math.round(
-    (headlineLen > 80 ? 48 : headlineLen > 50 ? 60 : 76) * scale
-  );
+  const headlineSize = Math.round((headlineLen > 80 ? 48 : headlineLen > 50 ? 60 : 76) * scale);
   const subtitleSize = Math.round(28 * scale);
   const brandSize = Math.round(18 * scale);
   const labelSize = Math.round(14 * scale);
@@ -118,10 +127,15 @@ export async function generateLinkedInVisual(options: {
     newsletter: 'NEWSLETTER',
   };
   const baseLabel = formatLabels[format] || '';
-  const slideIndicator = slideNumber && totalSlides
-    ? `${String(slideNumber).padStart(2, '0')} / ${String(totalSlides).padStart(2, '0')}`
-    : '';
-  const label = slideIndicator ? (baseLabel ? `${baseLabel} — ${slideIndicator}` : slideIndicator) : baseLabel;
+  const slideIndicator =
+    slideNumber && totalSlides
+      ? `${String(slideNumber).padStart(2, '0')} / ${String(totalSlides).padStart(2, '0')}`
+      : '';
+  const label = slideIndicator
+    ? baseLabel
+      ? `${baseLabel} — ${slideIndicator}`
+      : slideIndicator
+    : baseLabel;
 
   const svg = await satori(
     {
@@ -288,7 +302,7 @@ export async function generateLinkedInVisual(options: {
         { name: 'Sora', data: soraBold, weight: 700, style: 'normal' as const },
       ],
       ...satoriEmoji,
-    }
+    },
   );
 
   return await sharp(Buffer.from(svg)).png().toBuffer();
@@ -470,7 +484,7 @@ export async function generateLinkedInBanner(options: {
         { name: 'Sora', data: soraBold, weight: 700, style: 'normal' as const },
       ],
       ...satoriEmoji,
-    }
+    },
   );
 
   return await sharp(Buffer.from(svg)).png().toBuffer();

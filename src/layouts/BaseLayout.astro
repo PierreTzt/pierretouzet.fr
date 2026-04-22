@@ -55,65 +55,78 @@ const hreflangEn = getHreflangUrl(Astro.url.pathname, 'en', siteUrl);
 
 const isHomePage = Astro.url.pathname === '/fr/' || Astro.url.pathname === '/en/';
 
-const schemaOrg = isHomePage ? {
-  '@context': 'https://schema.org',
-  '@type': 'ProfilePage',
-  mainEntity: {
-    '@type': 'Person',
-    name: personal.name,
-    givenName: 'Pierre',
-    familyName: 'Touzet',
-    jobTitle: lang === 'fr' ? 'Responsable national des programmes / Ingénieur pédagogique' : 'National Program Director / Instructional Designer',
-    description: personal.description,
-    url: siteUrl,
-    email: personal.email,
-    address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Valenciennes',
-      addressRegion: 'Hauts-de-France',
-      addressCountry: 'FR',
-    },
-    image: new URL('/images/pierre-touzet.webp', Astro.site).href,
-    worksFor: {
-      '@type': 'Organization',
-      name: 'IEFT - Tourism Management School',
-    },
-    alumniOf: [
-      { '@type': 'Organization', name: 'OpenClassrooms' },
-      { '@type': 'Organization', name: 'Anaxil' },
-    ],
-    hasCredential: [
-      {
-        '@type': 'EducationalOccupationalCredential',
-        credentialCategory: 'certification',
-        name: lang === 'fr' ? "Responsable d'Ingénierie pédagogique" : 'Instructional Design Manager',
-        recognizedBy: { '@type': 'Organization', name: 'OpenClassrooms' },
+const schemaOrg = isHomePage
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'ProfilePage',
+      mainEntity: {
+        '@type': 'Person',
+        name: personal.name,
+        givenName: 'Pierre',
+        familyName: 'Touzet',
+        jobTitle:
+          lang === 'fr'
+            ? 'Responsable national des programmes / Ingénieur pédagogique'
+            : 'National Program Director / Instructional Designer',
+        description: personal.description,
+        url: siteUrl,
+        email: personal.email,
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Valenciennes',
+          addressRegion: 'Hauts-de-France',
+          addressCountry: 'FR',
+        },
+        image: new URL('/images/pierre-touzet.webp', Astro.site).href,
+        worksFor: {
+          '@type': 'Organization',
+          name: 'IEFT - Tourism Management School',
+        },
+        alumniOf: [
+          { '@type': 'Organization', name: 'OpenClassrooms' },
+          { '@type': 'Organization', name: 'Anaxil' },
+        ],
+        hasCredential: [
+          {
+            '@type': 'EducationalOccupationalCredential',
+            credentialCategory: 'certification',
+            name:
+              lang === 'fr'
+                ? "Responsable d'Ingénierie pédagogique"
+                : 'Instructional Design Manager',
+            recognizedBy: { '@type': 'Organization', name: 'OpenClassrooms' },
+          },
+          {
+            '@type': 'EducationalOccupationalCredential',
+            credentialCategory: 'certification',
+            name: 'DPO - Data Protection Officer',
+            recognizedBy: { '@type': 'Organization', name: 'CNIL' },
+          },
+        ],
+        hasOccupation: {
+          '@type': 'Occupation',
+          name: lang === 'fr' ? 'Ingénieur pédagogique' : 'Instructional Designer',
+          skills:
+            'RNCP, Qualiopi, Instructional Design, Digital Transformation, LMS, EdTech, AI in Education',
+        },
+        knowsAbout: [
+          'Ingénierie pédagogique',
+          'RNCP certification',
+          'Qualiopi audit',
+          'Digital transformation in education',
+          'Instructional design',
+          'Generative AI in education',
+          'LMS deployment',
+          'Change management',
+          'Multi-campus coordination',
+          'GDPR compliance in education',
+          'EdTech',
+          'Competency-based assessment',
+        ],
+        sameAs: ['https://www.linkedin.com/in/pierre-touzet/', 'https://www.gradly.fr'],
       },
-      {
-        '@type': 'EducationalOccupationalCredential',
-        credentialCategory: 'certification',
-        name: 'DPO - Data Protection Officer',
-        recognizedBy: { '@type': 'Organization', name: 'CNIL' },
-      },
-    ],
-    hasOccupation: {
-      '@type': 'Occupation',
-      name: lang === 'fr' ? 'Ingénieur pédagogique' : 'Instructional Designer',
-      skills: 'RNCP, Qualiopi, Instructional Design, Digital Transformation, LMS, EdTech, AI in Education',
-    },
-    knowsAbout: [
-      'Ingénierie pédagogique', 'RNCP certification', 'Qualiopi audit',
-      'Digital transformation in education', 'Instructional design',
-      'Generative AI in education', 'LMS deployment', 'Change management',
-      'Multi-campus coordination', 'GDPR compliance in education', 'EdTech',
-      'Competency-based assessment',
-    ],
-    sameAs: [
-      'https://www.linkedin.com/in/pierre-touzet/',
-      'https://www.gradly.fr',
-    ],
-  },
-} : null;
+    }
+  : null;
 ---
 
 <!doctype html>
@@ -137,15 +150,17 @@ const schemaOrg = isHomePage ? {
     <meta property="og:locale" content={lang === 'fr' ? 'fr_FR' : 'en_US'} />
     <meta property="og:locale:alternate" content={lang === 'fr' ? 'en_US' : 'fr_FR'} />
     <meta property="og:image" content={ogImageUrl} />
-    {article && (
-      <>
-        <meta property="article:published_time" content={article.publishedTime} />
-        <meta property="article:author" content={article.author || personal.name} />
-        {article.tags.map((tag) => (
-          <meta property="article:tag" content={tag} />
-        ))}
-      </>
-    )}
+    {
+      article && (
+        <>
+          <meta property="article:published_time" content={article.publishedTime} />
+          <meta property="article:author" content={article.author || personal.name} />
+          {article.tags.map((tag) => (
+            <meta property="article:tag" content={tag} />
+          ))}
+        </>
+      )
+    }
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -155,68 +170,94 @@ const schemaOrg = isHomePage ? {
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/manifest.json" />
-    <link rel="alternate" type="application/rss+xml" title={lang === 'fr' ? 'Blog RSS Feed (FR)' : 'Blog RSS Feed (EN)'} href={lang === 'fr' ? '/rss.xml' : '/en/rss.xml'} />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={lang === 'fr' ? 'Blog RSS Feed (FR)' : 'Blog RSS Feed (EN)'}
+      href={lang === 'fr' ? '/rss.xml' : '/en/rss.xml'}
+    />
     <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)" />
     {schemaOrg && <script type="application/ld+json" set:html={JSON.stringify(schemaOrg)} />}
-    {article && (
-      <script type="application/ld+json" set:html={JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'BlogPosting',
-        headline: title.split(' — ')[0],
-        description,
-        image: ogImageUrl,
-        datePublished: article.publishedTime,
-        dateModified: updatedDate ? updatedDate.toISOString() : article.publishedTime,
-        author: {
-          '@type': 'Person',
-          name: personal.name,
-          url: siteUrl,
-        },
-        publisher: {
-          '@type': 'Person',
-          name: personal.name,
-        },
-        mainEntityOfPage: {
-          '@type': 'WebPage',
-          '@id': canonicalURL.href,
-        },
-        keywords: article.tags.join(', '),
-        inLanguage: lang === 'fr' ? 'fr-FR' : 'en-US',
-      })} />
-    )}
-    {breadcrumbs && breadcrumbs.length > 0 && (
-      <script type="application/ld+json" set:html={JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        itemListElement: breadcrumbs.map((item, i) => ({
-          '@type': 'ListItem',
-          position: i + 1,
-          name: item.name,
-          item: new URL(item.url, Astro.site).href,
-        })),
-      })} />
-    )}
+    {
+      article && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BlogPosting',
+            headline: title.split(' — ')[0],
+            description,
+            image: ogImageUrl,
+            datePublished: article.publishedTime,
+            dateModified: updatedDate ? updatedDate.toISOString() : article.publishedTime,
+            author: {
+              '@type': 'Person',
+              name: personal.name,
+              url: siteUrl,
+            },
+            publisher: {
+              '@type': 'Person',
+              name: personal.name,
+            },
+            mainEntityOfPage: {
+              '@type': 'WebPage',
+              '@id': canonicalURL.href,
+            },
+            keywords: article.tags.join(', '),
+            inLanguage: lang === 'fr' ? 'fr-FR' : 'en-US',
+          })}
+        />
+      )
+    }
+    {
+      breadcrumbs && breadcrumbs.length > 0 && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: breadcrumbs.map((item, i) => ({
+              '@type': 'ListItem',
+              position: i + 1,
+              name: item.name,
+              item: new URL(item.url, Astro.site).href,
+            })),
+          })}
+        />
+      )
+    }
     <ViewTransitions />
-    <script type="speculationrules">
-      {
-        "prerender": [
+    <script
+      type="speculationrules"
+      is:inline
+      set:html={JSON.stringify({
+        prerender: [
           {
-            "where": { "and": [{ "href_matches": "/*" }, { "not": { "href_matches": "/api/*" } }, { "not": { "href_matches": "/admin/*" } }] },
-            "eagerness": "moderate"
-          }
-        ]
-      }
-    </script>
+            where: {
+              and: [
+                { href_matches: '/*' },
+                { not: { href_matches: '/api/*' } },
+                { not: { href_matches: '/admin/*' } },
+              ],
+            },
+            eagerness: 'moderate',
+          },
+        ],
+      })}
+    />
     <script>
       import { inject } from '@vercel/analytics';
       import { injectSpeedInsights } from '@vercel/speed-insights';
       // Respect Do Not Track (CNIL recommendation — not strictly required as
       // Vercel Analytics is cookie-free and exempted, but honours user signal).
+      // Typed as Record<string, string | undefined> to access legacy DNT props.
+      const legacyNav = navigator as unknown as Record<string, string | undefined>;
+      const legacyWin = window as unknown as Record<string, string | undefined>;
       const dnt =
         navigator.doNotTrack === '1' ||
-        (window as unknown as { doNotTrack?: string }).doNotTrack === '1' ||
-        (navigator as unknown as { msDoNotTrack?: string }).msDoNotTrack === '1';
+        legacyWin['doNotTrack'] === '1' ||
+        legacyNav['msDoNotTrack'] === '1';
       if (!dnt) {
         inject();
         injectSpeedInsights();
@@ -225,7 +266,10 @@ const schemaOrg = isHomePage ? {
     <script is:inline>
       (function () {
         const theme = localStorage.getItem('theme');
-        if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        if (
+          theme === 'dark' ||
+          (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        ) {
           document.documentElement.classList.add('dark');
         } else {
           document.documentElement.classList.remove('dark');
@@ -250,22 +294,26 @@ const schemaOrg = isHomePage ? {
     <Navbar lang={lang} currentPath={Astro.url.pathname} />
 
     <main id="main-content" class="flex-1 pt-14">
-      {breadcrumbs && breadcrumbs.length > 0 && (
-        <nav aria-label="Breadcrumb" class="max-w-5xl mx-auto px-4 pt-6 pb-0">
-          <ol class="flex items-center gap-1.5 text-xs text-zinc-600 dark:text-zinc-400">
-            {breadcrumbs.map((crumb, i) => (
-              <li class="flex items-center gap-1.5">
-                {i > 0 && <span class="text-zinc-400 dark:text-zinc-500">/</span>}
-                {crumb.url ? (
-                  <a href={crumb.url} class="hover:text-accent transition-colors">{crumb.name}</a>
-                ) : (
-                  <span class="text-zinc-500 dark:text-zinc-400">{crumb.name}</span>
-                )}
-              </li>
-            ))}
-          </ol>
-        </nav>
-      )}
+      {
+        breadcrumbs && breadcrumbs.length > 0 && (
+          <nav aria-label="Breadcrumb" class="max-w-5xl mx-auto px-4 pt-6 pb-0">
+            <ol class="flex items-center gap-1.5 text-xs text-zinc-600 dark:text-zinc-400">
+              {breadcrumbs.map((crumb, i) => (
+                <li class="flex items-center gap-1.5">
+                  {i > 0 && <span class="text-zinc-400 dark:text-zinc-500">/</span>}
+                  {crumb.url ? (
+                    <a href={crumb.url} class="hover:text-accent transition-colors">
+                      {crumb.name}
+                    </a>
+                  ) : (
+                    <span class="text-zinc-500 dark:text-zinc-400">{crumb.name}</span>
+                  )}
+                </li>
+              ))}
+            </ol>
+          </nav>
+        )
+      }
       <slot />
     </main>
 
@@ -287,7 +335,7 @@ const schemaOrg = isHomePage ? {
               }
             });
           },
-          { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+          { threshold: 0.1, rootMargin: '0px 0px -40px 0px' },
         );
         document.querySelectorAll('.scroll-reveal, .text-reveal').forEach((el) => {
           revealObserver.observe(el);
@@ -323,7 +371,6 @@ const schemaOrg = isHomePage ? {
             });
           });
         });
-
       }
 
       initAll();
@@ -339,15 +386,21 @@ const schemaOrg = isHomePage ? {
         konamiSeq = konamiSeq.slice(-10);
         if (konamiSeq.join(',') === konamiCode.join(',')) {
           const lang = document.documentElement.lang;
-          const msg = lang === 'fr'
-            ? 'Vous avez trouvé le secret. Curieux, vous aussi ?'
-            : "You found the secret. Curious one, aren't you?";
+          const msg =
+            lang === 'fr'
+              ? 'Vous avez trouvé le secret. Curieux, vous aussi ?'
+              : "You found the secret. Curious one, aren't you?";
           const toast = document.createElement('div');
           toast.setAttribute('role', 'status');
-          toast.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 z-100 px-6 py-3 bg-accent-500 text-white text-sm font-medium shadow-lg';
+          toast.className =
+            'fixed bottom-8 left-1/2 -translate-x-1/2 z-100 px-6 py-3 bg-accent-500 text-white text-sm font-medium shadow-lg';
           toast.textContent = msg;
           document.body.appendChild(toast);
-          setTimeout(() => { toast.style.opacity = '0'; toast.style.transition = 'opacity 0.3s'; setTimeout(() => toast.remove(), 300); }, 4000);
+          setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transition = 'opacity 0.3s';
+            setTimeout(() => toast.remove(), 300);
+          }, 4000);
           konamiSeq = [];
         }
       });

@@ -13,6 +13,7 @@ The problem isn't creating content. It's creating **useful** content. Content th
 ## My creator journey
 
 In 2 years, I launched:
+
 - A **YouTube channel** for educational content (taxes, tech, education)
 - A **podcast** about what goes on behind the scenes in higher education
 - A **newsletter** about tech for non-tech people

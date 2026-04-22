@@ -87,11 +87,15 @@ Réponds TOUJOURS en JSON valide avec cette structure exacte :
 N'inclus PAS de bloc de code autour du JSON. Réponds directement en JSON.`;
 
 const FORMAT_INSTRUCTIONS: Record<string, string> = {
-  analyse: "Rédige un post LinkedIn au format 'Analyse courte'. Pierre partage son analyse d'expert sur ce sujet/source.",
-  opinion: "Rédige un post LinkedIn au format 'Prise de position'. Pierre donne son opinion tranchée et argumentée.",
+  analyse:
+    "Rédige un post LinkedIn au format 'Analyse courte'. Pierre partage son analyse d'expert sur ce sujet/source.",
+  opinion:
+    "Rédige un post LinkedIn au format 'Prise de position'. Pierre donne son opinion tranchée et argumentée.",
   fait: "Rédige un post LinkedIn au format 'Fait marquant'. Pierre met en avant un chiffre ou fait clé avec son analyse.",
-  veille: "Rédige un post LinkedIn au format 'Veille hebdo'. Pierre partage sa curation de 3 actus de la semaine avec ses commentaires d'expert. Les actus sont fournies ci-dessous.",
-  newsletter: "Rédige un contenu pour la Newsletter LinkedIn de Pierre. Format plus développé et approfondi qu'un post classique. Pierre approfondit un sujet avec son expertise terrain.",
+  veille:
+    "Rédige un post LinkedIn au format 'Veille hebdo'. Pierre partage sa curation de 3 actus de la semaine avec ses commentaires d'expert. Les actus sont fournies ci-dessous.",
+  newsletter:
+    "Rédige un contenu pour la Newsletter LinkedIn de Pierre. Format plus développé et approfondi qu'un post classique. Pierre approfondit un sujet avec son expertise terrain.",
 };
 
 export const POST: APIRoute = async ({ request, cookies }) => {
@@ -103,7 +107,10 @@ export const POST: APIRoute = async ({ request, cookies }) => {
   try {
     body = await request.json();
   } catch {
-    return new Response(JSON.stringify({ error: 'Corps JSON invalide' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+    return new Response(JSON.stringify({ error: 'Corps JSON invalide' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 
   const { input, format, preferences } = body;
@@ -121,14 +128,17 @@ export const POST: APIRoute = async ({ request, cookies }) => {
 
   // Inject tone preferences from feedback history
   if (preferences && preferences.length > 0) {
-    userMessage += '\n\n## Préférences de ton (retours précédents de Pierre) :\n' +
+    userMessage +=
+      '\n\n## Préférences de ton (retours précédents de Pierre) :\n' +
       preferences.map((p: string) => `- ${p}`).join('\n') +
       '\n\nRespecte impérativement ces préférences.';
   }
 
   const apiKey = import.meta.env.ANTHROPIC_API_KEY;
   if (!apiKey) {
-    return new Response(JSON.stringify({ error: 'ANTHROPIC_API_KEY non configurée' }), { status: 500 });
+    return new Response(JSON.stringify({ error: 'ANTHROPIC_API_KEY non configurée' }), {
+      status: 500,
+    });
   }
 
   const client = new Anthropic({ apiKey });
@@ -158,27 +168,36 @@ export const POST: APIRoute = async ({ request, cookies }) => {
           parsed = JSON.parse(match[0]);
         } catch {
           console.error('[generate-linkedin] Invalid JSON in response:', rawText.slice(0, 500));
-          return new Response(JSON.stringify({ error: 'JSON invalide dans la réponse' }), { status: 500 });
+          return new Response(JSON.stringify({ error: 'JSON invalide dans la réponse' }), {
+            status: 500,
+          });
         }
       } else {
         console.error('[generate-linkedin] No JSON found in response:', rawText.slice(0, 500));
-        return new Response(JSON.stringify({ error: 'Pas de JSON trouvé dans la réponse' }), { status: 500 });
+        return new Response(JSON.stringify({ error: 'Pas de JSON trouvé dans la réponse' }), {
+          status: 500,
+        });
       }
     }
 
     // Ensure required fields exist
     if (!parsed.text) {
       console.error('[generate-linkedin] Missing "text" field in response:', rawText.slice(0, 500));
-      return new Response(JSON.stringify({ error: 'Champ "text" manquant dans la réponse' }), { status: 500 });
+      return new Response(JSON.stringify({ error: 'Champ "text" manquant dans la réponse' }), {
+        status: 500,
+      });
     }
 
-    return new Response(JSON.stringify({
-      text: parsed.text,
-      headline: parsed.headline || '',
-      subtitle: parsed.subtitle || '',
-    }), {
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return new Response(
+      JSON.stringify({
+        text: parsed.text,
+        headline: parsed.headline || '',
+        subtitle: parsed.subtitle || '',
+      }),
+      {
+        headers: { 'Content-Type': 'application/json' },
+      },
+    );
   } catch (err: any) {
     console.error('[generate-linkedin] Error:', err);
     return new Response(JSON.stringify({ error: 'Erreur lors de la génération' }), { status: 500 });

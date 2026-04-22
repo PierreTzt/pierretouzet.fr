@@ -31,7 +31,7 @@ export const data: SiteData = {
         'Full academic harmonization across 6 campuses: unified curricula, assessments and methods where each campus used to do things differently',
         'Deployed new programs from design to launch, driving significant enrollment growth',
         'Designed syllabi, competency blocks and RNCP-compliant evaluation grids',
-        'Secured certification and jury approvals (RNCP, Qualiopi — France\'s mandatory quality label for training providers)',
+        "Secured certification and jury approvals (RNCP, Qualiopi — France's mandatory quality label for training providers)",
         'Cross-functional management of a team of 11 coordinators and academic directors',
         'Budget oversight and program profitability optimization',
       ],
@@ -80,7 +80,7 @@ export const data: SiteData = {
       shortDescription:
         'Online training platform for generative AI: short, dense, up-to-date courses to skill up fast.',
       longDescription:
-        "I built Distil out of frustration: AI courses are either too long or already outdated. Distil cuts through the noise and keeps only what works. 25 modules, 42 lessons of 10-15 min each, lifetime access and regular updates. Condensed pedagogy designed for professionals who want real results without spending months.",
+        'I built Distil out of frustration: AI courses are either too long or already outdated. Distil cuts through the noise and keeps only what works. 25 modules, 42 lessons of 10-15 min each, lifetime access and regular updates. Condensed pedagogy designed for professionals who want real results without spending months.',
       technologies: ['Astro', 'Tailwind CSS', 'Vercel', 'PostHog'],
       imageAlt: 'Distil Academy interface - AI training platform',
       demoUrl: 'https://www.distil.academy/',
@@ -92,23 +92,28 @@ export const data: SiteData = {
         { label: 'Access', value: 'Lifetime' },
         { label: 'Updates', value: 'Continuous' },
       ],
-      story: "Available AI courses always frustrated me: either outdated YouTube videos or €2,000 programs recycling the same content. I thought: what if I built the course I wish I'd taken? Modules under one hour, 10-15 min lessons, only what works in the field. No hype, no hollow theory — just concrete, tested content updated continuously. Distil was born from this conviction: AI moves too fast for static courses.",
+      story:
+        "Available AI courses always frustrated me: either outdated YouTube videos or €2,000 programs recycling the same content. I thought: what if I built the course I wish I'd taken? Modules under one hour, 10-15 min lessons, only what works in the field. No hype, no hollow theory — just concrete, tested content updated continuously. Distil was born from this conviction: AI moves too fast for static courses.",
       features: [
         {
           title: 'Short, dense courses',
-          description: "Each module is under one hour, each lesson 10-15 min. No filler, just the essentials.",
+          description:
+            'Each module is under one hour, each lesson 10-15 min. No filler, just the essentials.',
         },
         {
           title: 'Lifetime access + updates',
-          description: "One purchase, permanent access. Courses are regularly updated to keep pace with AI evolution.",
+          description:
+            'One purchase, permanent access. Courses are regularly updated to keep pace with AI evolution.',
         },
         {
           title: 'Filtered, tested content',
-          description: "Continuous monitoring and real-world testing. Only what actually works gets taught.",
+          description:
+            'Continuous monitoring and real-world testing. Only what actually works gets taught.',
         },
         {
           title: 'Built for professionals',
-          description: "No technical background needed. Concrete results you can apply immediately in your work.",
+          description:
+            'No technical background needed. Concrete results you can apply immediately in your work.',
         },
       ],
     },
@@ -119,7 +124,7 @@ export const data: SiteData = {
       shortDescription:
         'Admin time ÷ 3: the tool that automates RNCP competency bulletins for training centers.',
       longDescription:
-        "I built Gradly to solve a problem I lived every day: program directors spending hours manually producing RNCP competency bulletins. A 100% offline solution ensuring data sovereignty, Excel/CSV import/export, and compliant PDF bulletin generation. Compatible with market ERPs (Yparéo). Result: administrative time divided by 3.",
+        'I built Gradly to solve a problem I lived every day: program directors spending hours manually producing RNCP competency bulletins. A 100% offline solution ensuring data sovereignty, Excel/CSV import/export, and compliant PDF bulletin generation. Compatible with market ERPs (Yparéo). Result: administrative time divided by 3.',
       technologies: ['No-code', 'Excel/CSV', 'PDF', 'Offline-first', 'ERP'],
       imageAlt: 'Gradly interface - RNCP bulletin management',
       demoUrl: 'https://www.gradly.fr/',
@@ -131,23 +136,28 @@ export const data: SiteData = {
         { label: 'Data', value: '100% offline' },
         { label: 'Compatibility', value: 'Yparéo & ERP' },
       ],
-      story: "Every semester, I watched the same scene unfold: academic coordinators locked in their offices for days, copy-pasting grades into Excel spreadsheets to produce RNCP-compliant competency bulletins. Hours of repetitive work, prone to errors and frustration. I thought: \"If I'm living this problem, hundreds of others are too.\" I started with a prototype for my own use. Then colleagues wanted it. Then other campuses. Gradly was born from this field observation — not from a market study, but from real pain.",
+      story:
+        'Every semester, I watched the same scene unfold: academic coordinators locked in their offices for days, copy-pasting grades into Excel spreadsheets to produce RNCP-compliant competency bulletins. Hours of repetitive work, prone to errors and frustration. I thought: "If I\'m living this problem, hundreds of others are too." I started with a prototype for my own use. Then colleagues wanted it. Then other campuses. Gradly was born from this field observation — not from a market study, but from real pain.',
       features: [
         {
           title: '100% offline — data sovereignty',
-          description: "No data ever leaves the user's machine. No cloud, no server, no GDPR risk. Learner data stays where it belongs.",
+          description:
+            "No data ever leaves the user's machine. No cloud, no server, no GDPR risk. Learner data stays where it belongs.",
         },
         {
           title: 'Smart import',
-          description: "Direct import from Excel, CSV or ERP exports (Yparéo). Gradly adapts to existing formats — not the other way around.",
+          description:
+            'Direct import from Excel, CSV or ERP exports (Yparéo). Gradly adapts to existing formats — not the other way around.',
         },
         {
           title: 'RNCP-compliant PDF bulletins',
-          description: "Automatic generation of competency bulletins that comply with RNCP standards. Blocks, competencies, acquisition levels — everything is calculated and formatted.",
+          description:
+            'Automatic generation of competency bulletins that comply with RNCP standards. Blocks, competencies, acquisition levels — everything is calculated and formatted.',
         },
         {
           title: 'Admin time divided by 3',
-          description: "What used to take days now takes hours. Coordinators can focus on supporting learners, not on paperwork.",
+          description:
+            'What used to take days now takes hours. Coordinators can focus on supporting learners, not on paperwork.',
         },
       ],
     },
@@ -158,7 +168,7 @@ export const data: SiteData = {
       shortDescription:
         'Identification, design and deployment of digital tools that transformed how dozens of educational teams operate.',
       longDescription:
-        "As national coordinator within the Compétences & Développement network (IFAG, IEFT), I led the digital transformation of pedagogical tools. POC management, satisfaction data analysis, permanent EdTech watch. Goal: give educational teams the means to focus on what matters most — supporting learners.",
+        'As national coordinator within the Compétences & Développement network (IFAG, IEFT), I led the digital transformation of pedagogical tools. POC management, satisfaction data analysis, permanent EdTech watch. Goal: give educational teams the means to focus on what matters most — supporting learners.',
       technologies: ['LMS', 'Analytics', 'Automation', 'POC', 'EdTech Watch'],
       imageAlt: 'Pedagogical digital transformation',
       featured: true,
@@ -174,8 +184,7 @@ export const data: SiteData = {
       id: 'portfolio',
       slug: 'portfolio',
       title: 'Personal Portfolio',
-      shortDescription:
-        'This website, designed as a showcase for my career and projects.',
+      shortDescription: 'This website, designed as a showcase for my career and projects.',
       longDescription:
         'Personal portfolio built with Astro and Tailwind CSS. Modern and minimalist design, bilingual French/English, responsive and accessible. Hosted on Vercel with continuous deployment.',
       technologies: ['Astro', 'Tailwind CSS', 'TypeScript', 'Vercel'],
@@ -213,9 +222,9 @@ export const data: SiteData = {
       slug: 'youtube-taxes',
       title: 'YouTube — Tax Education',
       shortDescription:
-        "~20 videos and Shorts to make taxes simple. Proof that I can break down any topic — even taxation.",
+        '~20 videos and Shorts to make taxes simple. Proof that I can break down any topic — even taxation.',
       longDescription:
-        "Created a YouTube channel with about 20 videos and Shorts to make taxation accessible to everyone. One video every 3 days, from quick editing to platform algorithms. What I gained: understanding recommendation algorithms and mastering rapid video editing.",
+        'Created a YouTube channel with about 20 videos and Shorts to make taxation accessible to everyone. One video every 3 days, from quick editing to platform algorithms. What I gained: understanding recommendation algorithms and mastering rapid video editing.',
       technologies: ['YouTube', 'Shorts', 'Video Editing', 'Taxation'],
       imageAlt: 'YouTube tax education channel',
       featured: false,
@@ -291,7 +300,7 @@ export const data: SiteData = {
       shortDescription:
         'End-to-end mentoring of an entrepreneur: micro-business creation and upskilling on generative AI.',
       longDescription:
-        "End-to-end mentoring of an entrepreneur in creating their micro-business: offer structuring, digital strategy and upskilling on generative AI. Mission completed. What I gained: the joy of mentoring and watching someone take the leap.",
+        'End-to-end mentoring of an entrepreneur in creating their micro-business: offer structuring, digital strategy and upskilling on generative AI. Mission completed. What I gained: the joy of mentoring and watching someone take the leap.',
       technologies: ['Consulting', 'Generative AI', 'Strategy', 'Mentoring'],
       imageAlt: 'Entrepreneurial mentoring and AI',
       featured: false,
@@ -353,7 +362,8 @@ export const data: SiteData = {
     {
       id: 'around-grief',
       title: 'Around grief',
-      description: 'Three tools built for the hours that follow a loss. One-time payment, no data kept.',
+      description:
+        'Three tools built for the hours that follow a loss. One-time payment, no data kept.',
       entries: [
         { kind: 'external', siteSlug: 'cahier-bleu' },
         { kind: 'external', siteSlug: 'memoire-gardee' },
@@ -364,9 +374,7 @@ export const data: SiteData = {
       id: 'labs',
       title: 'Labs',
       description: 'Technical experiments and personal projects.',
-      entries: [
-        { kind: 'project', projectSlug: 'portfolio' },
-      ],
+      entries: [{ kind: 'project', projectSlug: 'portfolio' }],
     },
   ],
   skillCategories: [
@@ -403,7 +411,12 @@ export const data: SiteData = {
       description: 'Building custom tools and driving digital transformation.',
       icon: 'M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5',
       skills: [
-        { name: 'GDPR & Data Protection', level: 85, highlighted: true, badge: 'Certified DPO (CNIL, France)' },
+        {
+          name: 'GDPR & Data Protection',
+          level: 85,
+          highlighted: true,
+          badge: 'Certified DPO (CNIL, France)',
+        },
         { name: 'Process Automation', level: 85, highlighted: true, badge: 'Admin time ÷ 3' },
         { name: 'No-code / Low-code', level: 80 },
         { name: 'Technology Watch', level: 80 },
@@ -433,8 +446,7 @@ export const data: SiteData = {
       field: 'Instructional Design Manager',
       startDate: '2025',
       endDate: '2025',
-      description:
-        'Educational technology and instructional design.',
+      description: 'Educational technology and instructional design.',
     },
     {
       institution: 'Anaxil',
@@ -442,8 +454,7 @@ export const data: SiteData = {
       field: 'GDPR - DPO Training & CNIL-certified CIL',
       startDate: '2018',
       endDate: '2018',
-      description:
-        'European General Data Protection Regulation. Data Protection Officer.',
+      description: 'European General Data Protection Regulation. Data Protection Officer.',
     },
     {
       institution: 'Lycée du Hainaut',
@@ -458,19 +469,22 @@ export const data: SiteData = {
       name: 'Cyril Blanchet',
       role: 'Campus Director',
       company: 'ICL IET — Lyon Campus',
-      quote: "Pierre is a well-rounded professional — reliable and inspiring. He demonstrated exemplary rigor, well-placed creativity and sharp analytical skills. His stress management, project leadership and strategic vision were decisive in the success of our initiative.",
+      quote:
+        'Pierre is a well-rounded professional — reliable and inspiring. He demonstrated exemplary rigor, well-placed creativity and sharp analytical skills. His stress management, project leadership and strategic vision were decisive in the success of our initiative.',
     },
     {
       name: 'Za Nguyen',
       role: 'Academic Coordinator',
       company: 'IHECF Montpellier',
-      quote: "Pierre is someone you can truly count on: professional, committed, always willing to help. He has an excellent big-picture vision while paying attention to detail, which makes him particularly valuable within a team. I warmly recommend Pierre for any professional opportunity.",
+      quote:
+        'Pierre is someone you can truly count on: professional, committed, always willing to help. He has an excellent big-picture vision while paying attention to detail, which makes him particularly valuable within a team. I warmly recommend Pierre for any professional opportunity.',
     },
     {
       name: 'Fanny Murer',
       role: 'National Pedagogical Coordinator',
       company: 'ICL',
-      quote: "I particularly appreciated his great availability and listening skills. Structured and rigorous, he knows how to organize and prioritize projects effectively. Pierre is very comfortable with digital tools and helps streamline and modernize pedagogical practices.",
+      quote:
+        'I particularly appreciated his great availability and listening skills. Structured and rigorous, he knows how to organize and prioritize projects effectively. Pierre is very comfortable with digital tools and helps streamline and modernize pedagogical practices.',
     },
   ],
   keyMetrics: [
@@ -483,40 +497,47 @@ export const data: SiteData = {
     {
       number: '01',
       title: 'Observe',
-      description: "I listen, audit, and uncover the real problem — not the one presented to me, but the one hiding behind it.",
+      description:
+        'I listen, audit, and uncover the real problem — not the one presented to me, but the one hiding behind it.',
     },
     {
       number: '02',
       title: 'Design',
-      description: 'I craft a tailored solution, prototype fast, and test with real users before building everything.',
+      description:
+        'I craft a tailored solution, prototype fast, and test with real users before building everything.',
     },
     {
       number: '03',
       title: 'Deploy',
-      description: "I train the teams, support change management and don't let go until adoption is real.",
+      description:
+        "I train the teams, support change management and don't let go until adoption is real.",
     },
     {
       number: '04',
       title: 'Iterate',
-      description: 'I measure results, collect feedback and start again — because a good process lives and evolves.',
+      description:
+        'I measure results, collect feedback and start again — because a good process lives and evolves.',
     },
   ],
   speakerTopics: [
     {
       title: 'From IT technician to program director: 15 years of curiosity',
-      abstract: "A non-linear career, a vocational diploma, and one conviction: curiosity is the best career engine. A look back at 15 years of pivots, risk-taking and transformation — in IT, education and entrepreneurship.",
+      abstract:
+        'A non-linear career, a vocational diploma, and one conviction: curiosity is the best career engine. A look back at 15 years of pivots, risk-taking and transformation — in IT, education and entrepreneurship.',
       format: 'Keynote · 30-45 min',
       tags: ['Career', 'Multipotentialist', 'Career change'],
     },
     {
       title: 'How I automated RNCP management for a school network',
-      abstract: "Academic coordinators spend days manually producing RNCP bulletins. I built a tool to divide that time by 3. A concrete look at problem identification, prototyping, deployment and results.",
+      abstract:
+        'Academic coordinators spend days manually producing RNCP bulletins. I built a tool to divide that time by 3. A concrete look at problem identification, prototyping, deployment and results.',
       format: 'Case study · 20-30 min',
       tags: ['EdTech', 'RNCP', 'Automation', 'Gradly'],
     },
     {
       title: "AI in education: a practitioner's view, not a theorist's",
-      abstract: "Everyone talks about AI in education. Few people actually use it daily with learners. What I've tested, what works, what doesn't, and why we need to stop being afraid.",
+      abstract:
+        "Everyone talks about AI in education. Few people actually use it daily with learners. What I've tested, what works, what doesn't, and why we need to stop being afraid.",
       format: 'Keynote · 30-45 min',
       tags: ['Generative AI', 'Education', 'Practice'],
     },
@@ -530,22 +551,31 @@ export const data: SiteData = {
   services: [
     {
       title: 'Instructional Design & Certification',
-      description: 'Designing programs that meet RNCP and Qualiopi standards, from curriculum to certification.',
-      examples: ['Curricula & syllabi', 'RNCP applications', 'Qualiopi audits', 'Competency blocks'],
+      description:
+        'Designing programs that meet RNCP and Qualiopi standards, from curriculum to certification.',
+      examples: [
+        'Curricula & syllabi',
+        'RNCP applications',
+        'Qualiopi audits',
+        'Competency blocks',
+      ],
     },
     {
       title: 'Digital Transformation',
-      description: 'Identifying, deploying and driving adoption of digital tools for educational and administrative teams.',
+      description:
+        'Identifying, deploying and driving adoption of digital tools for educational and administrative teams.',
       examples: ['LMS deployment', 'Automation', 'Change management', 'Team training'],
     },
     {
       title: 'Content Creation & Education',
-      description: 'Creating content that makes the complex accessible — video, podcast, newsletter, ebook or live.',
+      description:
+        'Creating content that makes the complex accessible — video, podcast, newsletter, ebook or live.',
       examples: ['Video & Shorts', 'Podcast', 'Newsletter', 'Ebook & guides'],
     },
     {
       title: 'AI Consulting & Mentoring',
-      description: 'Supporting the integration of generative AI into your educational processes or business.',
+      description:
+        'Supporting the integration of generative AI into your educational processes or business.',
       examples: ['AI audit', 'Upskilling', 'Digital strategy', 'Mentoring'],
     },
   ],
@@ -620,17 +650,21 @@ export const data: SiteData = {
     },
     speaker: {
       title: 'Speaking & conferences',
-      subtitle: 'I talk about what I experience in the field — education, AI, digital transformation, atypical careers.',
+      subtitle:
+        'I talk about what I experience in the field — education, AI, digital transformation, atypical careers.',
       cta: 'Invite me to speak',
       format: 'Format',
     },
     ebook: {
       title: 'AI in Education — Free Ebook',
-      subtitle: "A practitioner's take on generative AI in education. 10 pages to understand the real stakes, jargon-free.",
+      subtitle:
+        "A practitioner's take on generative AI in education. 10 pages to understand the real stakes, jargon-free.",
       cta: 'Download for free',
       landing: {
-        metaDescription: "Download Pierre Touzet's free ebook on generative AI in education. 10 pages of field experience, jargon-free.",
-        heroSubtitle: "10 pages to understand how generative AI is transforming education — from a practitioner's perspective, not a theorist's. Based on 15 years of field experience.",
+        metaDescription:
+          "Download Pierre Touzet's free ebook on generative AI in education. 10 pages of field experience, jargon-free.",
+        heroSubtitle:
+          "10 pages to understand how generative AI is transforming education — from a practitioner's perspective, not a theorist's. Based on 15 years of field experience.",
         formTitle: 'Download for free',
         formName: 'Your first name',
         formEmail: 'Your email',
@@ -651,7 +685,8 @@ export const data: SiteData = {
           'Immediately actionable — each chapter offers concrete next steps',
           'Free, no strings attached, no spam',
         ],
-        testimonialQuote: "Pierre is someone you can truly count on: professional, committed, always willing to help. He has an excellent big-picture vision while paying attention to detail.",
+        testimonialQuote:
+          'Pierre is someone you can truly count on: professional, committed, always willing to help. He has an excellent big-picture vision while paying attention to detail.',
         testimonialAuthor: 'Za Nguyen',
         testimonialRole: 'Academic Coordinator — IHECF Montpellier',
         freeLabel: 'Free',
@@ -661,7 +696,7 @@ export const data: SiteData = {
     },
     hiring: {
       title: 'Looking to hire?',
-      subtitle: "Discover why Pierre is the profile you need.",
+      subtitle: 'Discover why Pierre is the profile you need.',
       whyMe: 'Why me',
     },
     consulting: {
@@ -679,7 +714,8 @@ export const data: SiteData = {
       empty: 'No articles yet. Check back soon!',
     },
     studio: {
-      intro: "A collection of what I'm building — in-depth case studies and live sites, grouped by theme.",
+      intro:
+        "A collection of what I'm building — in-depth case studies and live sites, grouped by theme.",
       caseStudyBadge: 'Case study',
       liveSiteBadge: 'Live site',
       clusterCountProjects: '{n} projects',

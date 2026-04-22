@@ -15,7 +15,9 @@ const data = getData(lang);
 const studioPath = `/${lang}/studio/`;
 const homePath = `/${lang}/`;
 
-const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/project-*.png', { eager: true });
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/project-*.png', {
+  eager: true,
+});
 
 // Map slugs that differ from their image filename
 const imageSlugOverrides: Record<string, string> = {
@@ -42,8 +44,16 @@ const projectImage = images[`/src/assets/images/project-${imageSlug}.png`]?.defa
         href={studioPath}
         class="scroll-reveal group mono-label hover:text-accent-500 transition-colors duration-200 inline-flex items-center gap-2 mb-12"
       >
-        <svg class="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+        <svg
+          class="w-3.5 h-3.5 group-hover:-translate-x-0.5 transition-transform duration-200"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          stroke-width="2"
+          aria-hidden="true"
+        >
+          <path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"
+          ></path>
         </svg>
         {data.ui.project.backToStudio}
       </a>
@@ -57,101 +67,159 @@ const projectImage = images[`/src/assets/images/project-${imageSlug}.png`]?.defa
       </div>
 
       <!-- Project visual -->
-      <div class="scroll-reveal aspect-video border border-zinc-200 dark:border-zinc-800 mb-12 overflow-hidden" style="transition-delay: 100ms">
-        {projectImage ? (
-          <Image
-            src={projectImage}
-            alt={project.imageAlt}
-            widths={[400, 800, 1200]}
-            sizes="(max-width: 768px) 100vw, 800px"
-            class="w-full h-full object-cover"
-            loading="lazy"
-            decoding="async"
-          />
-        ) : (
-          <div class="w-full h-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
-            <span class="mono-label">{data.ui.project.visual}</span>
-          </div>
-        )}
+      <div
+        class="scroll-reveal aspect-video border border-zinc-200 dark:border-zinc-800 mb-12 overflow-hidden"
+        style="transition-delay: 100ms"
+      >
+        {
+          projectImage ? (
+            <Image
+              src={projectImage}
+              alt={project.imageAlt}
+              widths={[400, 800, 1200]}
+              sizes="(max-width: 768px) 100vw, 800px"
+              class="w-full h-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+          ) : (
+            <div class="w-full h-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
+              <span class="mono-label">{data.ui.project.visual}</span>
+            </div>
+          )
+        }
       </div>
 
-      {project.metrics && project.metrics.length > 0 && (
-        <div class="scroll-reveal grid grid-cols-3 gap-px bg-zinc-200 dark:bg-zinc-800 mb-12" style="transition-delay: 150ms">
-          {project.metrics.map((metric) => (
-            <div class="bg-white dark:bg-zinc-900/80 p-6 text-center">
-              <p class="font-display text-2xl md:text-3xl font-bold text-accent-500 mb-1">{metric.value}</p>
-              <p class="font-mono text-caption uppercase tracking-wider text-zinc-500 dark:text-zinc-400">{metric.label}</p>
-            </div>
-          ))}
-        </div>
-      )}
-
-      <p class="scroll-reveal text-base text-zinc-600 dark:text-zinc-400 leading-relaxed mb-12 max-w-2xl" style="transition-delay: 200ms">
-        {project.longDescription}
-      </p>
-
-      {project.story && (
-        <div class="scroll-reveal mb-12" style="transition-delay: 220ms">
-          <span class="mono-label mb-4 block">{data.ui.project.story}</span>
-          <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-2xl italic border-l-2 border-accent-500/30 pl-4">
-            {project.story}
-          </p>
-        </div>
-      )}
-
-      {project.features && project.features.length > 0 && (
-        <div class="scroll-reveal mb-12" style="transition-delay: 240ms">
-          <span class="mono-label mb-6 block">{data.ui.project.features}</span>
-          <div class="grid md:grid-cols-2 gap-px bg-zinc-200 dark:bg-zinc-800">
-            {project.features.map((feature, i) => (
-              <div class="bg-white dark:bg-zinc-900/80 p-6">
-                <span class="font-mono text-caption text-accent-500 mb-2 block">{String(i + 1).padStart(2, '0')}</span>
-                <h3 class="text-sm font-semibold text-zinc-900 dark:text-zinc-100 mb-2">{feature.title}</h3>
-                <p class="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">{feature.description}</p>
+      {
+        project.metrics && project.metrics.length > 0 && (
+          <div
+            class="scroll-reveal grid grid-cols-3 gap-px bg-zinc-200 dark:bg-zinc-800 mb-12"
+            style="transition-delay: 150ms"
+          >
+            {project.metrics.map((metric) => (
+              <div class="bg-white dark:bg-zinc-900/80 p-6 text-center">
+                <p class="font-display text-2xl md:text-3xl font-bold text-accent-500 mb-1">
+                  {metric.value}
+                </p>
+                <p class="font-mono text-caption uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                  {metric.label}
+                </p>
               </div>
             ))}
           </div>
-        </div>
-      )}
+        )
+      }
+
+      <p
+        class="scroll-reveal text-base text-zinc-600 dark:text-zinc-400 leading-relaxed mb-12 max-w-2xl"
+        style="transition-delay: 200ms"
+      >
+        {project.longDescription}
+      </p>
+
+      {
+        project.story && (
+          <div class="scroll-reveal mb-12" style="transition-delay: 220ms">
+            <span class="mono-label mb-4 block">{data.ui.project.story}</span>
+            <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-2xl italic border-l-2 border-accent-500/30 pl-4">
+              {project.story}
+            </p>
+          </div>
+        )
+      }
+
+      {
+        project.features && project.features.length > 0 && (
+          <div class="scroll-reveal mb-12" style="transition-delay: 240ms">
+            <span class="mono-label mb-6 block">{data.ui.project.features}</span>
+            <div class="grid md:grid-cols-2 gap-px bg-zinc-200 dark:bg-zinc-800">
+              {project.features.map((feature, i) => (
+                <div class="bg-white dark:bg-zinc-900/80 p-6">
+                  <span class="font-mono text-caption text-accent-500 mb-2 block">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <h3 class="text-sm font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
+                    {feature.title}
+                  </h3>
+                  <p class="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )
+      }
 
       <div class="scroll-reveal mb-12" style="transition-delay: 250ms">
         <span class="mono-label mb-4 block">{data.ui.project.technologies}</span>
         <div class="flex flex-wrap gap-2">
-          {project.technologies.map((tech) => (
-            <span class="font-mono text-caption uppercase tracking-wider px-3 py-1.5 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-accent-500/50 hover:text-accent-500 transition-colors duration-200">
-              {tech}
-            </span>
-          ))}
+          {
+            project.technologies.map((tech) => (
+              <span class="font-mono text-caption uppercase tracking-wider px-3 py-1.5 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 hover:border-accent-500/50 hover:text-accent-500 transition-colors duration-200">
+                {tech}
+              </span>
+            ))
+          }
         </div>
       </div>
 
-      <div class="scroll-reveal flex flex-wrap gap-4 border-t border-zinc-200 dark:border-zinc-800 pt-8" style="transition-delay: 300ms">
-        {project.demoUrl && (
-          <a
-            href={project.demoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group inline-flex items-center gap-2 px-5 py-2.5 bg-zinc-900 dark:bg-zinc-100 text-zinc-50 dark:text-zinc-900 text-sm font-medium hover:bg-accent-600 dark:hover:bg-accent-500 dark:hover:text-white transition-all duration-200"
-          >
-            {data.ui.project.demo}
-            <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-            </svg>
-          </a>
-        )}
-        {project.githubUrl && (
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group inline-flex items-center gap-2 px-5 py-2.5 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 text-sm font-medium hover:border-accent-500 hover:text-accent-500 transition-colors duration-200"
-          >
-            {data.ui.project.source}
-            <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
-            </svg>
-          </a>
-        )}
+      <div
+        class="scroll-reveal flex flex-wrap gap-4 border-t border-zinc-200 dark:border-zinc-800 pt-8"
+        style="transition-delay: 300ms"
+      >
+        {
+          project.demoUrl && (
+            <a
+              href={project.demoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group inline-flex items-center gap-2 px-5 py-2.5 bg-zinc-900 dark:bg-zinc-100 text-zinc-50 dark:text-zinc-900 text-sm font-medium hover:bg-accent-600 dark:hover:bg-accent-500 dark:hover:text-white transition-all duration-200"
+            >
+              {data.ui.project.demo}
+              <svg
+                class="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="1.5"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+                />
+              </svg>
+            </a>
+          )
+        }
+        {
+          project.githubUrl && (
+            <a
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group inline-flex items-center gap-2 px-5 py-2.5 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 text-sm font-medium hover:border-accent-500 hover:text-accent-500 transition-colors duration-200"
+            >
+              {data.ui.project.source}
+              <svg
+                class="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-200"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="1.5"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25"
+                />
+              </svg>
+            </a>
+          )
+        }
       </div>
     </div>
   </section>

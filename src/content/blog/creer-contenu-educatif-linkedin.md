@@ -1,5 +1,5 @@
 ---
-title: "Créer du contenu éducatif : ce que LinkedIn ne vous dit pas"
+title: 'Créer du contenu éducatif : ce que LinkedIn ne vous dit pas'
 description: "Tout le monde dit qu'il faut créer du contenu. Personne ne dit que c'est un vrai métier. Retour sur 2 ans de création : YouTube, podcast, newsletter."
 date: 2026-01-10
 lang: fr
@@ -13,6 +13,7 @@ Le problème, ce n'est pas de créer du contenu. C'est de créer du contenu **ut
 ## Mon parcours de créateur
 
 En 2 ans, j'ai lancé :
+
 - Une **chaîne YouTube** de vulgarisation (impôts, tech, éducation)
 - Un **podcast** sur les coulisses de l'enseignement supérieur
 - Une **newsletter** tech pour non-techniciens

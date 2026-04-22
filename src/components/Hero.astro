@@ -18,7 +18,6 @@ const lastName = personal.name.split(' ').slice(1).join(' ');
 
 <section class="min-h-[55vh] px-6">
   <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-[auto_1fr] items-end min-h-[55vh]">
-
     <!-- Left: Photo desktop (full height, fades at bottom) -->
     <div class="hidden lg:block self-stretch relative w-[300px] opacity-0 animate-reveal">
       <div class="absolute inset-0 overflow-hidden hero-photo-mask">
@@ -59,19 +58,23 @@ const lastName = personal.name.split(' ').slice(1).join(' ');
         </div>
       </div>
       <h1 class="text-display font-display mb-4 opacity-0 animate-reveal-delay-1">
-        <span class="text-zinc-900 dark:text-zinc-50 font-bold">{firstName} </span><span class="font-extrabold bg-linear-to-r from-accent-500 to-electric-500 bg-clip-text text-transparent">{lastName}</span>
+        <span class="text-zinc-900 dark:text-zinc-50 font-bold">{firstName} </span><span
+          class="font-extrabold bg-linear-to-r from-accent-500 to-electric-500 bg-clip-text text-transparent"
+          >{lastName}</span
+        >
       </h1>
       <p class="mono-label mb-8 opacity-0 animate-reveal-delay-1">
-        <span data-greeting class="text-accent-500"></span> {personal.location}
+        <span data-greeting class="text-accent-500"></span>
+        {personal.location}
       </p>
 
       <script is:inline>
-        (function() {
-          var el = document.querySelector('[data-greeting]');
+        (function () {
+          const el = document.querySelector('[data-greeting]');
           if (!el) return;
-          var h = new Date().getHours();
-          var lang = document.documentElement.lang;
-          var g;
+          const h = new Date().getHours();
+          const lang = document.documentElement.lang;
+          let g;
           if (lang === 'fr') {
             g = h >= 18 ? 'Bonsoir' : 'Bonjour';
           } else {
@@ -81,7 +84,9 @@ const lastName = personal.name.split(' ').slice(1).join(' ');
         })();
       </script>
 
-      <div class="grid md:grid-cols-[1fr_1px_1fr] gap-8 items-start opacity-0 animate-reveal-delay-2">
+      <div
+        class="grid md:grid-cols-[1fr_1px_1fr] gap-8 items-start opacity-0 animate-reveal-delay-2"
+      >
         <div>
           <p class="font-display text-subheading text-zinc-600 dark:text-zinc-400 font-light">
             {personal.title}
@@ -97,28 +102,44 @@ const lastName = personal.name.split(' ').slice(1).join(' ');
           <div class="flex items-center gap-6 flex-wrap">
             <a
               href={projectsHref}
-
               class="group inline-flex items-center gap-2 px-5 py-2.5 bg-accent-500 text-white text-sm font-medium hover:bg-accent-600 transition-all duration-200"
             >
               {ui.hero.cta}
-              <svg class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              <svg
+                class="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform duration-200"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"
+                ></path>
               </svg>
             </a>
             <a
               href="/cv-pierre-touzet.pdf"
               download
-
               class="group inline-flex items-center gap-2 px-5 py-2.5 border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 text-sm font-medium hover:border-accent-500 hover:text-accent-500 transition-colors duration-200"
             >
-              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+              <svg
+                class="w-3.5 h-3.5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                ></path>
               </svg>
               {ui.hero.downloadCv}
             </a>
             <a
               href={contactHref}
-
               class="mono-label hover:text-accent-500 transition-colors duration-200"
             >
               {ui.hero.ctaSecondary} →

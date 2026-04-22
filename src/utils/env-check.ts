@@ -13,7 +13,7 @@ export function requireEnv(key: EnvKey): string {
   if (!value) {
     throw new Error(
       `Missing required environment variable: ${key}. ` +
-      `Set it in your Vercel dashboard or .env file for local development.`
+        `Set it in your Vercel dashboard or .env file for local development.`,
     );
   }
   return value;

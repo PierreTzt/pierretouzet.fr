@@ -1,5 +1,5 @@
 ---
-title: "From vocational diploma to program management: in praise of non-linear careers"
+title: 'From vocational diploma to program management: in praise of non-linear careers'
 description: "People often say my career path is atypical. Looking back, that's exactly what makes it valuable. Reflections on 15 years of pivots."
 date: 2026-01-25
 lang: en

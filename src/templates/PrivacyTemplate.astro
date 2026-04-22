@@ -16,20 +16,20 @@ type Section = { title: string; body: string; items?: { label: string; body: str
 
 const frSections: Section[] = [
   {
-    title: "1. Responsable du traitement",
+    title: '1. Responsable du traitement',
     body: `Le responsable du traitement des données personnelles collectées via pierretouzet.fr est ${data.personal.name}, entrepreneur individuel (micro-entreprise), joignable à l'adresse : ${data.personal.email}.`,
   },
   {
-    title: "2. Données collectées, finalités et bases légales",
-    body: "Les traitements mis en œuvre sur ce site sont les suivants :",
+    title: '2. Données collectées, finalités et bases légales',
+    body: 'Les traitements mis en œuvre sur ce site sont les suivants :',
     items: [
       {
-        label: "Formulaire de contact (/contact)",
+        label: 'Formulaire de contact (/contact)',
         body: "Données : nom, adresse email, objet et message. Mode de transmission : le formulaire ouvre votre client de messagerie via un lien mailto et aucune donnée n'est stockée sur le serveur du site. Finalité : vous répondre. Base légale : exécution de mesures précontractuelles à votre demande (art. 6.1.b RGPD). Durée : conservée dans vos échanges email, purgée manuellement après clôture de la conversation (typiquement 12 mois).",
       },
       {
         label: "Réservation d'échange (Cal.com)",
-        body: "Si vous utilisez le bouton « Réserver un créneau », vous êtes redirigé vers Cal.com (Cal.com, Inc.) qui agit en tant que responsable du traitement indépendant. Les données de réservation (nom, email, créneau) lui sont transmises directement. Consultez la politique Cal.com : cal.com/privacy.",
+        body: 'Si vous utilisez le bouton « Réserver un créneau », vous êtes redirigé vers Cal.com (Cal.com, Inc.) qui agit en tant que responsable du traitement indépendant. Les données de réservation (nom, email, créneau) lui sont transmises directement. Consultez la politique Cal.com : cal.com/privacy.',
       },
       {
         label: "Téléchargement de l'ebook (/ebook)",
@@ -46,141 +46,152 @@ const frSections: Section[] = [
     ],
   },
   {
-    title: "3. Destinataires et sous-traitants",
-    body: "Les données sont accessibles uniquement au responsable du traitement. Les sous-traitants suivants interviennent dans le fonctionnement du site :",
+    title: '3. Destinataires et sous-traitants',
+    body: 'Les données sont accessibles uniquement au responsable du traitement. Les sous-traitants suivants interviennent dans le fonctionnement du site :',
     items: [
       {
-        label: "Vercel Inc. — hébergement, analytics, logs serveur",
+        label: 'Vercel Inc. — hébergement, analytics, logs serveur',
         body: "Vercel Inc. (440 N Baxter St, Coppell, TX 75019, États-Unis) héberge le site et collecte les mesures d'audience. Vercel est certifié EU-U.S. Data Privacy Framework (DPF). Un Data Processing Agreement est en vigueur (vercel.com/legal/dpa).",
       },
       {
-        label: "GitHub Inc. — stockage du code et des articles de blog",
-        body: "GitHub Inc. (88 Colin P Kelly Jr St, San Francisco, CA 94107, États-Unis) héberge le dépôt du site. Les articles de blog (contenu public) y sont stockés. GitHub est certifié EU-U.S. Data Privacy Framework.",
+        label: 'GitHub Inc. — stockage du code et des articles de blog',
+        body: 'GitHub Inc. (88 Colin P Kelly Jr St, San Francisco, CA 94107, États-Unis) héberge le dépôt du site. Les articles de blog (contenu public) y sont stockés. GitHub est certifié EU-U.S. Data Privacy Framework.',
       },
       {
-        label: "Anthropic PBC — génération de contenu côté admin uniquement",
+        label: 'Anthropic PBC — génération de contenu côté admin uniquement',
         body: "Anthropic PBC (San Francisco, États-Unis) fournit le modèle Claude utilisé uniquement par l'éditeur dans l'espace d'administration pour assister la rédaction. Aucune donnée de visiteur n'est transmise à Anthropic.",
       },
     ],
   },
   {
-    title: "4. Transferts hors Union européenne",
+    title: '4. Transferts hors Union européenne',
     body: "Les données techniques (mesures d'audience, logs d'accès) sont traitées aux États-Unis via Vercel Inc. Vercel est certifié au titre du EU-U.S. Data Privacy Framework, mécanisme reconnu par la Commission européenne comme offrant un niveau de protection adéquat (décision d'adéquation du 10 juillet 2023). Un contrat de sous-traitance (DPA) avec clauses contractuelles types s'applique en complément.",
   },
   {
-    title: "5. Vos droits",
-    body: "Conformément aux articles 15 à 22 du RGPD et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation du traitement, d'opposition et de portabilité de vos données. Vous pouvez exercer ces droits par email à " + data.personal.email + ". Une réponse vous sera apportée dans un délai d'un mois maximum.",
+    title: '5. Vos droits',
+    body:
+      "Conformément aux articles 15 à 22 du RGPD et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation du traitement, d'opposition et de portabilité de vos données. Vous pouvez exercer ces droits par email à " +
+      data.personal.email +
+      ". Une réponse vous sera apportée dans un délai d'un mois maximum.",
   },
   {
-    title: "6. Réclamation auprès de la CNIL",
+    title: '6. Réclamation auprès de la CNIL',
     body: "Si vous estimez que le traitement de vos données personnelles n'est pas conforme à la réglementation, vous disposez du droit d'introduire une réclamation auprès de la Commission Nationale de l'Informatique et des Libertés (CNIL), 3 Place de Fontenoy, TSA 80715, 75334 Paris Cedex 07 — www.cnil.fr.",
   },
   {
-    title: "7. Cookies et traceurs",
+    title: '7. Cookies et traceurs',
     body: "Ce site n'utilise aucun cookie publicitaire, de mesure d'audience tiers ou de personnalisation. Le seul cookie déposé (`admin-auth`) concerne exclusivement l'authentification de l'éditeur et ne s'applique pas aux visiteurs. Aucun bandeau de consentement n'est donc requis (recommandation CNIL du 17 septembre 2020 sur la mesure d'audience exemptée).",
   },
   {
-    title: "8. Sécurité",
+    title: '8. Sécurité',
     body: "Le site applique des mesures techniques de sécurité : chiffrement TLS obligatoire (HSTS préchargé), Content-Security-Policy restrictive, cookies HttpOnly/Secure/SameSite=strict pour l'espace admin, authentification par clé HMAC signée. Les mots de passe et secrets ne sont jamais exposés côté client.",
   },
   {
-    title: "9. Mise à jour de la politique",
+    title: '9. Mise à jour de la politique',
     body: "Cette politique peut être modifiée pour refléter l'évolution du site ou de la réglementation. La date de dernière mise à jour figure en bas de page.",
   },
 ];
 
 const enSections: Section[] = [
   {
-    title: "1. Data controller",
+    title: '1. Data controller',
     body: `The data controller for personal data collected via pierretouzet.fr is ${data.personal.name}, sole proprietor (French micro-enterprise), reachable at: ${data.personal.email}.`,
   },
   {
-    title: "2. Data collected, purposes and legal bases",
-    body: "The processing activities carried out on this site are as follows:",
+    title: '2. Data collected, purposes and legal bases',
+    body: 'The processing activities carried out on this site are as follows:',
     items: [
       {
-        label: "Contact form (/contact)",
+        label: 'Contact form (/contact)',
         body: "Data: name, email address, subject and message. Transmission: the form opens your email client via a mailto link and no data is stored on the site's server. Purpose: to reply to you. Legal basis: pre-contractual measures at your request (art. 6.1.b GDPR). Retention: kept in your email thread, manually purged after the conversation ends (typically 12 months).",
       },
       {
-        label: "Booking a meeting (Cal.com)",
+        label: 'Booking a meeting (Cal.com)',
         body: "If you use the « Book a slot » button, you are redirected to Cal.com (Cal.com, Inc.) which acts as an independent data controller. Booking data (name, email, slot) is sent directly to them. See Cal.com's policy: cal.com/privacy.",
       },
       {
-        label: "Ebook download (/ebook)",
-        body: "The PDF is served as a direct download. No personal data is collected to access it.",
+        label: 'Ebook download (/ebook)',
+        body: 'The PDF is served as a direct download. No personal data is collected to access it.',
       },
       {
-        label: "Audience measurement (Vercel Analytics, Vercel Speed Insights)",
+        label: 'Audience measurement (Vercel Analytics, Vercel Speed Insights)',
         body: "Data: page viewed, referrer, device type, country, Core Web Vitals metrics. These tools use neither cookies nor persistent identifiers. Purpose: measure audience and technical performance. Legal basis: publisher's legitimate interest in improving the site (art. 6.1.f GDPR). CNIL compliance: exempt from consent for audience measurement, default configuration. Retention: 30 days at Vercel.",
       },
       {
-        label: "Admin authentication cookie",
-        body: "A technical cookie `admin-auth` (HttpOnly, Secure, SameSite=strict, 24 h lifetime) is set only when the site editor logs in to the admin area. It never applies to visitors. Legal basis: legitimate interest (IT system security).",
+        label: 'Admin authentication cookie',
+        body: 'A technical cookie `admin-auth` (HttpOnly, Secure, SameSite=strict, 24 h lifetime) is set only when the site editor logs in to the admin area. It never applies to visitors. Legal basis: legitimate interest (IT system security).',
       },
     ],
   },
   {
-    title: "3. Recipients and subprocessors",
-    body: "Data is only accessible to the data controller. The following subprocessors are involved in running the site:",
+    title: '3. Recipients and subprocessors',
+    body: 'Data is only accessible to the data controller. The following subprocessors are involved in running the site:',
     items: [
       {
-        label: "Vercel Inc. — hosting, analytics, server logs",
-        body: "Vercel Inc. (440 N Baxter St, Coppell, TX 75019, United States) hosts the site and collects audience metrics. Vercel is certified under the EU-U.S. Data Privacy Framework (DPF). A Data Processing Agreement is in place (vercel.com/legal/dpa).",
+        label: 'Vercel Inc. — hosting, analytics, server logs',
+        body: 'Vercel Inc. (440 N Baxter St, Coppell, TX 75019, United States) hosts the site and collects audience metrics. Vercel is certified under the EU-U.S. Data Privacy Framework (DPF). A Data Processing Agreement is in place (vercel.com/legal/dpa).',
       },
       {
-        label: "GitHub Inc. — code and blog articles storage",
-        body: "GitHub Inc. (88 Colin P Kelly Jr St, San Francisco, CA 94107, United States) hosts the site repository. Blog articles (public content) are stored there. GitHub is certified under the EU-U.S. Data Privacy Framework.",
+        label: 'GitHub Inc. — code and blog articles storage',
+        body: 'GitHub Inc. (88 Colin P Kelly Jr St, San Francisco, CA 94107, United States) hosts the site repository. Blog articles (public content) are stored there. GitHub is certified under the EU-U.S. Data Privacy Framework.',
       },
       {
-        label: "Anthropic PBC — content generation, admin-side only",
-        body: "Anthropic PBC (San Francisco, United States) provides the Claude model used only by the editor in the admin area to assist with drafting. No visitor data is ever sent to Anthropic.",
+        label: 'Anthropic PBC — content generation, admin-side only',
+        body: 'Anthropic PBC (San Francisco, United States) provides the Claude model used only by the editor in the admin area to assist with drafting. No visitor data is ever sent to Anthropic.',
       },
     ],
   },
   {
-    title: "4. Transfers outside the European Union",
-    body: "Technical data (audience metrics, access logs) is processed in the United States via Vercel Inc. Vercel is certified under the EU-U.S. Data Privacy Framework, a mechanism recognised by the European Commission as providing an adequate level of protection (adequacy decision of 10 July 2023). A subprocessor agreement (DPA) with standard contractual clauses applies in addition.",
+    title: '4. Transfers outside the European Union',
+    body: 'Technical data (audience metrics, access logs) is processed in the United States via Vercel Inc. Vercel is certified under the EU-U.S. Data Privacy Framework, a mechanism recognised by the European Commission as providing an adequate level of protection (adequacy decision of 10 July 2023). A subprocessor agreement (DPA) with standard contractual clauses applies in addition.',
   },
   {
-    title: "5. Your rights",
-    body: "Under articles 15 to 22 of the GDPR and the French Data Protection Act, you have the right to access, rectify, erase, restrict processing of, object to processing of, and port your data. You can exercise these rights by emailing " + data.personal.email + ". A response will be provided within a maximum of one month.",
+    title: '5. Your rights',
+    body:
+      'Under articles 15 to 22 of the GDPR and the French Data Protection Act, you have the right to access, rectify, erase, restrict processing of, object to processing of, and port your data. You can exercise these rights by emailing ' +
+      data.personal.email +
+      '. A response will be provided within a maximum of one month.',
   },
   {
-    title: "6. Lodging a complaint with the CNIL",
-    body: "If you believe the processing of your personal data is not compliant with the regulation, you have the right to lodge a complaint with the CNIL (French data protection authority), 3 Place de Fontenoy, TSA 80715, 75334 Paris Cedex 07 — www.cnil.fr.",
+    title: '6. Lodging a complaint with the CNIL',
+    body: 'If you believe the processing of your personal data is not compliant with the regulation, you have the right to lodge a complaint with the CNIL (French data protection authority), 3 Place de Fontenoy, TSA 80715, 75334 Paris Cedex 07 — www.cnil.fr.',
   },
   {
-    title: "7. Cookies and trackers",
-    body: "This site uses no advertising, third-party analytics or personalisation cookies. The only cookie set (`admin-auth`) is used exclusively for editor authentication and does not apply to visitors. No consent banner is therefore required (CNIL recommendation of 17 September 2020 on exempted audience measurement).",
+    title: '7. Cookies and trackers',
+    body: 'This site uses no advertising, third-party analytics or personalisation cookies. The only cookie set (`admin-auth`) is used exclusively for editor authentication and does not apply to visitors. No consent banner is therefore required (CNIL recommendation of 17 September 2020 on exempted audience measurement).',
   },
   {
-    title: "8. Security",
-    body: "The site applies technical security measures: enforced TLS encryption (HSTS preloaded), restrictive Content-Security-Policy, HttpOnly/Secure/SameSite=strict cookies for the admin area, HMAC-signed authentication. Passwords and secrets are never exposed client-side.",
+    title: '8. Security',
+    body: 'The site applies technical security measures: enforced TLS encryption (HSTS preloaded), restrictive Content-Security-Policy, HttpOnly/Secure/SameSite=strict cookies for the admin area, HMAC-signed authentication. Passwords and secrets are never exposed client-side.',
   },
   {
-    title: "9. Policy updates",
-    body: "This policy may be updated to reflect changes to the site or regulation. The last update date appears at the bottom of this page.",
+    title: '9. Policy updates',
+    body: 'This policy may be updated to reflect changes to the site or regulation. The last update date appears at the bottom of this page.',
   },
 ];
 
-const i18n = lang === 'fr'
-  ? {
-      pageTitle: 'Politique de confidentialité',
-      pageDescription: 'Politique de confidentialité du site pierretouzet.fr — collecte et traitement des données personnelles.',
-      heading: 'Politique de confidentialité',
-      intro: "Cette politique décrit comment les données personnelles sont collectées, utilisées et protégées sur pierretouzet.fr. Elle s'adresse aux visiteurs du site.",
-      lastUpdatedLabel: 'Dernière mise à jour : ',
-      sections: frSections,
-    }
-  : {
-      pageTitle: 'Privacy policy',
-      pageDescription: 'Privacy policy for pierretouzet.fr — how personal data is collected and processed.',
-      heading: 'Privacy policy',
-      intro: "This policy describes how personal data is collected, used and protected on pierretouzet.fr. It is intended for visitors to the site.",
-      lastUpdatedLabel: 'Last updated: ',
-      sections: enSections,
-    };
+const i18n =
+  lang === 'fr'
+    ? {
+        pageTitle: 'Politique de confidentialité',
+        pageDescription:
+          'Politique de confidentialité du site pierretouzet.fr — collecte et traitement des données personnelles.',
+        heading: 'Politique de confidentialité',
+        intro:
+          "Cette politique décrit comment les données personnelles sont collectées, utilisées et protégées sur pierretouzet.fr. Elle s'adresse aux visiteurs du site.",
+        lastUpdatedLabel: 'Dernière mise à jour : ',
+        sections: frSections,
+      }
+    : {
+        pageTitle: 'Privacy policy',
+        pageDescription:
+          'Privacy policy for pierretouzet.fr — how personal data is collected and processed.',
+        heading: 'Privacy policy',
+        intro:
+          'This policy describes how personal data is collected, used and protected on pierretouzet.fr. It is intended for visitors to the site.',
+        lastUpdatedLabel: 'Last updated: ',
+        sections: enSections,
+      };
 ---
 
 <BaseLayout
@@ -195,28 +206,35 @@ const i18n = lang === 'fr'
   <section class="py-20 px-6">
     <div class="max-w-3xl mx-auto">
       <span class="mono-label mb-4 block">Privacy</span>
-      <h1 class="font-display text-heading text-zinc-900 dark:text-zinc-50 font-bold mb-4">{i18n.heading}</h1>
-      <div class="h-px bg-linear-to-r from-accent-500 via-electric-500 to-transparent mt-6 mb-8"></div>
+      <h1 class="font-display text-heading text-zinc-900 dark:text-zinc-50 font-bold mb-4">
+        {i18n.heading}
+      </h1>
+      <div class="h-px bg-linear-to-r from-accent-500 via-electric-500 to-transparent mt-6 mb-8">
+      </div>
 
       <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-10">{i18n.intro}</p>
 
       <div class="space-y-10 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-        {i18n.sections.map((section) => (
-          <div>
-            <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">{section.title}</h2>
-            <p>{section.body}</p>
-            {section.items && (
-              <ul class="mt-4 space-y-4 pl-4 border-l border-zinc-200 dark:border-zinc-800">
-                {section.items.map((item) => (
-                  <li>
-                    <p class="text-zinc-900 dark:text-zinc-100 font-medium mb-1">{item.label}</p>
-                    <p>{item.body}</p>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        ))}
+        {
+          i18n.sections.map((section) => (
+            <div>
+              <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">
+                {section.title}
+              </h2>
+              <p>{section.body}</p>
+              {section.items && (
+                <ul class="mt-4 space-y-4 pl-4 border-l border-zinc-200 dark:border-zinc-800">
+                  {section.items.map((item) => (
+                    <li>
+                      <p class="text-zinc-900 dark:text-zinc-100 font-medium mb-1">{item.label}</p>
+                      <p>{item.body}</p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))
+        }
       </div>
 
       <p class="mt-12 font-mono text-caption uppercase tracking-wider text-zinc-500">

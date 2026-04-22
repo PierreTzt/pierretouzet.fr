@@ -22,7 +22,7 @@ for (const [name, fr, en] of checks) {
 
 // Check project ID alignment
 for (const frProject of frData.projects) {
-  if (!enData.projects.find(p => p.id === frProject.id)) {
+  if (!enData.projects.find((p) => p.id === frProject.id)) {
     console.error(`PARITY ERROR: project id "${frProject.id}" exists in FR but not EN`);
     hasError = true;
   }

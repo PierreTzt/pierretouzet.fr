@@ -1,5 +1,5 @@
 ---
-title: "AI in education: what I see in the field"
+title: 'AI in education: what I see in the field'
 description: "A field report on the concrete use of generative AI in a school network. What works, what doesn't, and why we need to stop being afraid."
 date: 2026-03-07
 lang: en

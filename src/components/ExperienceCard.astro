@@ -27,16 +27,19 @@ const { experience, index, isLast = false } = Astro.props;
   <!-- Timeline column -->
   <div class="relative flex flex-col items-center pt-8">
     <!-- Dot -->
-    <div class="relative z-10 w-3 h-3 rounded-full border-2 border-accent-500 bg-white dark:bg-zinc-950 group-hover:bg-accent-500 transition-colors duration-300 shrink-0"></div>
+    <div
+      class="relative z-10 w-3 h-3 rounded-full border-2 border-accent-500 bg-white dark:bg-zinc-950 group-hover:bg-accent-500 transition-colors duration-300 shrink-0"
+    >
+    </div>
     <!-- Line -->
-    {!isLast && (
-      <div class="w-px flex-1 bg-zinc-200 dark:bg-zinc-800 mt-0"></div>
-    )}
+    {!isLast && <div class="w-px flex-1 bg-zinc-200 dark:bg-zinc-800 mt-0" />}
   </div>
 
   <!-- Content -->
   <div class="pb-10">
-    <div class="py-6 px-5 -mt-1 hover:bg-zinc-100/50 dark:hover:bg-zinc-900/30 transition-colors duration-200 rounded-lg">
+    <div
+      class="py-6 px-5 -mt-1 hover:bg-zinc-100/50 dark:hover:bg-zinc-900/30 transition-colors duration-200 rounded-lg"
+    >
       <!-- Mobile dates -->
       <div class="md:hidden mb-2">
         <span class="font-mono text-xs text-zinc-500 dark:text-zinc-400">
@@ -47,7 +50,9 @@ const { experience, index, isLast = false } = Astro.props;
         </span>
       </div>
 
-      <h3 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-2 group-hover:text-accent-500 transition-colors duration-200">
+      <h3
+        class="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-2 group-hover:text-accent-500 transition-colors duration-200"
+      >
         {experience.position}
       </h3>
       <p class="text-sm text-zinc-500 dark:text-zinc-400 mb-4 leading-relaxed">
@@ -55,20 +60,24 @@ const { experience, index, isLast = false } = Astro.props;
       </p>
 
       <ul class="space-y-1.5 mb-5">
-        {experience.achievements.map((achievement) => (
-          <li class="flex items-start gap-2 text-sm text-zinc-600 dark:text-zinc-400">
-            <span class="inline-block w-1 h-1 bg-accent-500 mt-2 shrink-0"></span>
-            {achievement}
-          </li>
-        ))}
+        {
+          experience.achievements.map((achievement) => (
+            <li class="flex items-start gap-2 text-sm text-zinc-600 dark:text-zinc-400">
+              <span class="inline-block w-1 h-1 bg-accent-500 mt-2 shrink-0" />
+              {achievement}
+            </li>
+          ))
+        }
       </ul>
 
       <div class="flex flex-wrap gap-2">
-        {experience.technologies.map((tech) => (
-          <span class="font-mono text-caption uppercase tracking-wider px-2 py-1 border border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:border-accent-500/50 hover:text-accent-500 transition-colors duration-200">
-            {tech}
-          </span>
-        ))}
+        {
+          experience.technologies.map((tech) => (
+            <span class="font-mono text-caption uppercase tracking-wider px-2 py-1 border border-zinc-200 dark:border-zinc-800 text-zinc-500 hover:border-accent-500/50 hover:text-accent-500 transition-colors duration-200">
+              {tech}
+            </span>
+          ))
+        }
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 ---
-title: "Change management in higher education: stop the PowerPoint trainings"
-description: "Why most digital transformation projects fail in schools — and what I learned deploying tools across 6 campuses."
+title: 'Change management in higher education: stop the PowerPoint trainings'
+description: 'Why most digital transformation projects fail in schools — and what I learned deploying tools across 6 campuses.'
 date: 2026-02-18
 lang: en
 tags: ['Digital transformation', 'Change management', 'Higher education']

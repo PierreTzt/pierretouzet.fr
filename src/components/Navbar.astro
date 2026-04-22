@@ -31,7 +31,10 @@ function isActive(href: string): boolean {
 }
 ---
 
-<nav aria-label={lang === 'fr' ? 'Navigation principale' : 'Main navigation'} class="fixed top-0 left-0 right-0 z-50 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/90 dark:bg-zinc-950/90 backdrop-blur-xs">
+<nav
+  aria-label={lang === 'fr' ? 'Navigation principale' : 'Main navigation'}
+  class="fixed top-0 left-0 right-0 z-50 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50/90 dark:bg-zinc-950/90 backdrop-blur-xs"
+>
   <div class="max-w-5xl mx-auto px-6">
     <div class="flex items-center justify-between h-14">
       <a
@@ -43,20 +46,22 @@ function isActive(href: string): boolean {
 
       <!-- Desktop nav -->
       <div class="hidden md:flex items-center gap-6">
-        {navLinks.map((link) => (
-          <a
-            href={link.href}
-            class:list={[
-              'font-mono text-xs uppercase tracking-wider transition-colors duration-200 py-1 focus:outline-2 focus:outline-offset-2 focus:outline-accent-500',
-              isActive(link.href)
-                ? 'text-accent-600 dark:text-accent-400'
-                : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100',
-            ]}
-            aria-current={isActive(link.href) ? 'page' : undefined}
-          >
-            {link.label}
-          </a>
-        ))}
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.href}
+              class:list={[
+                'font-mono text-xs uppercase tracking-wider transition-colors duration-200 py-1 focus:outline-2 focus:outline-offset-2 focus:outline-accent-500',
+                isActive(link.href)
+                  ? 'text-accent-600 dark:text-accent-400'
+                  : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100',
+              ]}
+              aria-current={isActive(link.href) ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          ))
+        }
         <span class="w-px h-4 bg-zinc-200 dark:bg-zinc-800"></span>
         <LanguageSwitcher lang={lang} label={ui.switchLang} />
         <ThemeToggle label={ui.toggleTheme} />
@@ -73,7 +78,14 @@ function isActive(href: string): boolean {
           aria-label={ui.nav.menuLabel}
           aria-expanded="false"
         >
-          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <svg
+            class="w-5 h-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+          >
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
         </button>
@@ -81,22 +93,27 @@ function isActive(href: string): boolean {
     </div>
 
     <!-- Mobile menu -->
-    <div id="mobile-menu" class="hidden md:hidden pb-4 border-t border-zinc-200 dark:border-zinc-800 pt-4">
+    <div
+      id="mobile-menu"
+      class="hidden md:hidden pb-4 border-t border-zinc-200 dark:border-zinc-800 pt-4"
+    >
       <div class="flex flex-col gap-3">
-        {navLinks.map((link) => (
-          <a
-            href={link.href}
-            class:list={[
-              'font-mono text-xs uppercase tracking-wider transition-colors duration-200 py-1',
-              isActive(link.href)
-                ? 'text-accent-600 dark:text-accent-400'
-                : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100',
-            ]}
-            aria-current={isActive(link.href) ? 'page' : undefined}
-          >
-            {link.label}
-          </a>
-        ))}
+        {
+          navLinks.map((link) => (
+            <a
+              href={link.href}
+              class:list={[
+                'font-mono text-xs uppercase tracking-wider transition-colors duration-200 py-1',
+                isActive(link.href)
+                  ? 'text-accent-600 dark:text-accent-400'
+                  : 'text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100',
+              ]}
+              aria-current={isActive(link.href) ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          ))
+        }
       </div>
     </div>
   </div>
@@ -115,10 +132,14 @@ function isActive(href: string): boolean {
     // Reset menu state on navigation
     menu?.classList.add('hidden');
     btn?.setAttribute('aria-expanded', 'false');
-    btn?.addEventListener('click', () => {
-      const isOpen = menu?.classList.toggle('hidden') === false;
-      btn.setAttribute('aria-expanded', String(isOpen));
-    }, { signal });
+    btn?.addEventListener(
+      'click',
+      () => {
+        const isOpen = menu?.classList.toggle('hidden') === false;
+        btn.setAttribute('aria-expanded', String(isOpen));
+      },
+      { signal },
+    );
   }
   initMobileMenu();
   document.addEventListener('astro:after-swap', initMobileMenu);

@@ -2,10 +2,11 @@
 export const prerender = false;
 import { getCollection } from 'astro:content';
 
-const posts = (await getCollection('blog', ({ data }) => !data.draft))
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+);
 
-const blogArticles = posts.map(p => ({
+const blogArticles = posts.map((p) => ({
   slug: p.slug,
   title: p.data.title,
   description: p.data.description,
@@ -15,819 +16,1567 @@ const blogArticles = posts.map(p => ({
 }));
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex, nofollow" />
-  <title>LinkedIn Studio — Admin</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Inter, system-ui, sans-serif; background: #fafafa; color: #18181b; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
-    h1 { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem; }
-    .subtitle { font-size: 0.8125rem; color: #71717a; margin-bottom: 2rem; font-family: ui-monospace, monospace; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>LinkedIn Studio — Admin</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Inter, system-ui, sans-serif;
+        background: #fafafa;
+        color: #18181b;
+      }
+      .container {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem;
+      }
+      h1 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+      }
+      .subtitle {
+        font-size: 0.8125rem;
+        color: #71717a;
+        margin-bottom: 2rem;
+        font-family: ui-monospace, monospace;
+      }
 
-    /* Nav */
-    .admin-nav { display: flex; gap: 1.5rem; margin-bottom: 2rem; font-size: 0.8125rem; font-family: ui-monospace, monospace; }
-    .admin-nav a { color: #71717a; text-decoration: none; }
-    .admin-nav a:hover { color: #4f46e5; }
-    .admin-nav a.active { color: #4f46e5; font-weight: 600; }
+      /* Nav */
+      .admin-nav {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        font-size: 0.8125rem;
+        font-family: ui-monospace, monospace;
+      }
+      .admin-nav a {
+        color: #71717a;
+        text-decoration: none;
+      }
+      .admin-nav a:hover {
+        color: #4f46e5;
+      }
+      .admin-nav a.active {
+        color: #4f46e5;
+        font-weight: 600;
+      }
 
-    /* Form elements */
-    label { display: block; font-size: 0.6875rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: #71717a; margin-bottom: 0.375rem; font-family: ui-monospace, monospace; }
-    input, select, textarea { width: 100%; padding: 0.625rem 0.75rem; border: 1px solid #e4e4e7; background: white; font-size: 0.875rem; font-family: inherit; outline: none; transition: border-color 0.15s; }
-    input:focus, select:focus, textarea:focus { border-color: #4f46e5; }
-    textarea { resize: vertical; line-height: 1.6; }
+      /* Form elements */
+      label {
+        display: block;
+        font-size: 0.6875rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #71717a;
+        margin-bottom: 0.375rem;
+        font-family: ui-monospace, monospace;
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 0.625rem 0.75rem;
+        border: 1px solid #e4e4e7;
+        background: white;
+        font-size: 0.875rem;
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.15s;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: #4f46e5;
+      }
+      textarea {
+        resize: vertical;
+        line-height: 1.6;
+      }
 
-    .field { margin-bottom: 1.25rem; }
-    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .field {
+        margin-bottom: 1.25rem;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
 
-    /* Buttons */
-    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.625rem 1.25rem; font-size: 0.8125rem; font-weight: 500; font-family: inherit; border: none; cursor: pointer; transition: all 0.15s; }
-    .btn-primary { background: #18181b; color: white; }
-    .btn-primary:hover:not(:disabled) { background: #4f46e5; }
-    .btn-accent { background: #4f46e5; color: white; }
-    .btn-accent:hover:not(:disabled) { background: #4338ca; }
-    .btn-ghost { background: transparent; color: #71717a; border: 1px solid #e4e4e7; }
-    .btn-ghost:hover:not(:disabled) { color: #18181b; border-color: #a1a1aa; }
-    .btn-sm { padding: 0.375rem 0.75rem; font-size: 0.75rem; }
-    .btn-danger { background: transparent; color: #ef4444; border: 1px solid #fecaca; }
-    .btn-danger:hover { background: #fef2f2; }
-    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+      /* Buttons */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.625rem 1.25rem;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        font-family: inherit;
+        border: none;
+        cursor: pointer;
+        transition: all 0.15s;
+      }
+      .btn-primary {
+        background: #18181b;
+        color: white;
+      }
+      .btn-primary:hover:not(:disabled) {
+        background: #4f46e5;
+      }
+      .btn-accent {
+        background: #4f46e5;
+        color: white;
+      }
+      .btn-accent:hover:not(:disabled) {
+        background: #4338ca;
+      }
+      .btn-ghost {
+        background: transparent;
+        color: #71717a;
+        border: 1px solid #e4e4e7;
+      }
+      .btn-ghost:hover:not(:disabled) {
+        color: #18181b;
+        border-color: #a1a1aa;
+      }
+      .btn-sm {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.75rem;
+      }
+      .btn-danger {
+        background: transparent;
+        color: #ef4444;
+        border: 1px solid #fecaca;
+      }
+      .btn-danger:hover {
+        background: #fef2f2;
+      }
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
 
-    .actions { display: flex; gap: 0.75rem; margin-top: 1.5rem; }
+      .actions {
+        display: flex;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+      }
 
-    /* Sections */
-    .card { background: white; border: 1px solid #e4e4e7; padding: 1.5rem; margin-bottom: 1.5rem; }
-    .card-header { font-size: 0.6875rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: #4f46e5; margin-bottom: 1rem; font-family: ui-monospace, monospace; }
+      /* Sections */
+      .card {
+        background: white;
+        border: 1px solid #e4e4e7;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+      .card-header {
+        font-size: 0.6875rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #4f46e5;
+        margin-bottom: 1rem;
+        font-family: ui-monospace, monospace;
+      }
 
-    /* Main tabs */
-    .main-tabs { display: flex; gap: 0; margin-bottom: 1.5rem; border-bottom: 1px solid #e4e4e7; }
-    .main-tab { padding: 0.625rem 1.25rem; font-size: 0.8125rem; font-family: ui-monospace, monospace; cursor: pointer; border: none; background: transparent; color: #71717a; border-bottom: 2px solid transparent; transition: all 0.15s; }
-    .main-tab:hover { color: #18181b; }
-    .main-tab.active { color: #4f46e5; border-bottom-color: #4f46e5; font-weight: 600; }
+      /* Main tabs */
+      .main-tabs {
+        display: flex;
+        gap: 0;
+        margin-bottom: 1.5rem;
+        border-bottom: 1px solid #e4e4e7;
+      }
+      .main-tab {
+        padding: 0.625rem 1.25rem;
+        font-size: 0.8125rem;
+        font-family: ui-monospace, monospace;
+        cursor: pointer;
+        border: none;
+        background: transparent;
+        color: #71717a;
+        border-bottom: 2px solid transparent;
+        transition: all 0.15s;
+      }
+      .main-tab:hover {
+        color: #18181b;
+      }
+      .main-tab.active {
+        color: #4f46e5;
+        border-bottom-color: #4f46e5;
+        font-weight: 600;
+      }
 
-    /* Format selector */
-    .format-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; margin-top: 0.375rem; }
-    .format-option { position: relative; }
-    .format-option input { position: absolute; opacity: 0; pointer-events: none; }
-    .format-option label {
-      display: flex; flex-direction: column; gap: 0.25rem;
-      padding: 0.875rem; border: 2px solid #e4e4e7; cursor: pointer;
-      transition: all 0.15s; text-transform: none; letter-spacing: normal;
-      font-family: inherit; font-size: 0.8125rem; font-weight: 500; color: #18181b;
-    }
-    .format-option label span { font-size: 0.6875rem; font-weight: 400; color: #71717a; }
-    .format-option input:checked + label { border-color: #4f46e5; background: rgba(79, 70, 229, 0.04); }
-    .format-option label:hover { border-color: #a1a1aa; }
+      /* Format selector */
+      .format-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 0.75rem;
+        margin-top: 0.375rem;
+      }
+      .format-option {
+        position: relative;
+      }
+      .format-option input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .format-option label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        padding: 0.875rem;
+        border: 2px solid #e4e4e7;
+        cursor: pointer;
+        transition: all 0.15s;
+        text-transform: none;
+        letter-spacing: normal;
+        font-family: inherit;
+        font-size: 0.8125rem;
+        font-weight: 500;
+        color: #18181b;
+      }
+      .format-option label span {
+        font-size: 0.6875rem;
+        font-weight: 400;
+        color: #71717a;
+      }
+      .format-option input:checked + label {
+        border-color: #4f46e5;
+        background: rgba(79, 70, 229, 0.04);
+      }
+      .format-option label:hover {
+        border-color: #a1a1aa;
+      }
 
-    /* Status */
-    .status { font-size: 0.75rem; color: #71717a; font-family: ui-monospace, monospace; padding: 0.75rem 0; }
-    .status.error { color: #ef4444; }
-    .status.success { color: #22c55e; }
+      /* Status */
+      .status {
+        font-size: 0.75rem;
+        color: #71717a;
+        font-family: ui-monospace, monospace;
+        padding: 0.75rem 0;
+      }
+      .status.error {
+        color: #ef4444;
+      }
+      .status.success {
+        color: #22c55e;
+      }
 
-    /* Spinner */
-    .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(255,255,255,0.3); border-radius: 50%; border-top-color: white; animation: spin 0.6s linear infinite; }
-    @keyframes spin { to { transform: rotate(360deg); } }
+      /* Spinner */
+      .spinner {
+        display: inline-block;
+        width: 14px;
+        height: 14px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 0.6s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
 
-    .hidden { display: none; }
+      .hidden {
+        display: none;
+      }
 
-    /* Two-column layout for step 2 */
-    .edit-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-    @media (max-width: 768px) { .edit-layout { grid-template-columns: 1fr; } .format-options { grid-template-columns: 1fr; } }
+      /* Two-column layout for step 2 */
+      .edit-layout {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+      }
+      @media (max-width: 768px) {
+        .edit-layout {
+          grid-template-columns: 1fr;
+        }
+        .format-options {
+          grid-template-columns: 1fr;
+        }
+      }
 
-    /* Visual preview */
-    .visual-preview { background: #f4f4f5; border: 1px solid #e4e4e7; display: flex; align-items: center; justify-content: center; padding: 1rem; min-height: 200px; }
-    .visual-preview img { max-width: 100%; max-height: 400px; object-fit: contain; }
-    .visual-preview .placeholder { color: #71717a; font-size: 0.8125rem; font-family: ui-monospace, monospace; }
+      /* Visual preview */
+      .visual-preview {
+        background: #f4f4f5;
+        border: 1px solid #e4e4e7;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        min-height: 200px;
+      }
+      .visual-preview img {
+        max-width: 100%;
+        max-height: 400px;
+        object-fit: contain;
+      }
+      .visual-preview .placeholder {
+        color: #71717a;
+        font-size: 0.8125rem;
+        font-family: ui-monospace, monospace;
+      }
 
-    /* Size selector */
-    .size-options { display: flex; gap: 0.5rem; margin-top: 0.375rem; }
-    .size-option { position: relative; }
-    .size-option input { position: absolute; opacity: 0; pointer-events: none; }
-    .size-option label {
-      display: inline-flex; align-items: center; gap: 0.375rem;
-      padding: 0.375rem 0.75rem; border: 1px solid #e4e4e7; cursor: pointer;
-      font-size: 0.6875rem; font-family: ui-monospace, monospace; color: #71717a;
-      text-transform: none; letter-spacing: normal; transition: all 0.15s;
-    }
-    .size-option input:checked + label { border-color: #4f46e5; color: #4f46e5; background: rgba(79, 70, 229, 0.04); }
-    .size-option label:hover { border-color: #a1a1aa; }
+      /* Size selector */
+      .size-options {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.375rem;
+      }
+      .size-option {
+        position: relative;
+      }
+      .size-option input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .size-option label {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.375rem;
+        padding: 0.375rem 0.75rem;
+        border: 1px solid #e4e4e7;
+        cursor: pointer;
+        font-size: 0.6875rem;
+        font-family: ui-monospace, monospace;
+        color: #71717a;
+        text-transform: none;
+        letter-spacing: normal;
+        transition: all 0.15s;
+      }
+      .size-option input:checked + label {
+        border-color: #4f46e5;
+        color: #4f46e5;
+        background: rgba(79, 70, 229, 0.04);
+      }
+      .size-option label:hover {
+        border-color: #a1a1aa;
+      }
 
-    /* LinkedIn preview mock */
-    .linkedin-mock { background: white; border: 1px solid #e4e4e7; padding: 1rem; margin-top: 1.5rem; }
-    .linkedin-mock-header { display: flex; gap: 0.625rem; align-items: flex-start; margin-bottom: 0.75rem; }
-    .linkedin-mock-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
-    .linkedin-mock-meta { display: flex; flex-direction: column; }
-    .linkedin-mock-name { font-size: 0.8125rem; font-weight: 600; color: #18181b; }
-    .linkedin-mock-title { font-size: 0.6875rem; color: #71717a; line-height: 1.3; }
-    .linkedin-mock-time { font-size: 0.625rem; color: #a1a1aa; }
-    .linkedin-mock-body { font-size: 0.8125rem; line-height: 1.5; color: #18181b; white-space: pre-line; margin-bottom: 0.75rem; }
-    .linkedin-mock-truncated { max-height: 4.5em; overflow: hidden; position: relative; }
-    .linkedin-mock-truncated::after { content: '...voir plus'; position: absolute; bottom: 0; right: 0; background: white; padding-left: 0.25rem; color: #71717a; font-weight: 500; font-size: 0.8125rem; }
-    .linkedin-mock-image { width: 100%; margin-bottom: 0.75rem; }
-    .linkedin-mock-image img { width: 100%; display: block; }
-    .linkedin-mock-actions { display: flex; gap: 1rem; padding-top: 0.5rem; border-top: 1px solid #e4e4e7; }
-    .linkedin-mock-action { display: flex; align-items: center; gap: 0.25rem; font-size: 0.6875rem; color: #71717a; }
+      /* LinkedIn preview mock */
+      .linkedin-mock {
+        background: white;
+        border: 1px solid #e4e4e7;
+        padding: 1rem;
+        margin-top: 1.5rem;
+      }
+      .linkedin-mock-header {
+        display: flex;
+        gap: 0.625rem;
+        align-items: flex-start;
+        margin-bottom: 0.75rem;
+      }
+      .linkedin-mock-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+      .linkedin-mock-meta {
+        display: flex;
+        flex-direction: column;
+      }
+      .linkedin-mock-name {
+        font-size: 0.8125rem;
+        font-weight: 600;
+        color: #18181b;
+      }
+      .linkedin-mock-title {
+        font-size: 0.6875rem;
+        color: #71717a;
+        line-height: 1.3;
+      }
+      .linkedin-mock-time {
+        font-size: 0.625rem;
+        color: #a1a1aa;
+      }
+      .linkedin-mock-body {
+        font-size: 0.8125rem;
+        line-height: 1.5;
+        color: #18181b;
+        white-space: pre-line;
+        margin-bottom: 0.75rem;
+      }
+      .linkedin-mock-truncated {
+        max-height: 4.5em;
+        overflow: hidden;
+        position: relative;
+      }
+      .linkedin-mock-truncated::after {
+        content: '...voir plus';
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        background: white;
+        padding-left: 0.25rem;
+        color: #71717a;
+        font-weight: 500;
+        font-size: 0.8125rem;
+      }
+      .linkedin-mock-image {
+        width: 100%;
+        margin-bottom: 0.75rem;
+      }
+      .linkedin-mock-image img {
+        width: 100%;
+        display: block;
+      }
+      .linkedin-mock-actions {
+        display: flex;
+        gap: 1rem;
+        padding-top: 0.5rem;
+        border-top: 1px solid #e4e4e7;
+      }
+      .linkedin-mock-action {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.6875rem;
+        color: #71717a;
+      }
 
-    /* Export buttons */
-    .export-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
-    .btn-copy-ok { background: #22c55e; color: white; }
+      /* Export buttons */
+      .export-actions {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+      .btn-copy-ok {
+        background: #22c55e;
+        color: white;
+      }
 
-    /* Veille items */
-    .veille-item { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.75rem; border: 1px solid #e4e4e7; margin-bottom: 0.5rem; background: white; }
-    .veille-item-content { flex: 1; }
-    .veille-item-title { font-size: 0.8125rem; font-weight: 500; color: #18181b; margin-bottom: 0.25rem; }
-    .veille-item-url { font-size: 0.6875rem; color: #4f46e5; word-break: break-all; }
-    .veille-item-note { font-size: 0.75rem; color: #71717a; margin-top: 0.25rem; }
-    .veille-item-date { font-size: 0.625rem; color: #a1a1aa; font-family: ui-monospace, monospace; }
-    .veille-empty { padding: 2rem; text-align: center; color: #a1a1aa; font-size: 0.8125rem; border: 1px dashed #e4e4e7; }
-    .veille-counter { font-size: 0.75rem; color: #71717a; font-family: ui-monospace, monospace; margin-bottom: 1rem; }
+      /* Veille items */
+      .veille-item {
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+        padding: 0.75rem;
+        border: 1px solid #e4e4e7;
+        margin-bottom: 0.5rem;
+        background: white;
+      }
+      .veille-item-content {
+        flex: 1;
+      }
+      .veille-item-title {
+        font-size: 0.8125rem;
+        font-weight: 500;
+        color: #18181b;
+        margin-bottom: 0.25rem;
+      }
+      .veille-item-url {
+        font-size: 0.6875rem;
+        color: #4f46e5;
+        word-break: break-all;
+      }
+      .veille-item-note {
+        font-size: 0.75rem;
+        color: #71717a;
+        margin-top: 0.25rem;
+      }
+      .veille-item-date {
+        font-size: 0.625rem;
+        color: #a1a1aa;
+        font-family: ui-monospace, monospace;
+      }
+      .veille-empty {
+        padding: 2rem;
+        text-align: center;
+        color: #a1a1aa;
+        font-size: 0.8125rem;
+        border: 1px dashed #e4e4e7;
+      }
+      .veille-counter {
+        font-size: 0.75rem;
+        color: #71717a;
+        font-family: ui-monospace, monospace;
+        margin-bottom: 1rem;
+      }
 
-    /* Blog articles list */
-    .blog-item { display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; border: 1px solid #e4e4e7; margin-bottom: 0.5rem; background: white; }
-    .blog-item-info { flex: 1; }
-    .blog-item-title { font-size: 0.8125rem; font-weight: 500; color: #18181b; }
-    .blog-item-meta { font-size: 0.6875rem; color: #71717a; margin-top: 0.125rem; }
-    .blog-item-meta .lang { text-transform: uppercase; font-weight: 600; color: #4f46e5; }
+      /* Blog articles list */
+      .blog-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem;
+        border: 1px solid #e4e4e7;
+        margin-bottom: 0.5rem;
+        background: white;
+      }
+      .blog-item-info {
+        flex: 1;
+      }
+      .blog-item-title {
+        font-size: 0.8125rem;
+        font-weight: 500;
+        color: #18181b;
+      }
+      .blog-item-meta {
+        font-size: 0.6875rem;
+        color: #71717a;
+        margin-top: 0.125rem;
+      }
+      .blog-item-meta .lang {
+        text-transform: uppercase;
+        font-weight: 600;
+        color: #4f46e5;
+      }
 
-    /* Feedback */
-    .feedback-zone { display: flex; gap: 0.5rem; align-items: flex-end; margin-top: 0.75rem; }
-    .feedback-zone input { flex: 1; font-size: 0.75rem; padding: 0.375rem 0.625rem; }
-    .feedback-prefs { margin-top: 0.75rem; }
-    .feedback-pref { display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.6875rem; padding: 0.25rem 0.5rem; background: #fef2f2; color: #ef4444; margin: 0.125rem; border: 1px solid #fecaca; }
-    .feedback-pref button { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 0.75rem; padding: 0 0.125rem; }
+      /* Feedback */
+      .feedback-zone {
+        display: flex;
+        gap: 0.5rem;
+        align-items: flex-end;
+        margin-top: 0.75rem;
+      }
+      .feedback-zone input {
+        flex: 1;
+        font-size: 0.75rem;
+        padding: 0.375rem 0.625rem;
+      }
+      .feedback-prefs {
+        margin-top: 0.75rem;
+      }
+      .feedback-pref {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.6875rem;
+        padding: 0.25rem 0.5rem;
+        background: #fef2f2;
+        color: #ef4444;
+        margin: 0.125rem;
+        border: 1px solid #fecaca;
+      }
+      .feedback-pref button {
+        background: none;
+        border: none;
+        color: #ef4444;
+        cursor: pointer;
+        font-size: 0.75rem;
+        padding: 0 0.125rem;
+      }
 
-    /* Tags input (export) */
-    .tags-container { display: flex; flex-wrap: wrap; gap: 0.375rem; margin-top: 0.375rem; }
-    .tag { display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.6875rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.25rem 0.625rem; background: rgba(79, 70, 229, 0.08); color: #4f46e5; font-family: ui-monospace, monospace; }
-    .tag button { background: none; border: none; color: #4f46e5; cursor: pointer; font-size: 0.875rem; line-height: 1; padding: 0 0.125rem; }
+      /* Tags input (export) */
+      .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.375rem;
+        margin-top: 0.375rem;
+      }
+      .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        font-size: 0.6875rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        padding: 0.25rem 0.625rem;
+        background: rgba(79, 70, 229, 0.08);
+        color: #4f46e5;
+        font-family: ui-monospace, monospace;
+      }
+      .tag button {
+        background: none;
+        border: none;
+        color: #4f46e5;
+        cursor: pointer;
+        font-size: 0.875rem;
+        line-height: 1;
+        padding: 0 0.125rem;
+      }
 
-    /* History */
-    .history-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin-bottom: 1.5rem; }
-    .stat-card { background: white; border: 1px solid #e4e4e7; padding: 1rem; text-align: center; }
-    .stat-value { font-size: 1.5rem; font-weight: 700; color: #18181b; }
-    .stat-label { font-size: 0.6875rem; color: #71717a; font-family: ui-monospace, monospace; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.25rem; }
-    .tag-cloud { display: flex; flex-wrap: wrap; gap: 0.375rem; margin-top: 0.5rem; }
-    .tag-cloud-item { font-size: 0.6875rem; padding: 0.25rem 0.5rem; background: rgba(79, 70, 229, 0.08); color: #4f46e5; font-family: ui-monospace, monospace; }
-    .history-month { font-size: 0.75rem; font-weight: 600; color: #71717a; text-transform: uppercase; letter-spacing: 0.05em; font-family: ui-monospace, monospace; margin: 1rem 0 0.5rem; }
-    .history-item { display: flex; gap: 0.75rem; padding: 0.75rem; border: 1px solid #e4e4e7; margin-bottom: 0.5rem; background: white; }
-    .history-item-content { flex: 1; }
-    .history-item-headline { font-size: 0.8125rem; font-weight: 500; color: #18181b; }
-    .history-item-excerpt { font-size: 0.75rem; color: #71717a; margin-top: 0.25rem; max-height: 2.25em; overflow: hidden; }
-    .history-item-meta { display: flex; gap: 0.75rem; align-items: center; margin-top: 0.375rem; font-size: 0.625rem; font-family: ui-monospace, monospace; color: #a1a1aa; }
-    .history-item-format { text-transform: uppercase; font-weight: 600; color: #4f46e5; }
-    .history-metrics { display: flex; gap: 0.5rem; align-items: center; }
-    .history-metrics input { width: 3.5rem; padding: 0.25rem 0.375rem; font-size: 0.6875rem; text-align: center; border: 1px solid #e4e4e7; font-family: ui-monospace, monospace; }
-    .history-metrics select { width: auto; padding: 0.25rem 0.375rem; font-size: 0.6875rem; border: 1px solid #e4e4e7; font-family: ui-monospace, monospace; }
-    .perf-flop { color: #ef4444; }
-    .perf-correct { color: #f59e0b; }
-    .perf-carton { color: #22c55e; }
-    .history-empty { padding: 3rem; text-align: center; color: #a1a1aa; font-size: 0.8125rem; border: 1px dashed #e4e4e7; }
+      /* History */
+      .history-stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.75rem;
+        margin-bottom: 1.5rem;
+      }
+      .stat-card {
+        background: white;
+        border: 1px solid #e4e4e7;
+        padding: 1rem;
+        text-align: center;
+      }
+      .stat-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #18181b;
+      }
+      .stat-label {
+        font-size: 0.6875rem;
+        color: #71717a;
+        font-family: ui-monospace, monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-top: 0.25rem;
+      }
+      .tag-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.375rem;
+        margin-top: 0.5rem;
+      }
+      .tag-cloud-item {
+        font-size: 0.6875rem;
+        padding: 0.25rem 0.5rem;
+        background: rgba(79, 70, 229, 0.08);
+        color: #4f46e5;
+        font-family: ui-monospace, monospace;
+      }
+      .history-month {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #71717a;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        font-family: ui-monospace, monospace;
+        margin: 1rem 0 0.5rem;
+      }
+      .history-item {
+        display: flex;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        border: 1px solid #e4e4e7;
+        margin-bottom: 0.5rem;
+        background: white;
+      }
+      .history-item-content {
+        flex: 1;
+      }
+      .history-item-headline {
+        font-size: 0.8125rem;
+        font-weight: 500;
+        color: #18181b;
+      }
+      .history-item-excerpt {
+        font-size: 0.75rem;
+        color: #71717a;
+        margin-top: 0.25rem;
+        max-height: 2.25em;
+        overflow: hidden;
+      }
+      .history-item-meta {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+        margin-top: 0.375rem;
+        font-size: 0.625rem;
+        font-family: ui-monospace, monospace;
+        color: #a1a1aa;
+      }
+      .history-item-format {
+        text-transform: uppercase;
+        font-weight: 600;
+        color: #4f46e5;
+      }
+      .history-metrics {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+      }
+      .history-metrics input {
+        width: 3.5rem;
+        padding: 0.25rem 0.375rem;
+        font-size: 0.6875rem;
+        text-align: center;
+        border: 1px solid #e4e4e7;
+        font-family: ui-monospace, monospace;
+      }
+      .history-metrics select {
+        width: auto;
+        padding: 0.25rem 0.375rem;
+        font-size: 0.6875rem;
+        border: 1px solid #e4e4e7;
+        font-family: ui-monospace, monospace;
+      }
+      .perf-flop {
+        color: #ef4444;
+      }
+      .perf-correct {
+        color: #f59e0b;
+      }
+      .perf-carton {
+        color: #22c55e;
+      }
+      .history-empty {
+        padding: 3rem;
+        text-align: center;
+        color: #a1a1aa;
+        font-size: 0.8125rem;
+        border: 1px dashed #e4e4e7;
+      }
 
-    /* Calendar */
-    .calendar-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; margin-bottom: 1rem; }
-    .calendar-item { padding: 0.75rem; border: 1px solid #e4e4e7; background: white; }
-    .calendar-value { font-size: 1.125rem; font-weight: 700; color: #18181b; }
-    .calendar-label { font-size: 0.6875rem; color: #71717a; font-family: ui-monospace, monospace; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 0.125rem; }
-    .calendar-suggestion { display: flex; gap: 0.75rem; align-items: center; padding: 0.75rem; border: 1px solid #e4e4e7; margin-bottom: 0.5rem; background: white; }
-    .calendar-suggestion-icon { width: 2rem; height: 2rem; display: flex; align-items: center; justify-content: center; font-size: 1rem; background: rgba(79, 70, 229, 0.08); flex-shrink: 0; }
-    .calendar-suggestion-text { font-size: 0.8125rem; color: #18181b; }
-    .calendar-suggestion-detail { font-size: 0.6875rem; color: #71717a; margin-top: 0.125rem; }
+      /* Calendar */
+      .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+      .calendar-item {
+        padding: 0.75rem;
+        border: 1px solid #e4e4e7;
+        background: white;
+      }
+      .calendar-value {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: #18181b;
+      }
+      .calendar-label {
+        font-size: 0.6875rem;
+        color: #71717a;
+        font-family: ui-monospace, monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-top: 0.125rem;
+      }
+      .calendar-suggestion {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+        padding: 0.75rem;
+        border: 1px solid #e4e4e7;
+        margin-bottom: 0.5rem;
+        background: white;
+      }
+      .calendar-suggestion-icon {
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        background: rgba(79, 70, 229, 0.08);
+        flex-shrink: 0;
+      }
+      .calendar-suggestion-text {
+        font-size: 0.8125rem;
+        color: #18181b;
+      }
+      .calendar-suggestion-detail {
+        font-size: 0.6875rem;
+        color: #71717a;
+        margin-top: 0.125rem;
+      }
 
-    /* Carousel */
-    .carousel-slide-row { display: flex; gap: 0.5rem; align-items: center; margin-bottom: 0.5rem; }
-    .carousel-slide-row input { flex: 1; }
-    .carousel-slide-num { font-size: 0.6875rem; font-weight: 700; color: #4f46e5; font-family: ui-monospace, monospace; width: 1.5rem; text-align: center; flex-shrink: 0; }
-    .carousel-preview-strip { display: flex; gap: 0.5rem; overflow-x: auto; padding: 0.5rem 0; }
-    .carousel-preview-strip img { width: 160px; height: 160px; object-fit: cover; border: 1px solid #e4e4e7; cursor: pointer; transition: border-color 0.15s; }
-    .carousel-preview-strip img:hover { border-color: #4f46e5; }
-    .carousel-preview-strip img.active { border-color: #4f46e5; border-width: 2px; }
+      /* Carousel */
+      .carousel-slide-row {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        margin-bottom: 0.5rem;
+      }
+      .carousel-slide-row input {
+        flex: 1;
+      }
+      .carousel-slide-num {
+        font-size: 0.6875rem;
+        font-weight: 700;
+        color: #4f46e5;
+        font-family: ui-monospace, monospace;
+        width: 1.5rem;
+        text-align: center;
+        flex-shrink: 0;
+      }
+      .carousel-preview-strip {
+        display: flex;
+        gap: 0.5rem;
+        overflow-x: auto;
+        padding: 0.5rem 0;
+      }
+      .carousel-preview-strip img {
+        width: 160px;
+        height: 160px;
+        object-fit: cover;
+        border: 1px solid #e4e4e7;
+        cursor: pointer;
+        transition: border-color 0.15s;
+      }
+      .carousel-preview-strip img:hover {
+        border-color: #4f46e5;
+      }
+      .carousel-preview-strip img.active {
+        border-color: #4f46e5;
+        border-width: 2px;
+      }
 
-    /* Banner slides */
-    .banner-slide { border: 1px solid #e4e4e7; padding: 1rem; margin-bottom: 0.75rem; background: white; position: relative; }
-    .banner-slide-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
-    .banner-slide-num { font-size: 0.6875rem; font-weight: 700; color: #4f46e5; font-family: ui-monospace, monospace; }
-    .banner-preview-item { margin-bottom: 0.75rem; }
-    .banner-preview-item img { width: 100%; border: 1px solid #e4e4e7; }
-    .banner-preview-label { font-size: 0.6875rem; color: #71717a; font-family: ui-monospace, monospace; margin-bottom: 0.25rem; }
+      /* Banner slides */
+      .banner-slide {
+        border: 1px solid #e4e4e7;
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+        background: white;
+        position: relative;
+      }
+      .banner-slide-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.75rem;
+      }
+      .banner-slide-num {
+        font-size: 0.6875rem;
+        font-weight: 700;
+        color: #4f46e5;
+        font-family: ui-monospace, monospace;
+      }
+      .banner-preview-item {
+        margin-bottom: 0.75rem;
+      }
+      .banner-preview-item img {
+        width: 100%;
+        border: 1px solid #e4e4e7;
+      }
+      .banner-preview-label {
+        font-size: 0.6875rem;
+        color: #71717a;
+        font-family: ui-monospace, monospace;
+        margin-bottom: 0.25rem;
+      }
 
-    /* RSS */
-    .rss-sources { margin-bottom: 1rem; }
-    .rss-source { display: flex; gap: 0.5rem; align-items: center; padding: 0.5rem; border: 1px solid #e4e4e7; margin-bottom: 0.375rem; background: white; font-size: 0.75rem; }
-    .rss-source-url { flex: 1; color: #4f46e5; word-break: break-all; font-family: ui-monospace, monospace; }
-    .rss-suggestion { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.625rem; border: 1px solid #e4e4e7; margin-bottom: 0.375rem; background: white; cursor: pointer; transition: border-color 0.15s; }
-    .rss-suggestion:hover { border-color: #4f46e5; }
-    .rss-suggestion-content { flex: 1; }
-    .rss-suggestion-title { font-size: 0.8125rem; font-weight: 500; color: #18181b; }
-    .rss-suggestion-desc { font-size: 0.6875rem; color: #71717a; margin-top: 0.125rem; }
-    .rss-suggestion-date { font-size: 0.625rem; color: #a1a1aa; font-family: ui-monospace, monospace; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <nav class="admin-nav">
-      <a href="/admin/blog">Blog</a>
-      <a href="/admin/linkedin" class="active">LinkedIn Studio</a>
-    </nav>
+      /* RSS */
+      .rss-sources {
+        margin-bottom: 1rem;
+      }
+      .rss-source {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+        padding: 0.5rem;
+        border: 1px solid #e4e4e7;
+        margin-bottom: 0.375rem;
+        background: white;
+        font-size: 0.75rem;
+      }
+      .rss-source-url {
+        flex: 1;
+        color: #4f46e5;
+        word-break: break-all;
+        font-family: ui-monospace, monospace;
+      }
+      .rss-suggestion {
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+        padding: 0.625rem;
+        border: 1px solid #e4e4e7;
+        margin-bottom: 0.375rem;
+        background: white;
+        cursor: pointer;
+        transition: border-color 0.15s;
+      }
+      .rss-suggestion:hover {
+        border-color: #4f46e5;
+      }
+      .rss-suggestion-content {
+        flex: 1;
+      }
+      .rss-suggestion-title {
+        font-size: 0.8125rem;
+        font-weight: 500;
+        color: #18181b;
+      }
+      .rss-suggestion-desc {
+        font-size: 0.6875rem;
+        color: #71717a;
+        margin-top: 0.125rem;
+      }
+      .rss-suggestion-date {
+        font-size: 0.625rem;
+        color: #a1a1aa;
+        font-family: ui-monospace, monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <nav class="admin-nav">
+        <a href="/admin/blog">Blog</a>
+        <a href="/admin/linkedin" class="active">LinkedIn Studio</a>
+      </nav>
 
-    <h1>LinkedIn Studio</h1>
-    <p class="subtitle">Génère tes posts LinkedIn + visuels brandés. Copie, colle, publie.</p>
+      <h1>LinkedIn Studio</h1>
+      <p class="subtitle">Génère tes posts LinkedIn + visuels brandés. Copie, colle, publie.</p>
 
-    <!-- Main tabs -->
-    <div class="main-tabs">
-      <button class="main-tab active" data-panel="panel-post">Nouveau post</button>
-      <button class="main-tab" data-panel="panel-veille">Veille hebdo</button>
-      <button class="main-tab" data-panel="panel-blog">Depuis le blog</button>
-      <button class="main-tab" data-panel="panel-history">Historique</button>
-      <button class="main-tab" data-panel="panel-reverse">LinkedIn → Blog</button>
-      <button class="main-tab" data-panel="panel-banner">Bannière</button>
-    </div>
-
-    <!-- ==================== TAB 1: Nouveau post ==================== -->
-    <div id="panel-post" class="tab-panel">
-      <div id="step-input" class="card">
-        <div class="card-header">01 — Ton sujet</div>
-        <div class="field">
-          <label for="input">Lien, idée, ou sujet</label>
-          <textarea id="input" rows="3" placeholder="Ex: Colle un lien d'article, décris un sujet, partage une stat..."></textarea>
-        </div>
-        <div class="field">
-          <label>Format du post</label>
-          <div class="format-options">
-            <div class="format-option">
-              <input type="radio" name="format" id="fmt-analyse" value="analyse" checked />
-              <label for="fmt-analyse">
-                Analyse courte
-                <span>Source + ce que j'en retiens</span>
-              </label>
-            </div>
-            <div class="format-option">
-              <input type="radio" name="format" id="fmt-opinion" value="opinion" />
-              <label for="fmt-opinion">
-                Prise de position
-                <span>J'estime que... + arguments</span>
-              </label>
-            </div>
-            <div class="format-option">
-              <input type="radio" name="format" id="fmt-fait" value="fait" />
-              <label for="fmt-fait">
-                Fait marquant
-                <span>Chiffre / stat + commentaire</span>
-              </label>
-            </div>
-            <div class="format-option">
-              <input type="radio" name="format" id="fmt-newsletter" value="newsletter" />
-              <label for="fmt-newsletter">
-                Newsletter
-                <span>Format long et approfondi</span>
-              </label>
-            </div>
-          </div>
-        </div>
-        <button id="btn-generate" class="btn btn-primary" style="width:100%">
-          Générer le post
-        </button>
-        <div id="status-generate" class="status hidden"></div>
+      <!-- Main tabs -->
+      <div class="main-tabs">
+        <button class="main-tab active" data-panel="panel-post">Nouveau post</button>
+        <button class="main-tab" data-panel="panel-veille">Veille hebdo</button>
+        <button class="main-tab" data-panel="panel-blog">Depuis le blog</button>
+        <button class="main-tab" data-panel="panel-history">Historique</button>
+        <button class="main-tab" data-panel="panel-reverse">LinkedIn → Blog</button>
+        <button class="main-tab" data-panel="panel-banner">Bannière</button>
       </div>
-    </div>
 
-    <!-- ==================== TAB 2: Veille hebdo ==================== -->
-    <div id="panel-veille" class="tab-panel hidden">
-      <div class="card">
-        <div class="card-header">Accumuler des actus</div>
-        <p class="veille-counter">Pendant la semaine, ajoute des liens. Quand tu es prêt, génère ta veille hebdo.</p>
-        <div class="row" style="margin-bottom: 1rem;">
-          <div class="field" style="margin-bottom:0">
-            <label for="veille-url">Lien de l'actu</label>
-            <input type="text" id="veille-url" placeholder="https://..." />
+      <!-- ==================== TAB 1: Nouveau post ==================== -->
+      <div id="panel-post" class="tab-panel">
+        <div id="step-input" class="card">
+          <div class="card-header">01 — Ton sujet</div>
+          <div class="field">
+            <label for="input">Lien, idée, ou sujet</label>
+            <textarea
+              id="input"
+              rows="3"
+              placeholder="Ex: Colle un lien d'article, décris un sujet, partage une stat..."
+            ></textarea>
           </div>
-          <div class="field" style="margin-bottom:0">
-            <label for="veille-title">Titre / description courte</label>
-            <input type="text" id="veille-title" placeholder="De quoi ça parle ?" />
-          </div>
-        </div>
-        <div class="field">
-          <label for="veille-note">Note perso (optionnel)</label>
-          <input type="text" id="veille-note" placeholder="Ton angle, ce qui t'a marqué..." />
-        </div>
-        <button id="btn-add-veille" class="btn btn-ghost btn-sm" style="width:100%">
-          Ajouter à la veille
-        </button>
-      </div>
-
-      <div class="card">
-        <div class="card-header">Actus accumulées</div>
-        <div id="veille-count" class="veille-counter"></div>
-        <div id="veille-list"></div>
-        <div class="actions" style="margin-top: 1rem;">
-          <button id="btn-generate-veille" class="btn btn-primary" disabled>
-            Générer la veille hebdo
-          </button>
-          <button id="btn-clear-veille" class="btn btn-danger btn-sm">
-            Vider la liste
-          </button>
-        </div>
-        <div id="status-veille" class="status hidden"></div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">Sources RSS</div>
-        <p style="font-size: 0.8125rem; color: #71717a; margin-bottom: 1rem;">Ajoute des flux RSS pour recevoir des suggestions d'actus automatiquement.</p>
-        <div class="row" style="margin-bottom: 1rem; align-items: end;">
-          <div class="field" style="margin-bottom:0">
-            <label for="rss-url">URL du flux RSS</label>
-            <input type="text" id="rss-url" placeholder="https://example.com/rss" />
-          </div>
-          <div class="field" style="margin-bottom:0">
-            <button id="btn-add-rss" class="btn btn-ghost btn-sm" style="width:100%">Ajouter</button>
-          </div>
-        </div>
-        <div id="rss-sources" class="rss-sources"></div>
-        <button id="btn-fetch-rss" class="btn btn-primary btn-sm" style="width:100%">
-          Récupérer les derniers articles
-        </button>
-        <div id="status-rss" class="status hidden"></div>
-        <div id="rss-suggestions" style="margin-top: 1rem;"></div>
-      </div>
-    </div>
-
-    <!-- ==================== TAB 3: Depuis le blog ==================== -->
-    <div id="panel-blog" class="tab-panel hidden">
-      <div class="card">
-        <div class="card-header">Décliner un article en post LinkedIn</div>
-        <div class="field">
-          <label>Format de déclinaison</label>
-          <div class="format-options">
-            <div class="format-option">
-              <input type="radio" name="blog-format" id="bfmt-analyse" value="analyse" checked />
-              <label for="bfmt-analyse">Analyse courte</label>
-            </div>
-            <div class="format-option">
-              <input type="radio" name="blog-format" id="bfmt-opinion" value="opinion" />
-              <label for="bfmt-opinion">Prise de position</label>
-            </div>
-            <div class="format-option">
-              <input type="radio" name="blog-format" id="bfmt-fait" value="fait" />
-              <label for="bfmt-fait">Fait marquant</label>
-            </div>
-          </div>
-        </div>
-        <div id="blog-list">
-          {blogArticles.map(a => (
-            <div class="blog-item" data-title={a.title} data-description={a.description} data-slug={a.slug} data-lang={a.lang}>
-              <div class="blog-item-info">
-                <div class="blog-item-title">{a.title}</div>
-                <div class="blog-item-meta">
-                  <span class="lang">{a.lang}</span> — {a.date} — {a.tags.join(', ')}
-                </div>
+          <div class="field">
+            <label>Format du post</label>
+            <div class="format-options">
+              <div class="format-option">
+                <input type="radio" name="format" id="fmt-analyse" value="analyse" checked />
+                <label for="fmt-analyse">
+                  Analyse courte
+                  <span>Source + ce que j'en retiens</span>
+                </label>
               </div>
-              <button class="btn btn-ghost btn-sm btn-repurpose">Décliner</button>
+              <div class="format-option">
+                <input type="radio" name="format" id="fmt-opinion" value="opinion" />
+                <label for="fmt-opinion">
+                  Prise de position
+                  <span>J'estime que... + arguments</span>
+                </label>
+              </div>
+              <div class="format-option">
+                <input type="radio" name="format" id="fmt-fait" value="fait" />
+                <label for="fmt-fait">
+                  Fait marquant
+                  <span>Chiffre / stat + commentaire</span>
+                </label>
+              </div>
+              <div class="format-option">
+                <input type="radio" name="format" id="fmt-newsletter" value="newsletter" />
+                <label for="fmt-newsletter">
+                  Newsletter
+                  <span>Format long et approfondi</span>
+                </label>
+              </div>
             </div>
-          ))}
-        </div>
-        <div id="status-blog" class="status hidden"></div>
-      </div>
-    </div>
-
-    <!-- ==================== TAB 5: LinkedIn → Blog ==================== -->
-    <div id="panel-reverse" class="tab-panel hidden">
-      <div class="card">
-        <div class="card-header">Transformer un post LinkedIn en article de blog</div>
-        <p style="font-size: 0.8125rem; color: #71717a; margin-bottom: 1rem;">Colle le texte d'un post LinkedIn qui a bien marché. L'IA va le développer en article de blog complet.</p>
-        <div class="field">
-          <label for="reverse-text">Texte du post LinkedIn</label>
-          <textarea id="reverse-text" rows="6" style="font-size: 0.8125rem;" placeholder="Colle ici le texte de ton post LinkedIn..."></textarea>
-        </div>
-        <div class="row">
-          <div class="field">
-            <label for="reverse-lang">Langue de l'article</label>
-            <select id="reverse-lang">
-              <option value="fr" selected>Français</option>
-              <option value="en">English</option>
-            </select>
           </div>
-          <div class="field">
-            <label>&nbsp;</label>
-            <button id="btn-reverse" class="btn btn-primary" style="width:100%">
-              Générer l'article de blog
-            </button>
-          </div>
+          <button id="btn-generate" class="btn btn-primary" style="width:100%">
+            Générer le post
+          </button>
+          <div id="status-generate" class="status hidden"></div>
         </div>
-        <div id="status-reverse" class="status hidden"></div>
       </div>
 
-      <!-- Reverse result -->
-      <div id="reverse-result" class="hidden">
+      <!-- ==================== TAB 2: Veille hebdo ==================== -->
+      <div id="panel-veille" class="tab-panel hidden">
         <div class="card">
-          <div class="card-header">Article généré</div>
+          <div class="card-header">Accumuler des actus</div>
+          <p class="veille-counter">
+            Pendant la semaine, ajoute des liens. Quand tu es prêt, génère ta veille hebdo.
+          </p>
+          <div class="row" style="margin-bottom: 1rem;">
+            <div class="field" style="margin-bottom:0">
+              <label for="veille-url">Lien de l'actu</label>
+              <input type="text" id="veille-url" placeholder="https://..." />
+            </div>
+            <div class="field" style="margin-bottom:0">
+              <label for="veille-title">Titre / description courte</label>
+              <input type="text" id="veille-title" placeholder="De quoi ça parle ?" />
+            </div>
+          </div>
+          <div class="field">
+            <label for="veille-note">Note perso (optionnel)</label>
+            <input type="text" id="veille-note" placeholder="Ton angle, ce qui t'a marqué..." />
+          </div>
+          <button id="btn-add-veille" class="btn btn-ghost btn-sm" style="width:100%">
+            Ajouter à la veille
+          </button>
+        </div>
+
+        <div class="card">
+          <div class="card-header">Actus accumulées</div>
+          <div id="veille-count" class="veille-counter"></div>
+          <div id="veille-list"></div>
+          <div class="actions" style="margin-top: 1rem;">
+            <button id="btn-generate-veille" class="btn btn-primary" disabled>
+              Générer la veille hebdo
+            </button>
+            <button id="btn-clear-veille" class="btn btn-danger btn-sm"> Vider la liste </button>
+          </div>
+          <div id="status-veille" class="status hidden"></div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">Sources RSS</div>
+          <p style="font-size: 0.8125rem; color: #71717a; margin-bottom: 1rem;">
+            Ajoute des flux RSS pour recevoir des suggestions d'actus automatiquement.
+          </p>
+          <div class="row" style="margin-bottom: 1rem; align-items: end;">
+            <div class="field" style="margin-bottom:0">
+              <label for="rss-url">URL du flux RSS</label>
+              <input type="text" id="rss-url" placeholder="https://example.com/rss" />
+            </div>
+            <div class="field" style="margin-bottom:0">
+              <button id="btn-add-rss" class="btn btn-ghost btn-sm" style="width:100%"
+                >Ajouter</button
+              >
+            </div>
+          </div>
+          <div id="rss-sources" class="rss-sources"></div>
+          <button id="btn-fetch-rss" class="btn btn-primary btn-sm" style="width:100%">
+            Récupérer les derniers articles
+          </button>
+          <div id="status-rss" class="status hidden"></div>
+          <div id="rss-suggestions" style="margin-top: 1rem;"></div>
+        </div>
+      </div>
+
+      <!-- ==================== TAB 3: Depuis le blog ==================== -->
+      <div id="panel-blog" class="tab-panel hidden">
+        <div class="card">
+          <div class="card-header">Décliner un article en post LinkedIn</div>
+          <div class="field">
+            <label>Format de déclinaison</label>
+            <div class="format-options">
+              <div class="format-option">
+                <input type="radio" name="blog-format" id="bfmt-analyse" value="analyse" checked />
+                <label for="bfmt-analyse">Analyse courte</label>
+              </div>
+              <div class="format-option">
+                <input type="radio" name="blog-format" id="bfmt-opinion" value="opinion" />
+                <label for="bfmt-opinion">Prise de position</label>
+              </div>
+              <div class="format-option">
+                <input type="radio" name="blog-format" id="bfmt-fait" value="fait" />
+                <label for="bfmt-fait">Fait marquant</label>
+              </div>
+            </div>
+          </div>
+          <div id="blog-list">
+            {
+              blogArticles.map((a) => (
+                <div
+                  class="blog-item"
+                  data-title={a.title}
+                  data-description={a.description}
+                  data-slug={a.slug}
+                  data-lang={a.lang}
+                >
+                  <div class="blog-item-info">
+                    <div class="blog-item-title">{a.title}</div>
+                    <div class="blog-item-meta">
+                      <span class="lang">{a.lang}</span> — {a.date} — {a.tags.join(', ')}
+                    </div>
+                  </div>
+                  <button class="btn btn-ghost btn-sm btn-repurpose">Décliner</button>
+                </div>
+              ))
+            }
+          </div>
+          <div id="status-blog" class="status hidden"></div>
+        </div>
+      </div>
+
+      <!-- ==================== TAB 5: LinkedIn → Blog ==================== -->
+      <div id="panel-reverse" class="tab-panel hidden">
+        <div class="card">
+          <div class="card-header">Transformer un post LinkedIn en article de blog</div>
+          <p style="font-size: 0.8125rem; color: #71717a; margin-bottom: 1rem;">
+            Colle le texte d'un post LinkedIn qui a bien marché. L'IA va le développer en article de
+            blog complet.
+          </p>
+          <div class="field">
+            <label for="reverse-text">Texte du post LinkedIn</label>
+            <textarea
+              id="reverse-text"
+              rows="6"
+              style="font-size: 0.8125rem;"
+              placeholder="Colle ici le texte de ton post LinkedIn..."></textarea>
+          </div>
           <div class="row">
             <div class="field">
-              <label for="reverse-title">Titre</label>
-              <input type="text" id="reverse-title" />
+              <label for="reverse-lang">Langue de l'article</label>
+              <select id="reverse-lang">
+                <option value="fr" selected>Français</option>
+                <option value="en">English</option>
+              </select>
             </div>
             <div class="field">
-              <label for="reverse-desc">Description SEO</label>
-              <input type="text" id="reverse-desc" />
+              <label>&nbsp;</label>
+              <button id="btn-reverse" class="btn btn-primary" style="width:100%">
+                Générer l'article de blog
+              </button>
             </div>
           </div>
-          <div class="field">
-            <label>Tags</label>
-            <div class="row" style="align-items:end">
-              <input type="text" id="reverse-tag-input" placeholder="Ajouter un tag + Entrée" />
-            </div>
-            <div id="reverse-tags-list" class="tags-container"></div>
-          </div>
-          <div class="field">
-            <label for="reverse-content">Contenu (Markdown)</label>
-            <textarea id="reverse-content" rows="18" style="font-family: ui-monospace, monospace; font-size: 0.8125rem;"></textarea>
-          </div>
-          <div class="actions">
-            <button id="btn-reverse-publish" class="btn btn-accent">Publier sur le blog</button>
-            <button id="btn-reverse-reset" class="btn btn-ghost">Annuler</button>
-          </div>
-          <div id="status-reverse-publish" class="status hidden"></div>
+          <div id="status-reverse" class="status hidden"></div>
         </div>
-      </div>
-    </div>
 
-    <!-- ==================== TAB 6: Bannière ==================== -->
-    <div id="panel-banner" class="tab-panel hidden">
-      <div class="card">
-        <div class="card-header">Diaporama bannière LinkedIn Premium</div>
-        <p style="font-size: 0.8125rem; color: #71717a; margin-bottom: 1rem;">Génère jusqu'à 5 bannières 1584x396 pour le diaporama Premium. La zone gauche est réservée à ta photo de profil.</p>
-        <div id="banner-slides-list"></div>
-        <button id="btn-add-banner-slide" class="btn btn-ghost btn-sm" style="width:100%;margin-top:0.5rem">+ Ajouter une slide</button>
-        <button id="btn-gen-banner" class="btn btn-primary" style="width:100%;margin-top:1rem">
-          Générer les bannières
-        </button>
-        <div id="status-banner" class="status hidden"></div>
-        <div id="banner-preview" style="margin-top: 1rem;"></div>
-        <div class="actions hidden" id="banner-download-actions" style="margin-top: 1rem;">
-          <button id="btn-download-banner" class="btn btn-primary">Télécharger toutes les bannières</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ==================== TAB 4: Historique ==================== -->
-    <div id="panel-history" class="tab-panel hidden">
-      <!-- Calendar suggestion -->
-      <div class="card" id="calendar-card">
-        <div class="card-header">Calendrier éditorial</div>
-        <div id="calendar-grid" class="calendar-grid"></div>
-        <div id="calendar-suggestions"></div>
-      </div>
-
-      <div id="history-stats" class="history-stats"></div>
-      <div class="card">
-        <div class="card-header">Répartition des tags</div>
-        <div id="history-tags" class="tag-cloud"></div>
-      </div>
-      <div class="card">
-        <div class="card-header">Posts publiés</div>
-        <div id="history-list"></div>
-      </div>
-    </div>
-
-    <!-- ==================== SHARED: Edit + Visual + Preview + Export ==================== -->
-    <div id="step-edit" class="hidden">
-      <div class="edit-layout">
-        <!-- Left: text -->
-        <div>
+        <!-- Reverse result -->
+        <div id="reverse-result" class="hidden">
           <div class="card">
-            <div class="card-header">Post généré</div>
+            <div class="card-header">Article généré</div>
+            <div class="row">
+              <div class="field">
+                <label for="reverse-title">Titre</label>
+                <input type="text" id="reverse-title" />
+              </div>
+              <div class="field">
+                <label for="reverse-desc">Description SEO</label>
+                <input type="text" id="reverse-desc" />
+              </div>
+            </div>
             <div class="field">
-              <label for="post-text">Texte du post</label>
-              <textarea id="post-text" rows="14" style="font-size: 0.8125rem;"></textarea>
+              <label>Tags</label>
+              <div class="row" style="align-items:end">
+                <input type="text" id="reverse-tag-input" placeholder="Ajouter un tag + Entrée" />
+              </div>
+              <div id="reverse-tags-list" class="tags-container"></div>
             </div>
-            <div class="actions" style="margin-top: 0;">
-              <button id="btn-regenerate" class="btn btn-ghost">Régénérer</button>
-              <button id="btn-feedback-toggle" class="btn btn-danger btn-sm">Pas mon style</button>
+            <div class="field">
+              <label for="reverse-content">Contenu (Markdown)</label>
+              <textarea
+                id="reverse-content"
+                rows="18"
+                style="font-family: ui-monospace, monospace; font-size: 0.8125rem;"></textarea>
             </div>
-            <div id="feedback-zone" class="feedback-zone hidden">
-              <input type="text" id="feedback-input" placeholder="Ex: trop marketing, trop long, pas assez direct..." />
-              <button id="btn-feedback-save" class="btn btn-sm btn-primary">Retenir</button>
+            <div class="actions">
+              <button id="btn-reverse-publish" class="btn btn-accent">Publier sur le blog</button>
+              <button id="btn-reverse-reset" class="btn btn-ghost">Annuler</button>
             </div>
-            <div id="feedback-prefs" class="feedback-prefs"></div>
+            <div id="status-reverse-publish" class="status hidden"></div>
           </div>
         </div>
+      </div>
 
-        <!-- Right: visual -->
-        <div>
-          <div class="card">
-            <div class="card-header">Visuel</div>
-            <div class="field">
-              <label>Mode</label>
-              <div class="size-options">
-                <div class="size-option">
-                  <input type="radio" name="visual-mode" id="mode-single" value="single" checked />
-                  <label for="mode-single">Slide unique</label>
-                </div>
-                <div class="size-option">
-                  <input type="radio" name="visual-mode" id="mode-carousel" value="carousel" />
-                  <label for="mode-carousel">Carrousel</label>
-                </div>
+      <!-- ==================== TAB 6: Bannière ==================== -->
+      <div id="panel-banner" class="tab-panel hidden">
+        <div class="card">
+          <div class="card-header">Diaporama bannière LinkedIn Premium</div>
+          <p style="font-size: 0.8125rem; color: #71717a; margin-bottom: 1rem;">
+            Génère jusqu'à 5 bannières 1584x396 pour le diaporama Premium. La zone gauche est
+            réservée à ta photo de profil.
+          </p>
+          <div id="banner-slides-list"></div>
+          <button
+            id="btn-add-banner-slide"
+            class="btn btn-ghost btn-sm"
+            style="width:100%;margin-top:0.5rem">+ Ajouter une slide</button
+          >
+          <button id="btn-gen-banner" class="btn btn-primary" style="width:100%;margin-top:1rem">
+            Générer les bannières
+          </button>
+          <div id="status-banner" class="status hidden"></div>
+          <div id="banner-preview" style="margin-top: 1rem;"></div>
+          <div class="actions hidden" id="banner-download-actions" style="margin-top: 1rem;">
+            <button id="btn-download-banner" class="btn btn-primary"
+              >Télécharger toutes les bannières</button
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- ==================== TAB 4: Historique ==================== -->
+      <div id="panel-history" class="tab-panel hidden">
+        <!-- Calendar suggestion -->
+        <div class="card" id="calendar-card">
+          <div class="card-header">Calendrier éditorial</div>
+          <div id="calendar-grid" class="calendar-grid"></div>
+          <div id="calendar-suggestions"></div>
+        </div>
+
+        <div id="history-stats" class="history-stats"></div>
+        <div class="card">
+          <div class="card-header">Répartition des tags</div>
+          <div id="history-tags" class="tag-cloud"></div>
+        </div>
+        <div class="card">
+          <div class="card-header">Posts publiés</div>
+          <div id="history-list"></div>
+        </div>
+      </div>
+
+      <!-- ==================== SHARED: Edit + Visual + Preview + Export ==================== -->
+      <div id="step-edit" class="hidden">
+        <div class="edit-layout">
+          <!-- Left: text -->
+          <div>
+            <div class="card">
+              <div class="card-header">Post généré</div>
+              <div class="field">
+                <label for="post-text">Texte du post</label>
+                <textarea id="post-text" rows="14" style="font-size: 0.8125rem;"></textarea>
               </div>
+              <div class="actions" style="margin-top: 0;">
+                <button id="btn-regenerate" class="btn btn-ghost">Régénérer</button>
+                <button id="btn-feedback-toggle" class="btn btn-danger btn-sm">Pas mon style</button
+                >
+              </div>
+              <div id="feedback-zone" class="feedback-zone hidden">
+                <input
+                  type="text"
+                  id="feedback-input"
+                  placeholder="Ex: trop marketing, trop long, pas assez direct..."
+                />
+                <button id="btn-feedback-save" class="btn btn-sm btn-primary">Retenir</button>
+              </div>
+              <div id="feedback-prefs" class="feedback-prefs"></div>
             </div>
+          </div>
 
-            <!-- Single mode -->
-            <div id="single-mode">
+          <!-- Right: visual -->
+          <div>
+            <div class="card">
+              <div class="card-header">Visuel</div>
               <div class="field">
-                <label for="headline">Titre du visuel</label>
-                <input type="text" id="headline" placeholder="Titre court et percutant" />
-              </div>
-              <div class="field">
-                <label for="vis-subtitle">Sous-titre (optionnel)</label>
-                <input type="text" id="vis-subtitle" placeholder="Chiffre clé, source..." />
-              </div>
-              <div class="field">
-                <label>Taille</label>
+                <label>Mode</label>
                 <div class="size-options">
                   <div class="size-option">
-                    <input type="radio" name="size" id="size-square" value="1200x1200" checked />
-                    <label for="size-square">1200x1200 Carré</label>
+                    <input
+                      type="radio"
+                      name="visual-mode"
+                      id="mode-single"
+                      value="single"
+                      checked
+                    />
+                    <label for="mode-single">Slide unique</label>
                   </div>
                   <div class="size-option">
-                    <input type="radio" name="size" id="size-portrait" value="1080x1350" />
-                    <label for="size-portrait">1080x1350 Portrait</label>
-                  </div>
-                  <div class="size-option">
-                    <input type="radio" name="size" id="size-landscape" value="1200x627" />
-                    <label for="size-landscape">1200x627 Paysage</label>
+                    <input type="radio" name="visual-mode" id="mode-carousel" value="carousel" />
+                    <label for="mode-carousel">Carrousel</label>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <!-- Carousel mode -->
-            <div id="carousel-mode" class="hidden">
-              <div class="field">
-                <label>Slides du carrousel <span style="font-weight:400;text-transform:none;letter-spacing:normal">(1080x1350 portrait, min 2)</span></label>
-                <div id="carousel-slides-list"></div>
-                <button id="btn-add-slide" class="btn btn-ghost btn-sm" style="width:100%;margin-top:0.5rem">+ Ajouter une slide</button>
+              <!-- Single mode -->
+              <div id="single-mode">
+                <div class="field">
+                  <label for="headline">Titre du visuel</label>
+                  <input type="text" id="headline" placeholder="Titre court et percutant" />
+                </div>
+                <div class="field">
+                  <label for="vis-subtitle">Sous-titre (optionnel)</label>
+                  <input type="text" id="vis-subtitle" placeholder="Chiffre clé, source..." />
+                </div>
+                <div class="field">
+                  <label>Taille</label>
+                  <div class="size-options">
+                    <div class="size-option">
+                      <input type="radio" name="size" id="size-square" value="1200x1200" checked />
+                      <label for="size-square">1200x1200 Carré</label>
+                    </div>
+                    <div class="size-option">
+                      <input type="radio" name="size" id="size-portrait" value="1080x1350" />
+                      <label for="size-portrait">1080x1350 Portrait</label>
+                    </div>
+                    <div class="size-option">
+                      <input type="radio" name="size" id="size-landscape" value="1200x627" />
+                      <label for="size-landscape">1200x627 Paysage</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Carousel mode -->
+              <div id="carousel-mode" class="hidden">
+                <div class="field">
+                  <label
+                    >Slides du carrousel <span
+                      style="font-weight:400;text-transform:none;letter-spacing:normal"
+                      >(1080x1350 portrait, min 2)</span
+                    ></label
+                  >
+                  <div id="carousel-slides-list"></div>
+                  <button
+                    id="btn-add-slide"
+                    class="btn btn-ghost btn-sm"
+                    style="width:100%;margin-top:0.5rem">+ Ajouter une slide</button
+                  >
+                </div>
+              </div>
+
+              <button id="btn-visual" class="btn btn-primary" style="width:100%">
+                Générer le visuel
+              </button>
+              <div id="status-visual" class="status hidden"></div>
+              <div id="visual-container" class="visual-preview" style="margin-top: 1rem;">
+                <span class="placeholder">Le visuel apparaîtra ici</span>
+              </div>
+              <!-- Carousel preview strip -->
+              <div id="carousel-preview" class="carousel-preview-strip hidden"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LinkedIn Preview -->
+        <div class="card">
+          <div class="card-header">Aperçu LinkedIn</div>
+          <div class="linkedin-mock">
+            <div class="linkedin-mock-header">
+              <img src="/images/pierre-touzet-sm.png" alt="" class="linkedin-mock-avatar" />
+              <div class="linkedin-mock-meta">
+                <span class="linkedin-mock-name">Pierre Touzet</span>
+                <span class="linkedin-mock-title"
+                  >Responsable national des programmes | Créateur de Gradly</span
+                >
+                <span class="linkedin-mock-time">Maintenant</span>
               </div>
             </div>
-
-            <button id="btn-visual" class="btn btn-primary" style="width:100%">
-              Générer le visuel
-            </button>
-            <div id="status-visual" class="status hidden"></div>
-            <div id="visual-container" class="visual-preview" style="margin-top: 1rem;">
-              <span class="placeholder">Le visuel apparaîtra ici</span>
+            <div id="preview-body" class="linkedin-mock-body linkedin-mock-truncated">
+              Le texte de ton post apparaîtra ici...
             </div>
-            <!-- Carousel preview strip -->
-            <div id="carousel-preview" class="carousel-preview-strip hidden"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- LinkedIn Preview -->
-      <div class="card">
-        <div class="card-header">Aperçu LinkedIn</div>
-        <div class="linkedin-mock">
-          <div class="linkedin-mock-header">
-            <img src="/images/pierre-touzet-sm.png" alt="" class="linkedin-mock-avatar" />
-            <div class="linkedin-mock-meta">
-              <span class="linkedin-mock-name">Pierre Touzet</span>
-              <span class="linkedin-mock-title">Responsable national des programmes | Créateur de Gradly</span>
-              <span class="linkedin-mock-time">Maintenant</span>
+            <div id="preview-image" class="linkedin-mock-image hidden">
+              <img id="preview-img" src="" alt="" />
+            </div>
+            <div class="linkedin-mock-actions">
+              <span class="linkedin-mock-action">&#128077; J'aime</span>
+              <span class="linkedin-mock-action">&#128172; Commenter</span>
+              <span class="linkedin-mock-action">&#8634; Republier</span>
+              <span class="linkedin-mock-action">&#9993; Envoyer</span>
             </div>
           </div>
-          <div id="preview-body" class="linkedin-mock-body linkedin-mock-truncated">
-            Le texte de ton post apparaîtra ici...
-          </div>
-          <div id="preview-image" class="linkedin-mock-image hidden">
-            <img id="preview-img" src="" alt="" />
-          </div>
-          <div class="linkedin-mock-actions">
-            <span class="linkedin-mock-action">&#128077; J'aime</span>
-            <span class="linkedin-mock-action">&#128172; Commenter</span>
-            <span class="linkedin-mock-action">&#8634; Republier</span>
-            <span class="linkedin-mock-action">&#9993; Envoyer</span>
-          </div>
         </div>
-      </div>
 
-      <!-- Tags -->
-      <div class="card">
-        <div class="card-header">Tags du post</div>
-        <div class="row" style="align-items:end">
-          <input type="text" id="post-tag-input" placeholder="Ajouter un tag + Entrée" />
+        <!-- Tags -->
+        <div class="card">
+          <div class="card-header">Tags du post</div>
+          <div class="row" style="align-items:end">
+            <input type="text" id="post-tag-input" placeholder="Ajouter un tag + Entrée" />
+          </div>
+          <div id="post-tags-list" class="tags-container"></div>
         </div>
-        <div id="post-tags-list" class="tags-container"></div>
-      </div>
 
-      <!-- Export -->
-      <div class="card">
-        <div class="card-header">Exporter</div>
-        <div class="export-actions">
-          <button id="btn-copy" class="btn btn-accent">Copier le texte</button>
-          <button id="btn-download" class="btn btn-primary" disabled>Télécharger le visuel</button>
-          <button id="btn-save-history" class="btn btn-ghost">Sauver dans l'historique</button>
-          <button id="btn-new" class="btn btn-ghost">Nouveau post</button>
+        <!-- Export -->
+        <div class="card">
+          <div class="card-header">Exporter</div>
+          <div class="export-actions">
+            <button id="btn-copy" class="btn btn-accent">Copier le texte</button>
+            <button id="btn-download" class="btn btn-primary" disabled>Télécharger le visuel</button
+            >
+            <button id="btn-save-history" class="btn btn-ghost">Sauver dans l'historique</button>
+            <button id="btn-new" class="btn btn-ghost">Nouveau post</button>
+          </div>
+          <div id="status-save" class="status hidden"></div>
         </div>
-        <div id="status-save" class="status hidden"></div>
       </div>
     </div>
-  </div>
 
-  <script is:inline>
-    // ==================== STATE ====================
-    let currentVisualBlob = null;
-    let currentSize = '1200x1200';
-    let currentFormat = 'analyse';
-    let currentInput = '';
-    let veilleItems = JSON.parse(localStorage.getItem('linkedin-veille') || '[]');
-    let feedbackPrefs = JSON.parse(localStorage.getItem('linkedin-feedback') || '[]');
-    let postHistory = JSON.parse(localStorage.getItem('linkedin-history') || '[]');
-    let postTags = [];
+    <script is:inline>
+      // ==================== STATE ====================
+      let currentVisualBlob = null;
+      let currentSize = '1200x1200';
+      let currentFormat = 'analyse';
+      let currentInput = '';
+      let veilleItems = JSON.parse(localStorage.getItem('linkedin-veille') || '[]');
+      const feedbackPrefs = JSON.parse(localStorage.getItem('linkedin-feedback') || '[]');
+      const postHistory = JSON.parse(localStorage.getItem('linkedin-history') || '[]');
+      let postTags = [];
 
-    // ==================== ELEMENTS ====================
-    const $input = document.getElementById('input');
-    const $postText = document.getElementById('post-text');
-    const $headline = document.getElementById('headline');
-    const $visSubtitle = document.getElementById('vis-subtitle');
-    const $visualContainer = document.getElementById('visual-container');
-    const $previewBody = document.getElementById('preview-body');
-    const $previewImage = document.getElementById('preview-image');
-    const $previewImg = document.getElementById('preview-img');
+      // ==================== ELEMENTS ====================
+      const $input = document.getElementById('input');
+      const $postText = document.getElementById('post-text');
+      const $headline = document.getElementById('headline');
+      const $visSubtitle = document.getElementById('vis-subtitle');
+      const $visualContainer = document.getElementById('visual-container');
+      const $previewBody = document.getElementById('preview-body');
+      const $previewImage = document.getElementById('preview-image');
+      const $previewImg = document.getElementById('preview-img');
 
-    const $stepEdit = document.getElementById('step-edit');
+      const $stepEdit = document.getElementById('step-edit');
 
-    const $btnGenerate = document.getElementById('btn-generate');
-    const $btnRegenerate = document.getElementById('btn-regenerate');
-    const $btnVisual = document.getElementById('btn-visual');
-    const $btnCopy = document.getElementById('btn-copy');
-    const $btnDownload = document.getElementById('btn-download');
-    const $btnNew = document.getElementById('btn-new');
+      const $btnGenerate = document.getElementById('btn-generate');
+      const $btnRegenerate = document.getElementById('btn-regenerate');
+      const $btnVisual = document.getElementById('btn-visual');
+      const $btnCopy = document.getElementById('btn-copy');
+      const $btnDownload = document.getElementById('btn-download');
+      const $btnNew = document.getElementById('btn-new');
 
-    const $statusGenerate = document.getElementById('status-generate');
-    const $statusVisual = document.getElementById('status-visual');
+      const $statusGenerate = document.getElementById('status-generate');
+      const $statusVisual = document.getElementById('status-visual');
 
-    // Veille elements
-    const $veilleUrl = document.getElementById('veille-url');
-    const $veilleTitle = document.getElementById('veille-title');
-    const $veilleNote = document.getElementById('veille-note');
-    const $veilleList = document.getElementById('veille-list');
-    const $veilleCount = document.getElementById('veille-count');
-    const $btnAddVeille = document.getElementById('btn-add-veille');
-    const $btnGenerateVeille = document.getElementById('btn-generate-veille');
-    const $btnClearVeille = document.getElementById('btn-clear-veille');
-    const $statusVeille = document.getElementById('status-veille');
-    const $statusBlog = document.getElementById('status-blog');
-    const $statusSave = document.getElementById('status-save');
+      // Veille elements
+      const $veilleUrl = document.getElementById('veille-url');
+      const $veilleTitle = document.getElementById('veille-title');
+      const $veilleNote = document.getElementById('veille-note');
+      const $veilleList = document.getElementById('veille-list');
+      const $veilleCount = document.getElementById('veille-count');
+      const $btnAddVeille = document.getElementById('btn-add-veille');
+      const $btnGenerateVeille = document.getElementById('btn-generate-veille');
+      const $btnClearVeille = document.getElementById('btn-clear-veille');
+      const $statusVeille = document.getElementById('status-veille');
+      const $statusBlog = document.getElementById('status-blog');
+      const $statusSave = document.getElementById('status-save');
 
-    // Feedback elements
-    const $btnFeedbackToggle = document.getElementById('btn-feedback-toggle');
-    const $feedbackZone = document.getElementById('feedback-zone');
-    const $feedbackInput = document.getElementById('feedback-input');
-    const $btnFeedbackSave = document.getElementById('btn-feedback-save');
-    const $feedbackPrefs = document.getElementById('feedback-prefs');
+      // Feedback elements
+      const $btnFeedbackToggle = document.getElementById('btn-feedback-toggle');
+      const $feedbackZone = document.getElementById('feedback-zone');
+      const $feedbackInput = document.getElementById('feedback-input');
+      const $btnFeedbackSave = document.getElementById('btn-feedback-save');
+      const $feedbackPrefs = document.getElementById('feedback-prefs');
 
-    // Tags elements
-    const $postTagInput = document.getElementById('post-tag-input');
-    const $postTagsList = document.getElementById('post-tags-list');
+      // Tags elements
+      const $postTagInput = document.getElementById('post-tag-input');
+      const $postTagsList = document.getElementById('post-tags-list');
 
-    // History elements
-    const $historyStats = document.getElementById('history-stats');
-    const $historyTags = document.getElementById('history-tags');
-    const $historyList = document.getElementById('history-list');
-    const $btnSaveHistory = document.getElementById('btn-save-history');
+      // History elements
+      const $historyStats = document.getElementById('history-stats');
+      const $historyTags = document.getElementById('history-tags');
+      const $historyList = document.getElementById('history-list');
+      const $btnSaveHistory = document.getElementById('btn-save-history');
 
-    // ==================== TABS ====================
-    document.querySelectorAll('.main-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.main-tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
-        tab.classList.add('active');
-        document.getElementById(tab.dataset.panel).classList.remove('hidden');
-      });
-    });
-
-    // ==================== HELPERS ====================
-    function getFormat() {
-      return document.querySelector('input[name="format"]:checked')?.value || 'analyse';
-    }
-    function getBlogFormat() {
-      return document.querySelector('input[name="blog-format"]:checked')?.value || 'analyse';
-    }
-    function getSize() {
-      return document.querySelector('input[name="size"]:checked')?.value || '1200x1200';
-    }
-
-    function updatePreview() {
-      const text = $postText.value || 'Le texte de ton post apparaîtra ici...';
-      $previewBody.textContent = text;
-      if (text.length > 250) {
-        $previewBody.classList.add('linkedin-mock-truncated');
-      } else {
-        $previewBody.classList.remove('linkedin-mock-truncated');
-      }
-    }
-    $postText?.addEventListener('input', updatePreview);
-
-    function showEdit(data) {
-      $postText.value = data.text || '';
-      $headline.value = data.headline || '';
-      $visSubtitle.value = data.subtitle || '';
-      updatePreview();
-      // Reset visual
-      currentVisualBlob = null;
-      $visualContainer.innerHTML = '<span class="placeholder">Le visuel apparaîtra ici</span>';
-      $previewImage.classList.add('hidden');
-      $btnDownload.disabled = true;
-      // Show
-      $stepEdit.classList.remove('hidden');
-      $stepEdit.scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function resetAll() {
-      $input.value = '';
-      $postText.value = '';
-      $headline.value = '';
-      $visSubtitle.value = '';
-      currentVisualBlob = null;
-      currentInput = '';
-      postTags = [];
-      renderPostTags();
-      $visualContainer.innerHTML = '<span class="placeholder">Le visuel apparaîtra ici</span>';
-      $previewBody.textContent = 'Le texte de ton post apparaîtra ici...';
-      $previewImage.classList.add('hidden');
-      $btnDownload.disabled = true;
-      $stepEdit.classList.add('hidden');
-      $feedbackZone.classList.add('hidden');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // ==================== GENERATE POST (shared) ====================
-    async function callGenerate(input, format, statusEl, btnEl) {
-      if (!input) return null;
-      currentInput = input;
-      currentFormat = format;
-
-      if (btnEl) {
-        btnEl.disabled = true;
-        btnEl.innerHTML = '<span class="spinner"></span> Génération...';
-      }
-      if (statusEl) {
-        statusEl.classList.remove('hidden', 'error');
-        statusEl.textContent = 'Claude rédige ton post LinkedIn...';
-      }
-
-      try {
-        const res = await fetch('/api/generate-linkedin', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'same-origin',
-          body: JSON.stringify({ input, format, preferences: feedbackPrefs }),
+      // ==================== TABS ====================
+      document.querySelectorAll('.main-tab').forEach((tab) => {
+        tab.addEventListener('click', () => {
+          document.querySelectorAll('.main-tab').forEach((t) => t.classList.remove('active'));
+          document.querySelectorAll('.tab-panel').forEach((p) => p.classList.add('hidden'));
+          tab.classList.add('active');
+          document.getElementById(tab.dataset.panel).classList.remove('hidden');
         });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.raw ? data.error + ' — ' + data.raw : (data.error || 'Erreur'));
-        if (statusEl) statusEl.classList.add('hidden');
-        return data;
-      } catch (err) {
-        if (statusEl) {
-          statusEl.classList.add('error');
-          statusEl.textContent = 'Erreur : ' + err.message;
+      });
+
+      // ==================== HELPERS ====================
+      function getFormat() {
+        return document.querySelector('input[name="format"]:checked')?.value || 'analyse';
+      }
+      function getBlogFormat() {
+        return document.querySelector('input[name="blog-format"]:checked')?.value || 'analyse';
+      }
+      function getSize() {
+        return document.querySelector('input[name="size"]:checked')?.value || '1200x1200';
+      }
+
+      function updatePreview() {
+        const text = $postText.value || 'Le texte de ton post apparaîtra ici...';
+        $previewBody.textContent = text;
+        if (text.length > 250) {
+          $previewBody.classList.add('linkedin-mock-truncated');
+        } else {
+          $previewBody.classList.remove('linkedin-mock-truncated');
         }
-        return null;
-      } finally {
+      }
+      $postText?.addEventListener('input', updatePreview);
+
+      function showEdit(data) {
+        $postText.value = data.text || '';
+        $headline.value = data.headline || '';
+        $visSubtitle.value = data.subtitle || '';
+        updatePreview();
+        // Reset visual
+        currentVisualBlob = null;
+        $visualContainer.innerHTML = '<span class="placeholder">Le visuel apparaîtra ici</span>';
+        $previewImage.classList.add('hidden');
+        $btnDownload.disabled = true;
+        // Show
+        $stepEdit.classList.remove('hidden');
+        $stepEdit.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      function resetAll() {
+        $input.value = '';
+        $postText.value = '';
+        $headline.value = '';
+        $visSubtitle.value = '';
+        currentVisualBlob = null;
+        currentInput = '';
+        postTags = [];
+        renderPostTags();
+        $visualContainer.innerHTML = '<span class="placeholder">Le visuel apparaîtra ici</span>';
+        $previewBody.textContent = 'Le texte de ton post apparaîtra ici...';
+        $previewImage.classList.add('hidden');
+        $btnDownload.disabled = true;
+        $stepEdit.classList.add('hidden');
+        $feedbackZone.classList.add('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      // ==================== GENERATE POST (shared) ====================
+      async function callGenerate(input, format, statusEl, btnEl) {
+        if (!input) return null;
+        currentInput = input;
+        currentFormat = format;
+
         if (btnEl) {
-          btnEl.disabled = false;
-          btnEl.textContent = btnEl.dataset.label || 'Générer le post';
+          btnEl.disabled = true;
+          btnEl.innerHTML = '<span class="spinner"></span> Génération...';
+        }
+        if (statusEl) {
+          statusEl.classList.remove('hidden', 'error');
+          statusEl.textContent = 'Claude rédige ton post LinkedIn...';
+        }
+
+        try {
+          const res = await fetch('/api/generate-linkedin', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({ input, format, preferences: feedbackPrefs }),
+          });
+          const data = await res.json();
+          if (!res.ok)
+            throw new Error(data.raw ? data.error + ' — ' + data.raw : data.error || 'Erreur');
+          if (statusEl) statusEl.classList.add('hidden');
+          return data;
+        } catch (err) {
+          if (statusEl) {
+            statusEl.classList.add('error');
+            statusEl.textContent = 'Erreur : ' + err.message;
+          }
+          return null;
+        } finally {
+          if (btnEl) {
+            btnEl.disabled = false;
+            btnEl.textContent = btnEl.dataset.label || 'Générer le post';
+          }
         }
       }
-    }
 
-    // ==================== TAB 1: Nouveau post ====================
-    $btnGenerate.dataset.label = 'Générer le post';
-    $btnGenerate.addEventListener('click', async () => {
-      const data = await callGenerate($input.value.trim(), getFormat(), $statusGenerate, $btnGenerate);
-      if (data) showEdit(data);
-    });
+      // ==================== TAB 1: Nouveau post ====================
+      $btnGenerate.dataset.label = 'Générer le post';
+      $btnGenerate.addEventListener('click', async () => {
+        const data = await callGenerate(
+          $input.value.trim(),
+          getFormat(),
+          $statusGenerate,
+          $btnGenerate,
+        );
+        if (data) showEdit(data);
+      });
 
-    $btnRegenerate.addEventListener('click', async () => {
-      const data = await callGenerate(currentInput, currentFormat, $statusGenerate, null);
-      if (data) showEdit(data);
-    });
+      $btnRegenerate.addEventListener('click', async () => {
+        const data = await callGenerate(currentInput, currentFormat, $statusGenerate, null);
+        if (data) showEdit(data);
+      });
 
-    // ==================== TAB 2: Veille hebdo ====================
-    function saveVeille() {
-      localStorage.setItem('linkedin-veille', JSON.stringify(veilleItems));
-    }
-
-    function renderVeille() {
-      $veilleCount.textContent = veilleItems.length + ' actu' + (veilleItems.length > 1 ? 's' : '') + ' dans la pile';
-      $btnGenerateVeille.disabled = veilleItems.length < 1;
-
-      if (veilleItems.length === 0) {
-        $veilleList.innerHTML = '<div class="veille-empty">Aucune actu pour le moment. Ajoute des liens ci-dessus.</div>';
-        return;
+      // ==================== TAB 2: Veille hebdo ====================
+      function saveVeille() {
+        localStorage.setItem('linkedin-veille', JSON.stringify(veilleItems));
       }
 
-      $veilleList.innerHTML = veilleItems.map((item, i) => `
+      function renderVeille() {
+        $veilleCount.textContent =
+          veilleItems.length + ' actu' + (veilleItems.length > 1 ? 's' : '') + ' dans la pile';
+        $btnGenerateVeille.disabled = veilleItems.length < 1;
+
+        if (veilleItems.length === 0) {
+          $veilleList.innerHTML =
+            '<div class="veille-empty">Aucune actu pour le moment. Ajoute des liens ci-dessus.</div>';
+          return;
+        }
+
+        $veilleList.innerHTML = veilleItems
+          .map(
+            (item, i) => `
         <div class="veille-item">
           <div class="veille-item-content">
             <div class="veille-item-title">${escHtml(item.title)}</div>
@@ -837,327 +1586,384 @@ const blogArticles = posts.map(p => ({
           </div>
           <button class="btn btn-danger btn-sm" onclick="removeVeille(${i})">Retirer</button>
         </div>
-      `).join('');
-    }
+      `,
+          )
+          .join('');
+      }
 
-    function escHtml(s) {
-      const d = document.createElement('div');
-      d.textContent = s;
-      return d.innerHTML;
-    }
+      function escHtml(s) {
+        const d = document.createElement('div');
+        d.textContent = s;
+        return d.innerHTML;
+      }
 
-    window.removeVeille = function(i) {
-      veilleItems.splice(i, 1);
-      saveVeille();
-      renderVeille();
-    };
-
-    $btnAddVeille.addEventListener('click', () => {
-      const title = $veilleTitle.value.trim();
-      if (!title) return;
-      veilleItems.push({
-        url: $veilleUrl.value.trim(),
-        title,
-        note: $veilleNote.value.trim(),
-        date: new Date().toISOString().slice(0, 10),
-      });
-      saveVeille();
-      renderVeille();
-      $veilleUrl.value = '';
-      $veilleTitle.value = '';
-      $veilleNote.value = '';
-    });
-
-    $btnClearVeille.addEventListener('click', () => {
-      if (veilleItems.length && confirm('Vider toute la liste de veille ?')) {
-        veilleItems = [];
+      window.removeVeille = function (i) {
+        veilleItems.splice(i, 1);
         saveVeille();
         renderVeille();
-      }
-    });
+      };
 
-    $btnGenerateVeille.dataset.label = 'Générer la veille hebdo';
-    $btnGenerateVeille.addEventListener('click', async () => {
-      // Build input from accumulated items
-      const itemsText = veilleItems.map((item, i) =>
-        `Actu ${i + 1}:\n` +
-        `Titre: ${item.title}\n` +
-        (item.url ? `Source: ${item.url}\n` : '') +
-        (item.note ? `Note de Pierre: ${item.note}\n` : '')
-      ).join('\n');
+      $btnAddVeille.addEventListener('click', () => {
+        const title = $veilleTitle.value.trim();
+        if (!title) return;
+        veilleItems.push({
+          url: $veilleUrl.value.trim(),
+          title,
+          note: $veilleNote.value.trim(),
+          date: new Date().toISOString().slice(0, 10),
+        });
+        saveVeille();
+        renderVeille();
+        $veilleUrl.value = '';
+        $veilleTitle.value = '';
+        $veilleNote.value = '';
+      });
 
-      const input = `Voici les actus accumulées cette semaine pour la veille hebdo :\n\n${itemsText}`;
+      $btnClearVeille.addEventListener('click', () => {
+        if (veilleItems.length && confirm('Vider toute la liste de veille ?')) {
+          veilleItems = [];
+          saveVeille();
+          renderVeille();
+        }
+      });
 
-      const data = await callGenerate(input, 'veille', $statusVeille, $btnGenerateVeille);
-      if (data) {
-        currentFormat = 'veille';
-        showEdit(data);
-      }
-    });
+      $btnGenerateVeille.dataset.label = 'Générer la veille hebdo';
+      $btnGenerateVeille.addEventListener('click', async () => {
+        // Build input from accumulated items
+        const itemsText = veilleItems
+          .map(
+            (item, i) =>
+              `Actu ${i + 1}:\n` +
+              `Titre: ${item.title}\n` +
+              (item.url ? `Source: ${item.url}\n` : '') +
+              (item.note ? `Note de Pierre: ${item.note}\n` : ''),
+          )
+          .join('\n');
 
-    renderVeille();
+        const input = `Voici les actus accumulées cette semaine pour la veille hebdo :\n\n${itemsText}`;
 
-    // ==================== TAB 3: Depuis le blog ====================
-    document.querySelectorAll('.btn-repurpose').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        const item = btn.closest('.blog-item');
-        const title = item.dataset.title;
-        const description = item.dataset.description;
-        const slug = item.dataset.slug;
-        const lang = item.dataset.lang;
-        const format = getBlogFormat();
-        const blogUrl = `https://www.pierretouzet.fr/${lang}/blog/${slug}`;
-
-        const input = `Décline cet article de blog en post LinkedIn :\n\nTitre : ${title}\nDescription : ${description}\nURL : ${blogUrl}\n\nLe post doit donner envie de lire l'article complet sans tout révéler. Inclus le lien vers l'article.`;
-
-        btn.disabled = true;
-        btn.textContent = '...';
-        $statusBlog.classList.remove('hidden', 'error');
-        $statusBlog.textContent = 'Génération du post depuis l\'article...';
-
-        const data = await callGenerate(input, format, $statusBlog, null);
-        btn.disabled = false;
-        btn.textContent = 'Décliner';
-
+        const data = await callGenerate(input, 'veille', $statusVeille, $btnGenerateVeille);
         if (data) {
-          currentFormat = format;
+          currentFormat = 'veille';
           showEdit(data);
         }
       });
-    });
 
-    // ==================== VISUAL GENERATION ====================
-    $btnVisual.addEventListener('click', async () => {
-      const headline = $headline.value.trim();
-      const subtitle = $visSubtitle.value.trim();
-      const format = currentFormat;
-      const size = getSize();
-      if (!headline) return;
+      renderVeille();
 
-      $btnVisual.disabled = true;
-      $btnVisual.innerHTML = '<span class="spinner"></span> Génération...';
-      $statusVisual.classList.remove('hidden', 'error');
-      $statusVisual.textContent = 'Création du visuel...';
+      // ==================== TAB 3: Depuis le blog ====================
+      document.querySelectorAll('.btn-repurpose').forEach((btn) => {
+        btn.addEventListener('click', async () => {
+          const item = btn.closest('.blog-item');
+          const title = item.dataset.title;
+          const description = item.dataset.description;
+          const slug = item.dataset.slug;
+          const lang = item.dataset.lang;
+          const format = getBlogFormat();
+          const blogUrl = `https://www.pierretouzet.fr/${lang}/blog/${slug}`;
 
-      try {
-        const res = await fetch('/api/generate-linkedin-visual', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'same-origin',
-          body: JSON.stringify({ headline, subtitle, format, size }),
+          const input = `Décline cet article de blog en post LinkedIn :\n\nTitre : ${title}\nDescription : ${description}\nURL : ${blogUrl}\n\nLe post doit donner envie de lire l'article complet sans tout révéler. Inclus le lien vers l'article.`;
+
+          btn.disabled = true;
+          btn.textContent = '...';
+          $statusBlog.classList.remove('hidden', 'error');
+          $statusBlog.textContent = "Génération du post depuis l'article...";
+
+          const data = await callGenerate(input, format, $statusBlog, null);
+          btn.disabled = false;
+          btn.textContent = 'Décliner';
+
+          if (data) {
+            currentFormat = format;
+            showEdit(data);
+          }
         });
+      });
 
-        if (!res.ok) {
-          const text = await res.text();
-          let msg = 'Erreur ' + res.status;
-          try { msg = JSON.parse(text).error || msg; } catch {}
-          throw new Error(msg);
+      // ==================== VISUAL GENERATION ====================
+      $btnVisual.addEventListener('click', async () => {
+        const headline = $headline.value.trim();
+        const subtitle = $visSubtitle.value.trim();
+        const format = currentFormat;
+        const size = getSize();
+        if (!headline) return;
+
+        $btnVisual.disabled = true;
+        $btnVisual.innerHTML = '<span class="spinner"></span> Génération...';
+        $statusVisual.classList.remove('hidden', 'error');
+        $statusVisual.textContent = 'Création du visuel...';
+
+        try {
+          const res = await fetch('/api/generate-linkedin-visual', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({ headline, subtitle, format, size }),
+          });
+
+          if (!res.ok) {
+            const text = await res.text();
+            let msg = 'Erreur ' + res.status;
+            try {
+              msg = JSON.parse(text).error || msg;
+            } catch {}
+            throw new Error(msg);
+          }
+
+          const blob = await res.blob();
+          currentVisualBlob = blob;
+          currentSize = size;
+
+          const url = URL.createObjectURL(blob);
+          $visualContainer.innerHTML = '<img src="' + url + '" alt="Visuel LinkedIn" />';
+
+          $previewImg.src = url;
+          $previewImage.classList.remove('hidden');
+
+          $btnDownload.disabled = false;
+          $statusVisual.classList.add('hidden');
+        } catch (err) {
+          $statusVisual.classList.add('error');
+          $statusVisual.textContent = 'Erreur : ' + err.message;
+        } finally {
+          $btnVisual.disabled = false;
+          $btnVisual.textContent = 'Générer le visuel';
         }
+      });
 
-        const blob = await res.blob();
-        currentVisualBlob = blob;
-        currentSize = size;
-
-        const url = URL.createObjectURL(blob);
-        $visualContainer.innerHTML = '<img src="' + url + '" alt="Visuel LinkedIn" />';
-
-        $previewImg.src = url;
-        $previewImage.classList.remove('hidden');
-
-        $btnDownload.disabled = false;
-        $statusVisual.classList.add('hidden');
-      } catch (err) {
-        $statusVisual.classList.add('error');
-        $statusVisual.textContent = 'Erreur : ' + err.message;
-      } finally {
-        $btnVisual.disabled = false;
-        $btnVisual.textContent = 'Générer le visuel';
-      }
-    });
-
-    // ==================== EXPORT ====================
-    $btnCopy.addEventListener('click', async () => {
-      const text = $postText.value.trim();
-      if (!text) return;
-      try {
-        await navigator.clipboard.writeText(text);
-        $btnCopy.textContent = 'Copié !';
-        $btnCopy.classList.add('btn-copy-ok');
-        $btnCopy.classList.remove('btn-accent');
-        setTimeout(() => {
-          $btnCopy.textContent = 'Copier le texte';
-          $btnCopy.classList.remove('btn-copy-ok');
-          $btnCopy.classList.add('btn-accent');
-        }, 2000);
-      } catch {
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        $btnCopy.textContent = 'Copié !';
-        setTimeout(() => { $btnCopy.textContent = 'Copier le texte'; }, 2000);
-      }
-    });
-
-    $btnDownload.addEventListener('click', () => {
-      if (!currentVisualBlob) return;
-      const url = URL.createObjectURL(currentVisualBlob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'linkedin-' + currentFormat + '-' + currentSize + '.png';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    });
-
-    $btnNew.addEventListener('click', resetAll);
-
-    // ==================== FEEDBACK LOOP ====================
-    function saveFeedback() {
-      localStorage.setItem('linkedin-feedback', JSON.stringify(feedbackPrefs));
-    }
-
-    function renderFeedback() {
-      if (feedbackPrefs.length === 0) {
-        $feedbackPrefs.innerHTML = '';
-        return;
-      }
-      $feedbackPrefs.innerHTML = feedbackPrefs.map((p, i) =>
-        '<span class="feedback-pref">' + escHtml(p) + '<button onclick="removeFeedback(' + i + ')">×</button></span>'
-      ).join('');
-    }
-
-    window.removeFeedback = function(i) {
-      feedbackPrefs.splice(i, 1);
-      saveFeedback();
-      renderFeedback();
-    };
-
-    $btnFeedbackToggle.addEventListener('click', () => {
-      $feedbackZone.classList.toggle('hidden');
-      if (!$feedbackZone.classList.contains('hidden')) $feedbackInput.focus();
-    });
-
-    $btnFeedbackSave.addEventListener('click', () => {
-      const val = $feedbackInput.value.trim();
-      if (!val) return;
-      feedbackPrefs.push(val);
-      saveFeedback();
-      renderFeedback();
-      $feedbackInput.value = '';
-      $feedbackZone.classList.add('hidden');
-      // Auto-regenerate with new preferences
-      if (currentInput) {
-        callGenerate(currentInput, currentFormat, $statusGenerate, null).then(data => {
-          if (data) showEdit(data);
-        });
-      }
-    });
-
-    renderFeedback();
-
-    // ==================== POST TAGS ====================
-    function renderPostTags() {
-      $postTagsList.innerHTML = postTags.map((t, i) =>
-        '<span class="tag">' + escHtml(t) + '<button onclick="removePostTag(' + i + ')">×</button></span>'
-      ).join('');
-    }
-
-    window.removePostTag = function(i) {
-      postTags.splice(i, 1);
-      renderPostTags();
-    };
-
-    $postTagInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const val = $postTagInput.value.trim();
-        if (val && !postTags.includes(val)) {
-          postTags.push(val);
-          renderPostTags();
+      // ==================== EXPORT ====================
+      $btnCopy.addEventListener('click', async () => {
+        const text = $postText.value.trim();
+        if (!text) return;
+        try {
+          await navigator.clipboard.writeText(text);
+          $btnCopy.textContent = 'Copié !';
+          $btnCopy.classList.add('btn-copy-ok');
+          $btnCopy.classList.remove('btn-accent');
+          setTimeout(() => {
+            $btnCopy.textContent = 'Copier le texte';
+            $btnCopy.classList.remove('btn-copy-ok');
+            $btnCopy.classList.add('btn-accent');
+          }, 2000);
+        } catch {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand('copy');
+          document.body.removeChild(ta);
+          $btnCopy.textContent = 'Copié !';
+          setTimeout(() => {
+            $btnCopy.textContent = 'Copier le texte';
+          }, 2000);
         }
-        $postTagInput.value = '';
+      });
+
+      $btnDownload.addEventListener('click', () => {
+        if (!currentVisualBlob) return;
+        const url = URL.createObjectURL(currentVisualBlob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'linkedin-' + currentFormat + '-' + currentSize + '.png';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      });
+
+      $btnNew.addEventListener('click', resetAll);
+
+      // ==================== FEEDBACK LOOP ====================
+      function saveFeedback() {
+        localStorage.setItem('linkedin-feedback', JSON.stringify(feedbackPrefs));
       }
-    });
 
-    // ==================== SAVE TO HISTORY ====================
-    function saveHistory() {
-      localStorage.setItem('linkedin-history', JSON.stringify(postHistory));
-    }
+      function renderFeedback() {
+        if (feedbackPrefs.length === 0) {
+          $feedbackPrefs.innerHTML = '';
+          return;
+        }
+        $feedbackPrefs.innerHTML = feedbackPrefs
+          .map(
+            (p, i) =>
+              '<span class="feedback-pref">' +
+              escHtml(p) +
+              '<button onclick="removeFeedback(' +
+              i +
+              ')">×</button></span>',
+          )
+          .join('');
+      }
 
-    $btnSaveHistory.addEventListener('click', () => {
-      const text = $postText.value.trim();
-      const headline = $headline.value.trim();
-      if (!text) return;
-
-      const entry = {
-        id: Date.now(),
-        date: new Date().toISOString().slice(0, 10),
-        format: currentFormat,
-        headline: headline || text.slice(0, 60),
-        excerpt: text.slice(0, 120),
-        tags: [...postTags],
-        reactions: 0,
-        comments: 0,
-        perf: '',
+      window.removeFeedback = function (i) {
+        feedbackPrefs.splice(i, 1);
+        saveFeedback();
+        renderFeedback();
       };
 
-      postHistory.unshift(entry);
-      saveHistory();
+      $btnFeedbackToggle.addEventListener('click', () => {
+        $feedbackZone.classList.toggle('hidden');
+        if (!$feedbackZone.classList.contains('hidden')) $feedbackInput.focus();
+      });
 
-      $statusSave.classList.remove('hidden', 'error');
-      $statusSave.classList.add('success');
-      $statusSave.textContent = 'Post sauvé dans l\'historique';
-      setTimeout(() => $statusSave.classList.add('hidden'), 2000);
-    });
+      $btnFeedbackSave.addEventListener('click', () => {
+        const val = $feedbackInput.value.trim();
+        if (!val) return;
+        feedbackPrefs.push(val);
+        saveFeedback();
+        renderFeedback();
+        $feedbackInput.value = '';
+        $feedbackZone.classList.add('hidden');
+        // Auto-regenerate with new preferences
+        if (currentInput) {
+          callGenerate(currentInput, currentFormat, $statusGenerate, null).then((data) => {
+            if (data) showEdit(data);
+          });
+        }
+      });
 
-    // ==================== HISTORY & METRICS ====================
-    const MONTHS_FR = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+      renderFeedback();
 
-    function renderHistory() {
-      // Stats
-      const total = postHistory.length;
-      const thisMonth = postHistory.filter(p => p.date.slice(0, 7) === new Date().toISOString().slice(0, 7)).length;
-      const cartons = postHistory.filter(p => p.perf === 'carton').length;
-      const formatCounts = {};
-      postHistory.forEach(p => { formatCounts[p.format] = (formatCounts[p.format] || 0) + 1; });
-      const topFormat = Object.entries(formatCounts).sort((a, b) => b[1] - a[1])[0];
+      // ==================== POST TAGS ====================
+      function renderPostTags() {
+        $postTagsList.innerHTML = postTags
+          .map(
+            (t, i) =>
+              '<span class="tag">' +
+              escHtml(t) +
+              '<button onclick="removePostTag(' +
+              i +
+              ')">×</button></span>',
+          )
+          .join('');
+      }
 
-      $historyStats.innerHTML = `
+      window.removePostTag = function (i) {
+        postTags.splice(i, 1);
+        renderPostTags();
+      };
+
+      $postTagInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const val = $postTagInput.value.trim();
+          if (val && !postTags.includes(val)) {
+            postTags.push(val);
+            renderPostTags();
+          }
+          $postTagInput.value = '';
+        }
+      });
+
+      // ==================== SAVE TO HISTORY ====================
+      function saveHistory() {
+        localStorage.setItem('linkedin-history', JSON.stringify(postHistory));
+      }
+
+      $btnSaveHistory.addEventListener('click', () => {
+        const text = $postText.value.trim();
+        const headline = $headline.value.trim();
+        if (!text) return;
+
+        const entry = {
+          id: Date.now(),
+          date: new Date().toISOString().slice(0, 10),
+          format: currentFormat,
+          headline: headline || text.slice(0, 60),
+          excerpt: text.slice(0, 120),
+          tags: [...postTags],
+          reactions: 0,
+          comments: 0,
+          perf: '',
+        };
+
+        postHistory.unshift(entry);
+        saveHistory();
+
+        $statusSave.classList.remove('hidden', 'error');
+        $statusSave.classList.add('success');
+        $statusSave.textContent = "Post sauvé dans l'historique";
+        setTimeout(() => $statusSave.classList.add('hidden'), 2000);
+      });
+
+      // ==================== HISTORY & METRICS ====================
+      const MONTHS_FR = [
+        'Janvier',
+        'Février',
+        'Mars',
+        'Avril',
+        'Mai',
+        'Juin',
+        'Juillet',
+        'Août',
+        'Septembre',
+        'Octobre',
+        'Novembre',
+        'Décembre',
+      ];
+
+      function renderHistory() {
+        // Stats
+        const total = postHistory.length;
+        const thisMonth = postHistory.filter(
+          (p) => p.date.slice(0, 7) === new Date().toISOString().slice(0, 7),
+        ).length;
+        const cartons = postHistory.filter((p) => p.perf === 'carton').length;
+        const formatCounts = {};
+        postHistory.forEach((p) => {
+          formatCounts[p.format] = (formatCounts[p.format] || 0) + 1;
+        });
+        const topFormat = Object.entries(formatCounts).sort((a, b) => b[1] - a[1])[0];
+
+        $historyStats.innerHTML = `
         <div class="stat-card"><div class="stat-value">${total}</div><div class="stat-label">Posts total</div></div>
         <div class="stat-card"><div class="stat-value">${thisMonth}</div><div class="stat-label">Ce mois</div></div>
         <div class="stat-card"><div class="stat-value">${cartons}</div><div class="stat-label">Cartons</div></div>
         <div class="stat-card"><div class="stat-value">${topFormat ? topFormat[0] : '-'}</div><div class="stat-label">Format favori</div></div>
       `;
 
-      // Tag cloud
-      const tagCounts = {};
-      postHistory.forEach(p => (p.tags || []).forEach(t => { tagCounts[t] = (tagCounts[t] || 0) + 1; }));
-      const sortedTags = Object.entries(tagCounts).sort((a, b) => b[1] - a[1]);
-      $historyTags.innerHTML = sortedTags.length
-        ? sortedTags.map(([tag, count]) => '<span class="tag-cloud-item">' + escHtml(tag) + ' (' + count + ')</span>').join('')
-        : '<span style="color:#a1a1aa;font-size:0.8125rem">Aucun tag pour le moment</span>';
+        // Tag cloud
+        const tagCounts = {};
+        postHistory.forEach((p) =>
+          (p.tags || []).forEach((t) => {
+            tagCounts[t] = (tagCounts[t] || 0) + 1;
+          }),
+        );
+        const sortedTags = Object.entries(tagCounts).sort((a, b) => b[1] - a[1]);
+        $historyTags.innerHTML = sortedTags.length
+          ? sortedTags
+              .map(
+                ([tag, count]) =>
+                  '<span class="tag-cloud-item">' + escHtml(tag) + ' (' + count + ')</span>',
+              )
+              .join('')
+          : '<span style="color:#a1a1aa;font-size:0.8125rem">Aucun tag pour le moment</span>';
 
-      // Posts list grouped by month
-      if (postHistory.length === 0) {
-        $historyList.innerHTML = '<div class="history-empty">Aucun post dans l\'historique. Sauve tes posts depuis la section export.</div>';
-        return;
-      }
-
-      let html = '';
-      let lastMonth = '';
-      postHistory.forEach((p, i) => {
-        const month = p.date.slice(0, 7);
-        if (month !== lastMonth) {
-          const [y, m] = month.split('-');
-          html += '<div class="history-month">' + MONTHS_FR[parseInt(m) - 1] + ' ' + y + '</div>';
-          lastMonth = month;
+        // Posts list grouped by month
+        if (postHistory.length === 0) {
+          $historyList.innerHTML =
+            '<div class="history-empty">Aucun post dans l\'historique. Sauve tes posts depuis la section export.</div>';
+          return;
         }
-        const perfClass = p.perf === 'carton' ? 'perf-carton' : p.perf === 'flop' ? 'perf-flop' : p.perf === 'correct' ? 'perf-correct' : '';
-        html += `
+
+        let html = '';
+        let lastMonth = '';
+        postHistory.forEach((p, i) => {
+          const month = p.date.slice(0, 7);
+          if (month !== lastMonth) {
+            const [y, m] = month.split('-');
+            html += '<div class="history-month">' + MONTHS_FR[parseInt(m) - 1] + ' ' + y + '</div>';
+            lastMonth = month;
+          }
+          const perfClass =
+            p.perf === 'carton'
+              ? 'perf-carton'
+              : p.perf === 'flop'
+                ? 'perf-flop'
+                : p.perf === 'correct'
+                  ? 'perf-correct'
+                  : '';
+          html += `
           <div class="history-item" data-index="${i}">
             <div class="history-item-content">
               <div class="history-item-headline">${escHtml(p.headline)}</div>
@@ -1165,7 +1971,7 @@ const blogArticles = posts.map(p => ({
               <div class="history-item-meta">
                 <span class="history-item-format">${escHtml(p.format)}</span>
                 <span>${p.date}</span>
-                ${(p.tags || []).map(t => '<span class="tag-cloud-item">' + escHtml(t) + '</span>').join('')}
+                ${(p.tags || []).map((t) => '<span class="tag-cloud-item">' + escHtml(t) + '</span>').join('')}
               </div>
             </div>
             <div class="history-metrics">
@@ -1181,662 +1987,835 @@ const blogArticles = posts.map(p => ({
             </div>
           </div>
         `;
+        });
+        $historyList.innerHTML = html;
+      }
+
+      window.updateMetric = function (i, field, value) {
+        if (!postHistory[i]) return;
+        postHistory[i][field] = field === 'perf' ? value : parseInt(value) || 0;
+        saveHistory();
+        renderHistory();
+      };
+
+      window.removeHistory = function (i) {
+        postHistory.splice(i, 1);
+        saveHistory();
+        renderHistory();
+      };
+
+      // Render history on tab switch
+      document
+        .querySelector('[data-panel="panel-history"]')
+        .addEventListener('click', renderHistory);
+      renderHistory();
+
+      // ==================== RSS FEEDS ====================
+      const rssSources = JSON.parse(localStorage.getItem('linkedin-rss-sources') || '[]');
+
+      const $rssUrl = document.getElementById('rss-url');
+      const $btnAddRss = document.getElementById('btn-add-rss');
+      const $rssSources = document.getElementById('rss-sources');
+      const $btnFetchRss = document.getElementById('btn-fetch-rss');
+      const $statusRss = document.getElementById('status-rss');
+      const $rssSuggestions = document.getElementById('rss-suggestions');
+
+      function saveRssSources() {
+        localStorage.setItem('linkedin-rss-sources', JSON.stringify(rssSources));
+      }
+
+      function renderRssSources() {
+        if (rssSources.length === 0) {
+          $rssSources.innerHTML = '';
+          $btnFetchRss.disabled = true;
+          return;
+        }
+        $btnFetchRss.disabled = false;
+        $rssSources.innerHTML = rssSources
+          .map(
+            (url, i) =>
+              '<div class="rss-source"><span class="rss-source-url">' +
+              escHtml(url) +
+              '</span>' +
+              '<button class="btn btn-danger btn-sm" onclick="removeRss(' +
+              i +
+              ')">×</button></div>',
+          )
+          .join('');
+      }
+
+      window.removeRss = function (i) {
+        rssSources.splice(i, 1);
+        saveRssSources();
+        renderRssSources();
+      };
+
+      $btnAddRss.addEventListener('click', () => {
+        const url = $rssUrl.value.trim();
+        if (!url || rssSources.includes(url)) return;
+        rssSources.push(url);
+        saveRssSources();
+        renderRssSources();
+        $rssUrl.value = '';
       });
-      $historyList.innerHTML = html;
-    }
 
-    window.updateMetric = function(i, field, value) {
-      if (!postHistory[i]) return;
-      postHistory[i][field] = field === 'perf' ? value : parseInt(value) || 0;
-      saveHistory();
-      renderHistory();
-    };
-
-    window.removeHistory = function(i) {
-      postHistory.splice(i, 1);
-      saveHistory();
-      renderHistory();
-    };
-
-    // Render history on tab switch
-    document.querySelector('[data-panel="panel-history"]').addEventListener('click', renderHistory);
-    renderHistory();
-
-    // ==================== RSS FEEDS ====================
-    let rssSources = JSON.parse(localStorage.getItem('linkedin-rss-sources') || '[]');
-
-    const $rssUrl = document.getElementById('rss-url');
-    const $btnAddRss = document.getElementById('btn-add-rss');
-    const $rssSources = document.getElementById('rss-sources');
-    const $btnFetchRss = document.getElementById('btn-fetch-rss');
-    const $statusRss = document.getElementById('status-rss');
-    const $rssSuggestions = document.getElementById('rss-suggestions');
-
-    function saveRssSources() {
-      localStorage.setItem('linkedin-rss-sources', JSON.stringify(rssSources));
-    }
-
-    function renderRssSources() {
-      if (rssSources.length === 0) {
-        $rssSources.innerHTML = '';
+      $btnFetchRss.addEventListener('click', async () => {
         $btnFetchRss.disabled = true;
-        return;
-      }
-      $btnFetchRss.disabled = false;
-      $rssSources.innerHTML = rssSources.map((url, i) =>
-        '<div class="rss-source"><span class="rss-source-url">' + escHtml(url) + '</span>' +
-        '<button class="btn btn-danger btn-sm" onclick="removeRss(' + i + ')">×</button></div>'
-      ).join('');
-    }
+        $btnFetchRss.innerHTML = '<span class="spinner"></span> Chargement...';
+        $statusRss.classList.remove('hidden', 'error');
+        $statusRss.textContent = 'Récupération des flux...';
+        $rssSuggestions.innerHTML = '';
 
-    window.removeRss = function(i) {
-      rssSources.splice(i, 1);
-      saveRssSources();
-      renderRssSources();
-    };
-
-    $btnAddRss.addEventListener('click', () => {
-      const url = $rssUrl.value.trim();
-      if (!url || rssSources.includes(url)) return;
-      rssSources.push(url);
-      saveRssSources();
-      renderRssSources();
-      $rssUrl.value = '';
-    });
-
-    $btnFetchRss.addEventListener('click', async () => {
-      $btnFetchRss.disabled = true;
-      $btnFetchRss.innerHTML = '<span class="spinner"></span> Chargement...';
-      $statusRss.classList.remove('hidden', 'error');
-      $statusRss.textContent = 'Récupération des flux...';
-      $rssSuggestions.innerHTML = '';
-
-      let allItems = [];
-      for (const url of rssSources) {
-        try {
-          const res = await fetch('/api/fetch-rss', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'same-origin',
-            body: JSON.stringify({ url }),
-          });
-          const data = await res.json();
-          if (res.ok && data.items) {
-            allItems = allItems.concat(data.items);
-          }
-        } catch {}
-      }
-
-      // Sort by date descending, take 15
-      allItems.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-      allItems = allItems.slice(0, 15);
-
-      if (allItems.length === 0) {
-        $rssSuggestions.innerHTML = '<div class="veille-empty">Aucun article trouvé dans les flux.</div>';
-      } else {
-        $rssSuggestions.innerHTML = allItems.map(item =>
-          '<div class="rss-suggestion" data-title="' + escAttr(item.title) + '" data-url="' + escAttr(item.link) + '" data-desc="' + escAttr(item.description) + '">' +
-            '<div class="rss-suggestion-content">' +
-              '<div class="rss-suggestion-title">' + escHtml(item.title) + '</div>' +
-              '<div class="rss-suggestion-desc">' + escHtml(item.description) + '</div>' +
-              (item.date ? '<div class="rss-suggestion-date">' + item.date.slice(0, 10) + '</div>' : '') +
-            '</div>' +
-            '<button class="btn btn-ghost btn-sm">Ajouter</button>' +
-          '</div>'
-        ).join('');
-
-        // Click to add to veille
-        $rssSuggestions.querySelectorAll('.rss-suggestion .btn').forEach(btn => {
-          btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const sug = btn.closest('.rss-suggestion');
-            veilleItems.push({
-              url: sug.dataset.url,
-              title: sug.dataset.title,
-              note: '',
-              date: new Date().toISOString().slice(0, 10),
+        let allItems = [];
+        for (const url of rssSources) {
+          try {
+            const res = await fetch('/api/fetch-rss', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              credentials: 'same-origin',
+              body: JSON.stringify({ url }),
             });
-            saveVeille();
-            renderVeille();
-            btn.textContent = 'Ajouté';
-            btn.disabled = true;
-          });
-        });
-      }
-
-      $statusRss.classList.add('hidden');
-      $btnFetchRss.disabled = false;
-      $btnFetchRss.textContent = 'Récupérer les derniers articles';
-    });
-
-    function escAttr(s) {
-      return s.replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    }
-
-    renderRssSources();
-
-    // ==================== LINKEDIN → BLOG (REVERSE FLOW) ====================
-    const $reverseText = document.getElementById('reverse-text');
-    const $reverseLang = document.getElementById('reverse-lang');
-    const $btnReverse = document.getElementById('btn-reverse');
-    const $statusReverse = document.getElementById('status-reverse');
-    const $reverseResult = document.getElementById('reverse-result');
-    const $reverseTitle = document.getElementById('reverse-title');
-    const $reverseDesc = document.getElementById('reverse-desc');
-    const $reverseContent = document.getElementById('reverse-content');
-    const $reverseTagInput = document.getElementById('reverse-tag-input');
-    const $reverseTagsList = document.getElementById('reverse-tags-list');
-    const $btnReversePublish = document.getElementById('btn-reverse-publish');
-    const $btnReverseReset = document.getElementById('btn-reverse-reset');
-    const $statusReversePublish = document.getElementById('status-reverse-publish');
-
-    let reverseTags = [];
-
-    function renderReverseTags() {
-      $reverseTagsList.innerHTML = reverseTags.map((t, i) =>
-        '<span class="tag">' + escHtml(t) + '<button onclick="removeReverseTag(' + i + ')">×</button></span>'
-      ).join('');
-    }
-
-    window.removeReverseTag = function(i) {
-      reverseTags.splice(i, 1);
-      renderReverseTags();
-    };
-
-    $reverseTagInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        const val = $reverseTagInput.value.trim();
-        if (val && !reverseTags.includes(val)) {
-          reverseTags.push(val);
-          renderReverseTags();
+            const data = await res.json();
+            if (res.ok && data.items) {
+              allItems = allItems.concat(data.items);
+            }
+          } catch {}
         }
-        $reverseTagInput.value = '';
+
+        // Sort by date descending, take 15
+        allItems.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+        allItems = allItems.slice(0, 15);
+
+        if (allItems.length === 0) {
+          $rssSuggestions.innerHTML =
+            '<div class="veille-empty">Aucun article trouvé dans les flux.</div>';
+        } else {
+          $rssSuggestions.innerHTML = allItems
+            .map(
+              (item) =>
+                '<div class="rss-suggestion" data-title="' +
+                escAttr(item.title) +
+                '" data-url="' +
+                escAttr(item.link) +
+                '" data-desc="' +
+                escAttr(item.description) +
+                '">' +
+                '<div class="rss-suggestion-content">' +
+                '<div class="rss-suggestion-title">' +
+                escHtml(item.title) +
+                '</div>' +
+                '<div class="rss-suggestion-desc">' +
+                escHtml(item.description) +
+                '</div>' +
+                (item.date
+                  ? '<div class="rss-suggestion-date">' + item.date.slice(0, 10) + '</div>'
+                  : '') +
+                '</div>' +
+                '<button class="btn btn-ghost btn-sm">Ajouter</button>' +
+                '</div>',
+            )
+            .join('');
+
+          // Click to add to veille
+          $rssSuggestions.querySelectorAll('.rss-suggestion .btn').forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+              e.stopPropagation();
+              const sug = btn.closest('.rss-suggestion');
+              veilleItems.push({
+                url: sug.dataset.url,
+                title: sug.dataset.title,
+                note: '',
+                date: new Date().toISOString().slice(0, 10),
+              });
+              saveVeille();
+              renderVeille();
+              btn.textContent = 'Ajouté';
+              btn.disabled = true;
+            });
+          });
+        }
+
+        $statusRss.classList.add('hidden');
+        $btnFetchRss.disabled = false;
+        $btnFetchRss.textContent = 'Récupérer les derniers articles';
+      });
+
+      function escAttr(s) {
+        return s.replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
       }
-    });
 
-    $btnReverse.addEventListener('click', async () => {
-      const text = $reverseText.value.trim();
-      const lang = $reverseLang.value;
-      if (!text) return;
+      renderRssSources();
 
-      const idea = 'Développe ce post LinkedIn en article de blog complet. Le post a bien fonctionné sur LinkedIn, il faut maintenant l\'approfondir en article.\n\nPost LinkedIn original :\n\n' + text;
+      // ==================== LINKEDIN → BLOG (REVERSE FLOW) ====================
+      const $reverseText = document.getElementById('reverse-text');
+      const $reverseLang = document.getElementById('reverse-lang');
+      const $btnReverse = document.getElementById('btn-reverse');
+      const $statusReverse = document.getElementById('status-reverse');
+      const $reverseResult = document.getElementById('reverse-result');
+      const $reverseTitle = document.getElementById('reverse-title');
+      const $reverseDesc = document.getElementById('reverse-desc');
+      const $reverseContent = document.getElementById('reverse-content');
+      const $reverseTagInput = document.getElementById('reverse-tag-input');
+      const $reverseTagsList = document.getElementById('reverse-tags-list');
+      const $btnReversePublish = document.getElementById('btn-reverse-publish');
+      const $btnReverseReset = document.getElementById('btn-reverse-reset');
+      const $statusReversePublish = document.getElementById('status-reverse-publish');
 
-      $btnReverse.disabled = true;
-      $btnReverse.innerHTML = '<span class="spinner"></span> Génération...';
-      $statusReverse.classList.remove('hidden', 'error');
-      $statusReverse.textContent = 'Claude rédige l\'article à partir du post...';
+      let reverseTags = [];
 
-      try {
-        const res = await fetch('/api/generate', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'same-origin',
-          body: JSON.stringify({ idea, lang }),
-        });
+      function renderReverseTags() {
+        $reverseTagsList.innerHTML = reverseTags
+          .map(
+            (t, i) =>
+              '<span class="tag">' +
+              escHtml(t) +
+              '<button onclick="removeReverseTag(' +
+              i +
+              ')">×</button></span>',
+          )
+          .join('');
+      }
 
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'Erreur');
-
-        $reverseTitle.value = data.title || '';
-        $reverseDesc.value = data.description || '';
-        $reverseContent.value = data.content || '';
-        reverseTags = data.tags || [];
+      window.removeReverseTag = function (i) {
+        reverseTags.splice(i, 1);
         renderReverseTags();
+      };
 
-        $reverseResult.classList.remove('hidden');
-        $statusReverse.classList.add('hidden');
-        $reverseResult.scrollIntoView({ behavior: 'smooth' });
-      } catch (err) {
-        $statusReverse.classList.add('error');
-        $statusReverse.textContent = 'Erreur : ' + err.message;
-      } finally {
-        $btnReverse.disabled = false;
-        $btnReverse.textContent = 'Générer l\'article de blog';
-      }
-    });
-
-    $btnReversePublish.addEventListener('click', async () => {
-      const title = $reverseTitle.value.trim();
-      const content = $reverseContent.value.trim();
-      if (!title || !content) return;
-
-      $btnReversePublish.disabled = true;
-      $btnReversePublish.innerHTML = '<span class="spinner"></span> Publication...';
-      $statusReversePublish.classList.remove('hidden', 'error', 'success');
-      $statusReversePublish.textContent = 'Commit sur GitHub en cours...';
-
-      try {
-        const res = await fetch('/api/publish', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'same-origin',
-          body: JSON.stringify({
-            title,
-            description: $reverseDesc.value.trim(),
-            tags: reverseTags,
-            content,
-            lang: $reverseLang.value,
-          }),
-        });
-
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'Erreur');
-
-        $statusReversePublish.classList.add('success');
-        $statusReversePublish.innerHTML = 'Article publié ! <a href="https://www.pierretouzet.fr' + data.url + '" target="_blank" style="color:#4f46e5">Voir l\'article</a> (en ligne dans ~1 min)';
-      } catch (err) {
-        $statusReversePublish.classList.add('error');
-        $statusReversePublish.textContent = 'Erreur : ' + err.message;
-      } finally {
-        $btnReversePublish.disabled = false;
-        $btnReversePublish.textContent = 'Publier sur le blog';
-      }
-    });
-
-    $btnReverseReset.addEventListener('click', () => {
-      $reverseText.value = '';
-      $reverseTitle.value = '';
-      $reverseDesc.value = '';
-      $reverseContent.value = '';
-      reverseTags = [];
-      renderReverseTags();
-      $reverseResult.classList.add('hidden');
-    });
-
-    // ==================== CAROUSEL MODE ====================
-    const $singleMode = document.getElementById('single-mode');
-    const $carouselMode = document.getElementById('carousel-mode');
-    const $carouselSlidesList = document.getElementById('carousel-slides-list');
-    const $btnAddSlide = document.getElementById('btn-add-slide');
-    const $carouselPreview = document.getElementById('carousel-preview');
-    let carouselSlides = [{ headline: '', subtitle: '' }, { headline: '', subtitle: '' }];
-    let carouselBlobs = [];
-    let isCarouselMode = false;
-
-    document.querySelectorAll('input[name="visual-mode"]').forEach(r => {
-      r.addEventListener('change', () => {
-        isCarouselMode = r.value === 'carousel';
-        $singleMode.classList.toggle('hidden', isCarouselMode);
-        $carouselMode.classList.toggle('hidden', !isCarouselMode);
-        $carouselPreview.classList.add('hidden');
-        if (isCarouselMode) renderCarouselSlides();
-      });
-    });
-
-    function renderCarouselSlides() {
-      $carouselSlidesList.innerHTML = carouselSlides.map((s, i) =>
-        '<div class="carousel-slide-row">' +
-          '<span class="carousel-slide-num">' + (i + 1) + '</span>' +
-          '<input type="text" placeholder="Titre slide ' + (i + 1) + '" value="' + escAttr(s.headline) + '" oninput="updateCarouselSlide(' + i + ',\'headline\',this.value)" />' +
-          '<input type="text" placeholder="Sous-titre (opt.)" value="' + escAttr(s.subtitle) + '" style="max-width:35%" oninput="updateCarouselSlide(' + i + ',\'subtitle\',this.value)" />' +
-          (carouselSlides.length > 2 ? '<button class="btn btn-danger btn-sm" onclick="removeCarouselSlide(' + i + ')">×</button>' : '') +
-        '</div>'
-      ).join('');
-    }
-
-    window.updateCarouselSlide = function(i, field, value) {
-      carouselSlides[i][field] = value;
-    };
-
-    window.removeCarouselSlide = function(i) {
-      carouselSlides.splice(i, 1);
-      renderCarouselSlides();
-    };
-
-    $btnAddSlide.addEventListener('click', () => {
-      if (carouselSlides.length >= 10) return;
-      carouselSlides.push({ headline: '', subtitle: '' });
-      renderCarouselSlides();
-    });
-
-    // Override visual generation for carousel
-    const originalVisualHandler = $btnVisual.onclick;
-    $btnVisual.addEventListener('click', async (e) => {
-      if (!isCarouselMode) return; // let original handler run
-      e.stopImmediatePropagation();
-
-      const validSlides = carouselSlides.filter(s => s.headline.trim());
-      if (validSlides.length < 2) {
-        $statusVisual.classList.remove('hidden');
-        $statusVisual.classList.add('error');
-        $statusVisual.textContent = 'Au moins 2 slides avec titre requis';
-        return;
-      }
-
-      $btnVisual.disabled = true;
-      $btnVisual.innerHTML = '<span class="spinner"></span> Génération...';
-      $statusVisual.classList.remove('hidden', 'error');
-      $statusVisual.textContent = 'Création du carrousel (' + validSlides.length + ' slides)...';
-
-      try {
-        const res = await fetch('/api/generate-linkedin-carousel', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'same-origin',
-          body: JSON.stringify({ slides: validSlides, format: currentFormat }),
-        });
-
-        if (!res.ok) {
-          const err = await res.json();
-          throw new Error(err.error || 'Erreur');
+      $reverseTagInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const val = $reverseTagInput.value.trim();
+          if (val && !reverseTags.includes(val)) {
+            reverseTags.push(val);
+            renderReverseTags();
+          }
+          $reverseTagInput.value = '';
         }
-
-        const data = await res.json();
-        carouselBlobs = [];
-
-        // Convert base64 to blobs
-        for (const b64 of data.images) {
-          const bin = atob(b64);
-          const arr = new Uint8Array(bin.length);
-          for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
-          carouselBlobs.push(new Blob([arr], { type: 'image/png' }));
-        }
-
-        // Show first in main preview
-        const firstUrl = URL.createObjectURL(carouselBlobs[0]);
-        $visualContainer.innerHTML = '<img src="' + firstUrl + '" alt="Slide 1" />';
-        $previewImg.src = firstUrl;
-        $previewImage.classList.remove('hidden');
-        currentVisualBlob = carouselBlobs[0];
-        $btnDownload.disabled = false;
-
-        // Show carousel strip
-        $carouselPreview.classList.remove('hidden');
-        $carouselPreview.innerHTML = carouselBlobs.map((blob, i) => {
-          const url = URL.createObjectURL(blob);
-          return '<img src="' + url + '" alt="Slide ' + (i + 1) + '" data-index="' + i + '" class="' + (i === 0 ? 'active' : '') + '" />';
-        }).join('');
-
-        // Click to select slide
-        $carouselPreview.querySelectorAll('img').forEach(img => {
-          img.addEventListener('click', () => {
-            const idx = parseInt(img.dataset.index);
-            const url = URL.createObjectURL(carouselBlobs[idx]);
-            $visualContainer.innerHTML = '<img src="' + url + '" alt="Slide ' + (idx + 1) + '" />';
-            currentVisualBlob = carouselBlobs[idx];
-            $carouselPreview.querySelectorAll('img').forEach(i => i.classList.remove('active'));
-            img.classList.add('active');
-          });
-        });
-
-        $statusVisual.classList.add('hidden');
-      } catch (err) {
-        $statusVisual.classList.add('error');
-        $statusVisual.textContent = 'Erreur : ' + err.message;
-      } finally {
-        $btnVisual.disabled = false;
-        $btnVisual.textContent = 'Générer le visuel';
-      }
-    }, true); // capture phase to run before original
-
-    // Override download for carousel (download all)
-    const origDownloadHandler = $btnDownload.onclick;
-    $btnDownload.addEventListener('click', (e) => {
-      if (!isCarouselMode || carouselBlobs.length === 0) return;
-      e.stopImmediatePropagation();
-
-      carouselBlobs.forEach((blob, i) => {
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'linkedin-carousel-' + currentFormat + '-slide-' + (i + 1) + '.png';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
       });
-    }, true);
 
-    renderCarouselSlides();
+      $btnReverse.addEventListener('click', async () => {
+        const text = $reverseText.value.trim();
+        const lang = $reverseLang.value;
+        if (!text) return;
 
-    // ==================== CALENDAR EDITORIAL ====================
-    const $calendarGrid = document.getElementById('calendar-grid');
-    const $calendarSuggestions = document.getElementById('calendar-suggestions');
-    const DAYS_FR = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+        const idea =
+          "Développe ce post LinkedIn en article de blog complet. Le post a bien fonctionné sur LinkedIn, il faut maintenant l'approfondir en article.\n\nPost LinkedIn original :\n\n" +
+          text;
 
-    function renderCalendar() {
-      if (postHistory.length === 0) {
-        document.getElementById('calendar-card').innerHTML =
-          '<div class="card-header">Calendrier éditorial</div>' +
-          '<p style="font-size:0.8125rem;color:#a1a1aa">Sauve quelques posts dans l\'historique pour débloquer les suggestions.</p>';
-        return;
-      }
+        $btnReverse.disabled = true;
+        $btnReverse.innerHTML = '<span class="spinner"></span> Génération...';
+        $statusReverse.classList.remove('hidden', 'error');
+        $statusReverse.textContent = "Claude rédige l'article à partir du post...";
 
-      const now = new Date();
-      const dates = postHistory.map(p => new Date(p.date)).sort((a, b) => b.getTime() - a.getTime());
-      const lastPostDate = dates[0];
-      const daysSinceLast = Math.floor((now.getTime() - lastPostDate.getTime()) / 86400000);
-
-      // Average frequency
-      let avgDaysBetween = '-';
-      if (dates.length >= 2) {
-        const gaps = [];
-        for (let i = 0; i < dates.length - 1; i++) {
-          gaps.push(Math.floor((dates[i].getTime() - dates[i + 1].getTime()) / 86400000));
-        }
-        avgDaysBetween = (gaps.reduce((a, b) => a + b, 0) / gaps.length).toFixed(1);
-      }
-
-      // Posts this week
-      const weekAgo = new Date(now.getTime() - 7 * 86400000);
-      const thisWeek = dates.filter(d => d >= weekAgo).length;
-
-      $calendarGrid.innerHTML =
-        '<div class="calendar-item"><div class="calendar-value">' + daysSinceLast + 'j</div><div class="calendar-label">Depuis dernier post</div></div>' +
-        '<div class="calendar-item"><div class="calendar-value">' + avgDaysBetween + 'j</div><div class="calendar-label">Fréquence moyenne</div></div>' +
-        '<div class="calendar-item"><div class="calendar-value">' + thisWeek + '</div><div class="calendar-label">Posts cette semaine</div></div>';
-
-      // Suggestions
-      const suggestions = [];
-
-      // 1. Timing suggestion
-      const avgDays = parseFloat(avgDaysBetween);
-      if (!isNaN(avgDays) && daysSinceLast >= avgDays) {
-        const sugDate = new Date(lastPostDate.getTime() + avgDays * 86400000);
-        const sugDay = sugDate > now ? sugDate : now;
-        suggestions.push({
-          icon: '&#128197;',
-          text: daysSinceLast > avgDays * 1.5 ? 'Il serait temps de poster !' : 'Prochain post suggéré',
-          detail: DAYS_FR[sugDay.getDay()] + ' ' + sugDay.getDate() + '/' + (sugDay.getMonth() + 1) + ' (basé sur ta fréquence de ' + avgDaysBetween + 'j)',
-        });
-      } else if (!isNaN(avgDays)) {
-        const nextDate = new Date(lastPostDate.getTime() + avgDays * 86400000);
-        suggestions.push({
-          icon: '&#9989;',
-          text: 'Tu es dans le rythme',
-          detail: 'Prochain post vers le ' + nextDate.getDate() + '/' + (nextDate.getMonth() + 1),
-        });
-      }
-
-      // 2. Format suggestion
-      const formatCounts = {};
-      const recentFormats = postHistory.slice(0, 5).map(p => p.format);
-      postHistory.forEach(p => { formatCounts[p.format] = (formatCounts[p.format] || 0) + 1; });
-      const allFormats = ['analyse', 'opinion', 'fait', 'veille', 'newsletter'];
-      const unusedFormats = allFormats.filter(f => !recentFormats.includes(f));
-      if (unusedFormats.length > 0) {
-        suggestions.push({
-          icon: '&#128161;',
-          text: 'Format suggéré : ' + unusedFormats[0],
-          detail: 'Pas utilisé dans tes 5 derniers posts. Varier les formats augmente l\'engagement.',
-        });
-      }
-
-      // 3. Best performer suggestion
-      const cartonPosts = postHistory.filter(p => p.perf === 'carton');
-      if (cartonPosts.length >= 2) {
-        const cartonFormats = {};
-        cartonPosts.forEach(p => { cartonFormats[p.format] = (cartonFormats[p.format] || 0) + 1; });
-        const bestFormat = Object.entries(cartonFormats).sort((a, b) => b[1] - a[1])[0];
-        suggestions.push({
-          icon: '&#127942;',
-          text: 'Ton meilleur format : ' + bestFormat[0],
-          detail: bestFormat[1] + ' carton(s) sur ce format. Double down quand tu veux de l\'impact.',
-        });
-      }
-
-      // 4. Tag freshness
-      const recentTags = new Set();
-      postHistory.slice(0, 5).forEach(p => (p.tags || []).forEach(t => recentTags.add(t)));
-      const allTags = {};
-      postHistory.forEach(p => (p.tags || []).forEach(t => { allTags[t] = (allTags[t] || 0) + 1; }));
-      const staleTags = Object.entries(allTags)
-        .filter(([t, c]) => c >= 2 && !recentTags.has(t))
-        .sort((a, b) => b[1] - a[1]);
-      if (staleTags.length > 0) {
-        suggestions.push({
-          icon: '&#128204;',
-          text: 'Thème à réactiver : ' + staleTags[0][0],
-          detail: staleTags[0][1] + ' posts au total mais absent des 5 derniers. Ton audience attend peut-être.',
-        });
-      }
-
-      $calendarSuggestions.innerHTML = suggestions.length
-        ? suggestions.map(s =>
-          '<div class="calendar-suggestion">' +
-            '<div class="calendar-suggestion-icon">' + s.icon + '</div>' +
-            '<div><div class="calendar-suggestion-text">' + s.text + '</div>' +
-            '<div class="calendar-suggestion-detail">' + s.detail + '</div></div>' +
-          '</div>'
-        ).join('')
-        : '<p style="font-size:0.8125rem;color:#a1a1aa">Ajoute plus de posts et de métriques pour des suggestions plus précises.</p>';
-    }
-
-    // Render calendar when history tab opens
-    const origHistoryClick = document.querySelector('[data-panel="panel-history"]');
-    origHistoryClick.addEventListener('click', renderCalendar);
-    renderCalendar();
-
-    // ==================== BANNER SLIDESHOW ====================
-    const $bannerSlidesList = document.getElementById('banner-slides-list');
-    const $btnAddBannerSlide = document.getElementById('btn-add-banner-slide');
-    const $btnGenBanner = document.getElementById('btn-gen-banner');
-    const $statusBanner = document.getElementById('status-banner');
-    const $bannerPreview = document.getElementById('banner-preview');
-    const $bannerDownloadActions = document.getElementById('banner-download-actions');
-    const $btnDownloadBanner = document.getElementById('btn-download-banner');
-    let bannerBlobs = [];
-
-    let bannerSlides = [
-      { tagline: 'Responsable national des programmes | Créateur de Gradly | Freelance & Consulting | 🏃 Coureur irrégulier', keywords: 'EDTECH, RNCP, IA EN ÉDUCATION, PÉDAGOGIE, GRADLY' },
-      { tagline: '15 ans entre IT, pédagogie et innovation digitale — Bac pro > Responsable programmes > Entrepreneur', keywords: 'PARCOURS ATYPIQUE, RECONVERSION, EDTECH' },
-      { tagline: "Gradly — L'outil qui automatise vos référentiels RNCP et simplifie Qualiopi", keywords: 'AUTOMATISATION, RNCP, QUALIOPI, CERTIFICATION' },
-      { tagline: "L'IA en éducation, vue du terrain — YouTube, podcast, newsletter, ebook", keywords: 'CONTENU, IA GÉNÉRATIVE, YOUTUBE, PODCAST' },
-      { tagline: 'Disponible en consulting & freelance — Ingénierie pédagogique, transformation digitale, IA', keywords: 'CONSULTING, FREELANCE, DISPONIBLE' },
-    ];
-
-    function renderBannerSlides() {
-      $btnAddBannerSlide.classList.toggle('hidden', bannerSlides.length >= 5);
-      $bannerSlidesList.innerHTML = bannerSlides.map((s, i) =>
-        '<div class="banner-slide">' +
-          '<div class="banner-slide-header">' +
-            '<span class="banner-slide-num">SLIDE ' + (i + 1) + ' / ' + bannerSlides.length + '</span>' +
-            (bannerSlides.length > 1 ? '<button class="btn btn-danger btn-sm" onclick="removeBannerSlide(' + i + ')">Retirer</button>' : '') +
-          '</div>' +
-          '<div class="field" style="margin-bottom:0.75rem">' +
-            '<label>Tagline</label>' +
-            '<input type="text" data-banner-slide="' + i + '" data-banner-field="tagline" placeholder="Message principal de cette slide" value="' + escAttr(s.tagline) + '" oninput="updateBannerSlide(' + i + ',\'tagline\',this.value)" />' +
-          '</div>' +
-          '<div class="field" style="margin-bottom:0">' +
-            '<label>Mots-clés (virgules)</label>' +
-            '<input type="text" data-banner-slide="' + i + '" data-banner-field="keywords" placeholder="Ex: EdTech, RNCP, IA, Pédagogie" value="' + escAttr(s.keywords) + '" oninput="updateBannerSlide(' + i + ',\'keywords\',this.value)" />' +
-          '</div>' +
-        '</div>'
-      ).join('');
-    }
-
-    window.updateBannerSlide = function(i, field, value) {
-      bannerSlides[i][field] = value;
-    };
-
-    window.removeBannerSlide = function(i) {
-      bannerSlides.splice(i, 1);
-      renderBannerSlides();
-    };
-
-    $btnAddBannerSlide.addEventListener('click', () => {
-      if (bannerSlides.length >= 5) return;
-      bannerSlides.push({ tagline: '', keywords: '' });
-      renderBannerSlides();
-    });
-
-    // Sync DOM inputs → bannerSlides state before generating
-    function syncBannerSlidesFromDOM() {
-      $bannerSlidesList.querySelectorAll('input[data-banner-slide]').forEach(input => {
-        const i = parseInt(input.dataset.bannerSlide);
-        const field = input.dataset.bannerField;
-        if (bannerSlides[i]) bannerSlides[i][field] = input.value;
-      });
-    }
-
-    $btnGenBanner.addEventListener('click', async () => {
-      syncBannerSlidesFromDOM();
-      const validSlides = bannerSlides.filter(s => s.tagline.trim());
-      if (validSlides.length === 0) return;
-
-      $btnGenBanner.disabled = true;
-      $btnGenBanner.innerHTML = '<span class="spinner"></span> Génération...';
-      $statusBanner.classList.remove('hidden', 'error');
-      $statusBanner.textContent = 'Création de ' + validSlides.length + ' bannière(s)...';
-      bannerBlobs = [];
-      $bannerPreview.innerHTML = '';
-
-      try {
-        for (let i = 0; i < validSlides.length; i++) {
-          $statusBanner.textContent = 'Slide ' + (i + 1) + ' / ' + validSlides.length + '...';
-          const keywords = validSlides[i].keywords.trim()
-            ? validSlides[i].keywords.split(',').map(k => k.trim()).filter(Boolean)
-            : [];
-
-          const res = await fetch('/api/generate-linkedin-banner', {
+        try {
+          const res = await fetch('/api/generate', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             credentials: 'same-origin',
-            body: JSON.stringify({ tagline: validSlides[i].tagline, keywords }),
+            body: JSON.stringify({ idea, lang }),
           });
 
-          if (!res.ok) {
-            const err = await res.json();
-            throw new Error(err.error || 'Erreur slide ' + (i + 1));
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || 'Erreur');
+
+          $reverseTitle.value = data.title || '';
+          $reverseDesc.value = data.description || '';
+          $reverseContent.value = data.content || '';
+          reverseTags = data.tags || [];
+          renderReverseTags();
+
+          $reverseResult.classList.remove('hidden');
+          $statusReverse.classList.add('hidden');
+          $reverseResult.scrollIntoView({ behavior: 'smooth' });
+        } catch (err) {
+          $statusReverse.classList.add('error');
+          $statusReverse.textContent = 'Erreur : ' + err.message;
+        } finally {
+          $btnReverse.disabled = false;
+          $btnReverse.textContent = "Générer l'article de blog";
+        }
+      });
+
+      $btnReversePublish.addEventListener('click', async () => {
+        const title = $reverseTitle.value.trim();
+        const content = $reverseContent.value.trim();
+        if (!title || !content) return;
+
+        $btnReversePublish.disabled = true;
+        $btnReversePublish.innerHTML = '<span class="spinner"></span> Publication...';
+        $statusReversePublish.classList.remove('hidden', 'error', 'success');
+        $statusReversePublish.textContent = 'Commit sur GitHub en cours...';
+
+        try {
+          const res = await fetch('/api/publish', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({
+              title,
+              description: $reverseDesc.value.trim(),
+              tags: reverseTags,
+              content,
+              lang: $reverseLang.value,
+            }),
+          });
+
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || 'Erreur');
+
+          $statusReversePublish.classList.add('success');
+          $statusReversePublish.innerHTML =
+            'Article publié ! <a href="https://www.pierretouzet.fr' +
+            data.url +
+            '" target="_blank" style="color:#4f46e5">Voir l\'article</a> (en ligne dans ~1 min)';
+        } catch (err) {
+          $statusReversePublish.classList.add('error');
+          $statusReversePublish.textContent = 'Erreur : ' + err.message;
+        } finally {
+          $btnReversePublish.disabled = false;
+          $btnReversePublish.textContent = 'Publier sur le blog';
+        }
+      });
+
+      $btnReverseReset.addEventListener('click', () => {
+        $reverseText.value = '';
+        $reverseTitle.value = '';
+        $reverseDesc.value = '';
+        $reverseContent.value = '';
+        reverseTags = [];
+        renderReverseTags();
+        $reverseResult.classList.add('hidden');
+      });
+
+      // ==================== CAROUSEL MODE ====================
+      const $singleMode = document.getElementById('single-mode');
+      const $carouselMode = document.getElementById('carousel-mode');
+      const $carouselSlidesList = document.getElementById('carousel-slides-list');
+      const $btnAddSlide = document.getElementById('btn-add-slide');
+      const $carouselPreview = document.getElementById('carousel-preview');
+      const carouselSlides = [
+        { headline: '', subtitle: '' },
+        { headline: '', subtitle: '' },
+      ];
+      let carouselBlobs = [];
+      let isCarouselMode = false;
+
+      document.querySelectorAll('input[name="visual-mode"]').forEach((r) => {
+        r.addEventListener('change', () => {
+          isCarouselMode = r.value === 'carousel';
+          $singleMode.classList.toggle('hidden', isCarouselMode);
+          $carouselMode.classList.toggle('hidden', !isCarouselMode);
+          $carouselPreview.classList.add('hidden');
+          if (isCarouselMode) renderCarouselSlides();
+        });
+      });
+
+      function renderCarouselSlides() {
+        $carouselSlidesList.innerHTML = carouselSlides
+          .map(
+            (s, i) =>
+              '<div class="carousel-slide-row">' +
+              '<span class="carousel-slide-num">' +
+              (i + 1) +
+              '</span>' +
+              '<input type="text" placeholder="Titre slide ' +
+              (i + 1) +
+              '" value="' +
+              escAttr(s.headline) +
+              '" oninput="updateCarouselSlide(' +
+              i +
+              ",'headline',this.value)\" />" +
+              '<input type="text" placeholder="Sous-titre (opt.)" value="' +
+              escAttr(s.subtitle) +
+              '" style="max-width:35%" oninput="updateCarouselSlide(' +
+              i +
+              ",'subtitle',this.value)\" />" +
+              (carouselSlides.length > 2
+                ? '<button class="btn btn-danger btn-sm" onclick="removeCarouselSlide(' +
+                  i +
+                  ')">×</button>'
+                : '') +
+              '</div>',
+          )
+          .join('');
+      }
+
+      window.updateCarouselSlide = function (i, field, value) {
+        carouselSlides[i][field] = value;
+      };
+
+      window.removeCarouselSlide = function (i) {
+        carouselSlides.splice(i, 1);
+        renderCarouselSlides();
+      };
+
+      $btnAddSlide.addEventListener('click', () => {
+        if (carouselSlides.length >= 10) return;
+        carouselSlides.push({ headline: '', subtitle: '' });
+        renderCarouselSlides();
+      });
+
+      // Override visual generation for carousel
+      const originalVisualHandler = $btnVisual.onclick;
+      $btnVisual.addEventListener(
+        'click',
+        async (e) => {
+          if (!isCarouselMode) return; // let original handler run
+          e.stopImmediatePropagation();
+
+          const validSlides = carouselSlides.filter((s) => s.headline.trim());
+          if (validSlides.length < 2) {
+            $statusVisual.classList.remove('hidden');
+            $statusVisual.classList.add('error');
+            $statusVisual.textContent = 'Au moins 2 slides avec titre requis';
+            return;
           }
 
-          const blob = await res.blob();
-          bannerBlobs.push(blob);
+          $btnVisual.disabled = true;
+          $btnVisual.innerHTML = '<span class="spinner"></span> Génération...';
+          $statusVisual.classList.remove('hidden', 'error');
+          $statusVisual.textContent =
+            'Création du carrousel (' + validSlides.length + ' slides)...';
 
-          const url = URL.createObjectURL(blob);
-          $bannerPreview.innerHTML +=
-            '<div class="banner-preview-item">' +
-              '<div class="banner-preview-label">SLIDE ' + (i + 1) + '</div>' +
-              '<img src="' + url + '" alt="Bannière ' + (i + 1) + '" />' +
-            '</div>';
+          try {
+            const res = await fetch('/api/generate-linkedin-carousel', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              credentials: 'same-origin',
+              body: JSON.stringify({ slides: validSlides, format: currentFormat }),
+            });
+
+            if (!res.ok) {
+              const err = await res.json();
+              throw new Error(err.error || 'Erreur');
+            }
+
+            const data = await res.json();
+            carouselBlobs = [];
+
+            // Convert base64 to blobs
+            for (const b64 of data.images) {
+              const bin = atob(b64);
+              const arr = new Uint8Array(bin.length);
+              for (let i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+              carouselBlobs.push(new Blob([arr], { type: 'image/png' }));
+            }
+
+            // Show first in main preview
+            const firstUrl = URL.createObjectURL(carouselBlobs[0]);
+            $visualContainer.innerHTML = '<img src="' + firstUrl + '" alt="Slide 1" />';
+            $previewImg.src = firstUrl;
+            $previewImage.classList.remove('hidden');
+            currentVisualBlob = carouselBlobs[0];
+            $btnDownload.disabled = false;
+
+            // Show carousel strip
+            $carouselPreview.classList.remove('hidden');
+            $carouselPreview.innerHTML = carouselBlobs
+              .map((blob, i) => {
+                const url = URL.createObjectURL(blob);
+                return (
+                  '<img src="' +
+                  url +
+                  '" alt="Slide ' +
+                  (i + 1) +
+                  '" data-index="' +
+                  i +
+                  '" class="' +
+                  (i === 0 ? 'active' : '') +
+                  '" />'
+                );
+              })
+              .join('');
+
+            // Click to select slide
+            $carouselPreview.querySelectorAll('img').forEach((img) => {
+              img.addEventListener('click', () => {
+                const idx = parseInt(img.dataset.index);
+                const url = URL.createObjectURL(carouselBlobs[idx]);
+                $visualContainer.innerHTML =
+                  '<img src="' + url + '" alt="Slide ' + (idx + 1) + '" />';
+                currentVisualBlob = carouselBlobs[idx];
+                $carouselPreview
+                  .querySelectorAll('img')
+                  .forEach((i) => i.classList.remove('active'));
+                img.classList.add('active');
+              });
+            });
+
+            $statusVisual.classList.add('hidden');
+          } catch (err) {
+            $statusVisual.classList.add('error');
+            $statusVisual.textContent = 'Erreur : ' + err.message;
+          } finally {
+            $btnVisual.disabled = false;
+            $btnVisual.textContent = 'Générer le visuel';
+          }
+        },
+        true,
+      ); // capture phase to run before original
+
+      // Override download for carousel (download all)
+      const origDownloadHandler = $btnDownload.onclick;
+      $btnDownload.addEventListener(
+        'click',
+        (e) => {
+          if (!isCarouselMode || carouselBlobs.length === 0) return;
+          e.stopImmediatePropagation();
+
+          carouselBlobs.forEach((blob, i) => {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'linkedin-carousel-' + currentFormat + '-slide-' + (i + 1) + '.png';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+          });
+        },
+        true,
+      );
+
+      renderCarouselSlides();
+
+      // ==================== CALENDAR EDITORIAL ====================
+      const $calendarGrid = document.getElementById('calendar-grid');
+      const $calendarSuggestions = document.getElementById('calendar-suggestions');
+      const DAYS_FR = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+
+      function renderCalendar() {
+        if (postHistory.length === 0) {
+          document.getElementById('calendar-card').innerHTML =
+            '<div class="card-header">Calendrier éditorial</div>' +
+            '<p style="font-size:0.8125rem;color:#a1a1aa">Sauve quelques posts dans l\'historique pour débloquer les suggestions.</p>';
+          return;
         }
 
-        $bannerDownloadActions.classList.remove('hidden');
-        $statusBanner.classList.add('hidden');
-      } catch (err) {
-        $statusBanner.classList.add('error');
-        $statusBanner.textContent = 'Erreur : ' + err.message;
-      } finally {
-        $btnGenBanner.disabled = false;
-        $btnGenBanner.textContent = 'Générer les bannières';
+        const now = new Date();
+        const dates = postHistory
+          .map((p) => new Date(p.date))
+          .sort((a, b) => b.getTime() - a.getTime());
+        const lastPostDate = dates[0];
+        const daysSinceLast = Math.floor((now.getTime() - lastPostDate.getTime()) / 86400000);
+
+        // Average frequency
+        let avgDaysBetween = '-';
+        if (dates.length >= 2) {
+          const gaps = [];
+          for (let i = 0; i < dates.length - 1; i++) {
+            gaps.push(Math.floor((dates[i].getTime() - dates[i + 1].getTime()) / 86400000));
+          }
+          avgDaysBetween = (gaps.reduce((a, b) => a + b, 0) / gaps.length).toFixed(1);
+        }
+
+        // Posts this week
+        const weekAgo = new Date(now.getTime() - 7 * 86400000);
+        const thisWeek = dates.filter((d) => d >= weekAgo).length;
+
+        $calendarGrid.innerHTML =
+          '<div class="calendar-item"><div class="calendar-value">' +
+          daysSinceLast +
+          'j</div><div class="calendar-label">Depuis dernier post</div></div>' +
+          '<div class="calendar-item"><div class="calendar-value">' +
+          avgDaysBetween +
+          'j</div><div class="calendar-label">Fréquence moyenne</div></div>' +
+          '<div class="calendar-item"><div class="calendar-value">' +
+          thisWeek +
+          '</div><div class="calendar-label">Posts cette semaine</div></div>';
+
+        // Suggestions
+        const suggestions = [];
+
+        // 1. Timing suggestion
+        const avgDays = parseFloat(avgDaysBetween);
+        if (!isNaN(avgDays) && daysSinceLast >= avgDays) {
+          const sugDate = new Date(lastPostDate.getTime() + avgDays * 86400000);
+          const sugDay = sugDate > now ? sugDate : now;
+          suggestions.push({
+            icon: '&#128197;',
+            text:
+              daysSinceLast > avgDays * 1.5
+                ? 'Il serait temps de poster !'
+                : 'Prochain post suggéré',
+            detail:
+              DAYS_FR[sugDay.getDay()] +
+              ' ' +
+              sugDay.getDate() +
+              '/' +
+              (sugDay.getMonth() + 1) +
+              ' (basé sur ta fréquence de ' +
+              avgDaysBetween +
+              'j)',
+          });
+        } else if (!isNaN(avgDays)) {
+          const nextDate = new Date(lastPostDate.getTime() + avgDays * 86400000);
+          suggestions.push({
+            icon: '&#9989;',
+            text: 'Tu es dans le rythme',
+            detail: 'Prochain post vers le ' + nextDate.getDate() + '/' + (nextDate.getMonth() + 1),
+          });
+        }
+
+        // 2. Format suggestion
+        const formatCounts = {};
+        const recentFormats = postHistory.slice(0, 5).map((p) => p.format);
+        postHistory.forEach((p) => {
+          formatCounts[p.format] = (formatCounts[p.format] || 0) + 1;
+        });
+        const allFormats = ['analyse', 'opinion', 'fait', 'veille', 'newsletter'];
+        const unusedFormats = allFormats.filter((f) => !recentFormats.includes(f));
+        if (unusedFormats.length > 0) {
+          suggestions.push({
+            icon: '&#128161;',
+            text: 'Format suggéré : ' + unusedFormats[0],
+            detail:
+              "Pas utilisé dans tes 5 derniers posts. Varier les formats augmente l'engagement.",
+          });
+        }
+
+        // 3. Best performer suggestion
+        const cartonPosts = postHistory.filter((p) => p.perf === 'carton');
+        if (cartonPosts.length >= 2) {
+          const cartonFormats = {};
+          cartonPosts.forEach((p) => {
+            cartonFormats[p.format] = (cartonFormats[p.format] || 0) + 1;
+          });
+          const bestFormat = Object.entries(cartonFormats).sort((a, b) => b[1] - a[1])[0];
+          suggestions.push({
+            icon: '&#127942;',
+            text: 'Ton meilleur format : ' + bestFormat[0],
+            detail:
+              bestFormat[1] + " carton(s) sur ce format. Double down quand tu veux de l'impact.",
+          });
+        }
+
+        // 4. Tag freshness
+        const recentTags = new Set();
+        postHistory.slice(0, 5).forEach((p) => (p.tags || []).forEach((t) => recentTags.add(t)));
+        const allTags = {};
+        postHistory.forEach((p) =>
+          (p.tags || []).forEach((t) => {
+            allTags[t] = (allTags[t] || 0) + 1;
+          }),
+        );
+        const staleTags = Object.entries(allTags)
+          .filter(([t, c]) => c >= 2 && !recentTags.has(t))
+          .sort((a, b) => b[1] - a[1]);
+        if (staleTags.length > 0) {
+          suggestions.push({
+            icon: '&#128204;',
+            text: 'Thème à réactiver : ' + staleTags[0][0],
+            detail:
+              staleTags[0][1] +
+              ' posts au total mais absent des 5 derniers. Ton audience attend peut-être.',
+          });
+        }
+
+        $calendarSuggestions.innerHTML = suggestions.length
+          ? suggestions
+              .map(
+                (s) =>
+                  '<div class="calendar-suggestion">' +
+                  '<div class="calendar-suggestion-icon">' +
+                  s.icon +
+                  '</div>' +
+                  '<div><div class="calendar-suggestion-text">' +
+                  s.text +
+                  '</div>' +
+                  '<div class="calendar-suggestion-detail">' +
+                  s.detail +
+                  '</div></div>' +
+                  '</div>',
+              )
+              .join('')
+          : '<p style="font-size:0.8125rem;color:#a1a1aa">Ajoute plus de posts et de métriques pour des suggestions plus précises.</p>';
       }
-    });
 
-    $btnDownloadBanner.addEventListener('click', () => {
-      bannerBlobs.forEach((blob, i) => {
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'linkedin-banner-slide-' + (i + 1) + '-1584x396.png';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-        URL.revokeObjectURL(url);
+      // Render calendar when history tab opens
+      const origHistoryClick = document.querySelector('[data-panel="panel-history"]');
+      origHistoryClick.addEventListener('click', renderCalendar);
+      renderCalendar();
+
+      // ==================== BANNER SLIDESHOW ====================
+      const $bannerSlidesList = document.getElementById('banner-slides-list');
+      const $btnAddBannerSlide = document.getElementById('btn-add-banner-slide');
+      const $btnGenBanner = document.getElementById('btn-gen-banner');
+      const $statusBanner = document.getElementById('status-banner');
+      const $bannerPreview = document.getElementById('banner-preview');
+      const $bannerDownloadActions = document.getElementById('banner-download-actions');
+      const $btnDownloadBanner = document.getElementById('btn-download-banner');
+      let bannerBlobs = [];
+
+      const bannerSlides = [
+        {
+          tagline:
+            'Responsable national des programmes | Créateur de Gradly | Freelance & Consulting | 🏃 Coureur irrégulier',
+          keywords: 'EDTECH, RNCP, IA EN ÉDUCATION, PÉDAGOGIE, GRADLY',
+        },
+        {
+          tagline:
+            '15 ans entre IT, pédagogie et innovation digitale — Bac pro > Responsable programmes > Entrepreneur',
+          keywords: 'PARCOURS ATYPIQUE, RECONVERSION, EDTECH',
+        },
+        {
+          tagline: "Gradly — L'outil qui automatise vos référentiels RNCP et simplifie Qualiopi",
+          keywords: 'AUTOMATISATION, RNCP, QUALIOPI, CERTIFICATION',
+        },
+        {
+          tagline: "L'IA en éducation, vue du terrain — YouTube, podcast, newsletter, ebook",
+          keywords: 'CONTENU, IA GÉNÉRATIVE, YOUTUBE, PODCAST',
+        },
+        {
+          tagline:
+            'Disponible en consulting & freelance — Ingénierie pédagogique, transformation digitale, IA',
+          keywords: 'CONSULTING, FREELANCE, DISPONIBLE',
+        },
+      ];
+
+      function renderBannerSlides() {
+        $btnAddBannerSlide.classList.toggle('hidden', bannerSlides.length >= 5);
+        $bannerSlidesList.innerHTML = bannerSlides
+          .map(
+            (s, i) =>
+              '<div class="banner-slide">' +
+              '<div class="banner-slide-header">' +
+              '<span class="banner-slide-num">SLIDE ' +
+              (i + 1) +
+              ' / ' +
+              bannerSlides.length +
+              '</span>' +
+              (bannerSlides.length > 1
+                ? '<button class="btn btn-danger btn-sm" onclick="removeBannerSlide(' +
+                  i +
+                  ')">Retirer</button>'
+                : '') +
+              '</div>' +
+              '<div class="field" style="margin-bottom:0.75rem">' +
+              '<label>Tagline</label>' +
+              '<input type="text" data-banner-slide="' +
+              i +
+              '" data-banner-field="tagline" placeholder="Message principal de cette slide" value="' +
+              escAttr(s.tagline) +
+              '" oninput="updateBannerSlide(' +
+              i +
+              ",'tagline',this.value)\" />" +
+              '</div>' +
+              '<div class="field" style="margin-bottom:0">' +
+              '<label>Mots-clés (virgules)</label>' +
+              '<input type="text" data-banner-slide="' +
+              i +
+              '" data-banner-field="keywords" placeholder="Ex: EdTech, RNCP, IA, Pédagogie" value="' +
+              escAttr(s.keywords) +
+              '" oninput="updateBannerSlide(' +
+              i +
+              ",'keywords',this.value)\" />" +
+              '</div>' +
+              '</div>',
+          )
+          .join('');
+      }
+
+      window.updateBannerSlide = function (i, field, value) {
+        bannerSlides[i][field] = value;
+      };
+
+      window.removeBannerSlide = function (i) {
+        bannerSlides.splice(i, 1);
+        renderBannerSlides();
+      };
+
+      $btnAddBannerSlide.addEventListener('click', () => {
+        if (bannerSlides.length >= 5) return;
+        bannerSlides.push({ tagline: '', keywords: '' });
+        renderBannerSlides();
       });
-    });
 
-    renderBannerSlides();
-  </script>
-</body>
+      // Sync DOM inputs → bannerSlides state before generating
+      function syncBannerSlidesFromDOM() {
+        $bannerSlidesList.querySelectorAll('input[data-banner-slide]').forEach((input) => {
+          const i = parseInt(input.dataset.bannerSlide);
+          const field = input.dataset.bannerField;
+          if (bannerSlides[i]) bannerSlides[i][field] = input.value;
+        });
+      }
+
+      $btnGenBanner.addEventListener('click', async () => {
+        syncBannerSlidesFromDOM();
+        const validSlides = bannerSlides.filter((s) => s.tagline.trim());
+        if (validSlides.length === 0) return;
+
+        $btnGenBanner.disabled = true;
+        $btnGenBanner.innerHTML = '<span class="spinner"></span> Génération...';
+        $statusBanner.classList.remove('hidden', 'error');
+        $statusBanner.textContent = 'Création de ' + validSlides.length + ' bannière(s)...';
+        bannerBlobs = [];
+        $bannerPreview.innerHTML = '';
+
+        try {
+          for (let i = 0; i < validSlides.length; i++) {
+            $statusBanner.textContent = 'Slide ' + (i + 1) + ' / ' + validSlides.length + '...';
+            const keywords = validSlides[i].keywords.trim()
+              ? validSlides[i].keywords
+                  .split(',')
+                  .map((k) => k.trim())
+                  .filter(Boolean)
+              : [];
+
+            const res = await fetch('/api/generate-linkedin-banner', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              credentials: 'same-origin',
+              body: JSON.stringify({ tagline: validSlides[i].tagline, keywords }),
+            });
+
+            if (!res.ok) {
+              const err = await res.json();
+              throw new Error(err.error || 'Erreur slide ' + (i + 1));
+            }
+
+            const blob = await res.blob();
+            bannerBlobs.push(blob);
+
+            const url = URL.createObjectURL(blob);
+            $bannerPreview.innerHTML +=
+              '<div class="banner-preview-item">' +
+              '<div class="banner-preview-label">SLIDE ' +
+              (i + 1) +
+              '</div>' +
+              '<img src="' +
+              url +
+              '" alt="Bannière ' +
+              (i + 1) +
+              '" />' +
+              '</div>';
+          }
+
+          $bannerDownloadActions.classList.remove('hidden');
+          $statusBanner.classList.add('hidden');
+        } catch (err) {
+          $statusBanner.classList.add('error');
+          $statusBanner.textContent = 'Erreur : ' + err.message;
+        } finally {
+          $btnGenBanner.disabled = false;
+          $btnGenBanner.textContent = 'Générer les bannières';
+        }
+      });
+
+      $btnDownloadBanner.addEventListener('click', () => {
+        bannerBlobs.forEach((blob, i) => {
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'linkedin-banner-slide-' + (i + 1) + '-1584x396.png';
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        });
+      });
+
+      renderBannerSlides();
+    </script>
+  </body>
 </html>

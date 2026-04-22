@@ -12,22 +12,20 @@ const words = title.split(' ');
 
 <div class="text-reveal mb-16">
   <div class="flex items-baseline gap-4 mb-4">
-    {number && (
-      <span class="font-mono text-caption text-accent-500">{number}</span>
-    )}
+    {number && <span class="font-mono text-caption text-accent-500">{number}</span>}
     <Tag class="font-display text-heading text-zinc-900 dark:text-zinc-50 font-bold">
-      {words.map((word, i) => (
-        <span class="word" style={`transition-delay: ${i * 60}ms`}>
-          <span class="word-inner">{word}</span>
-        </span>
-        <Fragment>{' '}</Fragment>
-      ))}
+      {
+        words.map((word: string, i: number) => (
+          <Fragment>
+            <span class="word" style={`transition-delay: ${i * 60}ms`}>
+              <span class="word-inner">{word}</span>
+            </span>
+            <Fragment> </Fragment>
+          </Fragment>
+        ))
+      }
     </Tag>
   </div>
-  {subtitle && (
-    <p class="text-sm text-zinc-500 max-w-xl leading-relaxed mt-2">
-      {subtitle}
-    </p>
-  )}
+  {subtitle && <p class="text-sm text-zinc-500 max-w-xl leading-relaxed mt-2">{subtitle}</p>}
   <div class="mt-6 h-px bg-linear-to-r from-zinc-200 dark:from-zinc-800 to-transparent"></div>
 </div>

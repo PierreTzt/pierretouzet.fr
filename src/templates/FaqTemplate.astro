@@ -16,98 +16,121 @@ const { lang } = Astro.props;
 const data = getData(lang);
 
 const pageTitle = lang === 'fr' ? 'Questions fréquentes' : 'Frequently Asked Questions';
-const pageSubtitle = lang === 'fr'
-  ? 'Certification RNCP, Qualiopi, LMS, ingénierie pédagogique : les réponses concrètes d\u2019un praticien.'
-  : 'RNCP certification, Qualiopi, LMS, instructional design: practical answers from someone who does the work.';
-const pageDescription = lang === 'fr'
-  ? 'Réponses concrètes sur la certification RNCP, l\u2019audit Qualiopi, le choix d\u2019un LMS, l\u2019IA en formation et l\u2019ingénierie pédagogique \u2014 par Pierre Touzet.'
-  : 'Practical answers on RNCP certification, Qualiopi audits, LMS selection, AI in education and instructional design \u2014 by Pierre Touzet.';
+const pageSubtitle =
+  lang === 'fr'
+    ? 'Certification RNCP, Qualiopi, LMS, ingénierie pédagogique : les réponses concrètes d\u2019un praticien.'
+    : 'RNCP certification, Qualiopi, LMS, instructional design: practical answers from someone who does the work.';
+const pageDescription =
+  lang === 'fr'
+    ? 'Réponses concrètes sur la certification RNCP, l\u2019audit Qualiopi, le choix d\u2019un LMS, l\u2019IA en formation et l\u2019ingénierie pédagogique \u2014 par Pierre Touzet.'
+    : 'Practical answers on RNCP certification, Qualiopi audits, LMS selection, AI in education and instructional design \u2014 by Pierre Touzet.';
 
-const faqs: FaqItem[] = lang === 'fr'
-  ? [
-      {
-        question: 'Qu\u2019est-ce que le RNCP et comment obtenir une certification ?',
-        answer: 'Le RNCP (Répertoire National des Certifications Professionnelles) est le registre officiel qui atteste qu\u2019un diplôme correspond à des compétences reconnues sur le marché du travail. Pour y inscrire une certification, il faut déposer un dossier auprès de France Compétences démontrant l\u2019adéquation entre les blocs de compétences, les modalités d\u2019évaluation et les besoins du secteur. En pilotant la stratégie pédagogique de 6 campus à l\u2019IEFT, j\u2019ai mené des dossiers RNCP de bout en bout \u2014 de la rédaction des référentiels à l\u2019obtention devant le jury. Le processus prend généralement 12 à 18 mois et exige une rigueur documentaire sans faille.',
-      },
-      {
-        question: 'Comment préparer un audit Qualiopi ?',
-        answer: 'L\u2019audit Qualiopi évalue le respect de 7 critères et 32 indicateurs portant sur la qualité des actions de formation. La préparation commence par un audit interne qui identifie les écarts entre vos pratiques actuelles et le référentiel, suivi d\u2019un plan d\u2019action correctif priorisé. Ayant préparé et obtenu Qualiopi pour des organismes de formation, je sais que la clé réside dans la traçabilité : chaque processus doit être documenté, chaque amélioration enregistrée. Je recommande de commencer la préparation au minimum 6 mois avant l\u2019audit initial.',
-      },
-      {
-        question: 'Comment choisir un LMS pour l\u2019enseignement supérieur ?',
-        answer: 'Le choix d\u2019un LMS (Learning Management System) doit croiser trois dimensions : les besoins pédagogiques réels, la capacité d\u2019intégration technique avec vos outils existants, et le taux d\u2019adoption prévisible par les équipes. Un LMS parfait sur le papier mais ignoré par les enseignants ne sert à rien. Après avoir déployé des outils numériques sur les 28 campus du réseau IFAG avec un taux d\u2019adoption de 100 %, j\u2019ai appris que la formation des utilisateurs et l\u2019accompagnement au changement comptent davantage que les fonctionnalités. Je privilégie des solutions comme Moodle ou Canvas qui offrent une API ouverte et une communauté active.',
-      },
-      {
-        question: 'Comment automatiser la gestion des bulletins de compétences RNCP ?',
-        answer: 'La gestion manuelle des bulletins RNCP est un gouffre de temps : saisie des résultats, calcul des validations par bloc, génération des documents individuels. C\u2019est exactement le problème que j\u2019ai résolu en créant Gradly, un outil qui divise le temps administratif par 3 en automatisant la collecte des notes, le mapping vers les blocs de compétences et la génération des bulletins conformes. L\u2019automatisation passe par une modélisation rigoureuse du référentiel RNCP en amont, puis par un moteur de règles qui applique les critères de validation définis dans le dossier de certification.',
-      },
-      {
-        question: 'Qu\u2019est-ce que l\u2019ingénierie pédagogique ?',
-        answer: 'L\u2019ingénierie pédagogique est la discipline qui conçoit des dispositifs de formation efficaces en articulant objectifs d\u2019apprentissage, méthodes pédagogiques, modalités d\u2019évaluation et outils technologiques. Ce n\u2019est pas simplement créer des cours : c\u2019est architecturer un parcours complet qui garantit l\u2019acquisition mesurable de compétences. Au quotidien, cela représente le c\u0153ur de mon métier : concevoir des maquettes pédagogiques, rédiger des syllabi, structurer des blocs de compétences RNCP et former les intervenants à leur mise en \u0153uvre sur 6 campus.',
-      },
-      {
-        question: 'Comment accompagner le changement dans un établissement scolaire ?',
-        answer: 'La conduite du changement en milieu éducatif échoue le plus souvent par manque d\u2019accompagnement terrain, pas par manque de vision. Les enseignants et coordinateurs doivent comprendre le « pourquoi » avant d\u2019accepter le « comment ». Quand j\u2019ai déployé la transformation digitale sur 28 campus IFAG, j\u2019ai misé sur la formation par les pairs, des ambassadeurs locaux et un support réactif plutôt que sur des directives descendantes. Résultat : 100 % d\u2019adoption. La clé est de co-construire avec les équipes, pas d\u2019imposer.',
-      },
-      {
-        question: 'Comment intégrer l\u2019IA générative dans la formation ?',
-        answer: 'L\u2019IA générative peut transformer la formation à trois niveaux : personnalisation des parcours, automatisation de la production de contenus, et aide à l\u2019évaluation formative. Mais son intégration réussie commence par un audit de maturité et une montée en compétences des équipes pédagogiques. Ayant intégré l\u2019IA dans mes propres workflows \u2014 de la génération de contenus LinkedIn à l\u2019administration du CMS de ce portfolio \u2014 je préconise une approche pragmatique : identifier 2 ou 3 cas d\u2019usage à fort impact, prototyper rapidement, mesurer les résultats, puis industrialiser.',
-      },
-      {
-        question: 'Comment harmoniser les programmes sur plusieurs campus ?',
-        answer: 'L\u2019harmonisation multi-campus exige un cadre commun suffisamment structurant pour garantir la qualité, mais assez souple pour s\u2019adapter aux réalités locales. Cela passe par des maquettes pédagogiques unifiées, des grilles d\u2019évaluation standardisées et un calendrier académique partagé. À l\u2019IEFT, j\u2019ai harmonisé 6 campus qui fonctionnaient chacun différemment : maquettes, évaluations, modalités \u2014 tout a été refondu dans un référentiel national. Le management transversal d\u2019une équipe de 11 coordinateurs assure ensuite le déploiement homogène sur le terrain.',
-      },
-      {
-        question: 'Quelle est la différence entre RNCP et Qualiopi ?',
-        answer: 'Le RNCP et Qualiopi sont deux dispositifs complémentaires mais distincts. Le RNCP certifie le diplôme lui-même : il atteste que la certification correspond à des compétences professionnelles reconnues. Qualiopi certifie l\u2019organisme de formation : elle atteste que vos processus de formation respectent un référentiel qualité national. Concrètement, un organisme peut être certifié Qualiopi sans proposer de titre RNCP, et inversement. Ayant piloté les deux démarches, je constate que les établissements confondent souvent ces deux niveaux, ce qui génère des erreurs de stratégie coûteuses en temps.',
-      },
-      {
-        question: 'Comment structurer des blocs de compétences conformes au RNCP ?',
-        answer: 'Un bloc de compétences RNCP doit constituer un ensemble cohérent et évaluable de compétences professionnelles, certifiable de manière autonome. Chaque bloc décrit des compétences attestées, des critères d\u2019évaluation précis et des modalités d\u2019évaluation adaptées au contexte professionnel visé. En concevant les référentiels de l\u2019IEFT, j\u2019ai structuré les blocs en partant des situations professionnelles réelles du secteur du tourisme, puis en remontant vers les compétences nécessaires \u2014 jamais l\u2019inverse. Cette approche « terrain vers référentiel » est la seule qui convainc France Compétences.',
-      },
-    ]
-  : [
-      {
-        question: 'What is RNCP and how do you get certified?',
-        answer: 'RNCP (Répertoire National des Certifications Professionnelles) is France\'s official register that validates qualifications against labor-market competencies. To register a certification, you submit a dossier to France Compétences proving alignment between competency blocks, assessment methods, and industry needs. Managing the academic strategy across 6 IEFT campuses, I have led RNCP dossiers end-to-end \u2014 from writing competency frameworks to presenting before the certification jury. The process typically takes 12 to 18 months and demands rigorous documentation at every stage.',
-      },
-      {
-        question: 'How do you prepare for a Qualiopi audit?',
-        answer: 'A Qualiopi audit assesses compliance with 7 criteria and 32 indicators covering the quality of training programs. Preparation starts with an internal audit that identifies gaps between your current practices and the national quality framework, followed by a prioritized corrective action plan. Having prepared and secured Qualiopi certification for training organizations, I know that traceability is everything: every process must be documented, every improvement recorded. I recommend starting preparation at least 6 months before the initial audit date.',
-      },
-      {
-        question: 'How do you choose an LMS for higher education?',
-        answer: 'Selecting an LMS (Learning Management System) means balancing three dimensions: actual pedagogical needs, technical integration with existing tools, and projected adoption rates among staff. A feature-rich platform that instructors ignore is worthless. After deploying digital tools across all 28 campuses in the IFAG network with 100% adoption, I learned that user training and change management matter far more than feature lists. I favor solutions like Moodle or Canvas that offer open APIs and active communities, because long-term sustainability depends on ecosystem support.',
-      },
-      {
-        question: 'How can you automate RNCP competency bulletin management?',
-        answer: 'Manual RNCP bulletin management is a massive time sink: entering grades, calculating block validations, generating individual documents. This is the exact problem I solved by building Gradly, a tool that cuts administrative time by a factor of 3 by automating grade collection, competency-block mapping, and compliant bulletin generation. The key is rigorous upstream modeling of the RNCP framework, followed by a rule engine that applies the validation criteria defined in the certification dossier. The result: fewer errors, faster turnaround, and happier coordinators.',
-      },
-      {
-        question: 'What is instructional design?',
-        answer: 'Instructional design is the discipline of creating effective learning experiences by aligning learning objectives, teaching methods, assessment strategies, and technology. It goes beyond course creation \u2014 it means architecting a complete pathway that ensures measurable competency acquisition. This is the core of my daily work: designing curricula, writing syllabi, structuring RNCP competency blocks, and training instructors on implementation across 6 national campuses. The best instructional design is invisible: learners progress naturally because the structure does the heavy lifting.',
-      },
-      {
-        question: 'How do you manage change in educational institutions?',
-        answer: 'Change management in education fails most often from lack of ground-level support, not lack of vision. Teachers and coordinators need to understand the "why" before they accept the "how." When I led the digital transformation across 28 IFAG campuses, I relied on peer training, local ambassadors, and responsive support rather than top-down directives. The result was 100% adoption. The key is co-building with teams, not imposing on them. Resistance drops when people feel heard and see concrete benefits within weeks, not months.',
-      },
-      {
-        question: 'How can you integrate generative AI in education?',
-        answer: 'Generative AI can transform education at three levels: personalized learning paths, automated content production, and formative assessment support. But successful integration starts with a maturity audit and upskilling the teaching staff. Having integrated AI into my own workflows \u2014 from LinkedIn content generation to the CMS powering this very portfolio \u2014 I advocate a pragmatic approach: identify 2 or 3 high-impact use cases, prototype quickly, measure results, then scale. Starting with infrastructure before identifying real needs is the most common and costly mistake.',
-      },
-      {
-        question: 'How do you harmonize programs across multiple campuses?',
-        answer: 'Multi-campus harmonization requires a common framework that is structured enough to guarantee quality but flexible enough to accommodate local realities. This means unified curricula, standardized evaluation grids, and a shared academic calendar. At IEFT, I harmonized 6 campuses that each operated differently: curricula, assessments, and methods were all rebuilt into a single national framework. Cross-functional management of 11 coordinators then ensures consistent deployment on the ground. The challenge is always balancing standardization with local autonomy.',
-      },
-      {
-        question: 'What is the difference between RNCP and Qualiopi?',
-        answer: 'RNCP and Qualiopi are complementary but distinct. RNCP certifies the qualification itself: it validates that a certification maps to recognized professional competencies. Qualiopi certifies the training organization: it validates that your training processes meet a national quality framework. In practice, an organization can hold Qualiopi without offering any RNCP title, and vice versa. Having managed both processes, I find that institutions frequently confuse these two levels, leading to strategic missteps that waste months of effort.',
-      },
-      {
-        question: 'How do you structure RNCP-compliant competency blocks?',
-        answer: 'An RNCP competency block must be a coherent, independently assessable set of professional competencies. Each block describes attested competencies, precise evaluation criteria, and assessment methods adapted to the targeted professional context. When designing IEFT\'s frameworks, I structured blocks by starting from real professional situations in the tourism sector, then working backward to the required competencies \u2014 never the reverse. This "field-to-framework" approach is the only one that convinces France Compétences during the certification review.',
-      },
-    ];
+const faqs: FaqItem[] =
+  lang === 'fr'
+    ? [
+        {
+          question: 'Qu\u2019est-ce que le RNCP et comment obtenir une certification ?',
+          answer:
+            'Le RNCP (Répertoire National des Certifications Professionnelles) est le registre officiel qui atteste qu\u2019un diplôme correspond à des compétences reconnues sur le marché du travail. Pour y inscrire une certification, il faut déposer un dossier auprès de France Compétences démontrant l\u2019adéquation entre les blocs de compétences, les modalités d\u2019évaluation et les besoins du secteur. En pilotant la stratégie pédagogique de 6 campus à l\u2019IEFT, j\u2019ai mené des dossiers RNCP de bout en bout \u2014 de la rédaction des référentiels à l\u2019obtention devant le jury. Le processus prend généralement 12 à 18 mois et exige une rigueur documentaire sans faille.',
+        },
+        {
+          question: 'Comment préparer un audit Qualiopi ?',
+          answer:
+            'L\u2019audit Qualiopi évalue le respect de 7 critères et 32 indicateurs portant sur la qualité des actions de formation. La préparation commence par un audit interne qui identifie les écarts entre vos pratiques actuelles et le référentiel, suivi d\u2019un plan d\u2019action correctif priorisé. Ayant préparé et obtenu Qualiopi pour des organismes de formation, je sais que la clé réside dans la traçabilité : chaque processus doit être documenté, chaque amélioration enregistrée. Je recommande de commencer la préparation au minimum 6 mois avant l\u2019audit initial.',
+        },
+        {
+          question: 'Comment choisir un LMS pour l\u2019enseignement supérieur ?',
+          answer:
+            'Le choix d\u2019un LMS (Learning Management System) doit croiser trois dimensions : les besoins pédagogiques réels, la capacité d\u2019intégration technique avec vos outils existants, et le taux d\u2019adoption prévisible par les équipes. Un LMS parfait sur le papier mais ignoré par les enseignants ne sert à rien. Après avoir déployé des outils numériques sur les 28 campus du réseau IFAG avec un taux d\u2019adoption de 100 %, j\u2019ai appris que la formation des utilisateurs et l\u2019accompagnement au changement comptent davantage que les fonctionnalités. Je privilégie des solutions comme Moodle ou Canvas qui offrent une API ouverte et une communauté active.',
+        },
+        {
+          question: 'Comment automatiser la gestion des bulletins de compétences RNCP ?',
+          answer:
+            'La gestion manuelle des bulletins RNCP est un gouffre de temps : saisie des résultats, calcul des validations par bloc, génération des documents individuels. C\u2019est exactement le problème que j\u2019ai résolu en créant Gradly, un outil qui divise le temps administratif par 3 en automatisant la collecte des notes, le mapping vers les blocs de compétences et la génération des bulletins conformes. L\u2019automatisation passe par une modélisation rigoureuse du référentiel RNCP en amont, puis par un moteur de règles qui applique les critères de validation définis dans le dossier de certification.',
+        },
+        {
+          question: 'Qu\u2019est-ce que l\u2019ingénierie pédagogique ?',
+          answer:
+            'L\u2019ingénierie pédagogique est la discipline qui conçoit des dispositifs de formation efficaces en articulant objectifs d\u2019apprentissage, méthodes pédagogiques, modalités d\u2019évaluation et outils technologiques. Ce n\u2019est pas simplement créer des cours : c\u2019est architecturer un parcours complet qui garantit l\u2019acquisition mesurable de compétences. Au quotidien, cela représente le c\u0153ur de mon métier : concevoir des maquettes pédagogiques, rédiger des syllabi, structurer des blocs de compétences RNCP et former les intervenants à leur mise en \u0153uvre sur 6 campus.',
+        },
+        {
+          question: 'Comment accompagner le changement dans un établissement scolaire ?',
+          answer:
+            'La conduite du changement en milieu éducatif échoue le plus souvent par manque d\u2019accompagnement terrain, pas par manque de vision. Les enseignants et coordinateurs doivent comprendre le « pourquoi » avant d\u2019accepter le « comment ». Quand j\u2019ai déployé la transformation digitale sur 28 campus IFAG, j\u2019ai misé sur la formation par les pairs, des ambassadeurs locaux et un support réactif plutôt que sur des directives descendantes. Résultat : 100 % d\u2019adoption. La clé est de co-construire avec les équipes, pas d\u2019imposer.',
+        },
+        {
+          question: 'Comment intégrer l\u2019IA générative dans la formation ?',
+          answer:
+            'L\u2019IA générative peut transformer la formation à trois niveaux : personnalisation des parcours, automatisation de la production de contenus, et aide à l\u2019évaluation formative. Mais son intégration réussie commence par un audit de maturité et une montée en compétences des équipes pédagogiques. Ayant intégré l\u2019IA dans mes propres workflows \u2014 de la génération de contenus LinkedIn à l\u2019administration du CMS de ce portfolio \u2014 je préconise une approche pragmatique : identifier 2 ou 3 cas d\u2019usage à fort impact, prototyper rapidement, mesurer les résultats, puis industrialiser.',
+        },
+        {
+          question: 'Comment harmoniser les programmes sur plusieurs campus ?',
+          answer:
+            'L\u2019harmonisation multi-campus exige un cadre commun suffisamment structurant pour garantir la qualité, mais assez souple pour s\u2019adapter aux réalités locales. Cela passe par des maquettes pédagogiques unifiées, des grilles d\u2019évaluation standardisées et un calendrier académique partagé. À l\u2019IEFT, j\u2019ai harmonisé 6 campus qui fonctionnaient chacun différemment : maquettes, évaluations, modalités \u2014 tout a été refondu dans un référentiel national. Le management transversal d\u2019une équipe de 11 coordinateurs assure ensuite le déploiement homogène sur le terrain.',
+        },
+        {
+          question: 'Quelle est la différence entre RNCP et Qualiopi ?',
+          answer:
+            'Le RNCP et Qualiopi sont deux dispositifs complémentaires mais distincts. Le RNCP certifie le diplôme lui-même : il atteste que la certification correspond à des compétences professionnelles reconnues. Qualiopi certifie l\u2019organisme de formation : elle atteste que vos processus de formation respectent un référentiel qualité national. Concrètement, un organisme peut être certifié Qualiopi sans proposer de titre RNCP, et inversement. Ayant piloté les deux démarches, je constate que les établissements confondent souvent ces deux niveaux, ce qui génère des erreurs de stratégie coûteuses en temps.',
+        },
+        {
+          question: 'Comment structurer des blocs de compétences conformes au RNCP ?',
+          answer:
+            'Un bloc de compétences RNCP doit constituer un ensemble cohérent et évaluable de compétences professionnelles, certifiable de manière autonome. Chaque bloc décrit des compétences attestées, des critères d\u2019évaluation précis et des modalités d\u2019évaluation adaptées au contexte professionnel visé. En concevant les référentiels de l\u2019IEFT, j\u2019ai structuré les blocs en partant des situations professionnelles réelles du secteur du tourisme, puis en remontant vers les compétences nécessaires \u2014 jamais l\u2019inverse. Cette approche « terrain vers référentiel » est la seule qui convainc France Compétences.',
+        },
+      ]
+    : [
+        {
+          question: 'What is RNCP and how do you get certified?',
+          answer:
+            "RNCP (Répertoire National des Certifications Professionnelles) is France's official register that validates qualifications against labor-market competencies. To register a certification, you submit a dossier to France Compétences proving alignment between competency blocks, assessment methods, and industry needs. Managing the academic strategy across 6 IEFT campuses, I have led RNCP dossiers end-to-end \u2014 from writing competency frameworks to presenting before the certification jury. The process typically takes 12 to 18 months and demands rigorous documentation at every stage.",
+        },
+        {
+          question: 'How do you prepare for a Qualiopi audit?',
+          answer:
+            'A Qualiopi audit assesses compliance with 7 criteria and 32 indicators covering the quality of training programs. Preparation starts with an internal audit that identifies gaps between your current practices and the national quality framework, followed by a prioritized corrective action plan. Having prepared and secured Qualiopi certification for training organizations, I know that traceability is everything: every process must be documented, every improvement recorded. I recommend starting preparation at least 6 months before the initial audit date.',
+        },
+        {
+          question: 'How do you choose an LMS for higher education?',
+          answer:
+            'Selecting an LMS (Learning Management System) means balancing three dimensions: actual pedagogical needs, technical integration with existing tools, and projected adoption rates among staff. A feature-rich platform that instructors ignore is worthless. After deploying digital tools across all 28 campuses in the IFAG network with 100% adoption, I learned that user training and change management matter far more than feature lists. I favor solutions like Moodle or Canvas that offer open APIs and active communities, because long-term sustainability depends on ecosystem support.',
+        },
+        {
+          question: 'How can you automate RNCP competency bulletin management?',
+          answer:
+            'Manual RNCP bulletin management is a massive time sink: entering grades, calculating block validations, generating individual documents. This is the exact problem I solved by building Gradly, a tool that cuts administrative time by a factor of 3 by automating grade collection, competency-block mapping, and compliant bulletin generation. The key is rigorous upstream modeling of the RNCP framework, followed by a rule engine that applies the validation criteria defined in the certification dossier. The result: fewer errors, faster turnaround, and happier coordinators.',
+        },
+        {
+          question: 'What is instructional design?',
+          answer:
+            'Instructional design is the discipline of creating effective learning experiences by aligning learning objectives, teaching methods, assessment strategies, and technology. It goes beyond course creation \u2014 it means architecting a complete pathway that ensures measurable competency acquisition. This is the core of my daily work: designing curricula, writing syllabi, structuring RNCP competency blocks, and training instructors on implementation across 6 national campuses. The best instructional design is invisible: learners progress naturally because the structure does the heavy lifting.',
+        },
+        {
+          question: 'How do you manage change in educational institutions?',
+          answer:
+            'Change management in education fails most often from lack of ground-level support, not lack of vision. Teachers and coordinators need to understand the "why" before they accept the "how." When I led the digital transformation across 28 IFAG campuses, I relied on peer training, local ambassadors, and responsive support rather than top-down directives. The result was 100% adoption. The key is co-building with teams, not imposing on them. Resistance drops when people feel heard and see concrete benefits within weeks, not months.',
+        },
+        {
+          question: 'How can you integrate generative AI in education?',
+          answer:
+            'Generative AI can transform education at three levels: personalized learning paths, automated content production, and formative assessment support. But successful integration starts with a maturity audit and upskilling the teaching staff. Having integrated AI into my own workflows \u2014 from LinkedIn content generation to the CMS powering this very portfolio \u2014 I advocate a pragmatic approach: identify 2 or 3 high-impact use cases, prototype quickly, measure results, then scale. Starting with infrastructure before identifying real needs is the most common and costly mistake.',
+        },
+        {
+          question: 'How do you harmonize programs across multiple campuses?',
+          answer:
+            'Multi-campus harmonization requires a common framework that is structured enough to guarantee quality but flexible enough to accommodate local realities. This means unified curricula, standardized evaluation grids, and a shared academic calendar. At IEFT, I harmonized 6 campuses that each operated differently: curricula, assessments, and methods were all rebuilt into a single national framework. Cross-functional management of 11 coordinators then ensures consistent deployment on the ground. The challenge is always balancing standardization with local autonomy.',
+        },
+        {
+          question: 'What is the difference between RNCP and Qualiopi?',
+          answer:
+            'RNCP and Qualiopi are complementary but distinct. RNCP certifies the qualification itself: it validates that a certification maps to recognized professional competencies. Qualiopi certifies the training organization: it validates that your training processes meet a national quality framework. In practice, an organization can hold Qualiopi without offering any RNCP title, and vice versa. Having managed both processes, I find that institutions frequently confuse these two levels, leading to strategic missteps that waste months of effort.',
+        },
+        {
+          question: 'How do you structure RNCP-compliant competency blocks?',
+          answer:
+            'An RNCP competency block must be a coherent, independently assessable set of professional competencies. Each block describes attested competencies, precise evaluation criteria, and assessment methods adapted to the targeted professional context. When designing IEFT\'s frameworks, I structured blocks by starting from real professional situations in the tourism sector, then working backward to the required competencies \u2014 never the reverse. This "field-to-framework" approach is the only one that convinces France Compétences during the certification review.',
+        },
+      ];
 
 // FAQPage Schema.org structured data
 const faqSchema = {
@@ -141,43 +164,59 @@ const faqSchema = {
 
       <!-- FAQ items -->
       <div class="scroll-reveal space-y-px bg-zinc-200 dark:bg-zinc-800">
-        {faqs.map((faq, i) => (
-          <details class="tile group" id={`faq-${i + 1}`}>
-            <summary class="p-6 cursor-pointer select-none flex items-start gap-4 list-none [&::-webkit-details-marker]:hidden">
-              <span class="font-mono text-caption text-accent-500 mt-0.5 shrink-0">{String(i + 1).padStart(2, '0')}</span>
-              <h2 class="text-sm font-semibold text-zinc-900 dark:text-zinc-100 flex-1 pr-4">{faq.question}</h2>
-              <svg
-                class="w-4 h-4 text-zinc-400 dark:text-zinc-500 shrink-0 mt-0.5 transition-transform duration-200 group-open:rotate-45"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                stroke-width="1.5"
-                aria-hidden="true"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-              </svg>
-            </summary>
-            <div class="px-6 pb-6 pl-13">
-              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">{faq.answer}</p>
-            </div>
-          </details>
-        ))}
+        {
+          faqs.map((faq, i) => (
+            <details class="tile group" id={`faq-${i + 1}`}>
+              <summary class="p-6 cursor-pointer select-none flex items-start gap-4 list-none [&::-webkit-details-marker]:hidden">
+                <span class="font-mono text-caption text-accent-500 mt-0.5 shrink-0">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <h2 class="text-sm font-semibold text-zinc-900 dark:text-zinc-100 flex-1 pr-4">
+                  {faq.question}
+                </h2>
+                <svg
+                  class="w-4 h-4 text-zinc-400 dark:text-zinc-500 shrink-0 mt-0.5 transition-transform duration-200 group-open:rotate-45"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  aria-hidden="true"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+              </summary>
+              <div class="px-6 pb-6 pl-13">
+                <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">{faq.answer}</p>
+              </div>
+            </details>
+          ))
+        }
       </div>
 
       <!-- CTA -->
       <div class="scroll-reveal mt-16 text-center" style="transition-delay: 100ms">
         <p class="text-sm text-zinc-500 dark:text-zinc-400 mb-6">
-          {lang === 'fr'
-            ? 'Une question spécifique ? Je réponds personnellement.'
-            : 'Have a specific question? I reply personally.'}
+          {
+            lang === 'fr'
+              ? 'Une question spécifique ? Je réponds personnellement.'
+              : 'Have a specific question? I reply personally.'
+          }
         </p>
         <a
           href={`/${lang}/contact/`}
           class="group inline-flex items-center gap-3 px-8 py-4 bg-zinc-900 dark:bg-zinc-100 text-zinc-50 dark:text-zinc-900 text-sm font-medium hover:bg-accent-600 dark:hover:bg-accent-500 dark:hover:text-white transition-all duration-200"
         >
           {data.ui.contact.letsTalk}
-          <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          <svg
+            class="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"
+            ></path>
           </svg>
         </a>
       </div>

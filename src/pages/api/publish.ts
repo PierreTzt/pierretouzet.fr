@@ -37,21 +37,36 @@ export const POST: APIRoute = async ({ request, cookies }) => {
   try {
     body = await request.json();
   } catch {
-    return new Response(JSON.stringify({ error: 'Corps JSON invalide' }), { status: 400, headers: { 'Content-Type': 'application/json' } });
+    return new Response(JSON.stringify({ error: 'Corps JSON invalide' }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    });
   }
 
   const { title, description, tags, content, lang } = body;
 
   if (!title || !content || !lang) {
-    return new Response(JSON.stringify({ error: 'Titre, contenu et langue requis' }), { status: 400 });
+    return new Response(JSON.stringify({ error: 'Titre, contenu et langue requis' }), {
+      status: 400,
+    });
   }
 
   const slug = slugify(title);
   const date = new Date().toISOString().split('T')[0];
 
-  const safeTitle = title.replace(/[\n\r]/g, ' ').replace(/---/g, '').replace(/"/g, '\\"').trim();
-  const safeDescription = (description || '').replace(/[\n\r]/g, ' ').replace(/---/g, '').replace(/"/g, '\\"').trim();
-  const safeTags = (tags || []).map((t: string) => t.replace(/['\n\r\[\]{}]/g, '').trim()).filter(Boolean);
+  const safeTitle = title
+    .replace(/[\n\r]/g, ' ')
+    .replace(/---/g, '')
+    .replace(/"/g, '\\"')
+    .trim();
+  const safeDescription = (description || '')
+    .replace(/[\n\r]/g, ' ')
+    .replace(/---/g, '')
+    .replace(/"/g, '\\"')
+    .trim();
+  const safeTags = (tags || [])
+    .map((t: string) => t.replace(/['\n\r\[\]{}]/g, '').trim())
+    .filter(Boolean);
 
   const frontmatter = [
     '---',
@@ -112,22 +127,29 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     if (!response.ok) {
       const err = await response.json();
       console.error('[publish] GitHub API error:', err);
-      return new Response(JSON.stringify({ error: 'Erreur lors de la publication' }), { status: 500 });
+      return new Response(JSON.stringify({ error: 'Erreur lors de la publication' }), {
+        status: 500,
+      });
     }
 
     const result = await response.json();
     const blogUrl = `/${lang}/blog/${slug}/`;
 
-    return new Response(JSON.stringify({
-      success: true,
-      slug,
-      url: blogUrl,
-      commitUrl: result.commit?.html_url,
-    }), {
-      headers: { 'Content-Type': 'application/json' },
-    });
+    return new Response(
+      JSON.stringify({
+        success: true,
+        slug,
+        url: blogUrl,
+        commitUrl: result.commit?.html_url,
+      }),
+      {
+        headers: { 'Content-Type': 'application/json' },
+      },
+    );
   } catch (err: any) {
     console.error('[publish] Error:', err);
-    return new Response(JSON.stringify({ error: 'Erreur lors de la publication' }), { status: 500 });
+    return new Response(JSON.stringify({ error: 'Erreur lors de la publication' }), {
+      status: 500,
+    });
   }
 };

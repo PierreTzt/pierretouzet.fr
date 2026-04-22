@@ -3,7 +3,7 @@ import type { SiteData } from './types';
 export const data: SiteData = {
   personal: {
     name: 'Pierre Touzet',
-    title: "Je rends le complexe accessible.",
+    title: 'Je rends le complexe accessible.',
     description:
       "15 ans entre IT, pédagogie et innovation digitale — je pilote 6 campus nationaux, j'ai créé Gradly pour automatiser la gestion RNCP, et j'accompagne les organisations éducatives dans leur transformation. Disponible en consulting et freelance.",
     email: 'pierre.touzet@mecontacter.eu',
@@ -32,7 +32,7 @@ export const data: SiteData = {
         "Déploiement de nouveaux programmes de la conception à l'ouverture, avec une croissance significative des effectifs",
         "Conception des syllabi, blocs de compétences et grilles d'évaluation conformes RNCP",
         'Obtention des dossiers de certification et jurys (RNCP, Qualiopi)',
-        'Management transversal d\'une équipe de 11 coordinateurs et responsables pédagogiques',
+        "Management transversal d'une équipe de 11 coordinateurs et responsables pédagogiques",
         'Pilotage budgétaire et optimisation de la rentabilité des programmes',
       ],
       technologies: ['RNCP', 'Qualiopi', 'Ingénierie pédagogique', 'Management', 'Certification'],
@@ -50,7 +50,7 @@ export const data: SiteData = {
         "Développement sur mesure d'outils pour automatiser les tâches récurrentes (dont les prémices de Gradly)",
         'Veille EdTech permanente et pilotage de POC sur des solutions innovantes',
         'Animation de groupes de travail transversaux entre campus',
-        'Mise en place d\'indicateurs data pour le suivi qualité des formations',
+        "Mise en place d'indicateurs data pour le suivi qualité des formations",
       ],
       technologies: ['Outils numériques', 'LMS', 'Data', 'Innovation', 'Qualité'],
     },
@@ -65,7 +65,7 @@ export const data: SiteData = {
       achievements: [
         "Refonte complète du système d'approvisionnement : rationalisation du panel fournisseurs et livraisons OTD > 90%",
         'Migration complète du parc informatique vers Windows 10',
-        'Support IT N1, N2 et N3 pour l\'ensemble des utilisateurs',
+        "Support IT N1, N2 et N3 pour l'ensemble des utilisateurs",
         'Gestion de la facturation, du suivi clients et du reporting',
         'Création graphique (plaquettes, flyers) et gestion des réseaux sociaux',
       ],
@@ -86,29 +86,34 @@ export const data: SiteData = {
       demoUrl: 'https://www.distil.academy/',
       featured: true,
       status: 'active',
-      period: '2026 — Aujourd\'hui',
+      period: "2026 — Aujourd'hui",
       metrics: [
         { label: 'Format', value: 'Leçons de 10-15 min' },
         { label: 'Accès', value: 'À vie' },
         { label: 'Mises à jour', value: 'Continues' },
       ],
-      story: "Les formations IA disponibles m'ont toujours frustré : soit des vidéos YouTube déjà périmées, soit des cursus à 2000€ qui recyclent les mêmes contenus. Je me suis dit : et si je créais la formation que j'aurais aimé suivre ? Des modules de moins d'une heure, des leçons de 10-15 min, uniquement ce qui fonctionne sur le terrain. Pas de hype, pas de théorie creuse — du concret, testé et mis à jour en continu. Distil est né de cette conviction : l'IA évolue trop vite pour des formations figées.",
+      story:
+        "Les formations IA disponibles m'ont toujours frustré : soit des vidéos YouTube déjà périmées, soit des cursus à 2000€ qui recyclent les mêmes contenus. Je me suis dit : et si je créais la formation que j'aurais aimé suivre ? Des modules de moins d'une heure, des leçons de 10-15 min, uniquement ce qui fonctionne sur le terrain. Pas de hype, pas de théorie creuse — du concret, testé et mis à jour en continu. Distil est né de cette conviction : l'IA évolue trop vite pour des formations figées.",
       features: [
         {
           title: 'Cours courts et denses',
-          description: "Chaque module fait moins d'une heure, chaque leçon 10-15 min. Pas de remplissage, que de l'essentiel.",
+          description:
+            "Chaque module fait moins d'une heure, chaque leçon 10-15 min. Pas de remplissage, que de l'essentiel.",
         },
         {
           title: 'Accès à vie + mises à jour',
-          description: "Un seul achat, un accès permanent. Les cours sont mis à jour régulièrement pour suivre l'évolution de l'IA.",
+          description:
+            "Un seul achat, un accès permanent. Les cours sont mis à jour régulièrement pour suivre l'évolution de l'IA.",
         },
         {
           title: 'Contenu filtré et testé',
-          description: "Veille permanente et tests en conditions réelles. Seul ce qui marche vraiment est enseigné.",
+          description:
+            'Veille permanente et tests en conditions réelles. Seul ce qui marche vraiment est enseigné.',
         },
         {
           title: 'Pensé pour les professionnels',
-          description: "Pas besoin de background technique. Des résultats concrets applicables immédiatement dans son métier.",
+          description:
+            'Pas besoin de background technique. Des résultats concrets applicables immédiatement dans son métier.',
         },
       ],
     },
@@ -125,36 +130,41 @@ export const data: SiteData = {
       demoUrl: 'https://www.gradly.fr/',
       featured: true,
       status: 'active',
-      period: '2023 — Aujourd\'hui',
+      period: "2023 — Aujourd'hui",
       metrics: [
         { label: 'Temps admin', value: '÷ 3' },
         { label: 'Données', value: '100% offline' },
         { label: 'Compatibilité', value: 'Yparéo & ERP' },
       ],
-      story: "Chaque semestre, je voyais la même scène se répéter : des coordinateurs pédagogiques enfermés dans leur bureau pendant des jours, copiant-collant des notes dans des tableaux Excel pour produire des bulletins de compétences conformes au RNCP. Des heures de travail répétitif, source d'erreurs et de frustration. Je me suis dit : \"Si je vis ce problème, des centaines d'autres le vivent aussi.\" J'ai commencé par un prototype pour mon propre usage. Puis les collègues l'ont voulu. Puis d'autres campus. Gradly est né de ce constat terrain — pas d'une étude de marché, mais d'une douleur réelle.",
+      story:
+        "Chaque semestre, je voyais la même scène se répéter : des coordinateurs pédagogiques enfermés dans leur bureau pendant des jours, copiant-collant des notes dans des tableaux Excel pour produire des bulletins de compétences conformes au RNCP. Des heures de travail répétitif, source d'erreurs et de frustration. Je me suis dit : \"Si je vis ce problème, des centaines d'autres le vivent aussi.\" J'ai commencé par un prototype pour mon propre usage. Puis les collègues l'ont voulu. Puis d'autres campus. Gradly est né de ce constat terrain — pas d'une étude de marché, mais d'une douleur réelle.",
       features: [
         {
           title: '100% offline — souveraineté des données',
-          description: "Aucune donnée ne quitte la machine de l'utilisateur. Pas de cloud, pas de serveur, pas de risque RGPD. Les données des apprenants restent où elles doivent être.",
+          description:
+            "Aucune donnée ne quitte la machine de l'utilisateur. Pas de cloud, pas de serveur, pas de risque RGPD. Les données des apprenants restent où elles doivent être.",
         },
         {
           title: 'Import intelligent',
-          description: "Import direct depuis Excel, CSV ou les exports ERP (Yparéo). Gradly s'adapte aux formats existants — pas l'inverse.",
+          description:
+            "Import direct depuis Excel, CSV ou les exports ERP (Yparéo). Gradly s'adapte aux formats existants — pas l'inverse.",
         },
         {
           title: 'Bulletins PDF conformes RNCP',
-          description: "Génération automatique de bulletins de compétences conformes aux référentiels RNCP. Blocs, compétences, niveaux d'acquisition — tout est calculé et mis en forme.",
+          description:
+            "Génération automatique de bulletins de compétences conformes aux référentiels RNCP. Blocs, compétences, niveaux d'acquisition — tout est calculé et mis en forme.",
         },
         {
           title: 'Temps administratif divisé par 3',
-          description: "Ce qui prenait des jours se fait maintenant en quelques heures. Les coordinateurs peuvent se concentrer sur l'accompagnement, pas sur la paperasse.",
+          description:
+            "Ce qui prenait des jours se fait maintenant en quelques heures. Les coordinateurs peuvent se concentrer sur l'accompagnement, pas sur la paperasse.",
         },
       ],
     },
     {
       id: 'innovation-pedagogique',
       slug: 'innovation-pedagogique',
-      title: "Transformation digitale pédagogique",
+      title: 'Transformation digitale pédagogique',
       shortDescription:
         "Identification, conception et déploiement d'outils numériques qui ont transformé le fonctionnement de dizaines d'équipes pédagogiques.",
       longDescription:
@@ -163,7 +173,7 @@ export const data: SiteData = {
       imageAlt: 'Transformation digitale pédagogique',
       featured: true,
       status: 'active',
-      period: '2022 — Aujourd\'hui',
+      period: "2022 — Aujourd'hui",
       metrics: [
         { label: 'Campus', value: '10+' },
         { label: 'Outils déployés', value: '5+' },
@@ -174,8 +184,7 @@ export const data: SiteData = {
       id: 'portfolio',
       slug: 'portfolio',
       title: 'Portfolio personnel',
-      shortDescription:
-        'Ce site web, conçu comme vitrine de mon parcours et de mes projets.',
+      shortDescription: 'Ce site web, conçu comme vitrine de mon parcours et de mes projets.',
       longDescription:
         'Portfolio personnel développé avec Astro et Tailwind CSS. Design moderne et minimaliste, bilingue français/anglais, responsive et accessible. Hébergé sur Vercel avec déploiement continu.',
       technologies: ['Astro', 'Tailwind CSS', 'TypeScript', 'Vercel'],
@@ -310,7 +319,7 @@ export const data: SiteData = {
       slug: 'cahier-bleu',
       title: 'Le Cahier Bleu',
       url: 'https://www.lecahierbleu.fr/',
-      shortDescription: "Écrire un hommage à la hauteur du souvenir, en quinze minutes.",
+      shortDescription: 'Écrire un hommage à la hauteur du souvenir, en quinze minutes.',
       technologies: ['Astro', 'IA (Claude / GPT-4o)', 'Stripe', 'AES-256'],
       period: '2026',
       imageAlt: "Capture de la page d'accueil du Cahier Bleu",
@@ -343,7 +352,8 @@ export const data: SiteData = {
     {
       id: 'education-pedagogy',
       title: 'Éducation & pédagogie',
-      description: "Des plateformes et études de cas pour transformer l'expérience d'apprentissage.",
+      description:
+        "Des plateformes et études de cas pour transformer l'expérience d'apprentissage.",
       entries: [
         { kind: 'project', projectSlug: 'distil-academy' },
         { kind: 'project', projectSlug: 'gradly' },
@@ -353,7 +363,8 @@ export const data: SiteData = {
     {
       id: 'around-grief',
       title: 'Autour du deuil',
-      description: 'Trois outils pensés pour les heures qui suivent une perte. Paiement unique, aucune donnée conservée.',
+      description:
+        'Trois outils pensés pour les heures qui suivent une perte. Paiement unique, aucune donnée conservée.',
       entries: [
         { kind: 'external', siteSlug: 'cahier-bleu' },
         { kind: 'external', siteSlug: 'memoire-gardee' },
@@ -364,9 +375,7 @@ export const data: SiteData = {
       id: 'labs',
       title: 'Labs',
       description: 'Expérimentations techniques et projets personnels.',
-      entries: [
-        { kind: 'project', projectSlug: 'portfolio' },
-      ],
+      entries: [{ kind: 'project', projectSlug: 'portfolio' }],
     },
   ],
   skillCategories: [
@@ -403,8 +412,18 @@ export const data: SiteData = {
       description: "Création d'outils sur mesure et transformation digitale des process.",
       icon: 'M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5',
       skills: [
-        { name: 'RGPD & Protection des données', level: 85, highlighted: true, badge: 'DPO certifié CNIL' },
-        { name: 'Automatisation de processus', level: 85, highlighted: true, badge: 'Temps admin ÷ 3' },
+        {
+          name: 'RGPD & Protection des données',
+          level: 85,
+          highlighted: true,
+          badge: 'DPO certifié CNIL',
+        },
+        {
+          name: 'Automatisation de processus',
+          level: 85,
+          highlighted: true,
+          badge: 'Temps admin ÷ 3',
+        },
         { name: 'No-code / Low-code', level: 80 },
         { name: 'Veille technologique', level: 80 },
         { name: 'IA générative', level: 75 },
@@ -433,8 +452,7 @@ export const data: SiteData = {
       field: "Responsable d'Ingénierie pédagogique",
       startDate: '2025',
       endDate: '2025',
-      description:
-        'Technologie éducative et ingénierie pédagogique.',
+      description: 'Technologie éducative et ingénierie pédagogique.',
     },
     {
       institution: 'Anaxil',
@@ -458,19 +476,22 @@ export const data: SiteData = {
       name: 'Cyril Blanchet',
       role: "Directeur d'établissement",
       company: 'ICL IET — Campus de Lyon',
-      quote: "Pierre est un professionnel complet, fiable et inspirant. Il a su faire preuve d'une rigueur exemplaire, d'une créativité juste et d'une capacité d'analyse pertinente. Sa gestion du stress, sa maîtrise de la conduite de projet et sa vision stratégique ont été déterminantes dans la réussite de notre démarche.",
+      quote:
+        "Pierre est un professionnel complet, fiable et inspirant. Il a su faire preuve d'une rigueur exemplaire, d'une créativité juste et d'une capacité d'analyse pertinente. Sa gestion du stress, sa maîtrise de la conduite de projet et sa vision stratégique ont été déterminantes dans la réussite de notre démarche.",
     },
     {
       name: 'Za Nguyen',
       role: 'Responsable pédagogique',
       company: 'IHECF Montpellier',
-      quote: "Pierre, c'est quelqu'un sur qui on peut vraiment compter : pro, impliqué, toujours prêt à aider. Il possède une excellente vision d'ensemble tout en prêtant attention aux détails, ce qui le rend particulièrement précieux au sein d'une équipe. Je recommande chaleureusement Pierre pour toute opportunité professionnelle.",
+      quote:
+        "Pierre, c'est quelqu'un sur qui on peut vraiment compter : pro, impliqué, toujours prêt à aider. Il possède une excellente vision d'ensemble tout en prêtant attention aux détails, ce qui le rend particulièrement précieux au sein d'une équipe. Je recommande chaleureusement Pierre pour toute opportunité professionnelle.",
     },
     {
       name: 'Fanny Murer',
       role: 'Coordinatrice pédagogique nationale',
       company: 'ICL',
-      quote: "J'ai particulièrement apprécié sa grande disponibilité et son sens de l'écoute. Structuré et rigoureux, il sait organiser et prioriser efficacement les projets. Pierre est très à l'aise avec les outils informatiques et contribue à fluidifier et moderniser les pratiques pédagogiques.",
+      quote:
+        "J'ai particulièrement apprécié sa grande disponibilité et son sens de l'écoute. Structuré et rigoureux, il sait organiser et prioriser efficacement les projets. Pierre est très à l'aise avec les outils informatiques et contribue à fluidifier et moderniser les pratiques pédagogiques.",
     },
   ],
   keyMetrics: [
@@ -483,40 +504,47 @@ export const data: SiteData = {
     {
       number: '01',
       title: 'Observer',
-      description: "J'écoute, j'audite, je comprends le vrai problème — pas celui qu'on me présente, celui qui se cache derrière.",
+      description:
+        "J'écoute, j'audite, je comprends le vrai problème — pas celui qu'on me présente, celui qui se cache derrière.",
     },
     {
       number: '02',
       title: 'Concevoir',
-      description: 'Je dessine une solution sur mesure, je prototype vite, je teste avec les utilisateurs avant de tout construire.',
+      description:
+        'Je dessine une solution sur mesure, je prototype vite, je teste avec les utilisateurs avant de tout construire.',
     },
     {
       number: '03',
       title: 'Déployer',
-      description: "Je forme les équipes, j'accompagne le changement et je ne lâche rien tant que l'adoption n'est pas réelle.",
+      description:
+        "Je forme les équipes, j'accompagne le changement et je ne lâche rien tant que l'adoption n'est pas réelle.",
     },
     {
       number: '04',
       title: 'Itérer',
-      description: 'Je mesure les résultats, je collecte les retours et je recommence — parce qu\'un bon process vit et évolue.',
+      description:
+        "Je mesure les résultats, je collecte les retours et je recommence — parce qu'un bon process vit et évolue.",
     },
   ],
   speakerTopics: [
     {
-      title: "De technicien informatique à responsable de programmes : 15 ans de curiosité",
-      abstract: "Un parcours non-linéaire, un bac pro en poche, et une conviction : la curiosité est le meilleur moteur de carrière. Retour d'expérience sur 15 ans de pivots, de prises de risque et de transformation — dans l'IT, la pédagogie et l'entrepreneuriat.",
+      title: 'De technicien informatique à responsable de programmes : 15 ans de curiosité',
+      abstract:
+        "Un parcours non-linéaire, un bac pro en poche, et une conviction : la curiosité est le meilleur moteur de carrière. Retour d'expérience sur 15 ans de pivots, de prises de risque et de transformation — dans l'IT, la pédagogie et l'entrepreneuriat.",
       format: 'Conférence · 30-45 min',
       tags: ['Parcours', 'Multipotentialiste', 'Reconversion'],
     },
     {
       title: "Comment j'ai automatisé la gestion RNCP d'un réseau d'écoles",
-      abstract: "Les coordinateurs pédagogiques passent des jours à produire des bulletins RNCP à la main. J'ai créé un outil pour diviser ce temps par 3. Retour concret sur l'identification du problème, le prototypage, le déploiement et les résultats.",
-      format: 'Retour d\'expérience · 20-30 min',
+      abstract:
+        "Les coordinateurs pédagogiques passent des jours à produire des bulletins RNCP à la main. J'ai créé un outil pour diviser ce temps par 3. Retour concret sur l'identification du problème, le prototypage, le déploiement et les résultats.",
+      format: "Retour d'expérience · 20-30 min",
       tags: ['EdTech', 'RNCP', 'Automatisation', 'Gradly'],
     },
     {
       title: "L'IA en éducation : un regard de praticien, pas de théoricien",
-      abstract: "Tout le monde parle d'IA en éducation. Peu de gens l'utilisent vraiment au quotidien avec des apprenants. Ce que j'ai testé, ce qui marche, ce qui ne marche pas, et pourquoi il faut arrêter d'avoir peur.",
+      abstract:
+        "Tout le monde parle d'IA en éducation. Peu de gens l'utilisent vraiment au quotidien avec des apprenants. Ce que j'ai testé, ce qui marche, ce qui ne marche pas, et pourquoi il faut arrêter d'avoir peur.",
       format: 'Conférence · 30-45 min',
       tags: ['IA générative', 'Éducation', 'Pratique'],
     },
@@ -530,22 +558,31 @@ export const data: SiteData = {
   services: [
     {
       title: 'Ingénierie pédagogique & certification',
-      description: "Conception de programmes conformes aux exigences RNCP et Qualiopi, de la maquette à l'obtention de la certification.",
+      description:
+        "Conception de programmes conformes aux exigences RNCP et Qualiopi, de la maquette à l'obtention de la certification.",
       examples: ['Maquettes & syllabi', 'Dossiers RNCP', 'Audits Qualiopi', 'Blocs de compétences'],
     },
     {
       title: 'Transformation digitale',
-      description: "Identification, déploiement et adoption d'outils numériques pour les équipes pédagogiques et administratives.",
-      examples: ['Déploiement LMS', 'Automatisation', 'Conduite du changement', 'Formation des équipes'],
+      description:
+        "Identification, déploiement et adoption d'outils numériques pour les équipes pédagogiques et administratives.",
+      examples: [
+        'Déploiement LMS',
+        'Automatisation',
+        'Conduite du changement',
+        'Formation des équipes',
+      ],
     },
     {
       title: 'Création de contenu & vulgarisation',
-      description: "Conception de contenus qui rendent le complexe accessible — vidéo, podcast, newsletter, ebook ou live.",
+      description:
+        'Conception de contenus qui rendent le complexe accessible — vidéo, podcast, newsletter, ebook ou live.',
       examples: ['Vidéo & Shorts', 'Podcast', 'Newsletter', 'Ebook & guides'],
     },
     {
       title: 'Consulting IA & accompagnement',
-      description: "Accompagnement sur l'intégration de l'IA générative dans vos process pédagogiques ou votre activité.",
+      description:
+        "Accompagnement sur l'intégration de l'IA générative dans vos process pédagogiques ou votre activité.",
       examples: ['Audit IA', 'Montée en compétences', 'Stratégie digitale', 'Mentorat'],
     },
   ],
@@ -620,40 +657,46 @@ export const data: SiteData = {
     },
     speaker: {
       title: 'Interventions & conférences',
-      subtitle: "Je parle de ce que je vis sur le terrain — pédagogie, IA, transformation digitale, parcours atypiques.",
+      subtitle:
+        'Je parle de ce que je vis sur le terrain — pédagogie, IA, transformation digitale, parcours atypiques.',
       cta: "M'inviter à intervenir",
       format: 'Format',
     },
     ebook: {
       title: "L'IA dans l'éducation — Ebook gratuit",
-      subtitle: "Un regard de praticien sur l'IA générative en éducation. 10 pages pour comprendre les vrais enjeux, sans jargon.",
+      subtitle:
+        "Un regard de praticien sur l'IA générative en éducation. 10 pages pour comprendre les vrais enjeux, sans jargon.",
       cta: 'Télécharger gratuitement',
       landing: {
-        metaDescription: "Téléchargez gratuitement l'ebook de Pierre Touzet sur l'IA générative en éducation. 10 pages de retour d'expérience terrain, sans jargon.",
-        heroSubtitle: "10 pages pour comprendre comment l'IA générative transforme l'éducation — avec un regard de praticien, pas de théoricien. Basé sur 15 ans d'expérience terrain.",
+        metaDescription:
+          "Téléchargez gratuitement l'ebook de Pierre Touzet sur l'IA générative en éducation. 10 pages de retour d'expérience terrain, sans jargon.",
+        heroSubtitle:
+          "10 pages pour comprendre comment l'IA générative transforme l'éducation — avec un regard de praticien, pas de théoricien. Basé sur 15 ans d'expérience terrain.",
         formTitle: 'Télécharger gratuitement',
         formName: 'Votre prénom',
         formEmail: 'Votre email',
         formCta: "Recevoir l'ebook (PDF)",
         formSuccess: 'Votre téléchargement va commencer.',
-        formSuccessDetail: "Si le téléchargement ne se lance pas automatiquement, cliquez sur le lien ci-dessous.",
+        formSuccessDetail:
+          'Si le téléchargement ne se lance pas automatiquement, cliquez sur le lien ci-dessous.',
         tocTitle: 'Ce que vous allez découvrir',
         tocItems: [
           "Pourquoi l'IA générative change la donne en éducation — au-delà du buzz",
-          "Ce qui marche vraiment sur le terrain (et ce qui ne marche pas)",
+          'Ce qui marche vraiment sur le terrain (et ce qui ne marche pas)',
           "Comment intégrer l'IA dans ses pratiques pédagogiques sans tout réinventer",
           "Les erreurs à éviter quand on débute avec l'IA en formation",
         ],
-        credibilityTitle: "Pourquoi lire cet ebook",
+        credibilityTitle: 'Pourquoi lire cet ebook',
         credibilityItems: [
           "Écrit par un praticien qui utilise l'IA au quotidien avec des apprenants",
-          "Basé sur des expérimentations concrètes, pas des projections théoriques",
-          "Applicable immédiatement — chaque chapitre propose des actions concrètes",
-          "Gratuit, sans engagement, sans spam",
+          'Basé sur des expérimentations concrètes, pas des projections théoriques',
+          'Applicable immédiatement — chaque chapitre propose des actions concrètes',
+          'Gratuit, sans engagement, sans spam',
         ],
-        testimonialQuote: "Pierre est quelqu'un sur qui on peut vraiment compter : pro, impliqué, toujours prêt à aider. Il possède une excellente vision d'ensemble tout en prêtant attention aux détails.",
-        testimonialAuthor: "Za Nguyen",
-        testimonialRole: "Responsable pédagogique — IHECF Montpellier",
+        testimonialQuote:
+          "Pierre est quelqu'un sur qui on peut vraiment compter : pro, impliqué, toujours prêt à aider. Il possède une excellente vision d'ensemble tout en prêtant attention aux détails.",
+        testimonialAuthor: 'Za Nguyen',
+        testimonialRole: 'Responsable pédagogique — IHECF Montpellier',
         freeLabel: 'Gratuit',
         pagesLabel: '10 pages',
         formatLabel: 'PDF',
@@ -674,12 +717,14 @@ export const data: SiteData = {
     },
     blog: {
       title: 'Blog',
-      subtitle: 'Réflexions sur l\'ingénierie pédagogique, l\'IA en éducation et l\'innovation digitale.',
+      subtitle:
+        "Réflexions sur l'ingénierie pédagogique, l'IA en éducation et l'innovation digitale.",
       backToBlog: 'Retour au blog',
       empty: 'Aucun article pour le moment. Revenez bientôt !',
     },
     studio: {
-      intro: "Un recueil de ce que je construis — cas d'usage détaillés et sites lancés, regroupés par univers.",
+      intro:
+        "Un recueil de ce que je construis — cas d'usage détaillés et sites lancés, regroupés par univers.",
       caseStudyBadge: "Cas d'usage",
       liveSiteBadge: 'Site en ligne',
       clusterCountProjects: '{n} projets',

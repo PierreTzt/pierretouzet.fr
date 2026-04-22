@@ -51,8 +51,9 @@ const { label } = Astro.props;
   }
 
   .theme-icon {
-    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-                opacity 0.3s ease;
+    transition:
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 0.3s ease;
   }
 
   /* Light mode: show moon (to switch to dark), hide sun */
@@ -96,10 +97,14 @@ const { label } = Astro.props;
     const { signal } = themeToggleController;
 
     document.querySelectorAll('[data-theme-toggle]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const isDark = document.documentElement.classList.toggle('dark');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-      }, { signal });
+      btn.addEventListener(
+        'click',
+        () => {
+          const isDark = document.documentElement.classList.toggle('dark');
+          localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        },
+        { signal },
+      );
     });
   }
   initThemeToggle();
