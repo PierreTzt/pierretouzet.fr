@@ -9,7 +9,7 @@ interface Props {
 const { lang } = Astro.props;
 const { personal, ui } = getData(lang);
 
-const projectsHref = lang === 'fr' ? `/${lang}/projets/` : `/${lang}/projects/`;
+const projectsHref = `/${lang}/studio/`;
 const contactHref = `/${lang}/contact/`;
 
 const firstName = personal.name.split(' ')[0];
