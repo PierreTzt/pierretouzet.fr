@@ -1,3 +1,21 @@
+/**
+ * GÉNÉRATION D'IMAGES OPEN GRAPH.
+ *
+ * Produit l'image 1200×630 affichée quand un article est partagé sur les
+ * réseaux sociaux. Le résultat ressemble à une "carte" avec le titre de
+ * l'article, les tags, la date et la signature "Pierre Touzet".
+ *
+ * Pipeline (pour novices) :
+ *   1. On décrit la "maquette" en JSX-like (satori)
+ *   2. Satori convertit ça en SVG (vectoriel)
+ *   3. Sharp convertit le SVG en PNG (bitmap lisible par tout le monde)
+ *
+ * L'image est générée au BUILD (SSG) pour chaque article, via le endpoint
+ * src/pages/og/[...slug].png.ts.
+ *
+ * Les polices sont lues depuis node_modules/@fontsource/... au build.
+ * Sur Vercel, ces fichiers sont bundlés via `includeFiles` dans astro.config.mjs.
+ */
 import satori from 'satori';
 import sharp from 'sharp';
 import { readFileSync } from 'node:fs';

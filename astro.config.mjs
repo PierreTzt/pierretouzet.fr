@@ -1,4 +1,18 @@
 // @ts-check
+/**
+ * CONFIGURATION ASTRO — lue au build et en dev.
+ *
+ * Ce fichier contrôle :
+ *   - site : URL canonique du site (utilisée pour canonical, sitemap, OG)
+ *   - adapter : Vercel (SSR fonctions + CDN statique)
+ *     `includeFiles` bundle les polices nécessaires aux fonctions SSR
+ *   - vite.plugins : Tailwind v4 via @tailwindcss/vite (remplace l'ancien
+ *     integration @astrojs/tailwind)
+ *   - integrations.sitemap : génère sitemap.xml avec priorités par type de page
+ *   - i18n : déclare FR (défaut) + EN avec préfixes d'URL obligatoires
+ *
+ * Voir DEVELOPER_GUIDE.md §18.
+ */
 import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import sitemap from '@astrojs/sitemap';

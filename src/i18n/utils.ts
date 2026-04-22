@@ -1,3 +1,18 @@
+/**
+ * INTERNATIONALISATION (i18n) — helpers pour gérer FR et EN.
+ *
+ * Ce fichier fournit 4 fonctions clés :
+ *   - getLangFromUrl(url)          → devine la langue depuis l'URL ('/fr/...' ou '/en/...')
+ *   - getData(lang)                → renvoie les données FR ou EN
+ *   - getLocalizedPath(path, lang) → transforme une URL vers sa version dans l'autre langue
+ *                                    (utilise pageSlugMap pour traduire "competences" ↔ "skills")
+ *   - getHreflangUrl(path, lang, site) → URL absolue utilisée dans les balises <link hreflang>
+ *
+ * Quand tu ajoutes une page bilingue dont le slug change entre FR et EN,
+ * ajoute une entrée dans pageSlugMap ci-dessous.
+ *
+ * Voir DEVELOPER_GUIDE.md §8.
+ */
 import { data as frData } from '../data/fr';
 import { data as enData } from '../data/en';
 import type { SiteData } from '../data/types';

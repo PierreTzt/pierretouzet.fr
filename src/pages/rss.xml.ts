@@ -1,3 +1,13 @@
+/**
+ * /rss.xml — flux RSS des articles français.
+ *
+ * Astro fournit @astrojs/rss qui s'occupe de l'échappement XML. On lui
+ * donne la liste des articles triés par date décroissante ; il génère
+ * un document <rss version="2.0"> conforme, lisible par les agrégateurs
+ * (Feedly, Inoreader, etc.).
+ *
+ * La variante anglaise est dans src/pages/en/rss.xml.ts.
+ */
 import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
 import { getCollection } from 'astro:content';

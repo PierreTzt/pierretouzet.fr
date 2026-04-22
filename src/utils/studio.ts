@@ -1,3 +1,14 @@
+/**
+ * STUDIO — résolution des entrées du portfolio.
+ *
+ * Le "Studio" est la vitrine des projets. Chaque entrée peut être :
+ *   - un "project"  : projet complet avec page de détail interne (/studio/xxx/)
+ *   - un "external" : simple lien vers un site externe (YouTube, Podcast, etc.)
+ *
+ * resolveStudioEntry prend une référence (StudioEntryRef) et retourne la
+ * donnée complète correspondante dans SiteData, avec son type pour que
+ * les composants UI sachent quel rendu appliquer.
+ */
 import type { SiteData, StudioEntryRef, Project, StudioExternalSite } from '../data/types';
 
 export type ResolvedStudioEntry =

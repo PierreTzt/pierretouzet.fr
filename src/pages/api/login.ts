@@ -1,3 +1,14 @@
+/**
+ * POST /api/login — ouvre une session admin.
+ *
+ * Reçoit { password } en JSON. Si le mot de passe matche ADMIN_PASSWORD,
+ * pose un cookie `admin-auth` signé HMAC (voir utils/auth.ts) valide 24h.
+ * Sinon, renvoie 401.
+ *
+ * Note novice :
+ *   - rate-limit 5 tentatives/minute par IP : appliqué par le middleware (src/middleware.ts).
+ *   - prerender = false : route SSR, recalculée à chaque appel.
+ */
 import type { APIRoute } from 'astro';
 import { createSessionToken } from '../../utils/auth';
 import { timingSafeEqual } from 'crypto';

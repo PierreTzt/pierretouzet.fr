@@ -1,7 +1,22 @@
+/**
+ * MIDDLEWARE — s'exécute AVANT chaque requête SSR (pages admin + routes /api).
+ *
+ * Rôle :
+ *   1. Rate-limit : bloque une IP qui envoie > 5 tentatives de login en 1 min (HTTP 429).
+ *   2. Protection /admin : redirige vers /admin/login si le cookie admin-auth
+ *      est absent ou invalide (sauf pour la page /admin/login elle-même).
+ *
+ * Note novice : le middleware ne tourne PAS pour les pages statiques (SSG).
+ * Seules les pages ayant `export const prerender = false` passent par ici.
+ *
+ * Pour en savoir plus : voir DEVELOPER_GUIDE.md §13.
+ */
 import { defineMiddleware } from 'astro:middleware';
 import { verifySessionToken } from './utils/auth';
 
 // --- Rate limiting for login endpoint ---
+// Map en mémoire. Partagée entre requêtes tant que l'instance Lambda est chaude.
+// Simple mais suffisant pour un portfolio à faible trafic.
 const loginAttempts = new Map<string, { count: number; resetAt: number }>();
 
 function isRateLimited(ip: string): boolean {

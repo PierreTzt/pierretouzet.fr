@@ -1,3 +1,6 @@
+/**
+ * /en/rss.xml — flux RSS des articles anglais (pendant du rss.xml français).
+ */
 import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
 import { getCollection } from 'astro:content';

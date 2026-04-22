@@ -1,3 +1,15 @@
+/**
+ * POST /api/generate — génère un brouillon d'article via Claude.
+ *
+ * Reçoit { idea, lang }, renvoie { title, description, tags, content }
+ * prêt à être édité côté admin puis publié via /api/publish.
+ *
+ * La personnalité de Pierre (bio, ton, expertise) est injectée dans le
+ * SYSTEM_PROMPT depuis utils/persona.ts pour garder une voix cohérente
+ * entre le blog et les posts LinkedIn.
+ *
+ * Auth : obligatoire. Coût : 1 appel à l'API Anthropic (facturation).
+ */
 import type { APIRoute } from 'astro';
 import Anthropic from '@anthropic-ai/sdk';
 import { isAuthenticated } from '../../utils/auth';

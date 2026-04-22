@@ -1,3 +1,7 @@
+/**
+ * Schéma des articles de blog — variante Astro 5 (src/content.config.ts).
+ * Voir commentaire détaillé dans src/content/config.ts (fichier miroir).
+ */
 import { defineCollection, z } from 'astro:content';
 
 const blog = defineCollection({

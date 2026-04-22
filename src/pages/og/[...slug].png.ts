@@ -1,3 +1,16 @@
+/**
+ * Route dynamique : génère /og/<slug>.png pour chaque article de blog.
+ *
+ * Comment ça marche (pour novices) :
+ *   1. getStaticPaths liste TOUS les articles publiés au BUILD (SSG).
+ *   2. Pour chaque slug, Astro appelle GET et enregistre le PNG résultant
+ *      dans dist/client/og/<slug>.png.
+ *   3. Le <meta property="og:image"> des articles pointe vers cette URL,
+ *      donc les réseaux sociaux récupèrent l'image directement depuis le CDN.
+ *
+ * Cache 1 an (immutable) car le slug d'un article ne change jamais —
+ * si tu modifies le titre, tu changes le slug, donc nouvelle URL.
+ */
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { getCollection } from 'astro:content';
 import { generateOgImage } from '../../utils/og-image';

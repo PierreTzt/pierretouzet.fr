@@ -1,3 +1,18 @@
+/**
+ * POST /api/publish — publie un article de blog en commitant le fichier
+ * .md directement dans le repo GitHub.
+ *
+ * Flux (pour novices) :
+ *   1. Admin envoie { title, description, tags, content, lang }
+ *   2. On slugify le titre pour obtenir un nom de fichier sûr
+ *   3. On échappe les caractères dangereux du frontmatter (quotes, \n, ---)
+ *   4. On concatène frontmatter + contenu
+ *   5. On appelle l'API GitHub (PUT /repos/.../contents/...) avec le fichier
+ *      encodé en base64
+ *   6. GitHub crée un commit, Vercel détecte le push, redeploie le site
+ *
+ * Auth : obligatoire (isAuthenticated), c'est un write public sur le repo.
+ */
 import type { APIRoute } from 'astro';
 import { isAuthenticated } from '../../utils/auth';
 

@@ -1,3 +1,12 @@
+/**
+ * POST /api/generate-linkedin-carousel — génère les slides d'un carousel LinkedIn.
+ *
+ * Reçoit un tableau de { headline, subtitle }, renvoie une slide par entrée
+ * (format portrait 1080×1350). L'admin assemble ensuite les slides en PDF
+ * pour publication comme "document" LinkedIn.
+ *
+ * Auth : obligatoire.
+ */
 import type { APIRoute } from 'astro';
 import { isAuthenticated } from '../../utils/auth';
 import { generateLinkedInVisual } from '../../utils/linkedin-visual';

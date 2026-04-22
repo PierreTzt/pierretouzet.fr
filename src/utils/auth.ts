@@ -1,3 +1,21 @@
+/**
+ * AUTHENTIFICATION — helpers pour la session admin.
+ *
+ * Principe (pour novices) :
+ *   - Un token de session = "timestamp.signature" où signature = HMAC-SHA256(timestamp, secret).
+ *   - Le secret est ADMIN_PASSWORD (variable d'env).
+ *   - Personne ne peut forger un token sans connaître le secret.
+ *   - Le token expire après 24 h (vérification du timestamp).
+ *
+ * Le cookie `admin-auth` contient ce token. Il est posé par /api/login et
+ * vérifié par le middleware + chaque endpoint sensible (garde-fou).
+ *
+ * timingSafeEqual : comparaison en temps constant. Évite qu'un attaquant
+ * puisse deviner une signature caractère par caractère en mesurant le temps
+ * de réponse (timing attack).
+ *
+ * Voir DEVELOPER_GUIDE.md §14.
+ */
 import type { AstroCookies } from 'astro';
 import { createHmac, timingSafeEqual } from 'crypto';
 

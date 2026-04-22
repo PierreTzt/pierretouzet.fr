@@ -1,3 +1,24 @@
+/**
+ * GÉNÉRATION D'IMAGES LINKEDIN (admin studio).
+ *
+ * Ce fichier expose plusieurs fonctions utilisées par les routes
+ * /api/generate-linkedin-visual, /api/generate-linkedin-banner,
+ * /api/generate-linkedin-carousel. Chaque fonction construit une
+ * "maquette" JSX-like, la rend en SVG via Satori, puis la convertit
+ * en PNG via Sharp.
+ *
+ * Spécificités (pour novices) :
+ *   - loadFontFile : cherche les polices au bon endroit selon qu'on tourne
+ *     en dev (process.cwd()) ou sur Vercel serverless (chemin relatif au JS bundlé).
+ *   - loadTwemoji : quand un texte contient des emojis, Satori a besoin d'une
+ *     image SVG par emoji (Twitter's Twemoji sur jsdelivr). Cette fonction
+ *     détecte les codePoints Unicode d'un segment et fetch le SVG correspondant.
+ *
+ * Les formats produits :
+ *   - carré (1080×1080) pour un post
+ *   - bannière (1584×396) pour le header de profil
+ *   - carousel (plusieurs pages 1080×1350 concaténées)
+ */
 import satori from 'satori';
 import sharp from 'sharp';
 import { readFileSync } from 'node:fs';

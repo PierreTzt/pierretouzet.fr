@@ -1,4 +1,21 @@
 ---
+/**
+ * LAYOUT PRINCIPAL — enveloppe chaque page du site.
+ *
+ * Contient :
+ *   - <head> complet (meta SEO, OG, Twitter card, favicons, hreflang, canonical)
+ *   - Schema.org JSON-LD (ProfilePage pour la home, BlogPosting pour les
+ *     articles, BreadcrumbList pour les pages internes)
+ *   - Navbar + Footer (communs)
+ *   - Scripts globaux (Vercel Analytics respectant DNT, theme toggle,
+ *     service worker, scroll-reveal, Konami code easter egg)
+ *   - ViewTransitions pour les animations inter-pages
+ *
+ * Chaque template (HomeTemplate, BlogArticleTemplate, etc.) utilise ce
+ * layout et lui passe title, description, lang, ogImage, breadcrumbs, article.
+ *
+ * Voir DEVELOPER_GUIDE.md §10.
+ */
 import { ViewTransitions } from 'astro:transitions';
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';

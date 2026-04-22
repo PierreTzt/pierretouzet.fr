@@ -1,3 +1,12 @@
+/**
+ * POST /api/generate-linkedin — génère un post LinkedIn via Claude.
+ *
+ * Reçoit { input, lang, format }, renvoie un post rédigé avec le ton
+ * de Pierre (anti-storytelling, direct, expert). Le contenu n'est PAS
+ * publié automatiquement : l'admin le copie-colle dans LinkedIn.
+ *
+ * Auth : obligatoire.
+ */
 import type { APIRoute } from 'astro';
 import Anthropic from '@anthropic-ai/sdk';
 import { isAuthenticated } from '../../utils/auth';

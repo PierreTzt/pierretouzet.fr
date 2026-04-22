@@ -1,3 +1,11 @@
+/**
+ * POST /api/generate-linkedin-banner — génère la bannière de profil LinkedIn.
+ *
+ * Format fixe 1584×396 (ratio LinkedIn cover). L'admin la télécharge puis
+ * l'upload manuellement sur LinkedIn. Pipeline dans utils/linkedin-visual.ts.
+ *
+ * Auth : obligatoire.
+ */
 import type { APIRoute } from 'astro';
 import { isAuthenticated } from '../../utils/auth';
 import { generateLinkedInBanner } from '../../utils/linkedin-visual';

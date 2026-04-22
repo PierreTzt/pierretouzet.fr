@@ -1,3 +1,12 @@
+/**
+ * POST /api/generate-linkedin-visual — génère l'image d'un post LinkedIn.
+ *
+ * Formats supportés : 1200×1200 (carré), 1080×1350 (portrait), 1200×627 (paysage).
+ * Image renvoyée en base64 dans le JSON de réponse ; pas de stockage serveur.
+ * Pipeline réel dans src/utils/linkedin-visual.ts (Satori + Sharp + Twemoji).
+ *
+ * Auth : obligatoire.
+ */
 import type { APIRoute } from 'astro';
 import { isAuthenticated } from '../../utils/auth';
 import { generateLinkedInVisual } from '../../utils/linkedin-visual';
