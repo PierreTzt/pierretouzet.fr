@@ -39,3 +39,10 @@ _bmad/
 _bmad-output/
 Profile.pdf
 .vercel
+
+# audit/perf artefacts (screenshots, traces)
+audit-screenshots/
+perf-audit/
+Capture d'*.png
+Capture d'*.jpg
+*.trace.json.gz
