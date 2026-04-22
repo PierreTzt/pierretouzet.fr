@@ -219,7 +219,7 @@ Certaines fonctionnalités (admin, génération de contenu) ont besoin de clés 
 ADMIN_PASSWORD=unMotDePasseCompliqué
 ANTHROPIC_API_KEY=sk-ant-...
 GITHUB_TOKEN=ghp_...
-GITHUB_REPO=PierreTzt/portfolio
+GITHUB_REPO=owner/repo-name
 ```
 
 En production, ces mêmes variables sont configurées dans le dashboard Vercel, pas dans le code.

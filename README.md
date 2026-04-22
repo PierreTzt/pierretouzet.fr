@@ -200,7 +200,7 @@ Copier `.env.example` vers `.env` et renseigner :
 | `ADMIN_PASSWORD`    | Mot de passe de l'espace admin (sert aussi de secret HMAC) | Pour `/admin/*`     |
 | `ANTHROPIC_API_KEY` | Clé API Claude pour la génération de contenu              | Pour génération IA  |
 | `GITHUB_TOKEN`      | PAT avec accès `repo` pour publier un article             | Pour `/api/publish` |
-| `GITHUB_REPO`       | Format `owner/name` (défaut : `PierreTzt/portfolio`)       | Pour `/api/publish` |
+| `GITHUB_REPO`       | Repo cible au format `owner/name`                          | Pour `/api/publish` |
 | `SENTRY_DSN`        | DSN Sentry (optionnel, décommenter dans `astro.config.mjs`) | Non                 |
 
 En production, ces variables sont configurées dans le dashboard Vercel — jamais committées.

@@ -83,9 +83,12 @@ export const POST: APIRoute = async ({ request, cookies }) => {
   const filePath = `src/content/blog/${slug}.md`;
 
   // Commit to GitHub via API
-  const repo = import.meta.env.GITHUB_REPO || 'PierreTzt/portfolio';
+  const repo = import.meta.env.GITHUB_REPO;
   const token = import.meta.env.GITHUB_TOKEN;
 
+  if (!repo) {
+    return new Response(JSON.stringify({ error: 'GITHUB_REPO non configuré' }), { status: 500 });
+  }
   if (!token) {
     return new Response(JSON.stringify({ error: 'GitHub token non configuré' }), { status: 500 });
   }

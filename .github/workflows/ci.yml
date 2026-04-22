@@ -72,7 +72,7 @@ jobs:
       ADMIN_PASSWORD: ci-build-placeholder
       ANTHROPIC_API_KEY: ci-build-placeholder
       GITHUB_TOKEN: ci-build-placeholder
-      GITHUB_REPO: PierreTzt/portfolio
+      GITHUB_REPO: ${{ github.repository }}
     steps:
       - uses: actions/checkout@v4
 
@@ -115,7 +115,7 @@ jobs:
           ADMIN_PASSWORD: ci-build-placeholder
           ANTHROPIC_API_KEY: ci-build-placeholder
           GITHUB_TOKEN: ci-build-placeholder
-          GITHUB_REPO: PierreTzt/portfolio
+          GITHUB_REPO: ${{ github.repository }}
         run: npm run build
 
       - name: Run Lighthouse CI
