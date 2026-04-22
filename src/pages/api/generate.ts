@@ -103,7 +103,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     return new Response(JSON.stringify(parsed), {
       headers: { 'Content-Type': 'application/json' },
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('[generate] Error:', err);
     return new Response(JSON.stringify({ error: 'Erreur lors de la génération' }), { status: 500 });
   }

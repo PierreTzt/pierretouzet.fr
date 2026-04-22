@@ -51,7 +51,7 @@ export async function generateOgImage(options: {
   date: string;
   lang: 'fr' | 'en';
 }): Promise<Buffer> {
-  const { title, tags, date, lang } = options;
+  const { title, tags, date } = options;
 
   const svg = await satori(
     {

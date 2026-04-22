@@ -1,11 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getData } from '../i18n/utils';
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
 interface Props {
   lang: 'fr' | 'en';
-  post: any;
+  post: CollectionEntry<'blog'>;
 }
 
 const { lang, post } = Astro.props;
@@ -100,7 +100,7 @@ const relatedPosts = allPosts
         >
         {
           post.data.updatedDate && (
-            <span class="text-zinc-400 dark:text-zinc-500">
+            <span class="text-zinc-500 dark:text-zinc-400">
               &middot; {updatedLabel}{' '}
               <time datetime={post.data.updatedDate.toISOString()}>
                 {post.data.updatedDate.toLocaleDateString(dateLocale, {
@@ -143,7 +143,7 @@ const relatedPosts = allPosts
         {
           prevPost ? (
             <a href={`/${lang}/blog/${prevPost.slug}/`} class="group flex flex-col gap-1 text-left">
-              <span class="text-caption font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+              <span class="text-caption font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
                 {lang === 'fr' ? '\u2190 Pr\u00e9c\u00e9dent' : '\u2190 Previous'}
               </span>
               <span class="text-sm text-zinc-600 dark:text-zinc-300 group-hover:text-accent-500 transition-colors">
@@ -160,7 +160,7 @@ const relatedPosts = allPosts
               href={`/${lang}/blog/${nextPost.slug}/`}
               class="group flex flex-col gap-1 text-right ml-auto"
             >
-              <span class="text-caption font-mono uppercase tracking-wider text-zinc-400 dark:text-zinc-500">
+              <span class="text-caption font-mono uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
                 {lang === 'fr' ? 'Suivant \u2192' : 'Next \u2192'}
               </span>
               <span class="text-sm text-zinc-600 dark:text-zinc-300 group-hover:text-accent-500 transition-colors">

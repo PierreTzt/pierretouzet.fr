@@ -59,7 +59,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
         'Content-Disposition': `inline; filename="linkedin-visual-${size}.png"`,
       },
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('[generate-linkedin-visual] Error:', err);
     return new Response(JSON.stringify({ error: 'Erreur lors de la génération du visuel' }), {
       status: 500,

@@ -1,3 +1,4 @@
+/* eslint-disable no-console -- CLI script used via npm run check:parity */
 import { data as frData } from '../data/fr';
 import { data as enData } from '../data/en';
 

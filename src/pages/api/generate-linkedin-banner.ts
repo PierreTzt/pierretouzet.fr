@@ -45,7 +45,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
         'Content-Disposition': 'inline; filename="linkedin-banner-1584x396.png"',
       },
     });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('[generate-linkedin-banner] Error:', err);
     return new Response(JSON.stringify({ error: 'Erreur lors de la génération de la bannière' }), {
       status: 500,

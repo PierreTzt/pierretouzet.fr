@@ -198,7 +198,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
         headers: { 'Content-Type': 'application/json' },
       },
     );
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error('[generate-linkedin] Error:', err);
     return new Response(JSON.stringify({ error: 'Erreur lors de la génération' }), { status: 500 });
   }

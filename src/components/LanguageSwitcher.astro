@@ -14,7 +14,7 @@ const targetPath = getLocalizedPath(Astro.url.pathname, targetLang);
 <a
   href={targetPath}
   aria-label={label}
-  class="font-mono text-xs uppercase tracking-wider text-zinc-500 dark:text-zinc-400 hover:text-accent-500 transition-colors duration-200 py-1 px-1"
+  class="font-mono text-xs uppercase tracking-wider text-zinc-500 dark:text-zinc-400 hover:text-accent-500 transition-colors duration-200 inline-flex items-center justify-center min-w-[24px] min-h-[24px] py-2 px-2"
 >
   {targetLang.toUpperCase()}
 </a>

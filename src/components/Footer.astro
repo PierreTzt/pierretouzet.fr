@@ -35,8 +35,8 @@ const iconPaths: Record<string, string> = {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label={link.label}
-              class="text-zinc-500 hover:text-accent-600 transition-colors duration-200"
+              aria-label={`${link.label} (${lang === 'fr' ? 'nouvel onglet' : 'opens in new tab'})`}
+              class="inline-flex items-center justify-center min-w-[24px] min-h-[24px] p-1 text-zinc-500 hover:text-accent-600 transition-colors duration-200"
             >
               <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                 <path d={iconPaths[link.icon] || ''} />
@@ -47,7 +47,7 @@ const iconPaths: Record<string, string> = {
         <a
           href={`mailto:${personal.email}`}
           aria-label={ui.contact.emailMe}
-          class="text-zinc-500 hover:text-accent-600 transition-colors duration-200"
+          class="inline-flex items-center justify-center min-w-[24px] min-h-[24px] p-1 text-zinc-500 hover:text-accent-600 transition-colors duration-200"
         >
           <svg
             class="w-4 h-4"

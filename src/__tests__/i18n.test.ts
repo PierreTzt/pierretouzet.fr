@@ -6,7 +6,6 @@ import {
   getData,
   getHreflangUrl,
 } from '../i18n/utils';
-import type { Lang } from '../i18n/utils';
 import { data as frData } from '../data/fr';
 import { data as enData } from '../data/en';
 

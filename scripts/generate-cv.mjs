@@ -1,3 +1,4 @@
+/* eslint-disable no-console -- CLI script used via npm run check:parity or direct node */
 import puppeteer from 'puppeteer';
 import { readFileSync } from 'fs';
 import { resolve, dirname } from 'path';

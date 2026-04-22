@@ -61,7 +61,8 @@ const data = getData(lang);
               id="contact-name"
               name="name"
               required
-              class="w-full px-4 py-3 text-sm bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 focus:border-accent-500 focus:outline-hidden transition-colors"
+              autocomplete="name"
+              class="w-full px-4 py-3 text-sm bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500 focus:border-accent-500 transition-colors"
             />
           </div>
           <div>
@@ -71,7 +72,8 @@ const data = getData(lang);
               id="contact-email"
               name="email"
               required
-              class="w-full px-4 py-3 text-sm bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 focus:border-accent-500 focus:outline-hidden transition-colors"
+              autocomplete="email"
+              class="w-full px-4 py-3 text-sm bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500 focus:border-accent-500 transition-colors"
             />
           </div>
         </div>
@@ -82,7 +84,7 @@ const data = getData(lang);
           <select
             id="contact-type"
             name="type"
-            class="w-full px-4 py-3 text-sm bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 focus:border-accent-500 focus:outline-hidden transition-colors"
+            class="w-full px-4 py-3 text-sm bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500 focus:border-accent-500 transition-colors"
           >
             <option value="consulting"
               >{lang === 'fr' ? 'Consulting / Mission' : 'Consulting / Mission'}</option
@@ -101,7 +103,7 @@ const data = getData(lang);
             name="message"
             rows={4}
             required
-            class="w-full px-4 py-3 text-sm bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 focus:border-accent-500 focus:outline-hidden transition-colors resize-y"
+            class="w-full px-4 py-3 text-sm bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-500 focus:border-accent-500 transition-colors resize-y"
           ></textarea>
         </div>
         <button
@@ -121,12 +123,18 @@ const data = getData(lang);
             ></path>
           </svg>
         </button>
-        <p id="contact-status" class="text-sm text-center hidden"></p>
+        <p
+          id="contact-status"
+          role="status"
+          aria-live="polite"
+          class="text-sm text-center min-h-[1.25rem]"
+        >
+        </p>
       </form>
 
       <!-- Fallback mailto -->
       <div class="scroll-reveal mb-12 text-center">
-        <p class="text-xs text-zinc-400 dark:text-zinc-500 mb-2">
+        <p class="text-xs text-zinc-500 dark:text-zinc-400 mb-2">
           {lang === 'fr' ? 'Ou directement par email :' : 'Or directly by email:'}
         </p>
         <a
@@ -135,14 +143,14 @@ const data = getData(lang);
         >
           {data.personal.email}
         </a>
-        <p class="text-xs text-zinc-400 dark:text-zinc-500 mt-4">
+        <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-4">
           {lang === 'fr' ? 'Je réponds sous 48h.' : 'I respond within 48 hours.'}
         </p>
       </div>
 
       <!-- Cal.com booking -->
       <div class="scroll-reveal mb-12 text-center" style="transition-delay: 40ms">
-        <p class="text-xs text-zinc-400 dark:text-zinc-500 mb-3">
+        <p class="text-xs text-zinc-500 dark:text-zinc-400 mb-3">
           {lang === 'fr' ? 'Ou réservez directement un créneau :' : 'Or book a slot directly:'}
         </p>
         <a
@@ -178,7 +186,8 @@ const data = getData(lang);
           const recipient = form.dataset.email;
           if (!recipient) return;
           btn.disabled = true;
-          btn.textContent = '...';
+          btn.setAttribute('aria-busy', 'true');
+          btn.textContent = document.documentElement.lang === 'fr' ? 'Envoi en cours…' : 'Sending…';
           try {
             const data = new FormData(form);
             const body = Object.fromEntries(data.entries());
@@ -206,7 +215,7 @@ const data = getData(lang);
                 ? 'Redirection vers votre client email...'
                 : 'Redirecting to your email client...';
             status.className = 'text-sm text-center text-accent-500';
-          } catch (err) {
+          } catch {
             status.textContent =
               document.documentElement.lang === 'fr'
                 ? 'Erreur. Utilisez le lien email ci-dessous.'
@@ -214,6 +223,7 @@ const data = getData(lang);
             status.className = 'text-sm text-center text-red-500';
           }
           btn.disabled = false;
+          btn.removeAttribute('aria-busy');
           btn.textContent = document.documentElement.lang === 'fr' ? 'Envoyer' : 'Send';
         });
       </script>
