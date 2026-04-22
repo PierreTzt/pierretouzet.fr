@@ -46,3 +46,6 @@ perf-audit/
 Capture d'*.png
 Capture d'*.jpg
 *.trace.json.gz
+
+# Confidential strategic docs (kept locally at ../cv-confidentiel/)
+docs/audits/
