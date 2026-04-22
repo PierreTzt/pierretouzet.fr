@@ -12,10 +12,14 @@ const data = getData(lang);
 const legalSlug = lang === 'fr' ? 'mentions-legales' : 'legal';
 const privacySlug = lang === 'fr' ? 'politique-confidentialite' : 'privacy-policy';
 
-// À remplir par Pierre — placeholder visible tant qu'il n'est pas renseigné
-const SIREN = 'À renseigner';
-const LEGAL_STATUS_FR = 'Entrepreneur individuel (micro-entreprise)';
-const LEGAL_STATUS_EN = 'Sole proprietor (micro-enterprise)';
+const SIREN = '514 206 002';
+const SIRET = '514 206 002 00032';
+const APE = '62.01Z';
+const CREATION_DATE = '01/08/2009';
+const LEGAL_STATUS_FR = 'Entrepreneur individuel (régime micro-entreprise)';
+const LEGAL_STATUS_EN = 'Sole proprietor (micro-enterprise regime)';
+const APE_LABEL_FR = 'Programmation informatique';
+const APE_LABEL_EN = 'Computer programming';
 
 const i18n = lang === 'fr'
   ? {
@@ -25,6 +29,9 @@ const i18n = lang === 'fr'
       publisher: 'Éditeur du site',
       statusLabel: 'Statut : ',
       sirenLabel: 'SIREN : ',
+      siretLabel: 'SIRET : ',
+      apeLabel: 'Code APE : ',
+      creationLabel: "Date d'immatriculation : ",
       directorLabel: 'Directeur de la publication : ',
       emailLabel: 'Email : ',
       hosting: 'Hébergement',
@@ -50,6 +57,9 @@ const i18n = lang === 'fr'
       publisher: 'Site publisher',
       statusLabel: 'Status: ',
       sirenLabel: 'SIREN: ',
+      siretLabel: 'SIRET: ',
+      apeLabel: 'APE code: ',
+      creationLabel: 'Registration date: ',
       directorLabel: 'Publication director: ',
       emailLabel: 'Email: ',
       hosting: 'Hosting',
@@ -94,6 +104,9 @@ const i18n = lang === 'fr'
             {data.personal.location}<br />
             {i18n.statusLabel}{lang === 'fr' ? LEGAL_STATUS_FR : LEGAL_STATUS_EN}<br />
             {i18n.sirenLabel}{SIREN}<br />
+            {i18n.siretLabel}{SIRET}<br />
+            {i18n.apeLabel}{APE} — {lang === 'fr' ? APE_LABEL_FR : APE_LABEL_EN}<br />
+            {i18n.creationLabel}{CREATION_DATE}<br />
             {i18n.directorLabel}{data.personal.name}<br />
             {i18n.emailLabel}<a href={`mailto:${data.personal.email}`} class="text-accent-500 hover:underline">{data.personal.email}</a>
           </p>

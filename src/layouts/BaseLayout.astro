@@ -194,8 +194,16 @@ const schemaOrg = isHomePage ? {
     <script>
       import { inject } from '@vercel/analytics';
       import { injectSpeedInsights } from '@vercel/speed-insights';
-      inject();
-      injectSpeedInsights();
+      // Respect Do Not Track (CNIL recommendation — not strictly required as
+      // Vercel Analytics is cookie-free and exempted, but honours user signal).
+      const dnt =
+        navigator.doNotTrack === '1' ||
+        (window as unknown as { doNotTrack?: string }).doNotTrack === '1' ||
+        (navigator as unknown as { msDoNotTrack?: string }).msDoNotTrack === '1';
+      if (!dnt) {
+        inject();
+        injectSpeedInsights();
+      }
     </script>
     <script is:inline>
       (function () {

@@ -36,7 +36,7 @@ const data = getData(lang);
       </p>
 
       <!-- Contact form -->
-      <form class="scroll-reveal mb-12 space-y-4" id="contact-form">
+      <form class="scroll-reveal mb-12 space-y-4" id="contact-form" data-email={data.personal.email}>
         <div class="grid md:grid-cols-2 gap-4">
           <div>
             <label for="contact-name" class="mono-label mb-1 block">{lang === 'fr' ? 'Nom' : 'Name'}</label>
@@ -110,6 +110,8 @@ const data = getData(lang);
           const form = e.target;
           const status = document.getElementById('contact-status');
           const btn = form.querySelector('button[type="submit"]');
+          const recipient = form.dataset.email;
+          if (!recipient) return;
           btn.disabled = true;
           btn.textContent = '...';
           try {
@@ -118,7 +120,7 @@ const data = getData(lang);
             // Send via mailto fallback (no backend needed)
             const subject = encodeURIComponent(body.type + ': ' + body.name);
             const mailBody = encodeURIComponent('Nom: ' + body.name + '\nEmail: ' + body.email + '\nType: ' + body.type + '\n\n' + body.message);
-            window.location.href = 'mailto:pierre.touzet@mecontacter.eu?subject=' + subject + '&body=' + mailBody;
+            window.location.href = 'mailto:' + encodeURIComponent(recipient) + '?subject=' + subject + '&body=' + mailBody;
             status.textContent = document.documentElement.lang === 'fr' ? 'Redirection vers votre client email...' : 'Redirecting to your email client...';
             status.className = 'text-sm text-center text-accent-500';
           } catch (err) {
