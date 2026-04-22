@@ -71,8 +71,8 @@ Prérequis : **Node.js 20+** et **npm**.
 
 ```bash
 # Cloner
-git clone https://github.com/PierreTzt/portfolio.git
-cd portfolio
+git clone https://github.com/PierreTzt/pierretouzet.fr.git
+cd pierretouzet.fr
 
 # Installer
 npm install
