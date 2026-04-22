@@ -55,12 +55,20 @@ const iconPaths: Record<string, string> = {
         <p class="text-caption italic text-zinc-500 dark:text-zinc-400 mb-2">{randomFact.emoji} {randomFact.text}</p>
         <p>&copy; {year} {ui.footer.rights}</p>
         <p class="mt-1">{ui.footer.builtWith}</p>
-        <a
-          href={lang === 'fr' ? '/fr/mentions-legales/' : '/en/legal/'}
-          class="mt-1 inline-block hover:text-accent-500 transition-colors duration-200"
-        >
-          {ui.footer.legal}
-        </a>
+        <div class="mt-1 flex flex-col items-end gap-0.5">
+          <a
+            href={lang === 'fr' ? '/fr/mentions-legales/' : '/en/legal/'}
+            class="hover:text-accent-500 transition-colors duration-200"
+          >
+            {ui.footer.legal}
+          </a>
+          <a
+            href={lang === 'fr' ? '/fr/politique-confidentialite/' : '/en/privacy-policy/'}
+            class="hover:text-accent-500 transition-colors duration-200"
+          >
+            {ui.footer.privacy}
+          </a>
+        </div>
       </div>
     </div>
   </div>

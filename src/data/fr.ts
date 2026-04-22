@@ -599,6 +599,7 @@ export const data: SiteData = {
       rights: 'Tous droits réservés.',
       builtWith: 'Fait main avec Astro, Tailwind & pas mal de café',
       legal: 'Mentions légales',
+      privacy: 'Politique de confidentialité',
     },
     notFound: {
       title: 'Page introuvable',

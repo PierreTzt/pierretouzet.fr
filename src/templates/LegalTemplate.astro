@@ -10,6 +10,12 @@ const { lang } = Astro.props;
 const data = getData(lang);
 
 const legalSlug = lang === 'fr' ? 'mentions-legales' : 'legal';
+const privacySlug = lang === 'fr' ? 'politique-confidentialite' : 'privacy-policy';
+
+// À remplir par Pierre — placeholder visible tant qu'il n'est pas renseigné
+const SIREN = 'À renseigner';
+const LEGAL_STATUS_FR = 'Entrepreneur individuel (micro-entreprise)';
+const LEGAL_STATUS_EN = 'Sole proprietor (micro-enterprise)';
 
 const i18n = lang === 'fr'
   ? {
@@ -17,14 +23,19 @@ const i18n = lang === 'fr'
       pageDescription: 'Mentions légales du site pierretouzet.fr',
       heading: 'Mentions légales',
       publisher: 'Éditeur du site',
+      statusLabel: 'Statut : ',
+      sirenLabel: 'SIREN : ',
+      directorLabel: 'Directeur de la publication : ',
       emailLabel: 'Email : ',
       hosting: 'Hébergement',
       hostingCountry: 'États-Unis',
       ip: 'Propriété intellectuelle',
       ipText: `L'ensemble du contenu de ce site (textes, images, graphismes, logo, icônes) est la propriété exclusive de ${data.personal.name}, sauf mention contraire. Toute reproduction, distribution, modification ou utilisation de ces contenus sans autorisation préalable est strictement interdite.`,
       gdpr: 'Données personnelles & RGPD',
-      gdprText1: "Ce site ne collecte aucune donnée personnelle. Aucun cookie n'est déposé. Les statistiques de fréquentation et les mesures de performance (Core Web Vitals) sont anonymes et réalisées via Vercel Analytics et Vercel Speed Insights, des outils conformes au RGPD qui ne nécessitent pas de consentement.",
-      gdprText2: `Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour exercer ces droits, contactez : `,
+      gdprSummary: 'Ce site collecte un minimum de données personnelles : mesures d\'audience agrégées (Vercel Analytics, Vercel Speed Insights — sans cookie, sans identifiant persistant) et, le cas échéant, les informations que vous saisissez volontairement dans le formulaire de contact. Un cookie technique (`admin-auth`) existe uniquement pour l\'espace d\'administration éditeur et ne concerne pas les visiteurs.',
+      gdprDetails: 'Le détail des traitements, des bases légales, des durées de conservation, des sous-traitants (Vercel, GitHub, Anthropic) et des transferts hors UE est disponible dans la ',
+      gdprDetailsLink: 'politique de confidentialité',
+      gdprRights: 'Conformément au Règlement Général sur la Protection des Données (RGPD) et à la loi Informatique et Libertés, vous disposez d\'un droit d\'accès, de rectification, d\'effacement, de limitation et d\'opposition sur vos données. Vous disposez également d\'un droit d\'introduire une réclamation auprès de la CNIL. Pour exercer ces droits, contactez : ',
       liability: 'Responsabilité',
       liabilityText: "L'éditeur ne saurait être tenu responsable des erreurs, d'une absence de disponibilité des informations ou de la présence de virus sur ce site. Les liens hypertextes vers d'autres sites ne constituent pas une approbation de leur contenu.",
       credits: 'Crédits',
@@ -37,14 +48,19 @@ const i18n = lang === 'fr'
       pageDescription: 'Legal notice for pierretouzet.fr',
       heading: 'Legal notice',
       publisher: 'Site publisher',
+      statusLabel: 'Status: ',
+      sirenLabel: 'SIREN: ',
+      directorLabel: 'Publication director: ',
       emailLabel: 'Email: ',
       hosting: 'Hosting',
       hostingCountry: 'United States',
       ip: 'Intellectual property',
       ipText: `All content on this site (text, images, graphics, logo, icons) is the exclusive property of ${data.personal.name}, unless otherwise stated. Any reproduction, distribution, modification or use of this content without prior authorization is strictly prohibited.`,
       gdpr: 'Personal data & GDPR',
-      gdprText1: 'This site does not collect any personal data. No cookies are used. Traffic analytics and performance measurements (Core Web Vitals) are anonymous and provided by Vercel Analytics and Vercel Speed Insights, GDPR-compliant tools that do not require consent.',
-      gdprText2: 'In accordance with the General Data Protection Regulation (GDPR), you have the right to access, rectify and delete your data. To exercise these rights, contact: ',
+      gdprSummary: 'This site collects minimal personal data: aggregated audience metrics (Vercel Analytics, Vercel Speed Insights — no cookie, no persistent identifier) and, where applicable, the information you voluntarily submit through the contact form. A technical cookie (`admin-auth`) exists only for the editor admin area and does not apply to visitors.',
+      gdprDetails: 'Full details about processing activities, legal bases, retention periods, subprocessors (Vercel, GitHub, Anthropic), and transfers outside the EU are available in the ',
+      gdprDetailsLink: 'privacy policy',
+      gdprRights: 'Under the General Data Protection Regulation (GDPR) and the French Data Protection Act, you have the right to access, rectify, erase, restrict and object to the processing of your personal data. You also have the right to lodge a complaint with the CNIL (French data protection authority). To exercise these rights, contact: ',
       liability: 'Liability',
       liabilityText: 'The publisher cannot be held responsible for errors, unavailability of information or the presence of viruses on this site. Hyperlinks to other sites do not constitute an endorsement of their content.',
       credits: 'Credits',
@@ -76,6 +92,9 @@ const i18n = lang === 'fr'
             {data.personal.name}<br />
             {data.personal.title}<br />
             {data.personal.location}<br />
+            {i18n.statusLabel}{lang === 'fr' ? LEGAL_STATUS_FR : LEGAL_STATUS_EN}<br />
+            {i18n.sirenLabel}{SIREN}<br />
+            {i18n.directorLabel}{data.personal.name}<br />
             {i18n.emailLabel}<a href={`mailto:${data.personal.email}`} class="text-accent-500 hover:underline">{data.personal.email}</a>
           </p>
         </div>
@@ -96,9 +115,12 @@ const i18n = lang === 'fr'
 
         <div>
           <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-3">{i18n.gdpr}</h2>
-          <p>{i18n.gdprText1}</p>
+          <p>{i18n.gdprSummary}</p>
           <p class="mt-3">
-            {i18n.gdprText2}<a href={`mailto:${data.personal.email}`} class="text-accent-500 hover:underline">{data.personal.email}</a>.
+            {i18n.gdprDetails}<a href={`/${lang}/${privacySlug}/`} class="text-accent-500 hover:underline">{i18n.gdprDetailsLink}</a>.
+          </p>
+          <p class="mt-3">
+            {i18n.gdprRights}<a href={`mailto:${data.personal.email}`} class="text-accent-500 hover:underline">{data.personal.email}</a>.
           </p>
         </div>
 

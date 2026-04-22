@@ -25,6 +25,16 @@ const data = getData(lang);
     <div class="max-w-3xl mx-auto">
       <SectionHeader title={data.ui.contact.title} subtitle={data.ui.contact.subtitle} number="01" as="h1" />
 
+      <p class="scroll-reveal text-xs text-zinc-500 dark:text-zinc-400 mb-6 leading-relaxed">
+        {lang === 'fr'
+          ? 'Ce formulaire ouvre votre client email pour envoyer le message — aucune donnée n\'est stockée sur le site.'
+          : "This form opens your email client to send the message — no data is stored on the site."}
+        {' '}
+        <a href={lang === 'fr' ? '/fr/politique-confidentialite/' : '/en/privacy-policy/'} class="text-accent-500 hover:underline">
+          {lang === 'fr' ? 'Politique de confidentialité' : 'Privacy policy'}
+        </a>.
+      </p>
+
       <!-- Contact form -->
       <form class="scroll-reveal mb-12 space-y-4" id="contact-form">
         <div class="grid md:grid-cols-2 gap-4">

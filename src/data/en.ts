@@ -599,6 +599,7 @@ export const data: SiteData = {
       rights: 'All rights reserved.',
       builtWith: 'Handcrafted with Astro, Tailwind & a lot of coffee',
       legal: 'Legal notice',
+      privacy: 'Privacy policy',
     },
     notFound: {
       title: 'Page Not Found',
