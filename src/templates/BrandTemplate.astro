@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getData } from '../i18n/utils';
 import ManifestoSection from '../components/brand/ManifestoSection.astro';
+import PaletteSection from '../components/brand/PaletteSection.astro';
 
 interface Props {
   lang: 'fr' | 'en';
@@ -23,5 +24,6 @@ const { brand } = data;
 >
   <main class="brand-page">
     <ManifestoSection manifesto={brand.manifesto} />
+    <PaletteSection palette={brand.palette} copyFeedback={brand.copyFeedback} />
   </main>
 </BaseLayout>
