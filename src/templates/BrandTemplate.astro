@@ -4,6 +4,7 @@ import { getData } from '../i18n/utils';
 import ManifestoSection from '../components/brand/ManifestoSection.astro';
 import PaletteSection from '../components/brand/PaletteSection.astro';
 import TypographySection from '../components/brand/TypographySection.astro';
+import VoiceSection from '../components/brand/VoiceSection.astro';
 
 interface Props {
   lang: 'fr' | 'en';
@@ -27,5 +28,6 @@ const { brand } = data;
     <ManifestoSection manifesto={brand.manifesto} />
     <PaletteSection palette={brand.palette} copyFeedback={brand.copyFeedback} />
     <TypographySection typography={brand.typography} />
+    <VoiceSection voice={brand.voice} />
   </main>
 </BaseLayout>
