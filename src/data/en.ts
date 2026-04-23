@@ -727,4 +727,197 @@ export const data: SiteData = {
     switchLang: 'Passer en français',
     toggleTheme: 'Toggle theme',
   },
+  brand: {
+    meta: {
+      title: 'Brand',
+      description:
+        'Visual and editorial identity of pierretouzet.fr — palette, typography, voice, and motion.',
+      heroLabel: 'Brandbook',
+    },
+    copyFeedback: 'Copied',
+    manifesto: {
+      eyebrow: '01 — Manifesto',
+      headline: 'Instructional design and code. Intent before the tool.',
+      paragraphs: [
+        'I design learning experiences and I build them. The two disciplines answer each other: no pedagogy without understanding the system, no interface without intention.',
+        'Every pixel, every word, every interaction is there for a reason. No gratuitous ornament. No complexity for effect.',
+        'Direct. No forced narrative. Expertise reads in the choices, not in the stories one tells.',
+      ],
+    },
+    palette: {
+      eyebrow: '02 — Palette',
+      heading: 'Eight tokens, one intent per use.',
+      intro:
+        'The palette is deliberately narrow. Indigo accent carries action, zinc neutrals carry reading, electric nuances the gradients. Click a swatch to copy its value.',
+      tokens: [
+        {
+          name: 'Accent',
+          hex: '#4f46e5',
+          tailwindClass: 'bg-accent-500',
+          usage: 'Primary action, focus, selection',
+        },
+        {
+          name: 'Accent Deep',
+          hex: '#3730a3',
+          tailwindClass: 'bg-accent-700',
+          usage: 'Hover states, deep backgrounds',
+        },
+        {
+          name: 'Accent Light',
+          hex: '#a5b4fc',
+          tailwindClass: 'bg-accent-300',
+          usage: 'Light accents, borders, pale fills',
+        },
+        {
+          name: 'Electric',
+          hex: '#818cf8',
+          tailwindClass: 'bg-electric-500',
+          usage: 'Secondary accent, gradients',
+        },
+        {
+          name: 'Zinc 50',
+          hex: '#fafafa',
+          tailwindClass: 'bg-zinc-50',
+          usage: 'Light background',
+        },
+        {
+          name: 'Zinc 900',
+          hex: '#18181b',
+          tailwindClass: 'bg-zinc-900',
+          usage: 'Dark surface',
+          onDark: true,
+        },
+        {
+          name: 'Zinc 950',
+          hex: '#09090b',
+          tailwindClass: 'bg-zinc-950',
+          usage: 'Dark background',
+          onDark: true,
+        },
+        {
+          name: 'Selection',
+          hex: '#4f46e5',
+          displayValue: '#4f46e5 @ 30%',
+          tailwindClass: '::selection',
+          usage: 'Text selection (accent-500/30)',
+        },
+      ],
+    },
+    typography: {
+      eyebrow: '03 — Typography',
+      heading: 'Sora to strike. Inter to read.',
+      intro:
+        'Two variable families, two complementary roles. Sora structures impact; Inter carries reading.',
+      pairings: [
+        {
+          family: 'Sora',
+          role: 'Display, headlines',
+          specimenText: 'Pierre Touzet',
+          weights: 'Regular 400 / Semibold 600 / Bold 700',
+          tailwindClass: 'font-display',
+        },
+        {
+          family: 'Inter',
+          role: 'Body, UI',
+          specimenText:
+            'I design learning experiences and I build them. The two disciplines answer each other.',
+          weights: 'Regular 400 / Medium 500',
+          tailwindClass: 'font-sans',
+        },
+      ],
+      scaleHeading: 'Fluid type scale',
+      scale: [
+        {
+          token: '--text-display',
+          label: 'Display',
+          example: 'Intent',
+          tailwindClass: 'text-display',
+        },
+        {
+          token: '--text-heading',
+          label: 'Heading',
+          example: 'One section, one idea.',
+          tailwindClass: 'text-heading',
+        },
+        {
+          token: '--text-subheading',
+          label: 'Subheading',
+          example: 'Frames the point without stealing the show.',
+          tailwindClass: 'text-subheading',
+        },
+        {
+          token: '--text-caption',
+          label: 'Caption',
+          example: 'MONO-LABEL — 11PX UPPERCASE',
+          tailwindClass: 'text-caption',
+        },
+      ],
+    },
+    voice: {
+      eyebrow: '04 — Voice & tone',
+      heading: 'Three rules, one stance.',
+      intro: 'Show the work, skip the story.',
+      principles: [
+        {
+          title: 'Direct',
+          description: 'Subject, verb, evidence. No padding.',
+        },
+        {
+          title: 'No forced narrative',
+          description:
+            'No "I woke up one morning…", no cliffhangers, no performative vulnerability.',
+        },
+        {
+          title: 'Implicit expertise',
+          description: 'I show what I know by doing, not by claiming to be an expert.',
+        },
+      ],
+      doLabel: '✓ We write',
+      dontLabel: '✗ We don’t write',
+      doDont: [
+        {
+          do: '"We shipped X in 6 weeks. Here’s the demo."',
+          dont: '"It was an incredible journey with a team of heroes…"',
+        },
+        {
+          do: '"The feature didn’t work. We rebuilt the auth."',
+          dont: '"Facing adversity, I learned to pivot…"',
+        },
+        {
+          do: '"Here’s the code. Here’s the result. Here’s what’s left."',
+          dont: '"Let me tell you a story about a developer who…"',
+        },
+        {
+          do: '"This technical choice costs X hours. It’s worth Y."',
+          dont: '"This project changed my vision of development."',
+        },
+      ],
+    },
+    motion: {
+      eyebrow: '05 — Motion & motifs',
+      heading: 'Content arrives, it doesn’t flail.',
+      intro: 'Three principles, each embodied by the section itself.',
+      principles: [
+        {
+          title: 'Scroll reveal',
+          description:
+            'Soft 0.6s appearance, cubic-bezier(0.22, 1, 0.36, 1) easing. Neutralized under prefers-reduced-motion.',
+          utilityClass: 'animate-reveal / scroll-reveal',
+        },
+        {
+          title: 'Hover glow',
+          description: 'Subtle radial halo that follows the cursor. Quiet feedback, never loud.',
+          utilityClass: 'glow-hover',
+        },
+        {
+          title: 'Dark-mode grain',
+          description:
+            'Static SVG texture at 3% opacity, applied via body::before in dark mode only.',
+          utilityClass: 'body::before (dark)',
+        },
+      ],
+      motifsHeading: 'Live motifs',
+      motifsHint: 'Hover to see →',
+    },
+  },
 };
