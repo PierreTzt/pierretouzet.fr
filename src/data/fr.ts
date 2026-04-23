@@ -637,6 +637,7 @@ export const data: SiteData = {
       builtWith: 'Fait main avec Astro, Tailwind & pas mal de café',
       legal: 'Mentions légales',
       privacy: 'Politique de confidentialité',
+      brand: 'Brand',
     },
     notFound: {
       title: 'Page introuvable',

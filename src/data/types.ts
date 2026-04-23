@@ -147,6 +147,7 @@ export interface UITranslations {
     builtWith: string;
     legal: string;
     privacy: string;
+    brand: string;
   };
   notFound: {
     title: string;

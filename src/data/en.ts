@@ -630,6 +630,7 @@ export const data: SiteData = {
       builtWith: 'Handcrafted with Astro, Tailwind & a lot of coffee',
       legal: 'Legal notice',
       privacy: 'Privacy policy',
+      brand: 'Brand',
     },
     notFound: {
       title: 'Page Not Found',
