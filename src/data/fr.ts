@@ -731,6 +731,7 @@ export const data: SiteData = {
       clusterCountProjects: '{n} projets',
       clusterCountSites: '{n} sites',
     },
+    viewBrandbook: 'Voir le brandbook',
     education: 'Formation',
     scrollToTop: 'Remonter en haut',
     skipToContent: 'Aller au contenu',

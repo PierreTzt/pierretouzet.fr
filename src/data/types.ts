@@ -223,6 +223,7 @@ export interface UITranslations {
     clusterCountProjects: string;
     clusterCountSites: string;
   };
+  viewBrandbook: string;
   education: string;
   scrollToTop: string;
   skipToContent: string;

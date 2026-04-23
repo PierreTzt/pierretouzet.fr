@@ -722,6 +722,7 @@ export const data: SiteData = {
       clusterCountProjects: '{n} projects',
       clusterCountSites: '{n} sites',
     },
+    viewBrandbook: 'View the brandbook',
     education: 'Education',
     scrollToTop: 'Scroll to top',
     skipToContent: 'Skip to content',
