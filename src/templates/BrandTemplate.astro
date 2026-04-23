@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getData } from '../i18n/utils';
+import ManifestoSection from '../components/brand/ManifestoSection.astro';
+
+interface Props {
+  lang: 'fr' | 'en';
+}
+
+const { lang } = Astro.props;
+const data = getData(lang);
+const { brand } = data;
+---
+
+<BaseLayout
+  title={`${brand.meta.title} — ${data.personal.name}`}
+  description={brand.meta.description}
+  lang={lang}
+  breadcrumbs={[
+    { name: data.ui.nav.home, url: `/${lang}/` },
+    { name: brand.meta.title, url: `/${lang}/brand/` },
+  ]}
+>
+  <main class="brand-page">
+    <ManifestoSection manifesto={brand.manifesto} />
+  </main>
+</BaseLayout>
