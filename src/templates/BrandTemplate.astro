@@ -5,6 +5,7 @@ import ManifestoSection from '../components/brand/ManifestoSection.astro';
 import PaletteSection from '../components/brand/PaletteSection.astro';
 import TypographySection from '../components/brand/TypographySection.astro';
 import VoiceSection from '../components/brand/VoiceSection.astro';
+import MotionSection from '../components/brand/MotionSection.astro';
 
 interface Props {
   lang: 'fr' | 'en';
@@ -29,5 +30,6 @@ const { brand } = data;
     <PaletteSection palette={brand.palette} copyFeedback={brand.copyFeedback} />
     <TypographySection typography={brand.typography} />
     <VoiceSection voice={brand.voice} />
+    <MotionSection motion={brand.motion} />
   </main>
 </BaseLayout>
