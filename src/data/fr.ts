@@ -312,6 +312,108 @@ export const data: SiteData = {
         { label: 'Statut', value: 'Terminé' },
       ],
     },
+    {
+      id: 'esport-tycoon',
+      slug: 'esport-tycoon',
+      title: 'Esport Tycoon',
+      shortDescription:
+        "Jeu de gestion idle « de la chambre au mondial » : recruter, entraîner et faire grimper une organisation esport. Publié et maintenu sur l'App Store.",
+      longDescription:
+        "Un jeu mobile de gestion où l'on bâtit une organisation esport de zéro : recrutement et entraînement de joueurs, tournois, ligues saisonnières avec montée/relégation, classements mondiaux et progression idle. Conçu, développé et publié seul sur l'App Store, puis maintenu en continu. Pour moi, un terrain d'application grandeur nature des mécaniques de progression et de motivation que j'utilise en ingénierie pédagogique.",
+      technologies: [
+        'iOS',
+        'Game design',
+        'Systèmes de progression',
+        'Live ops',
+        'Sauvegardes cloud',
+        'Achats intégrés',
+      ],
+      imageAlt: "Capture d'écran du jeu Esport Tycoon",
+      demoUrl: 'https://apps.apple.com/app/esport-tycoon/id6772518711',
+      featured: false,
+      status: 'active',
+      period: "2026 — Aujourd'hui",
+      metrics: [
+        { label: 'Plateforme', value: 'App Store' },
+        { label: 'Mises à jour', value: 'Continues' },
+        { label: 'Genre', value: 'Gestion idle' },
+      ],
+      story:
+        "J'ai voulu vérifier si je pouvais concevoir et publier seul un vrai jeu, pas un prototype. Esport Tycoon est parti d'une fascination pour les boucles de progression : qu'est-ce qui donne envie de revenir, de progresser, de viser le palier suivant ? Ce sont exactement les questions que je me pose en ingénierie pédagogique. J'ai donc traité le jeu comme un laboratoire : concevoir un système de motivation, le mettre entre les mains de vrais joueurs, observer, ajuster. Le résultat est en ligne sur l'App Store et je le fais évoluer en continu.",
+      features: [
+        {
+          title: 'Progression & mastery',
+          description:
+            "Recrutement, entraînement et fusion de joueurs, montée en puissance de l'organisation, de la chambre au niveau mondial. Le cœur du jeu est un système de progression à long terme.",
+        },
+        {
+          title: 'Ligues & compétition',
+          description:
+            'Tournois à élimination directe, ligues saisonnières avec montée/relégation et classements mondiaux. Des objectifs renouvelés pour entretenir la motivation.',
+        },
+        {
+          title: 'Progression idle',
+          description:
+            'Les gains continuent hors ligne. Une boucle de rétention pensée pour le retour quotidien, sans frustration.',
+        },
+        {
+          title: 'Publié et maintenu',
+          description:
+            "Conçu, développé et mis en ligne seul sur l'App Store, puis maintenu avec des mises à jour régulières. Un produit vivant, pas une démo.",
+        },
+      ],
+    },
+    {
+      id: 'glyfo',
+      slug: 'glyfo',
+      title: 'Glyfo',
+      shortDescription:
+        'Le jeu de mots du jour : une grille quotidienne partagée par tous, des streaks et un classement. Disponible sur iOS et Android.',
+      longDescription:
+        "Un jeu de mots quotidien : tout le monde joue la même grille chaque jour, on relie les lettres voisines pour former des mots et grimper au classement. Streaks, statistiques et records personnels entretiennent la régularité. Côté pédagogie, c'est la grammaire même du microlearning : une pratique courte, quotidienne et mesurée — la régularité plutôt que l'intensité.",
+      technologies: [
+        'iOS',
+        'Android',
+        'Web',
+        'Contenu quotidien',
+        'Classements',
+        "Design d'habitude",
+      ],
+      imageAlt: 'Grille du jeu de mots Glyfo',
+      demoUrl: 'https://pierretzt.github.io/glyfo/',
+      featured: false,
+      status: 'active',
+      period: "2026 — Aujourd'hui",
+      metrics: [
+        { label: 'Plateformes', value: 'iOS · Android' },
+        { label: 'Rythme', value: 'Une grille / jour' },
+        { label: 'Langues', value: 'FR · EN' },
+      ],
+      story:
+        "Glyfo est né d'une conviction que je défends en formation : la régularité bat l'intensité. Une grille par jour, la même pour tout le monde, jouable en quelques minutes — et un streak qui récompense le fait de revenir. C'est exactement le ressort des meilleures apps d'apprentissage (pratique quotidienne, habitude, feedback immédiat), appliqué à un jeu de mots. Je l'ai conçu pour être juste : tout le monde affronte la même grille, donc les scores sont comparables.",
+      features: [
+        {
+          title: 'Une grille pour tous, chaque jour',
+          description:
+            "La même grille quotidienne pour tous les joueurs : des scores comparables et un rituel partagé. Le cœur du design d'habitude.",
+        },
+        {
+          title: 'Streaks & régularité',
+          description:
+            "Le suivi de série récompense la pratique quotidienne — le même levier que les apps d'apprentissage pour ancrer une habitude.",
+        },
+        {
+          title: 'Stats & records',
+          description:
+            'Statistiques et records personnels pour visualiser sa progression dans le temps et entretenir la motivation.',
+        },
+        {
+          title: 'Sans friction',
+          description:
+            "Pas de compte, pas d'email. On ouvre, on joue. L'accessibilité au service de la régularité.",
+        },
+      ],
+    },
   ],
   studioSites: [
     {
@@ -369,6 +471,16 @@ export const data: SiteData = {
         { kind: 'external', siteSlug: 'cahier-bleu' },
         { kind: 'external', siteSlug: 'memoire-gardee' },
         { kind: 'external', siteSlug: 'maison-veillance' },
+      ],
+    },
+    {
+      id: 'games-engagement',
+      title: "Jeux & design d'engagement",
+      description:
+        "Deux jeux mobiles publiés, conçus comme un laboratoire des mécaniques d'engagement, de progression et d'habitude — les mêmes leviers que j'applique à l'apprentissage.",
+      entries: [
+        { kind: 'project', projectSlug: 'esport-tycoon' },
+        { kind: 'project', projectSlug: 'glyfo' },
       ],
     },
     {

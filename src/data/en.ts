@@ -312,6 +312,101 @@ export const data: SiteData = {
         { label: 'Status', value: 'Completed' },
       ],
     },
+    {
+      id: 'esport-tycoon',
+      slug: 'esport-tycoon',
+      title: 'Esport Tycoon',
+      shortDescription:
+        'Idle management game, "from bedroom to worldwide": recruit, train and grow an esports organization. Shipped and maintained on the App Store.',
+      longDescription:
+        'A mobile management game where you build an esports organization from scratch: recruiting and training players, tournaments, seasonal leagues with promotion and relegation, global leaderboards and idle progression. Designed, built and published solo on the App Store, then maintained continuously. For me, a real-world testbed for the progression and motivation mechanics I use in instructional design.',
+      technologies: [
+        'iOS',
+        'Game design',
+        'Progression systems',
+        'Live ops',
+        'Cloud saves',
+        'In-app purchases',
+      ],
+      imageAlt: 'Screenshot of the Esport Tycoon game',
+      demoUrl: 'https://apps.apple.com/app/esport-tycoon/id6772518711',
+      featured: false,
+      status: 'active',
+      period: '2026 — Present',
+      metrics: [
+        { label: 'Platform', value: 'App Store' },
+        { label: 'Updates', value: 'Ongoing' },
+        { label: 'Genre', value: 'Idle management' },
+      ],
+      story:
+        "I wanted to find out whether I could design and ship a real game on my own — not a prototype. Esport Tycoon started from a fascination with progression loops: what makes you want to come back, improve, reach the next tier? Those are exactly the questions I ask in instructional design. So I treated the game as a lab: design a motivation system, put it in real players' hands, observe, adjust. The result is live on the App Store and I keep evolving it.",
+      features: [
+        {
+          title: 'Progression & mastery',
+          description:
+            'Recruit, train and fuse players, and grow your organization from a single room to the world stage. The core of the game is a long-term progression system.',
+        },
+        {
+          title: 'Leagues & competition',
+          description:
+            'Single-elimination tournaments, seasonal leagues with promotion and relegation, and global leaderboards. Fresh goals to keep motivation alive.',
+        },
+        {
+          title: 'Idle progression',
+          description:
+            'Earnings continue offline. A retention loop designed for daily return, without frustration.',
+        },
+        {
+          title: 'Shipped and maintained',
+          description:
+            'Designed, built and released solo on the App Store, then kept alive with regular updates. A living product, not a demo.',
+        },
+      ],
+    },
+    {
+      id: 'glyfo',
+      slug: 'glyfo',
+      title: 'Glyfo',
+      shortDescription:
+        'The daily word game: one shared grid for everyone, streaks and a leaderboard. Available on iOS and Android.',
+      longDescription:
+        "A daily word game: everyone plays the same grid each day, linking neighboring letters to form words and climb the leaderboard. Streaks, statistics and personal records keep you coming back. On the learning side, it's the very grammar of microlearning: short, daily, measured practice — consistency over intensity.",
+      technologies: ['iOS', 'Android', 'Web', 'Daily content', 'Leaderboards', 'Habit design'],
+      imageAlt: 'Grid of the Glyfo word game',
+      demoUrl: 'https://pierretzt.github.io/glyfo/',
+      featured: false,
+      status: 'active',
+      period: '2026 — Present',
+      metrics: [
+        { label: 'Platforms', value: 'iOS · Android' },
+        { label: 'Cadence', value: 'One grid / day' },
+        { label: 'Languages', value: 'FR · EN' },
+      ],
+      story:
+        "Glyfo grew out of a belief I defend in training: consistency beats intensity. One grid a day, the same for everyone, playable in a few minutes — and a streak that rewards coming back. That's exactly the engine behind the best learning apps (daily practice, habit, instant feedback), applied to a word game. I designed it to be fair: everyone faces the same grid, so scores are comparable.",
+      features: [
+        {
+          title: 'One grid for everyone, every day',
+          description:
+            'The same daily grid for all players: comparable scores and a shared ritual. The heart of habit design.',
+        },
+        {
+          title: 'Streaks & consistency',
+          description:
+            'Streak tracking rewards daily practice — the same lever learning apps use to build a habit.',
+        },
+        {
+          title: 'Stats & records',
+          description:
+            'Statistics and personal records to visualize your progress over time and sustain motivation.',
+        },
+        {
+          title: 'Frictionless',
+          description:
+            'No account, no email. Open it and play. Accessibility in service of consistency.',
+        },
+      ],
+    },
   ],
   studioSites: [
     {
@@ -368,6 +463,16 @@ export const data: SiteData = {
         { kind: 'external', siteSlug: 'cahier-bleu' },
         { kind: 'external', siteSlug: 'memoire-gardee' },
         { kind: 'external', siteSlug: 'maison-veillance' },
+      ],
+    },
+    {
+      id: 'games-engagement',
+      title: 'Games & engagement design',
+      description:
+        'Two published mobile games, built as a lab for engagement, progression and habit mechanics — the same levers I apply to learning.',
+      entries: [
+        { kind: 'project', projectSlug: 'esport-tycoon' },
+        { kind: 'project', projectSlug: 'glyfo' },
       ],
     },
     {
