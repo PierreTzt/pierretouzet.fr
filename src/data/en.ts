@@ -850,6 +850,11 @@ export const data: SiteData = {
         'Every pixel, every word, every interaction is there for a reason. No gratuitous ornament. No complexity for effect.',
         'Direct. No forced narrative. Expertise reads in the choices, not in the stories one tells.',
       ],
+      signature: {
+        label: 'Signature',
+        text: 'Intent before the tool.',
+        note: 'The brand line. It stands on its own: bio, end of an article, last slide of a deck.',
+      },
     },
     palette: {
       eyebrow: '02 — Palette',

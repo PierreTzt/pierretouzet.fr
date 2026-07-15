@@ -318,6 +318,11 @@ export interface BrandData {
     eyebrow: string;
     headline: string;
     paragraphs: string[];
+    signature: {
+      label: string; // mono-label ("Signature")
+      text: string; // la phrase de marque, utilisable seule
+      note: string; // où et comment l'employer
+    };
   };
   palette: {
     eyebrow: string;

@@ -866,6 +866,11 @@ export const data: SiteData = {
         'Chaque pixel, chaque mot, chaque interaction est là pour une raison. Pas d’ornement gratuit. Pas de complexité pour impressionner.',
         'Direct. Sans récit forcé. L’expertise se lit dans les choix, pas dans les histoires qu’on raconte.',
       ],
+      signature: {
+        label: 'Signature',
+        text: 'Le sens avant l’outil.',
+        note: 'La phrase de marque. Elle tient seule : bio, fin d’article, dernière slide d’un deck.',
+      },
     },
     palette: {
       eyebrow: '02 — Palette',
