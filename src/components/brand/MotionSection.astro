@@ -27,7 +27,9 @@ const { motion } = Astro.props;
       {motion.intro}
     </p>
 
-    <div class="scroll-reveal grid grid-cols-1 md:grid-cols-3 gap-px bg-zinc-200 dark:bg-zinc-800 mb-24">
+    <div
+      class="scroll-reveal grid grid-cols-1 md:grid-cols-3 gap-px bg-zinc-200 dark:bg-zinc-800 mb-24"
+    >
       {
         motion.principles.map((principle, i) => (
           <div class="tile p-8 bg-white dark:bg-zinc-950">
@@ -59,20 +61,26 @@ const { motion } = Astro.props;
 
     <div class="scroll-reveal grid grid-cols-1 md:grid-cols-3 gap-px bg-zinc-200 dark:bg-zinc-800">
       <div class="bg-white dark:bg-zinc-950 p-10 flex items-center justify-center min-h-[180px]">
-        <span class="brand-link-demo font-display text-2xl md:text-3xl font-semibold text-zinc-900 dark:text-zinc-50 relative">
+        <span
+          class="brand-link-demo font-display text-2xl md:text-3xl font-semibold text-zinc-900 dark:text-zinc-50 relative"
+        >
           link-hover
         </span>
       </div>
 
       <div class="bg-white dark:bg-zinc-950 p-10 flex items-center justify-center min-h-[180px]">
-        <div class="tile tile-interactive glow-hover p-6 w-full max-w-[220px] text-center cursor-default">
+        <div
+          class="tile tile-interactive glow-hover p-6 w-full max-w-[220px] text-center cursor-default"
+        >
           <p class="font-mono text-caption text-accent-500 mb-2">TILE</p>
           <p class="font-display text-lg text-zinc-900 dark:text-zinc-50">glow-hover</p>
         </div>
       </div>
 
       <div class="bg-white dark:bg-zinc-950 p-10 flex items-center justify-center min-h-[180px]">
-        <div class="brand-grain-sample relative w-full max-w-[220px] aspect-square bg-zinc-900 dark:bg-zinc-800 flex items-center justify-center">
+        <div
+          class="brand-grain-sample relative w-full max-w-[220px] aspect-square bg-zinc-900 dark:bg-zinc-800 flex items-center justify-center"
+        >
           <p class="font-mono text-caption text-zinc-300 uppercase tracking-[0.15em] relative z-10">
             grain
           </p>

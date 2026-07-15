@@ -28,7 +28,9 @@ const { palette, copyFeedback } = Astro.props;
       {palette.intro}
     </p>
 
-    <div class="scroll-reveal grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-zinc-200 dark:bg-zinc-800">
+    <div
+      class="scroll-reveal grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-zinc-200 dark:bg-zinc-800"
+    >
       {
         palette.tokens.map((token) => {
           const valueToCopy = token.hex;
@@ -50,9 +52,7 @@ const { palette, copyFeedback } = Astro.props;
                 aria-hidden="true"
               />
               <div class="p-4 space-y-1">
-                <p class="font-semibold text-sm text-zinc-900 dark:text-zinc-100">
-                  {token.name}
-                </p>
+                <p class="font-semibold text-sm text-zinc-900 dark:text-zinc-100">{token.name}</p>
                 <p class="swatch-value font-mono text-xs text-zinc-500 dark:text-zinc-400">
                   {displayValue}
                 </p>
