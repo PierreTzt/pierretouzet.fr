@@ -67,7 +67,10 @@ describe('isLedgerStatus', () => {
   });
 });
 
-function makeLedgerData(statuses: (ProjectStatus | undefined)[]): SiteData {
+function makeLedgerData(
+  statuses: (ProjectStatus | undefined)[],
+  partial: Partial<SiteData> = {},
+): SiteData {
   const projects: Project[] = statuses.map((status, i) => ({
     id: `p${i}`,
     slug: `p${i}`,
@@ -84,7 +87,7 @@ function makeLedgerData(statuses: (ProjectStatus | undefined)[]): SiteData {
     social: [],
     experiences: [],
     projects,
-    studioSites: [] as StudioExternalSite[],
+    studioSites: [],
     studioClusters: [
       {
         id: 'c1',
@@ -95,7 +98,8 @@ function makeLedgerData(statuses: (ProjectStatus | undefined)[]): SiteData {
     ],
     skillCategories: [],
     ui: {} as never,
-  } as unknown as SiteData;
+    ...partial,
+  } as SiteData;
 }
 
 describe('computeLedger', () => {
@@ -131,5 +135,38 @@ describe('computeLedger', () => {
     const data = makeLedgerData(['revenue']);
     data.studioClusters[0].entries.push({ kind: 'project', projectSlug: 'inexistant' });
     expect(computeLedger(data).total).toBe(1);
+  });
+
+  it('compte les entrées externes (StudioExternalSite) au même titre que les projets', () => {
+    const externalSite: StudioExternalSite = {
+      id: 'e1',
+      slug: 'e1',
+      title: 'External Site',
+      url: 'https://example.com',
+      shortDescription: '',
+      technologies: [],
+      imageAlt: '',
+      status: 'revenue',
+    };
+    const data = makeLedgerData(['poc'], {
+      studioSites: [externalSite],
+      studioClusters: [
+        {
+          id: 'c1',
+          title: 'Cluster',
+          description: '',
+          entries: [
+            { kind: 'project', projectSlug: 'p0' },
+            { kind: 'external', siteSlug: 'e1' },
+          ],
+        },
+      ],
+    });
+    const ledger = computeLedger(data);
+    expect(ledger.total).toBe(2);
+    expect(ledger.counts).toEqual([
+      { status: 'revenue', count: 1 },
+      { status: 'poc', count: 1 },
+    ]);
   });
 });
