@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { LEDGER_STATUSES } from '../utils/ledger';
+import { LEDGER_STATUSES, isLedgerStatus } from '../utils/ledger';
 import { getStatusDisplay } from '../utils/status-display';
 import { data as frData } from '../data/fr';
 import { data as enData } from '../data/en';
@@ -45,5 +45,24 @@ describe('vocabulaire des statuts', () => {
         expect(ALL_STATUSES).toContain(status);
       }
     }
+  });
+});
+
+describe('isLedgerStatus', () => {
+  it('renvoie true pour chacun des cinq statuts du carnet', () => {
+    for (const status of LEDGER_STATUSES) {
+      expect(isLedgerStatus(status)).toBe(true);
+    }
+  });
+
+  it('renvoie false pour les statuts hors carnet', () => {
+    const nonLedgerStatuses = ['active', 'paused', 'archived'] as const;
+    for (const status of nonLedgerStatuses) {
+      expect(isLedgerStatus(status)).toBe(false);
+    }
+  });
+
+  it('renvoie false pour undefined', () => {
+    expect(isLedgerStatus(undefined)).toBe(false);
   });
 });
