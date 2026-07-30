@@ -5,7 +5,7 @@ export const data: SiteData = {
     name: 'Pierre Touzet',
     title: 'Ingénierie pédagogique et code.',
     description:
-      "Responsable national des programmes de 6 campus. En parallèle, un atelier : des paris lancés depuis 2025, construits avec l'IA, dont un qui génère des revenus. Le carnet est public, échecs compris.",
+      "Responsable national des programmes de 6 campus. En parallèle, un atelier : des paris construits avec l'IA, dont un qui génère des revenus. Le carnet est public, échecs compris.",
     signature: 'Le sens avant l’outil.',
     email: 'pierre.touzet@mecontacter.eu',
     location: 'Valenciennes, France',

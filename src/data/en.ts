@@ -5,7 +5,7 @@ export const data: SiteData = {
     name: 'Pierre Touzet',
     title: 'Instructional design and code.',
     description:
-      'Head of national programs across 6 campuses. Alongside that, a workshop: bets launched since 2025, built with AI, one of them earning revenue. The ledger is public, failures included.',
+      'Head of national programs across 6 campuses. Alongside that, a workshop: bets built with AI, one of them earning revenue. The ledger is public, failures included.',
     signature: 'Intent before the tool.',
     email: 'pierre.touzet@mecontacter.eu',
     location: 'Valenciennes, France',
