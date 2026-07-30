@@ -741,6 +741,20 @@ export const data: SiteData = {
       label: 'Disponibilité',
       available: 'Consulting & Freelance',
     },
+    ledger: {
+      eyebrow: "Carnet d'expériences",
+      headline: '{count} paris lancés depuis 2025.',
+      thesis:
+        "Lancer trois idées par secteur, construites avec l'IA, pour voir ce qui marche. Voici le résultat, échecs compris.",
+      verdictLabel: 'Verdict',
+      statusCounts: {
+        revenue: { one: 'rentable', other: 'rentables' },
+        published: { one: 'publié', other: 'publiés' },
+        relaunching: { one: 'en relance', other: 'en relance' },
+        unsold: { one: 'livré, jamais vendu', other: 'livrés, jamais vendus' },
+        poc: { one: 'POC, jamais lancé', other: 'POC, jamais lancés' },
+      },
+    },
     project: {
       label: 'Projet',
       demo: 'Visiter le site',

@@ -140,6 +140,20 @@ export interface UITranslations {
     label: string;
     available: string;
   };
+  ledger: {
+    eyebrow: string;
+    /** Contient le jeton {count}, remplacé par le total dérivé. Ne jamais écrire le nombre. */
+    headline: string;
+    thesis: string;
+    verdictLabel: string;
+    statusCounts: {
+      revenue: { one: string; other: string };
+      published: { one: string; other: string };
+      relaunching: { one: string; other: string };
+      unsold: { one: string; other: string };
+      poc: { one: string; other: string };
+    };
+  };
   project: {
     label: string;
     demo: string;

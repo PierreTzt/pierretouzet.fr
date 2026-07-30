@@ -727,6 +727,20 @@ export const data: SiteData = {
       label: 'Availability',
       available: 'Consulting & Freelance',
     },
+    ledger: {
+      eyebrow: 'Experiment ledger',
+      headline: '{count} bets launched since 2025.',
+      thesis:
+        'Launch three ideas per sector, built with AI, to see what works. Here are the results, failures included.',
+      verdictLabel: 'Verdict',
+      statusCounts: {
+        revenue: { one: 'earning revenue', other: 'earning revenue' },
+        published: { one: 'published', other: 'published' },
+        relaunching: { one: 'relaunching', other: 'relaunching' },
+        unsold: { one: 'shipped, never sold', other: 'shipped, never sold' },
+        poc: { one: 'POC, never launched', other: 'POCs, never launched' },
+      },
+    },
     project: {
       label: 'Project',
       demo: 'Visit website',

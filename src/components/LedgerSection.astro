@@ -1,0 +1,100 @@
+---
+/**
+ * CARNET — registre par secteur.
+ *
+ * Un bloc par pari sectoriel : titre, description, verdict, puis les entrées
+ * en lignes denses portant chacune son statut réel. Registre, pas galerie.
+ */
+import type { Lang } from '../i18n/utils';
+import { getData } from '../i18n/utils';
+import { resolveStudioEntry } from '../utils/studio';
+import { getStatusDisplay } from '../utils/status-display';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const data = getData(lang);
+const ui = data.ui.ledger;
+
+const clusters = data.studioClusters.map((cluster) => ({
+  cluster,
+  rows: cluster.entries
+    .map((ref) => resolveStudioEntry(ref, data))
+    .filter((entry): entry is NonNullable<typeof entry> => entry !== null)
+    .map((entry) => ({
+      title: entry.data.title,
+      shortDescription: entry.data.shortDescription,
+      period: entry.data.period,
+      statusDisplay: entry.data.status ? getStatusDisplay(entry.data.status, lang) : null,
+      href: entry.type === 'project' ? `/${lang}/studio/${entry.data.slug}/` : entry.data.url,
+      external: entry.type === 'external',
+    })),
+}));
+---
+
+<section aria-label={ui.eyebrow} class="px-6 pb-6">
+  <div class="max-w-7xl mx-auto scroll-reveal space-y-px">
+    {
+      clusters.map(({ cluster, rows }) => (
+        <div class="tile p-8">
+          <div class="md:flex md:items-start md:justify-between md:gap-8 mb-6">
+            <div class="max-w-xl">
+              <h2 class="font-display text-lg font-semibold text-zinc-900 dark:text-zinc-50 mb-2">
+                {cluster.title}
+              </h2>
+              <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                {cluster.description}
+              </p>
+            </div>
+            {cluster.verdict && (
+              <div class="mt-4 md:mt-0 md:text-right md:max-w-xs shrink-0">
+                <span class="mono-label block mb-1">{ui.verdictLabel}</span>
+                <p class="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                  {cluster.verdict}
+                </p>
+              </div>
+            )}
+          </div>
+
+          <ul class="border-t border-zinc-200 dark:border-zinc-800">
+            {rows.map((row) => (
+              <li class="border-b border-zinc-100 dark:border-zinc-800/60 last:border-b-0">
+                <a
+                  href={row.href}
+                  target={row.external ? '_blank' : undefined}
+                  rel={row.external ? 'noopener noreferrer' : undefined}
+                  data-track="ledger-entry-click"
+                  class="group flex flex-wrap items-baseline gap-x-4 gap-y-2 py-4 focus:outline-2 focus:outline-offset-2 focus:outline-accent-500"
+                >
+                  <span class="text-sm font-semibold text-zinc-900 dark:text-zinc-100 group-hover:text-accent-500 transition-colors duration-200">
+                    {row.title}
+                  </span>
+                  {row.statusDisplay && (
+                    <span
+                      class:list={[
+                        'font-mono text-caption uppercase tracking-wider px-2 py-0.5 rounded-xs',
+                        row.statusDisplay.class,
+                      ]}
+                    >
+                      {row.statusDisplay.label}
+                    </span>
+                  )}
+                  {row.period && (
+                    <span class="font-mono text-caption text-zinc-400 dark:text-zinc-500">
+                      {row.period}
+                    </span>
+                  )}
+                  <span class="text-sm text-zinc-500 dark:text-zinc-400 basis-full md:basis-auto md:flex-1 leading-relaxed">
+                    {row.shortDescription}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</section>
