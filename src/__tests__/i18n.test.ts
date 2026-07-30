@@ -67,14 +67,14 @@ describe('getData', () => {
     const result = getData('fr');
     expect(result).toBe(frData);
     expect(result.personal.name).toBe('Pierre Touzet');
-    expect(result.personal.title).toContain('complexe accessible');
+    expect(result.personal.title).toContain('Ingénierie pédagogique');
   });
 
   it('returns English data for "en"', () => {
     const result = getData('en');
     expect(result).toBe(enData);
     expect(result.personal.name).toBe('Pierre Touzet');
-    expect(result.personal.title).toContain('complex accessible');
+    expect(result.personal.title).toContain('Instructional design');
   });
 
   it('returns data with the same number of projects in both languages', () => {

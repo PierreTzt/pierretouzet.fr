@@ -2,6 +2,8 @@ export interface PersonalInfo {
   name: string;
   title: string;
   description: string;
+  /** Phrase de marque du brandbook. Tient seule. */
+  signature?: string;
   email: string;
   phone?: string;
   location: string;
