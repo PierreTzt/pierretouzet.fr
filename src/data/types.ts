@@ -84,6 +84,8 @@ export interface StudioCluster {
   id: string;
   title: string;
   description: string;
+  /** Verdict du pari sectoriel. Absent pour les clusters qui ne sont pas des paris (labs). */
+  verdict?: string;
   entries: StudioEntryRef[];
 }
 

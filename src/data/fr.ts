@@ -97,7 +97,7 @@ export const data: SiteData = {
       imageAlt: 'Interface de Distil Academy - plateforme de formation IA',
       demoUrl: 'https://www.distil.academy/',
       featured: true,
-      status: 'active',
+      status: 'relaunching',
       period: "2026 — Aujourd'hui",
       metrics: [
         { label: 'Format', value: 'Leçons de 10-15 min' },
@@ -141,7 +141,7 @@ export const data: SiteData = {
       imageAlt: 'Interface de Gradly - gestion des bulletins RNCP',
       demoUrl: 'https://www.gradly.fr/',
       featured: true,
-      status: 'active',
+      status: 'unsold',
       period: "2023 — Aujourd'hui",
       metrics: [
         { label: 'Temps admin', value: '÷ 3' },
@@ -343,7 +343,7 @@ export const data: SiteData = {
       imageAlt: "Capture d'écran du jeu Esport Tycoon",
       demoUrl: 'https://apps.apple.com/app/esport-tycoon/id6772518711',
       featured: false,
-      status: 'active',
+      status: 'revenue',
       period: "2026 — Aujourd'hui",
       metrics: [
         { label: 'Plateforme', value: 'App Store' },
@@ -394,7 +394,7 @@ export const data: SiteData = {
       imageAlt: 'Grille du jeu de mots Glyfo',
       demoUrl: 'https://pierretzt.github.io/glyfo/',
       featured: false,
-      status: 'active',
+      status: 'published',
       period: "2026 — Aujourd'hui",
       metrics: [
         { label: 'Plateformes', value: 'iOS · Android' },
@@ -437,7 +437,7 @@ export const data: SiteData = {
       technologies: ['Astro', 'IA (Claude / GPT-4o)', 'Stripe', 'AES-256'],
       period: '2026',
       imageAlt: "Capture de la page d'accueil du Cahier Bleu",
-      status: 'paused',
+      status: 'poc',
     },
     {
       id: 'memoire-gardee',
@@ -448,7 +448,7 @@ export const data: SiteData = {
       technologies: ['IA de restauration', 'Stripe', 'HD 300 DPI'],
       period: '2026',
       imageAlt: "Capture de la page d'accueil de Mémoire gardée",
-      status: 'paused',
+      status: 'poc',
     },
     {
       id: 'maison-veillance',
@@ -459,15 +459,27 @@ export const data: SiteData = {
       technologies: ['Astro', 'Vérification humaine', 'RGPD', 'Stripe'],
       period: '2026',
       imageAlt: "Capture de la page d'accueil de Maison Veillance",
-      status: 'paused',
+      status: 'poc',
     },
   ],
   studioClusters: [
+    {
+      id: 'games-engagement',
+      title: "Jeux & design d'engagement",
+      description:
+        "Deux jeux mobiles publiés, conçus comme un laboratoire des mécaniques d'engagement, de progression et d'habitude — les mêmes leviers que j'applique à l'apprentissage.",
+      verdict: 'Le seul secteur qui a payé.',
+      entries: [
+        { kind: 'project', projectSlug: 'esport-tycoon' },
+        { kind: 'project', projectSlug: 'glyfo' },
+      ],
+    },
     {
       id: 'education-pedagogy',
       title: 'Éducation & pédagogie',
       description:
         "Des plateformes et études de cas pour transformer l'expérience d'apprentissage.",
+      verdict: 'Un client interne refusé, un produit qui convertit un peu. Relance en cours.',
       entries: [
         { kind: 'project', projectSlug: 'distil-academy' },
         { kind: 'project', projectSlug: 'gradly' },
@@ -479,20 +491,11 @@ export const data: SiteData = {
       title: 'Autour du deuil',
       description:
         'Trois paris sur un même secteur : construits, mis en ligne, jamais lancés commercialement. Secteur testé, puis écarté.',
+      verdict: 'Trois paris, secteur écarté avant lancement.',
       entries: [
         { kind: 'external', siteSlug: 'cahier-bleu' },
         { kind: 'external', siteSlug: 'memoire-gardee' },
         { kind: 'external', siteSlug: 'maison-veillance' },
-      ],
-    },
-    {
-      id: 'games-engagement',
-      title: "Jeux & design d'engagement",
-      description:
-        "Deux jeux mobiles publiés, conçus comme un laboratoire des mécaniques d'engagement, de progression et d'habitude — les mêmes leviers que j'applique à l'apprentissage.",
-      entries: [
-        { kind: 'project', projectSlug: 'esport-tycoon' },
-        { kind: 'project', projectSlug: 'glyfo' },
       ],
     },
     {

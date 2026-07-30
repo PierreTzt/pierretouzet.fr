@@ -170,3 +170,35 @@ describe('computeLedger', () => {
     ]);
   });
 });
+
+describe('carnet réel du site', () => {
+  it('compte sept paris en FR', () => {
+    const ledger = computeLedger(frData);
+    expect(ledger.total).toBe(7);
+    expect(ledger.counts).toEqual([
+      { status: 'revenue', count: 1 },
+      { status: 'published', count: 1 },
+      { status: 'relaunching', count: 1 },
+      { status: 'unsold', count: 1 },
+      { status: 'poc', count: 3 },
+    ]);
+  });
+
+  it('compte le même carnet en EN', () => {
+    expect(computeLedger(enData)).toEqual(computeLedger(frData));
+  });
+
+  it('place le secteur jeux en premier', () => {
+    expect(frData.studioClusters[0].id).toBe('games-engagement');
+    expect(enData.studioClusters[0].id).toBe('games-engagement');
+  });
+
+  it('donne un verdict à chaque secteur sauf labs', () => {
+    for (const data of [frData, enData]) {
+      for (const cluster of data.studioClusters) {
+        if (cluster.id === 'labs') continue;
+        expect(cluster.verdict).toBeTruthy();
+      }
+    }
+  });
+});

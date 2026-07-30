@@ -97,7 +97,7 @@ export const data: SiteData = {
       imageAlt: 'Distil Academy interface - AI training platform',
       demoUrl: 'https://www.distil.academy/',
       featured: true,
-      status: 'active',
+      status: 'relaunching',
       period: '2026 — Present',
       metrics: [
         { label: 'Format', value: '10-15 min lessons' },
@@ -141,7 +141,7 @@ export const data: SiteData = {
       imageAlt: 'Gradly interface - RNCP bulletin management',
       demoUrl: 'https://www.gradly.fr/',
       featured: true,
-      status: 'active',
+      status: 'unsold',
       period: '2023 — Present',
       metrics: [
         { label: 'Admin time', value: '÷ 3' },
@@ -343,7 +343,7 @@ export const data: SiteData = {
       imageAlt: 'Screenshot of the Esport Tycoon game',
       demoUrl: 'https://apps.apple.com/app/esport-tycoon/id6772518711',
       featured: false,
-      status: 'active',
+      status: 'revenue',
       period: '2026 — Present',
       metrics: [
         { label: 'Platform', value: 'App Store' },
@@ -387,7 +387,7 @@ export const data: SiteData = {
       imageAlt: 'Grid of the Glyfo word game',
       demoUrl: 'https://pierretzt.github.io/glyfo/',
       featured: false,
-      status: 'active',
+      status: 'published',
       period: '2026 — Present',
       metrics: [
         { label: 'Platforms', value: 'iOS · Android' },
@@ -430,7 +430,7 @@ export const data: SiteData = {
       technologies: ['Astro', 'AI (Claude / GPT-4o)', 'Stripe', 'AES-256'],
       period: '2026',
       imageAlt: 'Screenshot of Le Cahier Bleu homepage',
-      status: 'paused',
+      status: 'poc',
     },
     {
       id: 'memoire-gardee',
@@ -441,7 +441,7 @@ export const data: SiteData = {
       technologies: ['Restoration AI', 'Stripe', '300 DPI HD'],
       period: '2026',
       imageAlt: 'Screenshot of Mémoire gardée homepage',
-      status: 'paused',
+      status: 'poc',
     },
     {
       id: 'maison-veillance',
@@ -452,14 +452,26 @@ export const data: SiteData = {
       technologies: ['Astro', 'Human verification', 'GDPR', 'Stripe'],
       period: '2026',
       imageAlt: 'Screenshot of Maison Veillance homepage',
-      status: 'paused',
+      status: 'poc',
     },
   ],
   studioClusters: [
     {
+      id: 'games-engagement',
+      title: 'Games & engagement design',
+      description:
+        'Two published mobile games, built as a lab for engagement, progression and habit mechanics — the same levers I apply to learning.',
+      verdict: 'The only sector that paid.',
+      entries: [
+        { kind: 'project', projectSlug: 'esport-tycoon' },
+        { kind: 'project', projectSlug: 'glyfo' },
+      ],
+    },
+    {
       id: 'education-pedagogy',
       title: 'Education & pedagogy',
       description: 'Platforms and case studies to reshape the learning experience.',
+      verdict: 'One internal client said no, one product converts a little. Relaunch under way.',
       entries: [
         { kind: 'project', projectSlug: 'distil-academy' },
         { kind: 'project', projectSlug: 'gradly' },
@@ -471,20 +483,11 @@ export const data: SiteData = {
       title: 'Around grief',
       description:
         'Three bets in a single sector: built, shipped, never commercially launched. Sector tested, then set aside.',
+      verdict: 'Three bets, sector set aside before launch.',
       entries: [
         { kind: 'external', siteSlug: 'cahier-bleu' },
         { kind: 'external', siteSlug: 'memoire-gardee' },
         { kind: 'external', siteSlug: 'maison-veillance' },
-      ],
-    },
-    {
-      id: 'games-engagement',
-      title: 'Games & engagement design',
-      description:
-        'Two published mobile games, built as a lab for engagement, progression and habit mechanics — the same levers I apply to learning.',
-      entries: [
-        { kind: 'project', projectSlug: 'esport-tycoon' },
-        { kind: 'project', projectSlug: 'glyfo' },
       ],
     },
     {
