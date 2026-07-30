@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import { LEDGER_STATUSES, isLedgerStatus } from '../utils/ledger';
+import { LEDGER_STATUSES, isLedgerStatus, computeLedger } from '../utils/ledger';
 import { getStatusDisplay } from '../utils/status-display';
 import { data as frData } from '../data/fr';
 import { data as enData } from '../data/en';
 import { resolveStudioEntry } from '../utils/studio';
-import type { SiteData, ProjectStatus } from '../data/types';
+import type { SiteData, ProjectStatus, Project, StudioExternalSite } from '../data/types';
 
 const ALL_STATUSES: ProjectStatus[] = [
   'revenue',
@@ -64,5 +64,72 @@ describe('isLedgerStatus', () => {
 
   it('renvoie false pour undefined', () => {
     expect(isLedgerStatus(undefined)).toBe(false);
+  });
+});
+
+function makeLedgerData(statuses: (ProjectStatus | undefined)[]): SiteData {
+  const projects: Project[] = statuses.map((status, i) => ({
+    id: `p${i}`,
+    slug: `p${i}`,
+    title: `Project ${i}`,
+    shortDescription: '',
+    longDescription: '',
+    technologies: [],
+    imageAlt: '',
+    featured: false,
+    status,
+  }));
+  return {
+    personal: {} as never,
+    social: [],
+    experiences: [],
+    projects,
+    studioSites: [] as StudioExternalSite[],
+    studioClusters: [
+      {
+        id: 'c1',
+        title: 'Cluster',
+        description: '',
+        entries: projects.map((p) => ({ kind: 'project' as const, projectSlug: p.slug })),
+      },
+    ],
+    skillCategories: [],
+    ui: {} as never,
+  } as unknown as SiteData;
+}
+
+describe('computeLedger', () => {
+  it('compte les paris par statut', () => {
+    const ledger = computeLedger(makeLedgerData(['revenue', 'poc', 'poc', 'poc']));
+    expect(ledger.total).toBe(4);
+    expect(ledger.counts).toEqual([
+      { status: 'revenue', count: 1 },
+      { status: 'poc', count: 3 },
+    ]);
+  });
+
+  it('ordonne les compteurs selon LEDGER_STATUSES', () => {
+    const ledger = computeLedger(makeLedgerData(['poc', 'revenue', 'unsold']));
+    expect(ledger.counts.map((c) => c.status)).toEqual(['revenue', 'unsold', 'poc']);
+  });
+
+  it('exclut les statuts hors carnet du décompte', () => {
+    const ledger = computeLedger(makeLedgerData(['revenue', 'active', 'paused', undefined]));
+    expect(ledger.total).toBe(1);
+    expect(ledger.counts).toEqual([{ status: 'revenue', count: 1 }]);
+  });
+
+  it('omet les compteurs à zéro', () => {
+    expect(computeLedger(makeLedgerData(['revenue'])).counts).toHaveLength(1);
+  });
+
+  it('retourne un carnet vide sans entrée', () => {
+    expect(computeLedger(makeLedgerData([]))).toEqual({ total: 0, counts: [] });
+  });
+
+  it('ignore les références non résolues', () => {
+    const data = makeLedgerData(['revenue']);
+    data.studioClusters[0].entries.push({ kind: 'project', projectSlug: 'inexistant' });
+    expect(computeLedger(data).total).toBe(1);
   });
 });
