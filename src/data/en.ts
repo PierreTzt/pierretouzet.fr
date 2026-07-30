@@ -830,9 +830,9 @@ export const data: SiteData = {
       },
     },
     hiring: {
-      title: 'Looking to hire?',
-      subtitle: 'Discover why Pierre is the profile you need.',
-      whyMe: 'Why me',
+      title: 'Working together',
+      subtitle: 'In post, not closed. What I run, and the terms that would make me look.',
+      whyMe: 'What I run',
     },
     consulting: {
       title: 'Looking for a consultant?',

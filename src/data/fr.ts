@@ -845,9 +845,9 @@ export const data: SiteData = {
       },
     },
     hiring: {
-      title: 'Vous recrutez ?',
-      subtitle: "Découvrez pourquoi Pierre est le profil qu'il vous faut.",
-      whyMe: 'Pourquoi moi',
+      title: 'Travailler ensemble',
+      subtitle: 'En poste, pas fermé. Ce que je pilote, et à quelles conditions je regarderais.',
+      whyMe: 'Ce que je pilote',
     },
     consulting: {
       title: 'Vous cherchez un consultant ?',

@@ -89,6 +89,12 @@ const iconPaths: Record<string, string> = {
           <a href={`/${lang}/brand/`} class="hover:text-accent-500 transition-colors duration-200">
             {ui.footer.brand}
           </a>
+          <a
+            href={lang === 'fr' ? '/fr/recrutement/' : '/en/hiring/'}
+            class="hover:text-accent-500 transition-colors duration-200"
+          >
+            {ui.hiring.title}
+          </a>
         </div>
       </div>
     </div>
