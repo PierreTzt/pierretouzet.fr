@@ -142,6 +142,7 @@ export interface UITranslations {
   };
   ledger: {
     eyebrow: string;
+    sectionsLabel: string;
     /** Contient le jeton {count}, remplacé par le total dérivé. Ne jamais écrire le nombre. */
     headline: string;
     thesis: string;

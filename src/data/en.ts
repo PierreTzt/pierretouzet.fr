@@ -729,6 +729,7 @@ export const data: SiteData = {
     },
     ledger: {
       eyebrow: 'Experiment ledger',
+      sectionsLabel: 'Ledger — bets by sector',
       headline: '{count} bets launched since 2025.',
       thesis:
         'Launch three ideas per sector, built with AI, to see what works. Here are the results, failures included.',

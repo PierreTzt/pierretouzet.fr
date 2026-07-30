@@ -743,6 +743,7 @@ export const data: SiteData = {
     },
     ledger: {
       eyebrow: "Carnet d'expériences",
+      sectionsLabel: 'Carnet — paris par secteur',
       headline: '{count} paris lancés depuis 2025.',
       thesis:
         "Lancer trois idées par secteur, construites avec l'IA, pour voir ce qui marche. Voici le résultat, échecs compris.",

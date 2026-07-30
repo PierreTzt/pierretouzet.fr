@@ -17,7 +17,7 @@ const { lang } = Astro.props;
 const data = getData(lang);
 const ui = data.ui.ledger;
 const ledger = computeLedger(data);
-const headline = ui.headline.replace('{count}', String(ledger.total));
+const headline = ui.headline.replaceAll('{count}', String(ledger.total));
 ---
 
 <section aria-label={ui.eyebrow} class="px-6 pb-6">
