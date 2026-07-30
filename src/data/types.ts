@@ -26,7 +26,20 @@ export interface Experience {
   technologies: string[];
 }
 
-export type ProjectStatus = 'active' | 'paused' | 'archived';
+/**
+ * Statuts du carnet d'expériences. Les cinq premiers décrivent un pari
+ * commercial et comptent dans le score dérivé ; les trois derniers servent
+ * aux études de cas internes et n'entrent pas dans le décompte.
+ */
+export type ProjectStatus =
+  | 'revenue' // génère du chiffre d'affaires
+  | 'published' // en ligne, traction faible
+  | 'relaunching' // relance en cours
+  | 'unsold' // mené à terme, jamais vendu
+  | 'poc' // construit, jamais lancé commercialement
+  | 'active'
+  | 'paused'
+  | 'archived';
 
 export interface ProjectFeature {
   title: string;

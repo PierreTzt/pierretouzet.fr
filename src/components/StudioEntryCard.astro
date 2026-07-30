@@ -2,6 +2,7 @@
 import type { Lang } from '../i18n/utils';
 import type { Project, StudioExternalSite } from '../data/types';
 import { getData } from '../i18n/utils';
+import { getStatusDisplay } from '../utils/status-display';
 
 type Entry = { type: 'project'; data: Project } | { type: 'external'; data: StudioExternalSite };
 
@@ -40,21 +41,7 @@ const badgeClass = isProject
   ? 'bg-zinc-200/60 dark:bg-zinc-800/60 text-zinc-600 dark:text-zinc-300'
   : 'bg-accent-500/10 text-accent-600 dark:text-accent-400';
 
-const statusConfig = {
-  active: {
-    label: lang === 'fr' ? 'Actif' : 'Active',
-    class: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400',
-  },
-  paused: {
-    label: lang === 'fr' ? 'En pause' : 'Paused',
-    class: 'bg-amber-500/10 text-amber-600 dark:text-amber-400',
-  },
-  archived: {
-    label: lang === 'fr' ? 'Archivé' : 'Archived',
-    class: 'bg-zinc-500/10 text-zinc-500 dark:text-zinc-400',
-  },
-};
-const statusDisplay = status ? statusConfig[status] : null;
+const statusDisplay = status ? getStatusDisplay(status, lang) : null;
 ---
 
 <a
