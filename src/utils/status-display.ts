@@ -30,7 +30,7 @@ const CLASSES: Record<ProjectStatus, string> = {
   relaunching: 'bg-accent-500/10 text-accent-600 dark:text-accent-400',
   unsold: 'bg-amber-500/10 text-amber-600 dark:text-amber-400',
   poc: 'bg-zinc-500/10 text-zinc-500 dark:text-zinc-400',
-  active: 'bg-emerald-500/10 text-emerald-600 dark:text-emerald-400',
+  active: 'bg-slate-500/10 text-slate-600 dark:text-slate-400',
   paused: 'bg-amber-500/10 text-amber-600 dark:text-amber-400',
   archived: 'bg-zinc-500/10 text-zinc-500 dark:text-zinc-400',
 };

@@ -501,7 +501,7 @@ export const data: SiteData = {
   skillCategories: [
     {
       name: 'Instructional Design',
-      description: '16 years designing, deploying and certifying training programs.',
+      description: '15 years designing, deploying and certifying training programs.',
       icon: 'M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5',
       skills: [
         { name: 'Program Design', level: 95, highlighted: true },
@@ -609,7 +609,7 @@ export const data: SiteData = {
     },
   ],
   keyMetrics: [
-    { value: '16', label: 'years of experience' },
+    { value: '15', label: 'years of experience' },
     { value: '6', label: 'campuses managed' },
     { value: '400+', label: 'learners' },
   ],
@@ -641,9 +641,9 @@ export const data: SiteData = {
   ],
   speakerTopics: [
     {
-      title: 'From IT technician to program director: 16 years of curiosity',
+      title: 'From IT technician to program director: 15 years of curiosity',
       abstract:
-        'A non-linear career, a vocational diploma, and one conviction: curiosity is the best career engine. A look back at 16 years of pivots, risk-taking and transformation — in IT, education and entrepreneurship.',
+        'A non-linear career, a vocational diploma, and one conviction: curiosity is the best career engine. A look back at 15 years of pivots, risk-taking and transformation — in IT, education and entrepreneurship.',
       format: 'Keynote · 30-45 min',
       tags: ['Career', 'Multipotentialist', 'Career change'],
     },
@@ -729,7 +729,7 @@ export const data: SiteData = {
     ledger: {
       eyebrow: 'Experiment ledger',
       sectionsLabel: 'Ledger — bets by sector',
-      headline: '{count} bets launched since 2025.',
+      headline: '{count} bets run alongside my job.',
       thesis:
         'Launch three ideas per sector, built with AI, to see what works. Here are the results, failures included.',
       verdictLabel: 'Verdict',
@@ -799,7 +799,7 @@ export const data: SiteData = {
         metaDescription:
           "Download Pierre Touzet's free ebook on generative AI in education. 10 pages of field experience, jargon-free.",
         heroSubtitle:
-          "10 pages to understand how generative AI is transforming education — from a practitioner's perspective, not a theorist's. Based on 16 years of field experience.",
+          "10 pages to understand how generative AI is transforming education — from a practitioner's perspective, not a theorist's. Based on 15 years of field experience.",
         formTitle: 'Download for free',
         formName: 'Your first name',
         formEmail: 'Your email',
@@ -831,8 +831,8 @@ export const data: SiteData = {
     },
     hiring: {
       title: 'Working together',
-      subtitle: 'In post, not closed. What I run, and the terms that would make me look.',
-      whyMe: 'What I run',
+      subtitle: 'In post, not closed. Here is what I run today.',
+      whyMe: 'By the numbers',
     },
     consulting: {
       title: 'Looking for a consultant?',

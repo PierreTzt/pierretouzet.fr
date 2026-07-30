@@ -509,7 +509,7 @@ export const data: SiteData = {
   skillCategories: [
     {
       name: 'Ingénierie pédagogique',
-      description: '16 ans à concevoir, déployer et certifier des programmes de formation.',
+      description: '15 ans à concevoir, déployer et certifier des programmes de formation.',
       icon: 'M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5',
       skills: [
         { name: 'Conception de programmes', level: 95, highlighted: true },
@@ -623,7 +623,7 @@ export const data: SiteData = {
     },
   ],
   keyMetrics: [
-    { value: '16', label: "ans d'expérience" },
+    { value: '15', label: "ans d'expérience" },
     { value: '6', label: 'campus pilotés' },
     { value: '400+', label: 'apprenants' },
   ],
@@ -655,9 +655,9 @@ export const data: SiteData = {
   ],
   speakerTopics: [
     {
-      title: 'De technicien informatique à responsable de programmes : 16 ans de curiosité',
+      title: 'De technicien informatique à responsable de programmes : 15 ans de curiosité',
       abstract:
-        "Un parcours non-linéaire, un bac pro en poche, et une conviction : la curiosité est le meilleur moteur de carrière. Retour d'expérience sur 16 ans de pivots, de prises de risque et de transformation — dans l'IT, la pédagogie et l'entrepreneuriat.",
+        "Un parcours non-linéaire, un bac pro en poche, et une conviction : la curiosité est le meilleur moteur de carrière. Retour d'expérience sur 15 ans de pivots, de prises de risque et de transformation — dans l'IT, la pédagogie et l'entrepreneuriat.",
       format: 'Conférence · 30-45 min',
       tags: ['Parcours', 'Multipotentialiste', 'Reconversion'],
     },
@@ -743,7 +743,7 @@ export const data: SiteData = {
     ledger: {
       eyebrow: "Carnet d'expériences",
       sectionsLabel: 'Carnet — paris par secteur',
-      headline: '{count} paris lancés depuis 2025.',
+      headline: '{count} paris lancés en parallèle de mon poste.',
       thesis:
         "Lancer trois idées par secteur, construites avec l'IA, pour voir ce qui marche. Voici le résultat, échecs compris.",
       verdictLabel: 'Verdict',
@@ -813,7 +813,7 @@ export const data: SiteData = {
         metaDescription:
           "Téléchargez gratuitement l'ebook de Pierre Touzet sur l'IA générative en éducation. 10 pages de retour d'expérience terrain, sans jargon.",
         heroSubtitle:
-          "10 pages pour comprendre comment l'IA générative transforme l'éducation — avec un regard de praticien, pas de théoricien. Basé sur 16 ans d'expérience terrain.",
+          "10 pages pour comprendre comment l'IA générative transforme l'éducation — avec un regard de praticien, pas de théoricien. Basé sur 15 ans d'expérience terrain.",
         formTitle: 'Télécharger gratuitement',
         formName: 'Votre prénom',
         formEmail: 'Votre email',
@@ -846,8 +846,8 @@ export const data: SiteData = {
     },
     hiring: {
       title: 'Travailler ensemble',
-      subtitle: 'En poste, pas fermé. Ce que je pilote, et à quelles conditions je regarderais.',
-      whyMe: 'Ce que je pilote',
+      subtitle: "En poste, pas fermé. Voici ce que je pilote aujourd'hui.",
+      whyMe: 'En chiffres',
     },
     consulting: {
       title: 'Vous cherchez un consultant ?',

@@ -30,22 +30,22 @@ const headline = ui.headline.replaceAll('{count}', String(ledger.total));
       <p class="text-sm text-zinc-500 dark:text-zinc-400 max-w-2xl leading-relaxed mb-8">
         {ui.thesis}
       </p>
-      <dl class="grid grid-cols-2 md:grid-cols-5 gap-px bg-zinc-200 dark:bg-zinc-800">
+      <div class="flex flex-wrap gap-px bg-zinc-200 dark:bg-zinc-800">
         {
           ledger.counts.map((entry) => (
-            <div class="tile p-4">
-              <dt class="font-display text-2xl font-bold text-zinc-900 dark:text-zinc-50">
+            <div class="tile p-4 flex-1 basis-32">
+              <p class="font-display text-2xl font-bold text-zinc-900 dark:text-zinc-50">
                 {entry.count}
-              </dt>
-              <dd class="mono-label mt-1 block">
+              </p>
+              <p class="mono-label mt-1 block">
                 {entry.count === 1
                   ? ui.statusCounts[entry.status].one
                   : ui.statusCounts[entry.status].other}
-              </dd>
+              </p>
             </div>
           ))
         }
-      </dl>
+      </div>
     </div>
   </div>
 </section>
