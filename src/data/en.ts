@@ -22,20 +22,32 @@ export const data: SiteData = {
     {
       id: 'ieft-director',
       company: 'IEFT - Tourism Management School',
-      position: 'National Program Director',
-      startDate: '2024-01',
+      position: 'Head of National Programs',
+      startDate: '2026-01',
       endDate: 'Present',
       description:
-        'Brought in to structure programs for a fast-growing tourism school. I now single-handedly lead the academic strategy across 6 national campuses, with a team of 11 on the ground and around 400 learners.',
+        'Promoted after two years as national coordinator. I lead the academic strategy across 6 campuses, with a team of 11 on the ground and around 400 learners.',
       achievements: [
-        'Full academic harmonization across 6 campuses: unified curricula, assessments and methods where each campus used to do things differently',
-        'Deployed new programs from design to launch, driving significant enrollment growth',
-        'Designed syllabi, competency blocks and RNCP-compliant evaluation grids',
-        "Secured certification and jury approvals (RNCP, Qualiopi — France's mandatory quality label for training providers)",
         'Cross-functional management of a team of 11 coordinators and academic directors',
+        'Deployed new programs from design to launch, driving significant enrollment growth',
         'Budget oversight and program profitability optimization',
       ],
-      technologies: ['RNCP', 'Qualiopi', 'Instructional Design', 'Management', 'Certification'],
+      technologies: ['Academic Strategy', 'Management', 'Budget Oversight', 'RNCP'],
+    },
+    {
+      id: 'ieft-coordinator',
+      company: 'IEFT - Tourism Management School',
+      position: 'National Pedagogical Coordinator',
+      startDate: '2024-01',
+      endDate: '2026-01',
+      description:
+        'Brought in to structure programs for a fast-growing tourism school: harmonizing curricula across 6 campuses, RNCP compliance and securing certifications.',
+      achievements: [
+        'Full academic harmonization across 6 campuses: unified curricula, assessments and methods where each campus used to do things differently',
+        'Designed syllabi, competency blocks and RNCP-compliant evaluation grids',
+        "Secured certification and jury approvals (RNCP, Qualiopi — France's mandatory quality label for training providers)",
+      ],
+      technologies: ['RNCP', 'Qualiopi', 'Instructional Design', 'Certification'],
     },
     {
       id: 'ifag-coordinator',
@@ -418,7 +430,7 @@ export const data: SiteData = {
       technologies: ['Astro', 'AI (Claude / GPT-4o)', 'Stripe', 'AES-256'],
       period: '2026',
       imageAlt: 'Screenshot of Le Cahier Bleu homepage',
-      status: 'active',
+      status: 'paused',
     },
     {
       id: 'memoire-gardee',
@@ -429,7 +441,7 @@ export const data: SiteData = {
       technologies: ['Restoration AI', 'Stripe', '300 DPI HD'],
       period: '2026',
       imageAlt: 'Screenshot of Mémoire gardée homepage',
-      status: 'active',
+      status: 'paused',
     },
     {
       id: 'maison-veillance',
@@ -440,7 +452,7 @@ export const data: SiteData = {
       technologies: ['Astro', 'Human verification', 'GDPR', 'Stripe'],
       period: '2026',
       imageAlt: 'Screenshot of Maison Veillance homepage',
-      status: 'active',
+      status: 'paused',
     },
   ],
   studioClusters: [
@@ -458,7 +470,7 @@ export const data: SiteData = {
       id: 'around-grief',
       title: 'Around grief',
       description:
-        'Three tools built for the hours that follow a loss. One-time payment, no data kept.',
+        'Three bets in a single sector: built, shipped, never commercially launched. Sector tested, then set aside.',
       entries: [
         { kind: 'external', siteSlug: 'cahier-bleu' },
         { kind: 'external', siteSlug: 'memoire-gardee' },

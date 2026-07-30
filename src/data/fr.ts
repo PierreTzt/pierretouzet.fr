@@ -23,19 +23,31 @@ export const data: SiteData = {
       id: 'ieft-responsable',
       company: 'IEFT - Tourism Management School',
       position: 'Responsable national des programmes',
-      startDate: '2024-01',
+      startDate: '2026-01',
       endDate: "Aujourd'hui",
       description:
-        "Arrivé pour structurer les programmes d'une école de tourisme en pleine croissance, je pilote aujourd'hui seul la stratégie pédagogique de 6 campus nationaux, avec une équipe de 11 personnes sur le terrain et environ 400 apprenants.",
+        'Promu après deux ans comme coordinateur national : je pilote la stratégie pédagogique de 6 campus, avec une équipe de 11 personnes sur le terrain et environ 400 apprenants.',
       achievements: [
-        'Harmonisation pédagogique complète sur 6 campus : maquettes, évaluations et modalités unifiées là où chaque campus faisait différemment',
-        "Déploiement de nouveaux programmes de la conception à l'ouverture, avec une croissance significative des effectifs",
-        "Conception des syllabi, blocs de compétences et grilles d'évaluation conformes RNCP",
-        'Obtention des dossiers de certification et jurys (RNCP, Qualiopi)',
         "Management transversal d'une équipe de 11 coordinateurs et responsables pédagogiques",
+        "Déploiement de nouveaux programmes de la conception à l'ouverture, avec une croissance significative des effectifs",
         'Pilotage budgétaire et optimisation de la rentabilité des programmes',
       ],
-      technologies: ['RNCP', 'Qualiopi', 'Ingénierie pédagogique', 'Management', 'Certification'],
+      technologies: ['Stratégie pédagogique', 'Management', 'Pilotage budgétaire', 'RNCP'],
+    },
+    {
+      id: 'ieft-coordinateur',
+      company: 'IEFT - Tourism Management School',
+      position: 'Coordinateur pédagogique national',
+      startDate: '2024-01',
+      endDate: '2026-01',
+      description:
+        "Arrivé pour structurer les programmes d'une école de tourisme en pleine croissance : harmonisation des maquettes sur les 6 campus, mise en conformité RNCP et obtention des certifications.",
+      achievements: [
+        'Harmonisation pédagogique complète sur 6 campus : maquettes, évaluations et modalités unifiées là où chaque campus faisait différemment',
+        "Conception des syllabi, blocs de compétences et grilles d'évaluation conformes RNCP",
+        'Obtention des dossiers de certification et jurys (RNCP, Qualiopi)',
+      ],
+      technologies: ['RNCP', 'Qualiopi', 'Ingénierie pédagogique', 'Certification'],
     },
     {
       id: 'ifag-coordinateur',
@@ -425,7 +437,7 @@ export const data: SiteData = {
       technologies: ['Astro', 'IA (Claude / GPT-4o)', 'Stripe', 'AES-256'],
       period: '2026',
       imageAlt: "Capture de la page d'accueil du Cahier Bleu",
-      status: 'active',
+      status: 'paused',
     },
     {
       id: 'memoire-gardee',
@@ -436,7 +448,7 @@ export const data: SiteData = {
       technologies: ['IA de restauration', 'Stripe', 'HD 300 DPI'],
       period: '2026',
       imageAlt: "Capture de la page d'accueil de Mémoire gardée",
-      status: 'active',
+      status: 'paused',
     },
     {
       id: 'maison-veillance',
@@ -447,7 +459,7 @@ export const data: SiteData = {
       technologies: ['Astro', 'Vérification humaine', 'RGPD', 'Stripe'],
       period: '2026',
       imageAlt: "Capture de la page d'accueil de Maison Veillance",
-      status: 'active',
+      status: 'paused',
     },
   ],
   studioClusters: [
@@ -466,7 +478,7 @@ export const data: SiteData = {
       id: 'around-grief',
       title: 'Autour du deuil',
       description:
-        'Trois outils pensés pour les heures qui suivent une perte. Paiement unique, aucune donnée conservée.',
+        'Trois paris sur un même secteur : construits, mis en ligne, jamais lancés commercialement. Secteur testé, puis écarté.',
       entries: [
         { kind: 'external', siteSlug: 'cahier-bleu' },
         { kind: 'external', siteSlug: 'memoire-gardee' },
