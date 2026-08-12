@@ -23,7 +23,7 @@ const emailSubject = lang === 'fr' ? 'Opportunité de recrutement' : 'Hiring opp
     { name: data.ui.nav.home, url: `/${lang}/` },
     {
       name: data.ui.hiring.title,
-      url: lang === 'fr' ? `/${lang}/recrutement/` : `/${lang}/hiring/`,
+      url: lang === 'fr' ? `/${lang}/travailler-ensemble/` : `/${lang}/work-with-me/`,
     },
   ]}
 >
@@ -85,6 +85,32 @@ const emailSubject = lang === 'fr' ? 'Opportunité de recrutement' : 'Hiring opp
         <span class="mono-label mb-4 block">{data.ui.sections.topSkills}</span>
         <div class="flex flex-wrap gap-2">
           {topSkills.map((skill, i) => <SkillBar skill={skill} index={i} />)}
+        </div>
+      </div>
+
+      <!-- Ce sur quoi je peux intervenir -->
+      <div class="scroll-reveal mb-12" style="transition-delay: 225ms">
+        <span class="mono-label mb-4 block">{data.ui.services.title}</span>
+        <div class="grid md:grid-cols-2 gap-px bg-zinc-200 dark:bg-zinc-800">
+          {
+            data.services.map((service) => (
+              <div class="tile p-6">
+                <h2 class="text-base font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
+                  {service.title}
+                </h2>
+                <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">
+                  {service.description}
+                </p>
+                <ul class="flex flex-wrap gap-2">
+                  {service.examples.map((ex) => (
+                    <li class="font-mono text-caption uppercase tracking-wider text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-800 px-2 py-0.5">
+                      {ex}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
         </div>
       </div>
 

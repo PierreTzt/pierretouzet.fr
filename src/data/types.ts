@@ -190,10 +190,6 @@ export interface UITranslations {
     title: string;
     subtitle: string;
   };
-  process: {
-    title: string;
-    subtitle: string;
-  };
   services: {
     title: string;
     subtitle: string;
@@ -278,12 +274,6 @@ export interface ProjectMetric {
 export interface KeyMetric {
   value: string;
   label: string;
-}
-
-export interface ProcessStep {
-  number: string;
-  title: string;
-  description: string;
 }
 
 export interface Service {
@@ -400,7 +390,6 @@ export interface SiteData {
   education: Education[];
   testimonials: Testimonial[];
   keyMetrics: KeyMetric[];
-  processSteps: ProcessStep[];
   services: Service[];
   speakerTopics: SpeakerTopic[];
   funFacts: FunFact[];

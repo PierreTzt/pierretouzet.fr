@@ -613,32 +613,6 @@ export const data: SiteData = {
     { value: '6', label: 'campuses managed' },
     { value: '400+', label: 'learners' },
   ],
-  processSteps: [
-    {
-      number: '01',
-      title: 'Observe',
-      description:
-        'I listen, audit, and uncover the real problem — not the one presented to me, but the one hiding behind it.',
-    },
-    {
-      number: '02',
-      title: 'Design',
-      description:
-        'I craft a tailored solution, prototype fast, and test with real users before building everything.',
-    },
-    {
-      number: '03',
-      title: 'Deploy',
-      description:
-        "I train the teams, support change management and don't let go until adoption is real.",
-    },
-    {
-      number: '04',
-      title: 'Iterate',
-      description:
-        'I measure results, collect feedback and start again — because a good process lives and evolves.',
-    },
-  ],
   speakerTopics: [
     {
       title: 'From IT technician to program director: 15 years of curiosity',
@@ -774,10 +748,6 @@ export const data: SiteData = {
     testimonials: {
       title: 'What they say',
       subtitle: 'LinkedIn Recommendations',
-    },
-    process: {
-      title: 'How I work',
-      subtitle: 'Every project follows the same logic — adapted to context.',
     },
     services: {
       title: 'What I can do for you',

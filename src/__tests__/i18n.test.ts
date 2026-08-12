@@ -99,8 +99,7 @@ describe('getLocalizedPath', () => {
       ['/fr/contact/', '/en/contact/'],
       ['/fr/mentions-legales/', '/en/legal/'],
       ['/fr/speaker/', '/en/speaker/'],
-      ['/fr/consulting/', '/en/consulting/'],
-      ['/fr/recrutement/', '/en/hiring/'],
+      ['/fr/travailler-ensemble/', '/en/work-with-me/'],
       ['/fr/bonjour/', '/en/hello/'],
       ['/fr/blog/', '/en/blog/'],
     ];
@@ -119,8 +118,7 @@ describe('getLocalizedPath', () => {
       ['/en/contact/', '/fr/contact/'],
       ['/en/legal/', '/fr/mentions-legales/'],
       ['/en/speaker/', '/fr/speaker/'],
-      ['/en/consulting/', '/fr/consulting/'],
-      ['/en/hiring/', '/fr/recrutement/'],
+      ['/en/work-with-me/', '/fr/travailler-ensemble/'],
       ['/en/hello/', '/fr/bonjour/'],
       ['/en/blog/', '/fr/blog/'],
     ];
