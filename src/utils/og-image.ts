@@ -1,17 +1,18 @@
 /**
  * GÉNÉRATION D'IMAGES OPEN GRAPH.
  *
- * Produit l'image 1200×630 affichée quand un article est partagé sur les
- * réseaux sociaux. Le résultat ressemble à une "carte" avec le titre de
- * l'article, les tags, la date et la signature "Pierre Touzet".
+ * Produit l'image 1200×630 affichée quand une page est partagée sur les
+ * réseaux sociaux. Deux "cartes" possibles :
+ *   - generateOgImage : carte article (titre, tags, date) — utilisée par
+ *     src/pages/og/[...slug].png.ts pour chaque article de blog.
+ *   - generateHomeOgImage : carte identité (nom, accroche, signature) —
+ *     utilisée par src/pages/og/home-[lang].png.ts pour la home FR/EN, et
+ *     pour régénérer le repli statique public/og-image.png.
  *
  * Pipeline (pour novices) :
  *   1. On décrit la "maquette" en JSX-like (satori)
  *   2. Satori convertit ça en SVG (vectoriel)
  *   3. Sharp convertit le SVG en PNG (bitmap lisible par tout le monde)
- *
- * L'image est générée au BUILD (SSG) pour chaque article, via le endpoint
- * src/pages/og/[...slug].png.ts.
  *
  * Les polices sont lues depuis node_modules/@fontsource/... au build.
  * Sur Vercel, ces fichiers sont bundlés via `includeFiles` dans astro.config.mjs.
@@ -19,31 +20,37 @@
 import satori from 'satori';
 import sharp from 'sharp';
 import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-function loadFont(name: string): Buffer {
-  // Try node_modules path (works in build)
-  const paths = [
+function loadFont(family: 'inter' | 'sora', weight: string): Buffer {
+  const filename = `${family}-latin-${weight}.woff`;
+  const candidates = [
+    // Works on Vercel serverless (chemin relatif au fichier bundlé)
     join(
-      process.cwd(),
+      dirname(fileURLToPath(import.meta.url)),
+      '..',
+      '..',
       'node_modules',
       '@fontsource',
-      'inter',
+      family,
       'files',
-      `inter-latin-${name}.woff`,
+      filename,
     ),
-    join(process.cwd(), 'node_modules', '@fontsource', 'sora', 'files', `sora-latin-${name}.woff`),
+    // Works in dev / build (racine du projet)
+    join(process.cwd(), 'node_modules', '@fontsource', family, 'files', filename),
   ];
-  for (const p of paths) {
+  for (const p of candidates) {
     try {
       return readFileSync(p);
     } catch {}
   }
-  throw new Error(`Font not found: ${name}`);
+  throw new Error(`Font not found: ${family}/${filename}`);
 }
 
-const interRegular = loadFont('400-normal');
-const interBold = loadFont('700-normal');
+const interRegular = loadFont('inter', '400-normal');
+const interBold = loadFont('inter', '700-normal');
+const soraBold = loadFont('sora', '700-normal');
 
 export async function generateOgImage(options: {
   title: string;
@@ -203,6 +210,149 @@ export async function generateOgImage(options: {
       fonts: [
         { name: 'Inter', data: interRegular, weight: 400, style: 'normal' },
         { name: 'Inter', data: interBold, weight: 700, style: 'normal' },
+      ],
+    },
+  );
+
+  return await sharp(Buffer.from(svg)).png().toBuffer();
+}
+
+/**
+ * Carte d'identité — utilisée comme image de partage par défaut du site
+ * (home FR/EN, et repli statique public/og-image.png). Reprend la même
+ * "carte" (fond, bandeau accent) que generateOgImage, mais avec le contenu
+ * qui identifie le site plutôt qu'un article : nom, accroche, signature.
+ */
+export async function generateHomeOgImage(options: {
+  name: string;
+  title: string;
+  signature?: string;
+}): Promise<Buffer> {
+  const { name, title, signature } = options;
+
+  const identityChildren = [
+    {
+      type: 'div',
+      props: {
+        style: {
+          fontFamily: 'Sora',
+          fontSize: '68px',
+          fontWeight: 700,
+          color: '#18181b',
+          letterSpacing: '-0.02em',
+          lineHeight: 1.1,
+        },
+        children: name,
+      },
+    },
+    {
+      type: 'div',
+      props: {
+        style: {
+          fontSize: '32px',
+          fontWeight: 400,
+          color: '#4f46e5',
+          letterSpacing: '-0.01em',
+          maxWidth: '820px',
+        },
+        children: title,
+      },
+    },
+    ...(signature
+      ? [
+          {
+            type: 'div',
+            props: {
+              style: {
+                fontFamily: 'Sora',
+                fontSize: '22px',
+                fontWeight: 700,
+                color: '#71717a',
+                marginTop: '8px',
+              },
+              children: signature,
+            },
+          },
+        ]
+      : []),
+  ];
+
+  const svg = await satori(
+    {
+      type: 'div',
+      props: {
+        style: {
+          width: '100%',
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+          backgroundColor: '#fafafa',
+          padding: '70px',
+          fontFamily: 'Inter',
+        },
+        children: [
+          // Top: accent line
+          {
+            type: 'div',
+            props: {
+              style: {
+                width: '80px',
+                height: '4px',
+                background: 'linear-gradient(to right, #4f46e5, #818cf8)',
+              },
+            },
+          },
+          // Middle: identity block
+          {
+            type: 'div',
+            props: {
+              style: {
+                display: 'flex',
+                flexDirection: 'column',
+                flex: 1,
+                justifyContent: 'center',
+                gap: '22px',
+              },
+              children: identityChildren,
+            },
+          },
+          // Bottom: domain
+          {
+            type: 'div',
+            props: {
+              style: {
+                fontSize: '13px',
+                fontWeight: 400,
+                color: '#a1a1aa',
+                textTransform: 'uppercase' as const,
+                letterSpacing: '0.08em',
+              },
+              children: 'pierretouzet.fr',
+            },
+          },
+          // Bottom accent line
+          {
+            type: 'div',
+            props: {
+              style: {
+                width: '100%',
+                height: '3px',
+                background: 'linear-gradient(to right, #4f46e5, #818cf8, transparent)',
+                marginTop: '20px',
+              },
+            },
+          },
+        ],
+      },
+    },
+    {
+      width: 1200,
+      height: 630,
+      fonts: [
+        { name: 'Inter', data: interRegular, weight: 400, style: 'normal' },
+        { name: 'Inter', data: interBold, weight: 700, style: 'normal' },
+        { name: 'Sora', data: soraBold, weight: 700, style: 'normal' },
       ],
     },
   );

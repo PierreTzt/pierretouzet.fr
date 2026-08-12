@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getData } from '../i18n/utils';
 import { getStatusDisplay } from '../utils/status-display';
@@ -29,12 +29,19 @@ const imageSlugOverrides: Record<string, string> = {
 };
 const imageSlug = imageSlugOverrides[project.slug] ?? project.slug;
 const projectImage = images[`/src/assets/images/project-${imageSlug}.png`]?.default;
+
+// Image de partage social : réutilise le visuel déjà affiché sur la fiche,
+// redimensionné pour un rendu net dans les cartes LinkedIn/Twitter/Slack.
+const projectOgImage = projectImage
+  ? (await getImage({ src: projectImage, width: 1200 })).src
+  : undefined;
 ---
 
 <BaseLayout
   title={`${project.title} — ${data.personal.name}`}
   description={project.shortDescription}
   lang={lang}
+  ogImage={projectOgImage}
   breadcrumbs={[
     { name: data.ui.nav.home, url: homePath },
     { name: data.ui.nav.studio, url: studioPath },

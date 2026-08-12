@@ -34,6 +34,7 @@ const latestPosts = (await getCollection('blog', ({ data }) => data.lang === lan
   title={`${data.personal.name} — ${data.personal.title}`}
   description={data.personal.description}
   lang={lang}
+  ogImage={`/og/home-${lang}.png`}
 >
   <Hero lang={lang} />
 
