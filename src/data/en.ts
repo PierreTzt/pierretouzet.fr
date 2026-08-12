@@ -654,7 +654,6 @@ export const data: SiteData = {
       home: 'Home',
       experiences: 'Experience',
       studio: 'Studio',
-      skills: 'Skills',
       contact: 'Contact',
       menuLabel: 'Open menu',
     },
@@ -732,10 +731,6 @@ export const data: SiteData = {
       title: 'Working together',
       subtitle: 'In post, not closed. Here is what I run today.',
       whyMe: 'By the numbers',
-    },
-    consulting: {
-      title: 'Looking for a consultant?',
-      subtitle: 'Concrete missions, clear process, measurable results.',
     },
     blog: {
       title: 'Blog',

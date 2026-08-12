@@ -65,7 +65,7 @@ export default defineConfig({
           item.priority = 0.8;
         }
         // List pages
-        else if (url.match(/\/(projets|projects|experiences|competences|skills|blog)\//)) {
+        else if (url.match(/\/(projets|projects|experiences|blog)\//)) {
           item.changefreq = /** @type {Freq} */ ('monthly');
           item.priority = 0.7;
         }

@@ -668,7 +668,6 @@ export const data: SiteData = {
       home: 'Accueil',
       experiences: 'Expériences',
       studio: 'Studio',
-      skills: 'Compétences',
       contact: 'Contact',
       menuLabel: 'Ouvrir le menu',
     },
@@ -746,10 +745,6 @@ export const data: SiteData = {
       title: 'Travailler ensemble',
       subtitle: "En poste, pas fermé. Voici ce que je pilote aujourd'hui.",
       whyMe: 'En chiffres',
-    },
-    consulting: {
-      title: 'Vous cherchez un consultant ?',
-      subtitle: 'Des missions concrètes, un process clair, des résultats mesurables.',
     },
     blog: {
       title: 'Blog',

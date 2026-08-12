@@ -34,6 +34,7 @@ const pageSlugMap: Record<string, string> = {
   experiences: 'experiences',
   contact: 'contact',
   'mentions-legales': 'legal',
+  'politique-confidentialite': 'privacy-policy',
   'travailler-ensemble': 'work-with-me',
   blog: 'blog',
 };

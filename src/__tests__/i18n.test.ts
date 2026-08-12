@@ -97,6 +97,7 @@ describe('getLocalizedPath', () => {
       ['/fr/experiences/', '/en/experiences/'],
       ['/fr/contact/', '/en/contact/'],
       ['/fr/mentions-legales/', '/en/legal/'],
+      ['/fr/politique-confidentialite/', '/en/privacy-policy/'],
       ['/fr/travailler-ensemble/', '/en/work-with-me/'],
       ['/fr/blog/', '/en/blog/'],
     ];
@@ -113,6 +114,7 @@ describe('getLocalizedPath', () => {
       ['/en/experiences/', '/fr/experiences/'],
       ['/en/contact/', '/fr/contact/'],
       ['/en/legal/', '/fr/mentions-legales/'],
+      ['/en/privacy-policy/', '/fr/politique-confidentialite/'],
       ['/en/work-with-me/', '/fr/travailler-ensemble/'],
       ['/en/blog/', '/fr/blog/'],
     ];

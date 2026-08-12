@@ -119,7 +119,6 @@ export interface UITranslations {
     home: string;
     experiences: string;
     studio: string;
-    skills: string;
     contact: string;
     menuLabel: string;
   };
@@ -196,10 +195,6 @@ export interface UITranslations {
     title: string;
     subtitle: string;
     whyMe: string;
-  };
-  consulting: {
-    title: string;
-    subtitle: string;
   };
   blog: {
     title: string;
