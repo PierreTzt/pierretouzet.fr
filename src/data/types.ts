@@ -135,7 +135,6 @@ export interface UITranslations {
     viewAll: string;
     allStudio: string;
     allExperiences: string;
-    allSkills: string;
     latestArticles: string;
   };
   status: {
@@ -194,47 +193,12 @@ export interface UITranslations {
     title: string;
     subtitle: string;
   };
-  speaker: {
-    title: string;
-    subtitle: string;
-    cta: string;
-    format: string;
-  };
-  ebook: {
-    title: string;
-    subtitle: string;
-    cta: string;
-    landing: {
-      metaDescription: string;
-      heroSubtitle: string;
-      formTitle: string;
-      formName: string;
-      formEmail: string;
-      formCta: string;
-      formSuccess: string;
-      formSuccessDetail: string;
-      tocTitle: string;
-      tocItems: string[];
-      credibilityTitle: string;
-      credibilityItems: string[];
-      testimonialQuote: string;
-      testimonialAuthor: string;
-      testimonialRole: string;
-      freeLabel: string;
-      pagesLabel: string;
-      formatLabel: string;
-    };
-  };
   hiring: {
     title: string;
     subtitle: string;
     whyMe: string;
   };
   consulting: {
-    title: string;
-    subtitle: string;
-  };
-  hello: {
     title: string;
     subtitle: string;
   };
@@ -280,13 +244,6 @@ export interface Service {
   title: string;
   description: string;
   examples: string[];
-}
-
-export interface SpeakerTopic {
-  title: string;
-  abstract: string;
-  format: string;
-  tags: string[];
 }
 
 export interface FunFact {
@@ -391,7 +348,6 @@ export interface SiteData {
   testimonials: Testimonial[];
   keyMetrics: KeyMetric[];
   services: Service[];
-  speakerTopics: SpeakerTopic[];
   funFacts: FunFact[];
   ui: UITranslations;
   brand: BrandData;

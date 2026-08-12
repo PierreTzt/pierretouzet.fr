@@ -5,7 +5,6 @@ import Metrics from '../components/Metrics.astro';
 import LedgerScore from '../components/LedgerScore.astro';
 import LedgerSection from '../components/LedgerSection.astro';
 import SkillBar from '../components/SkillBar.astro';
-import EbookCta from '../components/EbookCta.astro';
 import { getData, getLocalizedPath } from '../i18n/utils';
 import type { Lang } from '../i18n/utils';
 import { getCollection } from 'astro:content';
@@ -24,7 +23,6 @@ const trustedBy = lang === 'fr' ? "Ils m'ont fait confiance" : 'Trusted by';
 // Build localized paths using the i18n utility
 const studioPath = `/${lang}/studio/`;
 const experiencesPath = getLocalizedPath('/fr/experiences/', lang);
-const skillsPath = getLocalizedPath('/fr/competences/', lang);
 const contactPath = getLocalizedPath('/fr/contact/', lang);
 const hiringPath = getLocalizedPath('/fr/travailler-ensemble/', lang);
 const consultingPath = getLocalizedPath('/fr/travailler-ensemble/', lang);
@@ -178,12 +176,6 @@ const latestPosts = (await getCollection('blog', ({ data }) => data.lang === lan
         <div class="tile p-6">
           <div class="flex items-center justify-between mb-6">
             <span class="mono-label">{data.ui.sections.topSkills}</span>
-            <a
-              href={skillsPath}
-              class="mono-label hover:text-accent-500 transition-colors duration-200"
-            >
-              {data.ui.sections.viewAll} →
-            </a>
           </div>
           <div class="flex flex-wrap gap-2">
             {topCategory.skills.map((skill, i) => <SkillBar skill={skill} index={i} />)}
@@ -309,8 +301,6 @@ const latestPosts = (await getCollection('blog', ({ data }) => data.lang === lan
       </div>
     </div>
   </section>
-
-  <EbookCta lang={lang} />
 
   <!-- Spacer before footer -->
   <div class="pb-12"></div>

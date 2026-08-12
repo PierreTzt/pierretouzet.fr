@@ -94,13 +94,10 @@ describe('getLocalizedPath', () => {
   describe('FR -> EN page slug mapping', () => {
     const cases: [string, string][] = [
       ['/fr/studio/', '/en/studio/'],
-      ['/fr/competences/', '/en/skills/'],
       ['/fr/experiences/', '/en/experiences/'],
       ['/fr/contact/', '/en/contact/'],
       ['/fr/mentions-legales/', '/en/legal/'],
-      ['/fr/speaker/', '/en/speaker/'],
       ['/fr/travailler-ensemble/', '/en/work-with-me/'],
-      ['/fr/bonjour/', '/en/hello/'],
       ['/fr/blog/', '/en/blog/'],
     ];
 
@@ -113,13 +110,10 @@ describe('getLocalizedPath', () => {
   describe('EN -> FR page slug mapping', () => {
     const cases: [string, string][] = [
       ['/en/studio/', '/fr/studio/'],
-      ['/en/skills/', '/fr/competences/'],
       ['/en/experiences/', '/fr/experiences/'],
       ['/en/contact/', '/fr/contact/'],
       ['/en/legal/', '/fr/mentions-legales/'],
-      ['/en/speaker/', '/fr/speaker/'],
       ['/en/work-with-me/', '/fr/travailler-ensemble/'],
-      ['/en/hello/', '/fr/bonjour/'],
       ['/en/blog/', '/fr/blog/'],
     ];
 
@@ -214,7 +208,7 @@ describe('getLocalizedPath', () => {
   // ---- Edge cases ----
   describe('edge cases', () => {
     it('preserves trailing slash format', () => {
-      const result = getLocalizedPath('/fr/competences/', 'en');
+      const result = getLocalizedPath('/fr/mentions-legales/', 'en');
       expect(result).toMatch(/\/$/);
     });
 
@@ -246,8 +240,8 @@ describe('getHreflangUrl', () => {
   });
 
   it('maps page slugs in hreflang URLs', () => {
-    expect(getHreflangUrl('/fr/competences/', 'en', siteUrl)).toBe(
-      'https://www.pierretouzet.fr/en/skills/',
+    expect(getHreflangUrl('/fr/mentions-legales/', 'en', siteUrl)).toBe(
+      'https://www.pierretouzet.fr/en/legal/',
     );
   });
 

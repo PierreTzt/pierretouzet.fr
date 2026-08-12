@@ -5,7 +5,7 @@
  *   - getLangFromUrl(url)          → devine la langue depuis l'URL ('/fr/...' ou '/en/...')
  *   - getData(lang)                → renvoie les données FR ou EN
  *   - getLocalizedPath(path, lang) → transforme une URL vers sa version dans l'autre langue
- *                                    (utilise pageSlugMap pour traduire "competences" ↔ "skills")
+ *                                    (utilise pageSlugMap pour traduire "mentions-legales" ↔ "legal")
  *   - getHreflangUrl(path, lang, site) → URL absolue utilisée dans les balises <link hreflang>
  *
  * Quand tu ajoutes une page bilingue dont le slug change entre FR et EN,
@@ -31,16 +31,11 @@ export function getData(lang: Lang): SiteData {
 
 // Page slug mapping: FR -> EN
 const pageSlugMap: Record<string, string> = {
-  competences: 'skills',
   experiences: 'experiences',
   contact: 'contact',
   'mentions-legales': 'legal',
-  speaker: 'speaker',
   'travailler-ensemble': 'work-with-me',
-  bonjour: 'hello',
   blog: 'blog',
-  faq: 'faq',
-  ebook: 'ebook',
 };
 
 // Reverse: EN -> FR

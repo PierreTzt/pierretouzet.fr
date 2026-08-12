@@ -613,29 +613,6 @@ export const data: SiteData = {
     { value: '6', label: 'campuses managed' },
     { value: '400+', label: 'learners' },
   ],
-  speakerTopics: [
-    {
-      title: 'From IT technician to program director: 15 years of curiosity',
-      abstract:
-        'A non-linear career, a vocational diploma, and one conviction: curiosity is the best career engine. A look back at 15 years of pivots, risk-taking and transformation — in IT, education and entrepreneurship.',
-      format: 'Keynote · 30-45 min',
-      tags: ['Career', 'Multipotentialist', 'Career change'],
-    },
-    {
-      title: 'How I automated RNCP management for a school network',
-      abstract:
-        'Academic coordinators spend days manually producing RNCP bulletins. I built a tool to divide that time by 3. A concrete look at problem identification, prototyping, deployment and results.',
-      format: 'Case study · 20-30 min',
-      tags: ['EdTech', 'RNCP', 'Automation', 'Gradly'],
-    },
-    {
-      title: "AI in education: a practitioner's view, not a theorist's",
-      abstract:
-        "Everyone talks about AI in education. Few people actually use it daily with learners. What I've tested, what works, what doesn't, and why we need to stop being afraid.",
-      format: 'Keynote · 30-45 min',
-      tags: ['Generative AI', 'Education', 'Practice'],
-    },
-  ],
   funFacts: [
     { emoji: '🚀', text: 'Space enthusiast — can talk about SpaceX for hours' },
     { emoji: '💎', text: 'Jewelry maker in his spare time' },
@@ -693,7 +670,6 @@ export const data: SiteData = {
       viewAll: 'View all',
       allStudio: 'Full studio',
       allExperiences: 'All Experience',
-      allSkills: 'All Skills',
       latestArticles: 'Latest articles',
     },
     status: {
@@ -753,52 +729,6 @@ export const data: SiteData = {
       title: 'What I can do for you',
       subtitle: 'Concrete skills, ready for missions or permanent roles.',
     },
-    speaker: {
-      title: 'Speaking & conferences',
-      subtitle:
-        'I talk about what I experience in the field — education, AI, digital transformation, atypical careers.',
-      cta: 'Invite me to speak',
-      format: 'Format',
-    },
-    ebook: {
-      title: 'AI in Education — Free Ebook',
-      subtitle:
-        "A practitioner's take on generative AI in education. 10 pages to understand the real stakes, jargon-free.",
-      cta: 'Download for free',
-      landing: {
-        metaDescription:
-          "Download Pierre Touzet's free ebook on generative AI in education. 10 pages of field experience, jargon-free.",
-        heroSubtitle:
-          "10 pages to understand how generative AI is transforming education — from a practitioner's perspective, not a theorist's. Based on 15 years of field experience.",
-        formTitle: 'Download for free',
-        formName: 'Your first name',
-        formEmail: 'Your email',
-        formCta: 'Get the ebook (PDF)',
-        formSuccess: 'Your download will start shortly.',
-        formSuccessDetail: 'If the download does not start automatically, click the link below.',
-        tocTitle: 'What you will discover',
-        tocItems: [
-          'Why generative AI is a game-changer in education — beyond the buzz',
-          'What actually works in the field (and what does not)',
-          'How to integrate AI into your teaching practices without reinventing everything',
-          'The mistakes to avoid when starting with AI in training',
-        ],
-        credibilityTitle: 'Why read this ebook',
-        credibilityItems: [
-          'Written by a practitioner who uses AI daily with learners',
-          'Based on concrete experiments, not theoretical projections',
-          'Immediately actionable — each chapter offers concrete next steps',
-          'Free, no strings attached, no spam',
-        ],
-        testimonialQuote:
-          'Pierre is someone you can truly count on: professional, committed, always willing to help. He has an excellent big-picture vision while paying attention to detail.',
-        testimonialAuthor: 'Za Nguyen',
-        testimonialRole: 'Academic Coordinator — IHECF Montpellier',
-        freeLabel: 'Free',
-        pagesLabel: '10 pages',
-        formatLabel: 'PDF',
-      },
-    },
     hiring: {
       title: 'Working together',
       subtitle: 'In post, not closed. Here is what I run today.',
@@ -807,10 +737,6 @@ export const data: SiteData = {
     consulting: {
       title: 'Looking for a consultant?',
       subtitle: 'Concrete missions, clear process, measurable results.',
-    },
-    hello: {
-      title: 'Nice to meet you!',
-      subtitle: 'Pierre Touzet in 30 seconds.',
     },
     blog: {
       title: 'Blog',

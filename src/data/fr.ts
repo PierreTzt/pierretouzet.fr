@@ -627,29 +627,6 @@ export const data: SiteData = {
     { value: '6', label: 'campus pilotés' },
     { value: '400+', label: 'apprenants' },
   ],
-  speakerTopics: [
-    {
-      title: 'De technicien informatique à responsable de programmes : 15 ans de curiosité',
-      abstract:
-        "Un parcours non-linéaire, un bac pro en poche, et une conviction : la curiosité est le meilleur moteur de carrière. Retour d'expérience sur 15 ans de pivots, de prises de risque et de transformation — dans l'IT, la pédagogie et l'entrepreneuriat.",
-      format: 'Conférence · 30-45 min',
-      tags: ['Parcours', 'Multipotentialiste', 'Reconversion'],
-    },
-    {
-      title: "Comment j'ai automatisé la gestion RNCP d'un réseau d'écoles",
-      abstract:
-        "Les coordinateurs pédagogiques passent des jours à produire des bulletins RNCP à la main. J'ai créé un outil pour diviser ce temps par 3. Retour concret sur l'identification du problème, le prototypage, le déploiement et les résultats.",
-      format: "Retour d'expérience · 20-30 min",
-      tags: ['EdTech', 'RNCP', 'Automatisation', 'Gradly'],
-    },
-    {
-      title: "L'IA en éducation : un regard de praticien, pas de théoricien",
-      abstract:
-        "Tout le monde parle d'IA en éducation. Peu de gens l'utilisent vraiment au quotidien avec des apprenants. Ce que j'ai testé, ce qui marche, ce qui ne marche pas, et pourquoi il faut arrêter d'avoir peur.",
-      format: 'Conférence · 30-45 min',
-      tags: ['IA générative', 'Éducation', 'Pratique'],
-    },
-  ],
   funFacts: [
     { emoji: '🚀', text: 'Passionné de spatial — capable de parler de SpaceX pendant des heures' },
     { emoji: '💎', text: 'Créateur de bijoux à ses heures perdues' },
@@ -707,7 +684,6 @@ export const data: SiteData = {
       viewAll: 'Voir tout',
       allStudio: 'Tout le studio',
       allExperiences: 'Toutes les expériences',
-      allSkills: 'Toutes les compétences',
       latestArticles: 'Derniers articles',
     },
     status: {
@@ -767,53 +743,6 @@ export const data: SiteData = {
       title: 'Ce que je peux faire pour vous',
       subtitle: 'Des compétences concrètes, mobilisables en mission ou en poste.',
     },
-    speaker: {
-      title: 'Interventions & conférences',
-      subtitle:
-        'Je parle de ce que je vis sur le terrain — pédagogie, IA, transformation digitale, parcours atypiques.',
-      cta: "M'inviter à intervenir",
-      format: 'Format',
-    },
-    ebook: {
-      title: "L'IA dans l'éducation — Ebook gratuit",
-      subtitle:
-        "Un regard de praticien sur l'IA générative en éducation. 10 pages pour comprendre les vrais enjeux, sans jargon.",
-      cta: 'Télécharger gratuitement',
-      landing: {
-        metaDescription:
-          "Téléchargez gratuitement l'ebook de Pierre Touzet sur l'IA générative en éducation. 10 pages de retour d'expérience terrain, sans jargon.",
-        heroSubtitle:
-          "10 pages pour comprendre comment l'IA générative transforme l'éducation — avec un regard de praticien, pas de théoricien. Basé sur 15 ans d'expérience terrain.",
-        formTitle: 'Télécharger gratuitement',
-        formName: 'Votre prénom',
-        formEmail: 'Votre email',
-        formCta: "Recevoir l'ebook (PDF)",
-        formSuccess: 'Votre téléchargement va commencer.',
-        formSuccessDetail:
-          'Si le téléchargement ne se lance pas automatiquement, cliquez sur le lien ci-dessous.',
-        tocTitle: 'Ce que vous allez découvrir',
-        tocItems: [
-          "Pourquoi l'IA générative change la donne en éducation — au-delà du buzz",
-          'Ce qui marche vraiment sur le terrain (et ce qui ne marche pas)',
-          "Comment intégrer l'IA dans ses pratiques pédagogiques sans tout réinventer",
-          "Les erreurs à éviter quand on débute avec l'IA en formation",
-        ],
-        credibilityTitle: 'Pourquoi lire cet ebook',
-        credibilityItems: [
-          "Écrit par un praticien qui utilise l'IA au quotidien avec des apprenants",
-          'Basé sur des expérimentations concrètes, pas des projections théoriques',
-          'Applicable immédiatement — chaque chapitre propose des actions concrètes',
-          'Gratuit, sans engagement, sans spam',
-        ],
-        testimonialQuote:
-          "Pierre est quelqu'un sur qui on peut vraiment compter : pro, impliqué, toujours prêt à aider. Il possède une excellente vision d'ensemble tout en prêtant attention aux détails.",
-        testimonialAuthor: 'Za Nguyen',
-        testimonialRole: 'Responsable pédagogique — IHECF Montpellier',
-        freeLabel: 'Gratuit',
-        pagesLabel: '10 pages',
-        formatLabel: 'PDF',
-      },
-    },
     hiring: {
       title: 'Travailler ensemble',
       subtitle: "En poste, pas fermé. Voici ce que je pilote aujourd'hui.",
@@ -822,10 +751,6 @@ export const data: SiteData = {
     consulting: {
       title: 'Vous cherchez un consultant ?',
       subtitle: 'Des missions concrètes, un process clair, des résultats mesurables.',
-    },
-    hello: {
-      title: 'Enchanté !',
-      subtitle: 'Pierre Touzet en 30 secondes.',
     },
     blog: {
       title: 'Blog',

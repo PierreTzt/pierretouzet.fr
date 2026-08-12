@@ -9,7 +9,6 @@ const checks = [
   ['education', frData.education.length, enData.education.length],
   ['testimonials', frData.testimonials.length, enData.testimonials.length],
   ['services', frData.services.length, enData.services.length],
-  ['speakerTopics', frData.speakerTopics.length, enData.speakerTopics.length],
   ['funFacts', frData.funFacts.length, enData.funFacts.length],
 ] as const;
 
