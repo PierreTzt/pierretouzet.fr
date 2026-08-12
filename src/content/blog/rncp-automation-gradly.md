@@ -3,7 +3,7 @@ title: 'Automating RNCP management: why I built Gradly'
 description: "Academic coordinators spend days producing RNCP transcripts. I built a tool to cut that time by 3. Here's how."
 date: 2026-02-03
 lang: en
-tags: ['EdTech', 'RNCP', 'Gradly', 'Automation']
+tags: ['Projects', 'Education']
 translationKey: 'rncp-automation-gradly'
 ---
 
@@ -15,7 +15,7 @@ Cross-referenced Excel spreadsheets with competency frameworks, blocks, ECTS cre
 
 In the school network where I work, academic coordinators spent **2 to 3 days per session** producing these transcripts. Manually. With error risks on every line.
 
-Multiply that by 6 campuses, 3 sessions per year, and you get a time sink that produces zero pedagogical value.
+Multiply that by [6 campuses](/en/blog/change-management-schools/), 3 sessions per year, and you get a time sink that produces zero pedagogical value.
 
 ## The duct-tape solution
 

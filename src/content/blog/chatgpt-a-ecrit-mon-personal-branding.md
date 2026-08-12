@@ -1,9 +1,9 @@
 ---
-title: 'ChatGPT a écrit mon personal branding. Onze mois après, voici le diff.'
-description: "En juillet 2025, j'ai fait l'exercice du personal branding avec ChatGPT. Onze mois et un site plus tard, je compare : le fond a survécu, la forme est morte."
+title: 'ChatGPT a écrit mon personal branding'
+description: "En juillet 2025, j'ai fait l'exercice du personal branding avec ChatGPT. Onze mois plus tard : le fond a survécu, la forme est morte."
 date: 2026-07-15
 lang: fr
-tags: ['IA', 'Personal branding', 'Écriture']
+tags: ['IA', 'Écriture']
 translationKey: 'chatgpt-wrote-my-personal-branding'
 ---
 

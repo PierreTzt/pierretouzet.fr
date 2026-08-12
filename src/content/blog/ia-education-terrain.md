@@ -1,9 +1,9 @@
 ---
 title: "L'IA en éducation : ce que je vois sur le terrain"
-description: "Retour d'expérience sur l'utilisation concrète de l'IA générative dans un réseau d'écoles. Ce qui marche, ce qui ne marche pas, et pourquoi il faut arrêter d'avoir peur."
+description: "Retour d'expérience sur l'IA générative dans un réseau d'écoles : ce qui marche, ce qui ne marche pas, et pourquoi arrêter d'avoir peur."
 date: 2026-03-07
 lang: fr
-tags: ['IA', 'Éducation', 'Terrain']
+tags: ['IA', 'Pédagogie']
 translationKey: 'ai-education-field'
 ---
 

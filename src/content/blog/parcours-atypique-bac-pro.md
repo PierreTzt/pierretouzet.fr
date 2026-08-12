@@ -1,9 +1,9 @@
 ---
-title: 'Du bac pro au pilotage de programmes : éloge du parcours non-linéaire'
+title: 'Du bac pro au pilotage de programmes'
 description: "On m'a souvent dit que mon parcours était atypique. Avec le recul, c'est justement ce qui fait ma force. Retour sur 15 ans de pivots."
 date: 2026-01-25
 lang: fr
-tags: ['Parcours', 'Reconversion', 'Carrière']
+tags: ['Carrière', 'Projets']
 translationKey: 'non-linear-career-path'
 ---
 

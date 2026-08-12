@@ -3,7 +3,7 @@ title: 'AI in education: what I see in the field'
 description: "A field report on the concrete use of generative AI in a school network. What works, what doesn't, and why we need to stop being afraid."
 date: 2026-03-07
 lang: en
-tags: ['AI', 'Education', 'Field']
+tags: ['AI', 'Education']
 translationKey: 'ai-education-field'
 ---
 
@@ -33,6 +33,6 @@ Here's what I've observed:
 
 AI in education is neither the revolution being sold nor the danger being waved around. It's a tool. Powerful, imperfect, and requiring method.
 
-The real challenge isn't technological — it's human. It's change management. It's convincing a 55-year-old instructor that this tool can help without replacing them.
+The real challenge isn't technological — it's human. It's [change management](/en/blog/change-management-schools/). It's convincing a 55-year-old instructor that this tool can help without replacing them.
 
 And that, no AI can do. It's fieldwork.

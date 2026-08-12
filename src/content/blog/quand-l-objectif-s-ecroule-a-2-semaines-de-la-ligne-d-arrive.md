@@ -1,9 +1,9 @@
 ---
-title: "Quand l'objectif s'écroule à 2 semaines de la ligne d'arrivée"
+title: "Quand l'objectif s'écroule à 2 semaines de l'arrivée"
 description: "L'histoire de mon semi-marathon raté et ce que j'en ai appris sur la gestion d'objectifs ambitieux."
 date: 2026-03-11
 lang: fr
-tags: ['Échec', 'Objectifs', 'Résilience']
+tags: ['Carrière', 'Projets']
 ---
 
 ## Le plan parfait qui a foiré

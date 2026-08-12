@@ -1,9 +1,9 @@
 ---
-title: "Automatiser la gestion RNCP : pourquoi j'ai créé Gradly"
+title: 'Automatiser la gestion RNCP avec Gradly'
 description: "Les coordinateurs pédagogiques perdent des jours à produire des bulletins RNCP. J'ai créé un outil pour diviser ce temps par 3. Voici comment."
 date: 2026-02-03
 lang: fr
-tags: ['EdTech', 'RNCP', 'Gradly', 'Automatisation']
+tags: ['Projets', 'Pédagogie']
 translationKey: 'rncp-automation-gradly'
 ---
 

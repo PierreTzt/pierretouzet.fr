@@ -1,9 +1,9 @@
 ---
-title: "Conduite du changement dans l'enseignement supérieur : arrêtez les formations PowerPoint"
+title: "Conduite du changement à l'école : stop PowerPoint"
 description: "Pourquoi la plupart des projets de transformation digitale échouent dans les écoles — et ce que j'ai appris en déployant des outils sur 6 campus."
 date: 2026-02-18
 lang: fr
-tags: ['Transformation digitale', 'Conduite du changement', 'Enseignement supérieur']
+tags: ['Pédagogie', 'Projets']
 translationKey: 'change-management-schools'
 ---
 

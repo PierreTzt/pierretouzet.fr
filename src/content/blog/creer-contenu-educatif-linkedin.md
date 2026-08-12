@@ -1,9 +1,9 @@
 ---
-title: 'Créer du contenu éducatif : ce que LinkedIn ne vous dit pas'
+title: 'Créer du contenu éducatif : ce que LinkedIn cache'
 description: "Tout le monde dit qu'il faut créer du contenu. Personne ne dit que c'est un vrai métier. Retour sur 2 ans de création : YouTube, podcast, newsletter."
 date: 2026-01-10
 lang: fr
-tags: ['Contenu', 'Vulgarisation', 'Création']
+tags: ['Écriture', 'Pédagogie']
 translationKey: 'creating-educational-content'
 ---
 

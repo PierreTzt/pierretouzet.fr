@@ -1,13 +1,13 @@
 ---
-title: 'Change management in higher education: stop the PowerPoint trainings'
+title: 'Change management in schools: stop PowerPoint'
 description: 'Why most digital transformation projects fail in schools — and what I learned deploying tools across 6 campuses.'
 date: 2026-02-18
 lang: en
-tags: ['Digital transformation', 'Change management', 'Higher education']
+tags: ['Education', 'Projects']
 translationKey: 'change-management-schools'
 ---
 
-I've deployed digital tools across 6 campuses in 3 years. LMS platforms, assessment tools, digital signature systems, grade management software.
+I've deployed digital tools across 6 campuses in 3 years. LMS platforms, assessment tools, digital signature systems, [grade management software](/en/blog/rncp-automation-gradly/).
 
 **The finding is always the same**: technology is never the problem. Adoption is.
 

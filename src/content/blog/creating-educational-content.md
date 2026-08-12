@@ -1,9 +1,9 @@
 ---
-title: "Creating educational content: what LinkedIn won't tell you"
+title: 'Creating educational content: what LinkedIn misses'
 description: "Everyone says you should create content. Nobody says it's a real craft. Lessons from 2 years of creating: YouTube, podcast, newsletter."
 date: 2026-01-10
 lang: en
-tags: ['Content', 'Education', 'Creation']
+tags: ['Writing', 'Education']
 translationKey: 'creating-educational-content'
 ---
 
@@ -39,7 +39,7 @@ No. You need to be a **practitioner**. People aren't looking for experts — the
 
 ### Start from a real problem
 
-My best-performing content always starts from a real question: "How do I file taxes on Twitch income?", "What is RNCP certification?", "How do I train my team on AI?"
+My best-performing content always starts from a real question: "How do I file taxes on Twitch income?", "What is RNCP certification?", "How do I train my team on [AI](/en/blog/ai-education-field/)?"
 
 ### Simplify without dumbing down
 

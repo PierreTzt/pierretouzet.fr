@@ -1,9 +1,9 @@
 ---
-title: "ChatGPT wrote my personal branding. Eleven months later, here's the diff."
-description: 'In July 2025, I did the personal-branding exercise with ChatGPT. Eleven months and one website later, I ran the comparison: the substance survived, the style died.'
+title: 'ChatGPT wrote my personal branding'
+description: 'In July 2025, I did the personal-branding exercise with ChatGPT. Eleven months later: the substance survived, the style died.'
 date: 2026-07-15
 lang: en
-tags: ['AI', 'Personal branding', 'Writing']
+tags: ['AI', 'Writing']
 translationKey: 'chatgpt-wrote-my-personal-branding'
 ---
 

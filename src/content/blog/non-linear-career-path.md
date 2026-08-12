@@ -1,9 +1,9 @@
 ---
-title: 'From vocational diploma to program management: in praise of non-linear careers'
+title: 'From vocational diploma to program management'
 description: "People often say my career path is atypical. Looking back, that's exactly what makes it valuable. Reflections on 15 years of pivots."
 date: 2026-01-25
 lang: en
-tags: ['Career', 'Pivot', 'Non-linear path']
+tags: ['Career', 'Projects']
 translationKey: 'non-linear-career-path'
 ---
 
@@ -37,7 +37,7 @@ When you've changed careers 3 times, you're no longer afraid of the unknown. You
 
 ### Cross-functional vision
 
-I understand developers because I was a technician. I understand instructors because I taught. I understand executives because I started my own company. No degree gives you that cross-functional perspective.
+I understand developers because I was a technician. I understand instructors because I taught. I understand executives because I [started my own company](/en/blog/rncp-automation-gradly/). No degree gives you that cross-functional perspective.
 
 ### Humility
 
