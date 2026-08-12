@@ -2,7 +2,7 @@ export interface PersonalInfo {
   name: string;
   title: string;
   description: string;
-  /** Phrase de marque du brandbook. Tient seule. */
+  /** Phrase de marque. Tient seule, affichée dans le hero. */
   signature?: string;
   email: string;
   phone?: string;
@@ -178,7 +178,6 @@ export interface UITranslations {
     builtWith: string;
     legal: string;
     privacy: string;
-    brand: string;
   };
   notFound: {
     title: string;
@@ -215,7 +214,6 @@ export interface UITranslations {
     clusterCountProjects: string;
     clusterCountSites: string;
   };
-  viewBrandbook: string;
   education: string;
   scrollToTop: string;
   skipToContent: string;
@@ -251,91 +249,6 @@ export interface FunFact {
   text: string;
 }
 
-export interface BrandColorToken {
-  name: string;
-  hex: string;
-  displayValue?: string; // optional override for the displayed value (e.g. "#4f46e5 @ 30%")
-  tailwindClass: string;
-  usage: string;
-  onDark?: boolean; // swatch text must render on dark background
-}
-
-export interface BrandTypographyPairing {
-  family: string;
-  role: string;
-  specimenText: string;
-  weights: string;
-  tailwindClass: string;
-}
-
-export interface BrandTypographyScaleItem {
-  token: string;
-  label: string;
-  example: string;
-  tailwindClass: string;
-}
-
-export interface BrandPrinciple {
-  title: string;
-  description: string;
-  utilityClass?: string;
-}
-
-export interface BrandDoDont {
-  do: string;
-  dont: string;
-}
-
-export interface BrandData {
-  meta: {
-    title: string;
-    description: string;
-    heroLabel: string;
-  };
-  copyFeedback: string; // shown after click-to-copy ("Copié" / "Copied")
-  manifesto: {
-    eyebrow: string;
-    headline: string;
-    paragraphs: string[];
-    signature: {
-      label: string; // mono-label ("Signature")
-      text: string; // la phrase de marque, utilisable seule
-      note: string; // où et comment l'employer
-    };
-  };
-  palette: {
-    eyebrow: string;
-    heading: string;
-    intro: string;
-    tokens: BrandColorToken[];
-  };
-  typography: {
-    eyebrow: string;
-    heading: string;
-    intro: string;
-    pairings: BrandTypographyPairing[];
-    scaleHeading: string;
-    scale: BrandTypographyScaleItem[];
-  };
-  voice: {
-    eyebrow: string;
-    heading: string;
-    intro: string;
-    principles: BrandPrinciple[];
-    doLabel: string;
-    dontLabel: string;
-    doDont: BrandDoDont[];
-  };
-  motion: {
-    eyebrow: string;
-    heading: string;
-    intro: string;
-    principles: BrandPrinciple[];
-    motifsHeading: string;
-    motifsHint: string;
-  };
-}
-
 export interface SiteData {
   personal: PersonalInfo;
   social: SocialLink[];
@@ -350,5 +263,4 @@ export interface SiteData {
   services: Service[];
   funFacts: FunFact[];
   ui: UITranslations;
-  brand: BrandData;
 }
