@@ -168,29 +168,10 @@ describe('getLocalizedPath', () => {
       );
     });
 
-    it('maps FR youtube-impots to EN youtube-taxes', () => {
-      expect(getLocalizedPath('/fr/studio/youtube-impots/', 'en')).toBe(
-        '/en/studio/youtube-taxes/',
-      );
-    });
-
-    it('maps EN youtube-taxes to FR youtube-impots', () => {
-      expect(getLocalizedPath('/en/studio/youtube-taxes/', 'fr')).toBe(
-        '/fr/studio/youtube-impots/',
-      );
-    });
-
-    it('maps FR ebook-ia-education to EN ebook-ai-education', () => {
-      expect(getLocalizedPath('/fr/studio/ebook-ia-education/', 'en')).toBe(
-        '/en/studio/ebook-ai-education/',
-      );
-    });
-
-    it('maps FR accompagnement-entrepreneurial to EN entrepreneurial-mentoring', () => {
-      expect(getLocalizedPath('/fr/studio/accompagnement-entrepreneurial/', 'en')).toBe(
-        '/en/studio/entrepreneurial-mentoring/',
-      );
-    });
+    // Note : les projets youtube-impots/youtube-taxes, ebook-ia-education/ebook-ai-education
+    // et accompagnement-entrepreneurial/entrepreneurial-mentoring ont été retirés du site
+    // (fiches orphelines, non rattachées à un cluster). Leurs cas de mapping de slug ont été
+    // supprimés avec eux.
   });
 
   // ---- Blog paths ----

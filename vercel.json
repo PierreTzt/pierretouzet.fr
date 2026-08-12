@@ -204,6 +204,126 @@
       "source": "/en/hiring/",
       "destination": "/en/work-with-me/",
       "permanent": true
+    },
+    {
+      "source": "/fr/studio/twitch-tech",
+      "destination": "/fr/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/studio/twitch-tech/",
+      "destination": "/fr/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/en/studio/twitch-tech",
+      "destination": "/en/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/en/studio/twitch-tech/",
+      "destination": "/en/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/studio/youtube-impots",
+      "destination": "/fr/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/studio/youtube-impots/",
+      "destination": "/fr/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/en/studio/youtube-taxes",
+      "destination": "/en/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/en/studio/youtube-taxes/",
+      "destination": "/en/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/studio/podcast",
+      "destination": "/fr/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/studio/podcast/",
+      "destination": "/fr/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/en/studio/podcast",
+      "destination": "/en/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/en/studio/podcast/",
+      "destination": "/en/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/studio/newsletter-tech",
+      "destination": "/fr/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/studio/newsletter-tech/",
+      "destination": "/fr/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/en/studio/newsletter-tech",
+      "destination": "/en/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/en/studio/newsletter-tech/",
+      "destination": "/en/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/studio/ebook-ia-education",
+      "destination": "/fr/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/studio/ebook-ia-education/",
+      "destination": "/fr/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/en/studio/ebook-ai-education",
+      "destination": "/en/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/en/studio/ebook-ai-education/",
+      "destination": "/en/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/studio/accompagnement-entrepreneurial",
+      "destination": "/fr/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/studio/accompagnement-entrepreneurial/",
+      "destination": "/fr/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/en/studio/entrepreneurial-mentoring",
+      "destination": "/en/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/en/studio/entrepreneurial-mentoring/",
+      "destination": "/en/studio/",
+      "permanent": true
     }
   ],
   "headers": [
