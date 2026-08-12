@@ -191,15 +191,26 @@ const data = getData(lang);
           try {
             const data = new FormData(form);
             const body = Object.fromEntries(data.entries());
+            const typeSelect = form.querySelector('#contact-type');
+            const typeLabel = typeSelect.options[typeSelect.selectedIndex].text;
+            const labels =
+              document.documentElement.lang === 'fr'
+                ? { name: 'Nom', email: 'Email', type: 'Type' }
+                : { name: 'Name', email: 'Email', type: 'Type' };
             // Send via mailto fallback (no backend needed)
-            const subject = encodeURIComponent(body.type + ': ' + body.name);
+            const subject = encodeURIComponent(typeLabel + ': ' + body.name);
             const mailBody = encodeURIComponent(
-              'Nom: ' +
+              labels.name +
+                ': ' +
                 body.name +
-                '\nEmail: ' +
+                '\n' +
+                labels.email +
+                ': ' +
                 body.email +
-                '\nType: ' +
-                body.type +
+                '\n' +
+                labels.type +
+                ': ' +
+                typeLabel +
                 '\n\n' +
                 body.message,
             );

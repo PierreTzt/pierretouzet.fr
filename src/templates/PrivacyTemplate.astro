@@ -10,7 +10,7 @@ const { lang } = Astro.props;
 const data = getData(lang);
 
 const privacySlug = lang === 'fr' ? 'politique-confidentialite' : 'privacy-policy';
-const LAST_UPDATED = '2026-04-22';
+const LAST_UPDATED = '2026-08-12';
 
 type Section = { title: string; body: string; items?: { label: string; body: string }[] };
 
@@ -30,10 +30,6 @@ const frSections: Section[] = [
       {
         label: "Réservation d'échange (Cal.com)",
         body: 'Si vous utilisez le bouton « Réserver un créneau », vous êtes redirigé vers Cal.com (Cal.com, Inc.) qui agit en tant que responsable du traitement indépendant. Les données de réservation (nom, email, créneau) lui sont transmises directement. Consultez la politique Cal.com : cal.com/privacy.',
-      },
-      {
-        label: "Téléchargement de l'ebook (/ebook)",
-        body: "Le PDF est servi en téléchargement direct. Aucune donnée personnelle n'est collectée pour y accéder.",
       },
       {
         label: "Mesures d'audience (Vercel Analytics, Vercel Speed Insights)",
@@ -108,10 +104,6 @@ const enSections: Section[] = [
       {
         label: 'Booking a meeting (Cal.com)',
         body: "If you use the « Book a slot » button, you are redirected to Cal.com (Cal.com, Inc.) which acts as an independent data controller. Booking data (name, email, slot) is sent directly to them. See Cal.com's policy: cal.com/privacy.",
-      },
-      {
-        label: 'Ebook download (/ebook)',
-        body: 'The PDF is served as a direct download. No personal data is collected to access it.',
       },
       {
         label: 'Audience measurement (Vercel Analytics, Vercel Speed Insights)',
