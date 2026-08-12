@@ -37,15 +37,35 @@
  * La tolérance est étroite par nature sur cette photo : mesuré, 15 donne un
  * détourage propre et 16 fait céder le front. Ne pas l'augmenter sans regarder
  * le résultat composé sur un fond opaque — un PNG à canal alpha prévisualisé
- * seul est trompeur.
+ * seul est trompeur. Un détecteur de fuite chiffré (voir plus bas) échoue
+ * bruyamment si le sujet est mangé, mais il ne dispense pas de regarder le
+ * résultat : il attrape la falaise connue sur cette photo, pas toute
+ * régression possible sur une autre.
  *
- * Usage : node scripts/cutout-portrait.mjs <source> <sortie> [tolérance]
+ * Usage : node scripts/cutout-portrait.mjs <source> <sortie> [tolérance] [--derives]
+ *
+ * `--derives` génère en plus, à côté de <sortie>, les trois dérivés utilisés
+ * par le hero du site : le WebP plein format, et une vignette 400×600 (cadrée
+ * sur les 55% supérieurs de l'image, cadrage par le haut) en PNG et WebP.
+ * Sans ce drapeau, seul le détourage plein format est produit — comportement
+ * historique du script, inchangé.
  */
+import path from 'node:path';
 import sharp from 'sharp';
 
-const SRC = process.argv[2];
-const OUT = process.argv[3];
-const TOL = Number(process.argv[4] ?? 15);
+const USAGE = 'Usage : node scripts/cutout-portrait.mjs <source> <sortie> [tolérance] [--derives]';
+
+const args = process.argv.slice(2);
+const flags = new Set(args.filter((a) => a.startsWith('--')));
+const [SRC, OUT, TOL_ARG] = args.filter((a) => !a.startsWith('--'));
+const GENERATE_DERIVATIVES = flags.has('--derives');
+
+if (!SRC || !OUT) {
+  console.error(USAGE);
+  process.exit(1);
+}
+
+const TOL = Number(TOL_ARG ?? 15);
 
 /** Épaisseur, en pixels, de l'anneau de bordure servant à l'amorçage. */
 const BORDER = 6;
@@ -154,7 +174,9 @@ const distanceTo = (field, p) => {
   const i = p * 4;
   const j = p * 3;
   return (
-    Math.abs(data[i] - field[j]) + Math.abs(data[i + 1] - field[j + 1]) + Math.abs(data[i + 2] - field[j + 2])
+    Math.abs(data[i] - field[j]) +
+    Math.abs(data[i + 1] - field[j + 1]) +
+    Math.abs(data[i + 2] - field[j + 2])
   );
 };
 
@@ -394,6 +416,70 @@ for (let p = 0; p < N; p++) {
   }
 }
 
+// --------------------------------------- garde-fou : détecteur de fuite
+
+/**
+ * Écart max-min entre canaux au-delà duquel un pixel est « franchement
+ * coloré » — donc vraisemblablement du sujet. Le mur est neutre (écart
+ * mesuré de 0 à 8) ; le chino beige et la peau ne le sont pas du tout (51 et
+ * 81, cf. HOLE_MAX_SPREAD ci-dessus). 30 se place confortablement entre les
+ * deux : au-dessus du bruit du mur, en dessous de toute matière du sujet.
+ */
+const SUBJECT_COLOR_SPREAD = 30;
+/**
+ * Plancher de luminance (canal minimal) sous lequel un pixel neutre est du
+ * sujet sombre (cheveux, ombre portée) plutôt que du mur. Mesuré : le fond
+ * va de 121 (coin bas-droit, dans l'ombre) à 181 (zone la plus claire) sur
+ * cette photo — cf. tentative 1 dans task-1-report.md. 110 laisse une marge
+ * sous le point le plus sombre du fond connu.
+ */
+const BACKGROUND_MIN_CHANNEL = 110;
+
+/**
+ * Seuil de fuite, en pourcentage de l'image entière. Le masque final est
+ * comparé à cette estimation grossière de la silhouette attendue (neutre et
+ * clair = fond probable, coloré = sujet probable) pour mesurer deux
+ * fractions : le sujet effacé par erreur, et le fond oublié par erreur. La
+ * seconde n'est qu'informative — elle décroît avec la tolérance, donc ne
+ * signale jamais une fuite. La première est le vrai signal : mesurée sur
+ * cette photo, elle vaut ~0,21% à la tolérance retenue (15, propre) et
+ * saute à ~1,09% dès 16 (moitié gauche du visage mangée) — un facteur 5, la
+ * signature d'une vraie fuite plutôt que du bruit de contour. Le seuil est
+ * placé à 0,5%, à mi-chemin en échelle logarithmique entre les deux, pour
+ * laisser passer 15 avec marge et bloquer 16 avec marge. À réévaluer si ces
+ * deux valeurs de référence changent (autre photo, autre réglage d'érosion).
+ */
+const LEAK_THRESHOLD_PCT = 0.5;
+
+let subjectErased = 0;
+let backgroundRemaining = 0;
+for (let p = 0; p < N; p++) {
+  const i = p * 4;
+  const spread =
+    Math.max(data[i], data[i + 1], data[i + 2]) - Math.min(data[i], data[i + 1], data[i + 2]);
+  if (mask[p] && spread > SUBJECT_COLOR_SPREAD) subjectErased++;
+  if (
+    !mask[p] &&
+    spread <= HOLE_MAX_SPREAD &&
+    Math.min(data[i], data[i + 1], data[i + 2]) > BACKGROUND_MIN_CHANNEL
+  )
+    backgroundRemaining++;
+}
+const subjectErasedPct = (100 * subjectErased) / N;
+const backgroundRemainingPct = (100 * backgroundRemaining) / N;
+console.log(
+  `détecteur de fuite : sujet effacé ${subjectErasedPct.toFixed(2)}% (${subjectErased} px), fond restant ${backgroundRemainingPct.toFixed(2)}% (${backgroundRemaining} px)`,
+);
+if (subjectErasedPct > LEAK_THRESHOLD_PCT) {
+  console.error(
+    `ERREUR : fuite détectée — ${subjectErasedPct.toFixed(2)}% de l'image ressemble à du sujet (écart de canaux > ${SUBJECT_COLOR_SPREAD}) mais a été rendu transparent (seuil ${LEAK_THRESHOLD_PCT}%).`,
+  );
+  console.error(
+    'Action : baissez la tolérance et vérifiez le résultat composé sur un fond opaque avant de relancer — un PNG à canal alpha prévisualisé seul est trompeur.',
+  );
+  process.exit(1);
+}
+
 // ------------------------------------------ adoucissement du masque alpha
 
 // `.toColourspace('b-w')` est indispensable : sans lui, sharp 0.34 réinterprète
@@ -414,11 +500,41 @@ await sharp(data, { raw: { width: W, height: H, channels: 4 } })
 
 const pct = (n) => `${((100 * n) / N).toFixed(1)}%`;
 console.log(`tolérance ${TOL} (seuil Manhattan ${threshold})`);
-console.log('surface d\'amorçage bg_c(u,v) = a + b·u + c·v + d·u² + e·uv + f·v²');
+console.log("surface d'amorçage bg_c(u,v) = a + b·u + c·v + d·u² + e·uv + f·v²");
 for (const [i, name] of ['R', 'G', 'B'].entries()) {
   console.log(`  ${name}: ${coefs[i].map((k) => k.toFixed(2).padStart(9)).join(' ')}`);
 }
-console.log(`anneau : ${ringKept}/${2 * BORDER * (W + H) - 4 * BORDER * BORDER} échantillons retenus`);
+console.log(
+  `anneau : ${ringKept}/${2 * BORDER * (W + H) - 4 * BORDER * BORDER} échantillons retenus`,
+);
 console.log(`champ local r=${FIELD_RADIUS} : repli paramétrique sur ${pct(fellBack)} de l'image`);
 console.log(`enclaves de fond rouvertes : ${enclaves.length} px`);
 console.log(`fraction transparente ${pct(transparent)} → ${OUT}`);
+
+// -------------------------------------------------- dérivés (--derives)
+
+if (GENERATE_DERIVATIVES) {
+  // Noms dérivés du chemin de sortie : foo.png → foo.webp, foo-sm.png,
+  // foo-sm.webp. Générique, pour rester utilisable sur n'importe quel
+  // chemin de sortie plutôt que de viser public/images/ en dur.
+  const ext = path.extname(OUT);
+  const base = ext ? OUT.slice(0, -ext.length) : OUT;
+  const fullWebp = `${base}.webp`;
+  const smPng = `${base}-sm.png`;
+  const smWebp = `${base}-sm.webp`;
+
+  await sharp(OUT).webp({ quality: 90 }).toFile(fullWebp);
+
+  // Vignette 400×600 : cadrée sur les 55% supérieurs de l'image (le visage
+  // et les épaules), redimensionnée avec un cadrage par le haut. Paramètres
+  // repris de .superpowers/sdd/task-1-brief.md, section « Step 3 ».
+  const cropHeight = Math.round(H * 0.55);
+  const thumbnail = () =>
+    sharp(OUT)
+      .extract({ left: 0, top: 0, width: W, height: cropHeight })
+      .resize(400, 600, { fit: 'cover', position: 'top' });
+  await thumbnail().png({ compressionLevel: 9 }).toFile(smPng);
+  await thumbnail().webp({ quality: 90 }).toFile(smWebp);
+
+  console.log(`dérivés générés : ${fullWebp}, ${smPng}, ${smWebp}`);
+}
