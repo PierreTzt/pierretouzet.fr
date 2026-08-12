@@ -93,7 +93,7 @@ export const data: SiteData = {
       shortDescription:
         "Plateforme de formation en ligne sur l'IA générative : des cours courts, denses et à jour pour monter en compétences vite et bien.",
       longDescription:
-        "J'ai créé Distil pour répondre à une frustration : les formations IA sont soit trop longues, soit déjà obsolètes. Distil filtre le bruit et ne garde que ce qui marche. 25 modules, 42 leçons de 10-15 min, accès à vie et mises à jour régulières. Une pédagogie condensée, pensée pour les professionnels qui veulent des résultats concrets sans y passer des mois.",
+        "J'ai créé Distil pour répondre à une frustration : les formations IA sont soit trop longues, soit déjà obsolètes. Distil filtre le bruit et ne garde que ce qui marche. 25 modules, 42 leçons de 10-15 min, accès à vie. Une pédagogie condensée, pensée pour les professionnels qui veulent des résultats concrets sans y passer des mois.",
       technologies: ['Astro', 'Tailwind CSS', 'Vercel', 'PostHog'],
       imageAlt: 'Interface de Distil Academy - plateforme de formation IA',
       demoUrl: 'https://www.distil.academy/',
@@ -103,10 +103,9 @@ export const data: SiteData = {
       metrics: [
         { label: 'Format', value: 'Leçons de 10-15 min' },
         { label: 'Accès', value: 'À vie' },
-        { label: 'Mises à jour', value: 'Continues' },
       ],
       story:
-        "Les formations IA disponibles m'ont toujours frustré : soit des vidéos YouTube déjà périmées, soit des cursus à 2000€ qui recyclent les mêmes contenus. Je me suis dit : et si je créais la formation que j'aurais aimé suivre ? Des modules de moins d'une heure, des leçons de 10-15 min, uniquement ce qui fonctionne sur le terrain. Pas de hype, pas de théorie creuse — du concret, testé et mis à jour en continu. Distil est né de cette conviction : l'IA évolue trop vite pour des formations figées.",
+        "Les formations IA disponibles m'ont toujours frustré : soit des vidéos YouTube déjà périmées, soit des cursus à 2000€ qui recyclent les mêmes contenus. Je me suis dit : et si je créais la formation que j'aurais aimé suivre ? Des modules de moins d'une heure, des leçons de 10-15 min, uniquement ce qui fonctionne sur le terrain. Pas de hype, pas de théorie creuse — du concret, testé sur le terrain. Distil est né de cette conviction : l'IA évolue trop vite pour des formations figées.",
       features: [
         {
           title: 'Cours courts et denses',
@@ -116,7 +115,7 @@ export const data: SiteData = {
         {
           title: 'Accès à vie + mises à jour',
           description:
-            "Un seul achat, un accès permanent. Les cours sont mis à jour régulièrement pour suivre l'évolution de l'IA.",
+            "Un seul achat, un accès permanent. Les cours seront actualisés à la relance, pour suivre l'évolution de l'IA.",
         },
         {
           title: 'Contenu filtré et testé',
@@ -135,9 +134,9 @@ export const data: SiteData = {
       slug: 'gradly',
       title: 'Gradly',
       shortDescription:
-        "Temps administratif ÷ 3 : l'outil qui automatise les bulletins de compétences RNCP pour les centres de formation.",
+        "L'outil qui automatise les bulletins de compétences RNCP pour les centres de formation.",
       longDescription:
-        "J'ai conçu Gradly pour résoudre un problème que je vivais au quotidien : les responsables pédagogiques passent des heures à produire manuellement des bulletins de compétences RNCP. Solution 100% offline pour garantir la souveraineté des données, import/export Excel/CSV, génération de bulletins PDF conformes aux référentiels. Compatible avec les ERP du marché (Yparéo). Résultat : le temps administratif divisé par 3.",
+        "J'ai conçu Gradly pour résoudre un problème que je vivais au quotidien : les responsables pédagogiques passent des heures à produire manuellement des bulletins de compétences RNCP. Solution 100% offline pour garantir la souveraineté des données, import/export Excel/CSV, génération de bulletins PDF conformes aux référentiels. Compatible avec les ERP du marché (Yparéo).",
       technologies: ['No-code', 'Excel/CSV', 'PDF', 'Offline-first', 'ERP'],
       imageAlt: 'Interface de Gradly - gestion des bulletins RNCP',
       demoUrl: 'https://www.gradly.fr/',
@@ -145,12 +144,11 @@ export const data: SiteData = {
       status: 'unsold',
       period: "2023 — Aujourd'hui",
       metrics: [
-        { label: 'Temps admin', value: '÷ 3' },
         { label: 'Données', value: '100% offline' },
         { label: 'Compatibilité', value: 'Yparéo & ERP' },
       ],
       story:
-        "Chaque semestre, je voyais la même scène se répéter : des coordinateurs pédagogiques enfermés dans leur bureau pendant des jours, copiant-collant des notes dans des tableaux Excel pour produire des bulletins de compétences conformes au RNCP. Des heures de travail répétitif, source d'erreurs et de frustration. Je me suis dit : \"Si je vis ce problème, des centaines d'autres le vivent aussi.\" J'ai commencé par un prototype pour mon propre usage. Puis les collègues l'ont voulu. Puis d'autres campus. Gradly est né de ce constat terrain — pas d'une étude de marché, mais d'une douleur réelle.",
+        "Chaque semestre, je voyais la même scène se répéter : des coordinateurs pédagogiques enfermés dans leur bureau pendant des jours, copiant-collant des notes dans des tableaux Excel pour produire des bulletins de compétences conformes au RNCP. Des heures de travail répétitif, source d'erreurs et de frustration. Je me suis dit : \"Si je vis ce problème, des centaines d'autres le vivent aussi.\" J'ai commencé par un prototype pour mon propre usage, avec l'idée de l'étendre à d'autres coordinateurs, puis à d'autres campus. Gradly est né de ce constat terrain — pas d'une étude de marché, mais d'une douleur réelle.",
       features: [
         {
           title: '100% offline — souveraineté des données',
@@ -168,9 +166,9 @@ export const data: SiteData = {
             "Génération automatique de bulletins de compétences conformes aux référentiels RNCP. Blocs, compétences, niveaux d'acquisition — tout est calculé et mis en forme.",
         },
         {
-          title: 'Temps administratif divisé par 3',
+          title: 'Automatisation du temps administratif',
           description:
-            "Ce qui prenait des jours se fait maintenant en quelques heures. Les coordinateurs peuvent se concentrer sur l'accompagnement, pas sur la paperasse.",
+            "Remplace les heures de copier-coller en Excel par une génération automatique. L'objectif : libérer les coordinateurs pour l'accompagnement, pas la paperasse.",
         },
       ],
     },
@@ -480,7 +478,7 @@ export const data: SiteData = {
       title: 'Éducation & pédagogie',
       description:
         "Des plateformes et études de cas pour transformer l'expérience d'apprentissage.",
-      verdict: 'Un client interne refusé, un produit qui convertit un peu. Relance en cours.',
+      verdict: 'Un produit non vendu, un autre qui convertit un peu. Relance en cours.',
       entries: [
         { kind: 'project', projectSlug: 'distil-academy' },
         { kind: 'project', projectSlug: 'gradly' },

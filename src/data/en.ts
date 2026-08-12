@@ -93,7 +93,7 @@ export const data: SiteData = {
       shortDescription:
         'Online training platform for generative AI: short, dense, up-to-date courses to skill up fast.',
       longDescription:
-        'I built Distil out of frustration: AI courses are either too long or already outdated. Distil cuts through the noise and keeps only what works. 25 modules, 42 lessons of 10-15 min each, lifetime access and regular updates. Condensed pedagogy designed for professionals who want real results without spending months.',
+        'I built Distil out of frustration: AI courses are either too long or already outdated. Distil cuts through the noise and keeps only what works. 25 modules, 42 lessons of 10-15 min each, lifetime access. Condensed pedagogy designed for professionals who want real results without spending months.',
       technologies: ['Astro', 'Tailwind CSS', 'Vercel', 'PostHog'],
       imageAlt: 'Distil Academy interface - AI training platform',
       demoUrl: 'https://www.distil.academy/',
@@ -103,10 +103,9 @@ export const data: SiteData = {
       metrics: [
         { label: 'Format', value: '10-15 min lessons' },
         { label: 'Access', value: 'Lifetime' },
-        { label: 'Updates', value: 'Continuous' },
       ],
       story:
-        "Available AI courses always frustrated me: either outdated YouTube videos or €2,000 programs recycling the same content. I thought: what if I built the course I wish I'd taken? Modules under one hour, 10-15 min lessons, only what works in the field. No hype, no hollow theory — just concrete, tested content updated continuously. Distil was born from this conviction: AI moves too fast for static courses.",
+        "Available AI courses always frustrated me: either outdated YouTube videos or €2,000 programs recycling the same content. I thought: what if I built the course I wish I'd taken? Modules under one hour, 10-15 min lessons, only what works in the field. No hype, no hollow theory — just concrete, field-tested content. Distil was born from this conviction: AI moves too fast for static courses.",
       features: [
         {
           title: 'Short, dense courses',
@@ -116,7 +115,7 @@ export const data: SiteData = {
         {
           title: 'Lifetime access + updates',
           description:
-            'One purchase, permanent access. Courses are regularly updated to keep pace with AI evolution.',
+            'One purchase, permanent access. Courses will be refreshed at relaunch, to keep pace with AI evolution.',
         },
         {
           title: 'Filtered, tested content',
@@ -134,10 +133,9 @@ export const data: SiteData = {
       id: 'gradly',
       slug: 'gradly',
       title: 'Gradly',
-      shortDescription:
-        'Admin time ÷ 3: the tool that automates RNCP competency bulletins for training centers.',
+      shortDescription: 'The tool that automates RNCP competency bulletins for training centers.',
       longDescription:
-        'I built Gradly to solve a problem I lived every day: program directors spending hours manually producing RNCP competency bulletins. A 100% offline solution ensuring data sovereignty, Excel/CSV import/export, and compliant PDF bulletin generation. Compatible with market ERPs (Yparéo). Result: administrative time divided by 3.',
+        'I built Gradly to solve a problem I lived every day: program directors spending hours manually producing RNCP competency bulletins. A 100% offline solution ensuring data sovereignty, Excel/CSV import/export, and compliant PDF bulletin generation. Compatible with market ERPs (Yparéo).',
       technologies: ['No-code', 'Excel/CSV', 'PDF', 'Offline-first', 'ERP'],
       imageAlt: 'Gradly interface - RNCP bulletin management',
       demoUrl: 'https://www.gradly.fr/',
@@ -145,12 +143,11 @@ export const data: SiteData = {
       status: 'unsold',
       period: '2023 — Present',
       metrics: [
-        { label: 'Admin time', value: '÷ 3' },
         { label: 'Data', value: '100% offline' },
         { label: 'Compatibility', value: 'Yparéo & ERP' },
       ],
       story:
-        'Every semester, I watched the same scene unfold: academic coordinators locked in their offices for days, copy-pasting grades into Excel spreadsheets to produce RNCP-compliant competency bulletins. Hours of repetitive work, prone to errors and frustration. I thought: "If I\'m living this problem, hundreds of others are too." I started with a prototype for my own use. Then colleagues wanted it. Then other campuses. Gradly was born from this field observation — not from a market study, but from real pain.',
+        'Every semester, I watched the same scene unfold: academic coordinators locked in their offices for days, copy-pasting grades into Excel spreadsheets to produce RNCP-compliant competency bulletins. Hours of repetitive work, prone to errors and frustration. I thought: "If I\'m living this problem, hundreds of others are too." I started with a prototype for my own use, with the idea of extending it to other coordinators, then other campuses. Gradly was born from this field observation — not from a market study, but from real pain.',
       features: [
         {
           title: '100% offline — data sovereignty',
@@ -168,9 +165,9 @@ export const data: SiteData = {
             'Automatic generation of competency bulletins that comply with RNCP standards. Blocks, competencies, acquisition levels — everything is calculated and formatted.',
         },
         {
-          title: 'Admin time divided by 3',
+          title: 'Administrative time, automated',
           description:
-            'What used to take days now takes hours. Coordinators can focus on supporting learners, not on paperwork.',
+            'Replaces hours of copy-pasting in Excel with automatic generation. The goal: free coordinators for supporting learners, not paperwork.',
         },
       ],
     },
@@ -472,7 +469,7 @@ export const data: SiteData = {
       id: 'education-pedagogy',
       title: 'Education & pedagogy',
       description: 'Platforms and case studies to reshape the learning experience.',
-      verdict: 'One internal client said no, one product converts a little. Relaunch under way.',
+      verdict: 'One product unsold, another converting a little. Relaunch under way.',
       entries: [
         { kind: 'project', projectSlug: 'distil-academy' },
         { kind: 'project', projectSlug: 'gradly' },

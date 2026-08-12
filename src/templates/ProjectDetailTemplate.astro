@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getData } from '../i18n/utils';
+import { getStatusDisplay } from '../utils/status-display';
 import type { Project } from '../data/types';
 
 interface Props {
@@ -11,6 +12,8 @@ interface Props {
 
 const { lang, project } = Astro.props;
 const data = getData(lang);
+
+const statusDisplay = project.status ? getStatusDisplay(project.status, lang) : null;
 
 const studioPath = `/${lang}/studio/`;
 const homePath = `/${lang}/`;
@@ -63,6 +66,18 @@ const projectImage = images[`/src/assets/images/project-${imageSlug}.png`]?.defa
         <h1 class="font-display text-heading text-zinc-900 dark:text-zinc-50 font-bold mb-4">
           {project.title}
         </h1>
+        {
+          statusDisplay && (
+            <span
+              class:list={[
+                'font-mono text-caption uppercase tracking-wider px-2 py-0.5 rounded-xs',
+                statusDisplay.class,
+              ]}
+            >
+              {statusDisplay.label}
+            </span>
+          )
+        }
         <div class="h-px bg-linear-to-r from-accent-500 via-electric-500 to-transparent mt-6"></div>
       </div>
 
@@ -92,20 +107,20 @@ const projectImage = images[`/src/assets/images/project-${imageSlug}.png`]?.defa
 
       {
         project.metrics && project.metrics.length > 0 && (
-          <div
-            class="scroll-reveal grid grid-cols-3 gap-px bg-zinc-200 dark:bg-zinc-800 mb-12"
-            style="transition-delay: 150ms"
-          >
-            {project.metrics.map((metric) => (
-              <div class="bg-white dark:bg-zinc-900/80 p-6 text-center">
-                <p class="font-display text-2xl md:text-3xl font-bold text-accent-500 mb-1">
-                  {metric.value}
-                </p>
-                <p class="font-mono text-caption uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
-                  {metric.label}
-                </p>
-              </div>
-            ))}
+          <div class="scroll-reveal mb-12" style="transition-delay: 150ms">
+            <h2 class="mono-label mb-4 block">{data.ui.project.metrics}</h2>
+            <div class="grid grid-cols-3 gap-px bg-zinc-200 dark:bg-zinc-800">
+              {project.metrics.map((metric) => (
+                <div class="bg-white dark:bg-zinc-900/80 p-6 text-center">
+                  <p class="font-display text-2xl md:text-3xl font-bold text-accent-500 mb-1">
+                    {metric.value}
+                  </p>
+                  <p class="font-mono text-caption uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                    {metric.label}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         )
       }
@@ -120,7 +135,7 @@ const projectImage = images[`/src/assets/images/project-${imageSlug}.png`]?.defa
       {
         project.story && (
           <div class="scroll-reveal mb-12" style="transition-delay: 220ms">
-            <span class="mono-label mb-4 block">{data.ui.project.story}</span>
+            <h2 class="mono-label mb-4 block">{data.ui.project.story}</h2>
             <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-2xl italic border-l-2 border-accent-500/30 pl-4">
               {project.story}
             </p>
@@ -131,7 +146,7 @@ const projectImage = images[`/src/assets/images/project-${imageSlug}.png`]?.defa
       {
         project.features && project.features.length > 0 && (
           <div class="scroll-reveal mb-12" style="transition-delay: 240ms">
-            <span class="mono-label mb-6 block">{data.ui.project.features}</span>
+            <h2 class="mono-label mb-6 block">{data.ui.project.features}</h2>
             <div class="grid md:grid-cols-2 gap-px bg-zinc-200 dark:bg-zinc-800">
               {project.features.map((feature, i) => (
                 <div class="bg-white dark:bg-zinc-900/80 p-6">
@@ -152,7 +167,7 @@ const projectImage = images[`/src/assets/images/project-${imageSlug}.png`]?.defa
       }
 
       <div class="scroll-reveal mb-12" style="transition-delay: 250ms">
-        <span class="mono-label mb-4 block">{data.ui.project.technologies}</span>
+        <h2 class="mono-label mb-4 block">{data.ui.project.technologies}</h2>
         <div class="flex flex-wrap gap-2">
           {
             project.technologies.map((tech) => (
