@@ -5,26 +5,206 @@
       "destination": "/fr/",
       "permanent": false
     },
-    { "source": "/fr/projets", "destination": "/fr/studio", "permanent": true },
-    { "source": "/fr/projets/:slug", "destination": "/fr/studio/:slug", "permanent": true },
-    { "source": "/en/projects", "destination": "/en/studio", "permanent": true },
-    { "source": "/en/projects/:slug", "destination": "/en/studio/:slug", "permanent": true },
-    { "source": "/fr/competences", "destination": "/fr/", "permanent": true },
-    { "source": "/en/skills", "destination": "/en/", "permanent": true },
-    { "source": "/fr/bonjour", "destination": "/fr/", "permanent": true },
-    { "source": "/en/hello", "destination": "/en/", "permanent": true },
-    { "source": "/fr/faq", "destination": "/fr/contact/", "permanent": true },
-    { "source": "/en/faq", "destination": "/en/contact/", "permanent": true },
-    { "source": "/fr/ebook", "destination": "/fr/blog/", "permanent": true },
-    { "source": "/en/ebook", "destination": "/en/blog/", "permanent": true },
-    { "source": "/fr/speaker", "destination": "/fr/", "permanent": true },
-    { "source": "/en/speaker", "destination": "/en/", "permanent": true },
-    { "source": "/fr/brand", "destination": "/fr/", "permanent": true },
-    { "source": "/en/brand", "destination": "/en/", "permanent": true },
-    { "source": "/fr/consulting", "destination": "/fr/travailler-ensemble/", "permanent": true },
-    { "source": "/en/consulting", "destination": "/en/work-with-me/", "permanent": true },
-    { "source": "/fr/recrutement", "destination": "/fr/travailler-ensemble/", "permanent": true },
-    { "source": "/en/hiring", "destination": "/en/work-with-me/", "permanent": true }
+    {
+      "source": "/fr/projets",
+      "destination": "/fr/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/projets/",
+      "destination": "/fr/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/projets/:slug",
+      "destination": "/fr/studio/:slug/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/projets/:slug/",
+      "destination": "/fr/studio/:slug/",
+      "permanent": true
+    },
+    {
+      "source": "/en/projects",
+      "destination": "/en/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/en/projects/",
+      "destination": "/en/studio/",
+      "permanent": true
+    },
+    {
+      "source": "/en/projects/:slug",
+      "destination": "/en/studio/:slug/",
+      "permanent": true
+    },
+    {
+      "source": "/en/projects/:slug/",
+      "destination": "/en/studio/:slug/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/competences",
+      "destination": "/fr/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/competences/",
+      "destination": "/fr/",
+      "permanent": true
+    },
+    {
+      "source": "/en/skills",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/skills/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/bonjour",
+      "destination": "/fr/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/bonjour/",
+      "destination": "/fr/",
+      "permanent": true
+    },
+    {
+      "source": "/en/hello",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/hello/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/faq",
+      "destination": "/fr/contact/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/faq/",
+      "destination": "/fr/contact/",
+      "permanent": true
+    },
+    {
+      "source": "/en/faq",
+      "destination": "/en/contact/",
+      "permanent": true
+    },
+    {
+      "source": "/en/faq/",
+      "destination": "/en/contact/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/ebook",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/ebook/",
+      "destination": "/fr/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/ebook",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/en/ebook/",
+      "destination": "/en/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/speaker",
+      "destination": "/fr/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/speaker/",
+      "destination": "/fr/",
+      "permanent": true
+    },
+    {
+      "source": "/en/speaker",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/speaker/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/brand",
+      "destination": "/fr/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/brand/",
+      "destination": "/fr/",
+      "permanent": true
+    },
+    {
+      "source": "/en/brand",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/en/brand/",
+      "destination": "/en/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/consulting",
+      "destination": "/fr/travailler-ensemble/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/consulting/",
+      "destination": "/fr/travailler-ensemble/",
+      "permanent": true
+    },
+    {
+      "source": "/en/consulting",
+      "destination": "/en/work-with-me/",
+      "permanent": true
+    },
+    {
+      "source": "/en/consulting/",
+      "destination": "/en/work-with-me/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/recrutement",
+      "destination": "/fr/travailler-ensemble/",
+      "permanent": true
+    },
+    {
+      "source": "/fr/recrutement/",
+      "destination": "/fr/travailler-ensemble/",
+      "permanent": true
+    },
+    {
+      "source": "/en/hiring",
+      "destination": "/en/work-with-me/",
+      "permanent": true
+    },
+    {
+      "source": "/en/hiring/",
+      "destination": "/en/work-with-me/",
+      "permanent": true
+    }
   ],
   "headers": [
     {
@@ -57,12 +237,30 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
-        { "key": "X-DNS-Prefetch-Control", "value": "on" },
-        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "X-DNS-Prefetch-Control",
+          "value": "on"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
         {
           "key": "Content-Security-Policy",
           "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com https://*.sentry.io; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https:; font-src 'self'; connect-src 'self' https://va.vercel-scripts.com https://api.anthropic.com https://*.sentry.io; frame-ancestors 'none'; base-uri 'self'; form-action 'self'"
