@@ -18,8 +18,6 @@ const data = getData(lang);
 const latestExp = data.experiences[0];
 const topCategory = data.skillCategories[0];
 
-const trustedBy = lang === 'fr' ? "Ils m'ont fait confiance" : 'Trusted by';
-
 // Build localized paths using the i18n utility
 const studioPath = `/${lang}/studio/`;
 const experiencesPath = getLocalizedPath('/fr/experiences/', lang);
@@ -39,11 +37,11 @@ const latestPosts = (await getCollection('blog', ({ data }) => data.lang === lan
 >
   <Hero lang={lang} />
 
-  <Metrics metrics={data.keyMetrics} trustedBy={trustedBy} />
-
   <LedgerScore lang={lang} />
 
   <LedgerSection lang={lang} />
+
+  <Metrics metrics={data.keyMetrics} />
 
   <!-- === DASHBOARD GRID === -->
   <section aria-label={lang === 'fr' ? 'Tableau de bord' : 'Dashboard'} class="px-6 pb-6">

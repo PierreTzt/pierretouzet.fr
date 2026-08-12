@@ -100,7 +100,6 @@ export interface SkillCategory {
 
 export interface Skill {
   name: string;
-  level: number; // 0-100
   highlighted?: boolean;
   badge?: string; // e.g. "Certifié CNIL", "6 campus"
 }
