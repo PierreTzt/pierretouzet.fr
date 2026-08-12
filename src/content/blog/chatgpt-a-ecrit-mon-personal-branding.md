@@ -8,7 +8,7 @@ tags: ['IA', 'Personal branding', 'Écriture']
 
 En juillet 2025, un mois avant de construire [ce site](/fr/), j'ai fait l'exercice classique avec ChatGPT : définir ma marque personnelle. Questionnaire complet — mission, valeurs, passions — puis génération d'une signature, d'une ligne éditoriale et d'un exemple d'article.
 
-Onze mois plus tard, le site existe, le [brandbook](/fr/brand/) aussi. J'ai ressorti le document d'origine et j'ai fait le diff.
+Onze mois plus tard, le site existe, le brandbook aussi. J'ai ressorti le document d'origine et j'ai fait le diff.
 
 ## Ce que ChatGPT avait produit
 
@@ -34,7 +34,7 @@ Pourquoi ça a tenu ? Parce que ce n'est pas ChatGPT qui l'a produit. Le fond ve
 
 La signature n'a jamais été utilisée. Nulle part. Pas une page, pas une bio, pas un post. Elle a été remplacée par **« Le sens avant l'outil »** — quatre mots trouvés en écrivant le manifesto, pas en brainstormant des taglines.
 
-Quant au ton, l'exemple d'article de 2025 viole aujourd'hui à peu près chaque règle de ma section [Voix & ton](/fr/brand/) :
+Quant au ton, l'exemple d'article de 2025 viole aujourd'hui à peu près chaque règle de ma section Voix & ton :
 
 | 2025 (ChatGPT)                                | 2026 (brandbook)                      |
 | --------------------------------------------- | ------------------------------------- |

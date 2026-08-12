@@ -743,7 +743,7 @@ export const data: SiteData = {
     },
     hiring: {
       title: 'Travailler ensemble',
-      subtitle: "En poste, pas fermé. Voici ce que je pilote aujourd'hui.",
+      subtitle: 'En poste, pas fermé. Ce que je pilote, et ce sur quoi je peux intervenir.',
       whyMe: 'En chiffres',
     },
     blog: {

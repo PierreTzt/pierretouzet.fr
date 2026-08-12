@@ -13,18 +13,18 @@
     { "source": "/en/skills", "destination": "/en/", "permanent": true },
     { "source": "/fr/bonjour", "destination": "/fr/", "permanent": true },
     { "source": "/en/hello", "destination": "/en/", "permanent": true },
-    { "source": "/fr/faq", "destination": "/fr/contact", "permanent": true },
-    { "source": "/en/faq", "destination": "/en/contact", "permanent": true },
-    { "source": "/fr/ebook", "destination": "/fr/blog", "permanent": true },
-    { "source": "/en/ebook", "destination": "/en/blog", "permanent": true },
+    { "source": "/fr/faq", "destination": "/fr/contact/", "permanent": true },
+    { "source": "/en/faq", "destination": "/en/contact/", "permanent": true },
+    { "source": "/fr/ebook", "destination": "/fr/blog/", "permanent": true },
+    { "source": "/en/ebook", "destination": "/en/blog/", "permanent": true },
     { "source": "/fr/speaker", "destination": "/fr/", "permanent": true },
     { "source": "/en/speaker", "destination": "/en/", "permanent": true },
     { "source": "/fr/brand", "destination": "/fr/", "permanent": true },
     { "source": "/en/brand", "destination": "/en/", "permanent": true },
-    { "source": "/fr/consulting", "destination": "/fr/travailler-ensemble", "permanent": true },
-    { "source": "/en/consulting", "destination": "/en/work-with-me", "permanent": true },
-    { "source": "/fr/recrutement", "destination": "/fr/travailler-ensemble", "permanent": true },
-    { "source": "/en/hiring", "destination": "/en/work-with-me", "permanent": true }
+    { "source": "/fr/consulting", "destination": "/fr/travailler-ensemble/", "permanent": true },
+    { "source": "/en/consulting", "destination": "/en/work-with-me/", "permanent": true },
+    { "source": "/fr/recrutement", "destination": "/fr/travailler-ensemble/", "permanent": true },
+    { "source": "/en/hiring", "destination": "/en/work-with-me/", "permanent": true }
   ],
   "headers": [
     {

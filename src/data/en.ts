@@ -729,7 +729,7 @@ export const data: SiteData = {
     },
     hiring: {
       title: 'Working together',
-      subtitle: 'In post, not closed. Here is what I run today.',
+      subtitle: 'Employed, not unavailable. What I run, and what I can work on.',
       whyMe: 'By the numbers',
     },
     blog: {

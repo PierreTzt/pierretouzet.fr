@@ -8,7 +8,7 @@ tags: ['AI', 'Personal branding', 'Writing']
 
 In July 2025, one month before building [this site](/en/), I did the classic exercise with ChatGPT: define my personal brand. Full questionnaire — mission, values, passions — then generation of a signature line, an editorial strategy, and a sample article.
 
-Eleven months later, the site exists, and so does the [brandbook](/en/brand/). I pulled up the original document and ran the diff.
+Eleven months later, the site exists, and so does the brandbook. I pulled up the original document and ran the diff.
 
 ## What ChatGPT had produced
 
@@ -34,7 +34,7 @@ Why did it hold? Because ChatGPT didn't produce it. The substance came from my a
 
 The signature line was never used. Anywhere. Not one page, not one bio, not one post. It was replaced by **"Intent before the tool"** — four words found while writing the manifesto, not while brainstorming taglines.
 
-As for tone, the 2025 sample article now violates just about every rule in my [Voice & tone](/en/brand/) section:
+As for tone, the 2025 sample article now violates just about every rule in my Voice & tone section:
 
 | 2025 (ChatGPT)                      | 2026 (brandbook)              |
 | ----------------------------------- | ----------------------------- |

@@ -12,7 +12,7 @@ const { lang } = Astro.props;
 const data = getData(lang);
 const topSkills = data.skillCategories.flatMap((c) => c.skills).filter((s) => s.highlighted);
 
-const emailSubject = lang === 'fr' ? 'Opportunité de recrutement' : 'Hiring opportunity';
+const emailSubject = lang === 'fr' ? 'Travailler ensemble' : 'Working together';
 ---
 
 <BaseLayout

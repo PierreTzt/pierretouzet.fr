@@ -117,7 +117,7 @@ npm run preview      # sert dist/ en local
 │   └── content.config.ts           Schéma Zod des articles
 ├── docs/audits/                    Archives d'analyses / audits
 ├── astro.config.mjs                Config Astro (adapter Vercel, sitemap, i18n)
-├── vercel.json                     Headers HTTP (CSP, HSTS, permissions)
+├── vercel.json                     Redirections + headers HTTP (CSP, HSTS, permissions)
 └── DEVELOPER_GUIDE.md              Guide complet pour novices
 ```
 
@@ -161,7 +161,7 @@ Pour une explication détaillée de chaque zone, voir [DEVELOPER_GUIDE.md §5](.
 ### i18n
 
 - Routes préfixées `/fr/…` et `/en/…`, FR par défaut
-- Slugs traduits (`competences`↔`skills`, `projets`↔`projects`, `mentions-legales`↔`legal`…)
+- Slugs traduits (`travailler-ensemble`↔`work-with-me`, `mentions-legales`↔`legal`, `politique-confidentialite`↔`privacy-policy`…)
 - Détection automatique côté client via `navigator.language` sur `/`
 - Un fichier de données par langue, structure stricte via TypeScript
 

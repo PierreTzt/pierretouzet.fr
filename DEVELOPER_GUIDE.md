@@ -287,7 +287,7 @@ En détail :
 
 Le site est bilingue. Pour éviter d'avoir deux copies du code, on sépare :
 
-- `src/data/fr.ts` — toutes les données en français (projets, expériences, textes UI, services, FAQ, etc.)
+- `src/data/fr.ts` — toutes les données en français (projets, expériences, textes UI, services, etc.)
 - `src/data/en.ts` — les mêmes données en anglais
 - `src/data/types.ts` — la **forme** de ces données : quels champs existent, de quel type
 
@@ -339,12 +339,12 @@ Renvoie l'objet `data` correspondant à la langue.
 
 ### `getLocalizedPath(currentPath, targetLang)`
 Transforme l'URL actuelle vers l'équivalent dans l'autre langue.
-Exemple : `/fr/competences/` → `/en/skills/`.
+Exemple : `/fr/travailler-ensemble/` → `/en/work-with-me/`.
 
 Pourquoi c'est nécessaire ? Parce que les slugs d'URL sont traduits :
-- `competences` ↔ `skills`
-- `projets` ↔ `projects`
+- `travailler-ensemble` ↔ `work-with-me`
 - `mentions-legales` ↔ `legal`
+- `politique-confidentialite` ↔ `privacy-policy`
 
 Il y a une table de correspondance `pageSlugMap` au début du fichier. Si tu ajoutes une page bilingue avec des URLs différentes, ajoute une entrée ici.
 
