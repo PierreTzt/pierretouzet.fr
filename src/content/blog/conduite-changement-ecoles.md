@@ -4,6 +4,7 @@ description: "Pourquoi la plupart des projets de transformation digitale échoue
 date: 2026-02-18
 lang: fr
 tags: ['Transformation digitale', 'Conduite du changement', 'Enseignement supérieur']
+translationKey: 'change-management-schools'
 ---
 
 J'ai déployé des outils numériques sur 6 campus en 3 ans. Des LMS, des outils d'évaluation, des plateformes de signature, des systèmes de gestion de notes — [dont Gradly pour les bulletins RNCP](/fr/blog/rncp-automatisation-gradly/).

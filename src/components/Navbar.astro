@@ -7,9 +7,11 @@ import { getData } from '../i18n/utils';
 interface Props {
   lang: Lang;
   currentPath: string;
+  /** Voir BaseLayout — destination explicite transmise à LanguageSwitcher. */
+  languageSwitcherDestination?: string;
 }
 
-const { lang, currentPath } = Astro.props;
+const { lang, currentPath, languageSwitcherDestination } = Astro.props;
 const { ui, personal } = getData(lang);
 
 const prefix = `/${lang}`;
@@ -62,13 +64,21 @@ function isActive(href: string): boolean {
           ))
         }
         <span class="w-px h-4 bg-zinc-200 dark:bg-zinc-800"></span>
-        <LanguageSwitcher lang={lang} label={ui.switchLang} />
+        <LanguageSwitcher
+          lang={lang}
+          label={ui.switchLang}
+          destination={languageSwitcherDestination}
+        />
         <ThemeToggle label={ui.toggleTheme} />
       </div>
 
       <!-- Mobile -->
       <div class="flex items-center gap-3 md:hidden">
-        <LanguageSwitcher lang={lang} label={ui.switchLang} />
+        <LanguageSwitcher
+          lang={lang}
+          label={ui.switchLang}
+          destination={languageSwitcherDestination}
+        />
         <ThemeToggle label={ui.toggleTheme} />
         <button
           id="mobile-menu-btn"

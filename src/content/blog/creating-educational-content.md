@@ -4,6 +4,7 @@ description: "Everyone says you should create content. Nobody says it's a real c
 date: 2026-01-10
 lang: en
 tags: ['Content', 'Education', 'Creation']
+translationKey: 'creating-educational-content'
 ---
 
 "You should create content." If I had a euro every time someone told me that...

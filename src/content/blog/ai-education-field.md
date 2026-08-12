@@ -4,6 +4,7 @@ description: "A field report on the concrete use of generative AI in a school ne
 date: 2026-03-07
 lang: en
 tags: ['AI', 'Education', 'Field']
+translationKey: 'ai-education-field'
 ---
 
 Everyone talks about AI in education. Conferences multiply, white papers pile up, vendors release "AI solutions" every week.

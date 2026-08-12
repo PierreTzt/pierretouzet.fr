@@ -4,6 +4,7 @@ description: "Retour d'expérience sur l'utilisation concrète de l'IA générat
 date: 2026-03-07
 lang: fr
 tags: ['IA', 'Éducation', 'Terrain']
+translationKey: 'ai-education-field'
 ---
 
 Tout le monde parle d'IA en éducation. Les conférences se multiplient, les livres blancs s'empilent, les éditeurs sortent des "solutions IA" toutes les semaines.

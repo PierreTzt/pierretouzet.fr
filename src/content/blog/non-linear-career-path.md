@@ -4,6 +4,7 @@ description: "People often say my career path is atypical. Looking back, that's 
 date: 2026-01-25
 lang: en
 tags: ['Career', 'Pivot', 'Non-linear path']
+translationKey: 'non-linear-career-path'
 ---
 
 Vocational diploma. IT technician. Program manager. Entrepreneur.

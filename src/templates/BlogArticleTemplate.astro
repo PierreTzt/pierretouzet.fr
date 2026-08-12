@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getData } from '../i18n/utils';
+import { getArticleTranslationPath } from '../utils/blog-translation';
 import { getCollection, type CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -26,6 +27,19 @@ const currentIndex = allPosts.findIndex((p) => p.slug === post.slug);
 const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
 const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
 
+// \u00c9quivalent de cet article dans l'autre langue, r\u00e9solu via translationKey
+// (les slugs FR/EN d'un article ne se correspondent pas terme \u00e0 terme).
+const allPostsAllLangs = await getCollection('blog', ({ data }) => !data.draft);
+const translationPath = getArticleTranslationPath(post, allPostsAllLangs);
+const otherLang = lang === 'fr' ? 'en' : 'fr';
+const hreflangAlternates =
+  lang === 'fr'
+    ? { fr: `/fr/blog/${post.slug}/`, en: translationPath }
+    : { fr: translationPath, en: `/en/blog/${post.slug}/` };
+// Pas de traduction : on m\u00e8ne vers l'index du blog de l'autre langue plut\u00f4t
+// que de risquer un 404 sur une page inexistante.
+const languageSwitcherDestination = translationPath ?? `/${otherLang}/blog/`;
+
 const relatedPosts = allPosts
   .filter((p) => p.slug !== post.slug)
   .map((p) => ({
@@ -47,6 +61,8 @@ const relatedPosts = allPosts
     publishedTime: post.data.date.toISOString(),
     tags: post.data.tags,
   }}
+  hreflangAlternates={hreflangAlternates}
+  languageSwitcherDestination={languageSwitcherDestination}
   breadcrumbs={[
     { name: data.ui.nav.home, url: `/${lang}/` },
     { name: data.ui.blog.title, url: `/${lang}/blog/` },

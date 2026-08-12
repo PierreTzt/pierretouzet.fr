@@ -4,6 +4,7 @@ description: "On m'a souvent dit que mon parcours était atypique. Avec le recul
 date: 2026-01-25
 lang: fr
 tags: ['Parcours', 'Reconversion', 'Carrière']
+translationKey: 'non-linear-career-path'
 ---
 
 Bac pro. Technicien informatique. Responsable pédagogique. Entrepreneur.

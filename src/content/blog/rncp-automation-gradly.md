@@ -4,6 +4,7 @@ description: "Academic coordinators spend days producing RNCP transcripts. I bui
 date: 2026-02-03
 lang: en
 tags: ['EdTech', 'RNCP', 'Gradly', 'Automation']
+translationKey: 'rncp-automation-gradly'
 ---
 
 If you work in French private higher education, you know the pain: RNCP transcripts.

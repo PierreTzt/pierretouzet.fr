@@ -14,6 +14,9 @@ const blog = defineCollection({
     lang: z.enum(['fr', 'en']),
     tags: z.array(z.string()),
     draft: z.boolean().default(false),
+    // Clé partagée par les deux articles d'une paire FR/EN (ex. slug EN).
+    // Absente si l'article n'a pas d'équivalent dans l'autre langue.
+    translationKey: z.string().optional(),
   }),
 });
 

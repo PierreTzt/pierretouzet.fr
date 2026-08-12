@@ -4,6 +4,7 @@ description: "Les coordinateurs pédagogiques perdent des jours à produire des 
 date: 2026-02-03
 lang: fr
 tags: ['EdTech', 'RNCP', 'Gradly', 'Automatisation']
+translationKey: 'rncp-automation-gradly'
 ---
 
 Si vous travaillez dans l'enseignement supérieur privé, vous connaissez la douleur : les bulletins RNCP.

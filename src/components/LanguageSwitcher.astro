@@ -4,11 +4,18 @@ import { getLocalizedPath, getOppositeLang, type Lang } from '../i18n/utils';
 interface Props {
   lang: Lang;
   label: string;
+  /**
+   * Destination explicite, prioritaire sur le calcul automatique.
+   * Utile quand le chemin ne suffit pas à déduire l'équivalent (ex. articles
+   * de blog dont le slug diffère entre FR et EN). Non fournie : comportement
+   * inchangé (chemin déduit via getLocalizedPath).
+   */
+  destination?: string;
 }
 
-const { lang, label } = Astro.props;
+const { lang, label, destination } = Astro.props;
 const targetLang = getOppositeLang(lang);
-const targetPath = getLocalizedPath(Astro.url.pathname, targetLang);
+const targetPath = destination ?? getLocalizedPath(Astro.url.pathname, targetLang);
 ---
 
 <a

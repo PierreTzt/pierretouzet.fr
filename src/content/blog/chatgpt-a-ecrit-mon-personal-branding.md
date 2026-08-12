@@ -4,6 +4,7 @@ description: "En juillet 2025, j'ai fait l'exercice du personal branding avec Ch
 date: 2026-07-15
 lang: fr
 tags: ['IA', 'Personal branding', 'Écriture']
+translationKey: 'chatgpt-wrote-my-personal-branding'
 ---
 
 En juillet 2025, un mois avant de construire [ce site](/fr/), j'ai fait l'exercice classique avec ChatGPT : définir ma marque personnelle. Questionnaire complet — mission, valeurs, passions — puis génération d'une signature, d'une ligne éditoriale et d'un exemple d'article.

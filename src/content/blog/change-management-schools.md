@@ -4,6 +4,7 @@ description: 'Why most digital transformation projects fail in schools — and w
 date: 2026-02-18
 lang: en
 tags: ['Digital transformation', 'Change management', 'Higher education']
+translationKey: 'change-management-schools'
 ---
 
 I've deployed digital tools across 6 campuses in 3 years. LMS platforms, assessment tools, digital signature systems, grade management software.

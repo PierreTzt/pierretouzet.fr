@@ -4,6 +4,7 @@ description: "Tout le monde dit qu'il faut créer du contenu. Personne ne dit qu
 date: 2026-01-10
 lang: fr
 tags: ['Contenu', 'Vulgarisation', 'Création']
+translationKey: 'creating-educational-content'
 ---
 
 "Tu devrais créer du contenu." Si j'avais un euro chaque fois qu'on m'a dit ça...

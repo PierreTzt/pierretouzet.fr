@@ -35,6 +35,18 @@ interface ArticleMeta {
   author?: string;
 }
 
+/**
+ * URL alternatives explicites pour les balises hreflang, par langue.
+ * `null` signifie « pas d'équivalent dans cette langue » : la balise
+ * correspondante n'est alors pas émise (mieux vaut aucune balise qu'un
+ * hreflang cassé vers une page inexistante). Chemins relatifs (ex.
+ * "/en/blog/mon-article/"), résolus en URL absolue via Astro.site.
+ */
+interface HreflangAlternates {
+  fr: string | null;
+  en: string | null;
+}
+
 interface Props {
   title: string;
   description: string;
@@ -43,15 +55,48 @@ interface Props {
   breadcrumbs?: BreadcrumbItem[];
   article?: ArticleMeta;
   updatedDate?: Date;
+  /**
+   * Permet à un template (ex. BlogArticleTemplate) de fournir explicitement
+   * les URL alternatives plutôt que de laisser BaseLayout les déduire du
+   * chemin courant — nécessaire quand un slug diffère entre FR et EN.
+   * Non fourni : comportement inchangé (déduction automatique par chemin).
+   */
+  hreflangAlternates?: HreflangAlternates;
+  /**
+   * Destination explicite du sélecteur de langue (Navbar > LanguageSwitcher),
+   * transmise telle quelle. Non fournie : comportement inchangé (le
+   * composant déduit sa cible du chemin courant).
+   */
+  languageSwitcherDestination?: string;
 }
 
-const { title, description, lang, ogImage, breadcrumbs, article, updatedDate } = Astro.props;
+const {
+  title,
+  description,
+  lang,
+  ogImage,
+  breadcrumbs,
+  article,
+  updatedDate,
+  hreflangAlternates,
+  languageSwitcherDestination,
+} = Astro.props;
 const { ui, personal } = getData(lang);
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImageUrl = new URL(ogImage || '/og-image.png', Astro.site).href;
 const siteUrl = Astro.site?.href || 'https://www.pierretouzet.fr';
-const hreflangFr = getHreflangUrl(Astro.url.pathname, 'fr', siteUrl);
-const hreflangEn = getHreflangUrl(Astro.url.pathname, 'en', siteUrl);
+
+function resolveHreflang(targetLang: Lang): string | null {
+  if (!hreflangAlternates) {
+    return getHreflangUrl(Astro.url.pathname, targetLang, siteUrl);
+  }
+  const path = hreflangAlternates[targetLang];
+  return path ? new URL(path, siteUrl).href : null;
+}
+
+const hreflangFr = resolveHreflang('fr');
+const hreflangEn = resolveHreflang('en');
+const hreflangXDefault = hreflangFr ?? hreflangEn ?? canonicalURL.href;
 
 const isHomePage = Astro.url.pathname === '/fr/' || Astro.url.pathname === '/en/';
 
@@ -139,9 +184,9 @@ const schemaOrg = isHomePage
     <meta name="description" content={description} />
     <meta name="author" content={personal.name} />
     <link rel="canonical" href={canonicalURL} />
-    <link rel="alternate" hreflang="fr" href={hreflangFr} />
-    <link rel="alternate" hreflang="en" href={hreflangEn} />
-    <link rel="alternate" hreflang="x-default" href={hreflangFr} />
+    {hreflangFr && <link rel="alternate" hreflang="fr" href={hreflangFr} />}
+    {hreflangEn && <link rel="alternate" hreflang="en" href={hreflangEn} />}
+    <link rel="alternate" hreflang="x-default" href={hreflangXDefault} />
     <meta property="og:type" content={article ? 'article' : 'website'} />
     <meta property="og:site_name" content={personal.name} />
     <meta property="og:title" content={title} />
@@ -291,7 +336,11 @@ const schemaOrg = isHomePage
       {ui.skipToContent}
     </a>
 
-    <Navbar lang={lang} currentPath={Astro.url.pathname} />
+    <Navbar
+      lang={lang}
+      currentPath={Astro.url.pathname}
+      languageSwitcherDestination={languageSwitcherDestination}
+    />
 
     <main id="main-content" class="flex-1 pt-14">
       {
