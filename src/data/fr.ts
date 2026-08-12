@@ -548,7 +548,6 @@ export const data: SiteData = {
           name: 'Automatisation de processus',
           level: 85,
           highlighted: true,
-          badge: 'Temps admin ÷ 3',
         },
         { name: 'No-code / Low-code', level: 80 },
         { name: 'Veille technologique', level: 80 },

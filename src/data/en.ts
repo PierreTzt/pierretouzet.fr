@@ -535,7 +535,7 @@ export const data: SiteData = {
           highlighted: true,
           badge: 'Certified DPO (CNIL, France)',
         },
-        { name: 'Process Automation', level: 85, highlighted: true, badge: 'Admin time ÷ 3' },
+        { name: 'Process Automation', level: 85, highlighted: true },
         { name: 'No-code / Low-code', level: 80 },
         { name: 'Technology Watch', level: 80 },
         { name: 'Generative AI', level: 75 },
